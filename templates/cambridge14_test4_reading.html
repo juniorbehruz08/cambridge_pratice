@@ -1,0 +1,260 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 14 Test 4 Reading | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 14 - Test 4 Reading</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell reading-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score=""
+        data-existing-band=""
+    >
+        <form method="post" class="practice-form reading-practice-form" id="practiceForm">
+            {% csrf_token %}
+            <section class="reading-topbar">
+                <div>
+                    <p class="eyebrow">Reading</p>
+                    <h1>Cambridge IELTS 14 - Test 4</h1>
+                    <p>Passages are on the left and questions are on the right. Select passage text to highlight it.</p>
+                </div>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </section>
+
+            <section class="reading-split">
+                <aside class="reading-passages" aria-label="Reading passages">
+                    <article class="reading-passage-block" id="passage-1">
+                        <p class="reading-passage-label">READING PASSAGE 1</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1 below.</p>
+                        <h2>The secret of staying young</h2>
+                        <div class="reading-passage-copy">
+                            <p><em>Pheidole dentata</em>, a native ant of the south-eastern U.S., isn't immortal. But scientists have found that it doesn't seem to show any signs of aging. Old worker ants can do everything just as well as the youngsters, and their brains appear just as sharp. "We get a picture that these ants really don't decline," says Ysabel Giraldo, who studied the ants for her doctoral thesis at Boston University.</p>
+                            <p>Such age-defying feats are rare in the animal kingdom. Naked mole rats can live for almost 30 years and stay fit for nearly their entire lives. They can still reproduce even when old, and they never get cancer. But the vast majority of animals deteriorate with age just like people do.</p>
+                            <p>Like the naked mole rat, ants are social creatures that usually live in highly organised colonies. "It's this social complexity that makes <em>P. dentata</em> useful for studying aging in people," says Giraldo, now at the California Institute of Technology. Humans are also highly social, a trait that has been connected to healthier aging. By contrast, most animal studies of aging use mice, worms or fruit flies, which all lead much more isolated lives.</p>
+                            <p>In the lab, <em>P. dentata</em> worker ants typically live for around 140 days. Giraldo focused on ants at four age ranges: 20 to 22 days, 45 to 47 days, 95 to 97 days and 120 to 122 days. Unlike all previous studies, which only estimated how old the ants were, her work tracked the ants from the time the pupae became adults, so she knew their exact ages. Then she put them through a range of tests.</p>
+                            <p>Giraldo watched how well the ants took care of the young of the colony, recording how often each ant attended to, carried and fed them. She compared how well 20-day-old and 95-day-old ants followed the telltale scent that the insects usually leave to mark a trail to food. She tested how ants responded to light and also measured how active they were by counting how often ants in a small dish walked across a line. And she experimented with how ants react to live prey: a tethered fruit fly.</p>
+                            <p>Giraldo expected the older ants to perform poorly in all these tasks. But the elderly insects were all good caretakers and trail-followers - the 95-day-old ants could track the scent even longer than their younger counterparts. They all responded to light well, and the older ants were more active. And when it came to reacting to prey, the older ants attacked the poor fruit fly just as aggressively as the young ones did, flaring their mandibles or pulling at the fly's legs.</p>
+                            <p>Then Giraldo compared the brains of 20-day-old and 95-day-old ants, identifying any cells that were close to death. She saw no major differences with age, nor was there any difference in the location of the dying cells, showing that age didn't seem to affect specific brain functions. Ants and other insects have structures in their brains called mushroom bodies, which are important for processing information, learning and memory. She also wanted to see if aging affects the density of synaptic complexes within these structures - regions where neurons come together. Again, the answer was no. What was more, the old ants didn't experience any drop in the levels of either serotonin or dopamine - brain chemicals whose decline often coincides with aging. In humans, for example, a decrease in serotonin has been linked to disease.</p>
+                            <p>"This is the first time anyone has looked at both behavioral and neural changes in these ants so thoroughly," says Giraldo, who recently published the findings in the <em>Proceedings of the Royal Society B</em>. Scientists have looked at some similar aspects in bees, but the results of recent bee studies were mixed - some studies showed age-related declines, which biologists call senescence, and others didn't.</p>
+                            <p>"For now, the study raises more questions than it answers," Giraldo says, "including how <em>P. dentata</em> stays in such good shape." Also, if the ants don't deteriorate with age, why do they die at all? Out in the wild, the ants probably don't live for a full 140 days thanks to predators, disease and just being in an environment that's much harsher than the comforts of the lab. "The lucky ants that do live into old age may suffer a steep decline just before dying," Giraldo says, but she can't say for sure because her study wasn't designed to follow an ant's final moments.</p>
+                            <p>"It will be important to extend these findings to other species of social insects," says Gene E. Robinson, an entomologist at the University of Illinois at Urbana-Champaign. "This ant might be unique, or it might represent a broader pattern among other social bugs with possible clues to the science of aging in larger animals." Either way, it seems that for these ants, age really doesn't matter.</p>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-2">
+                        <p class="reading-passage-label">READING PASSAGE 2</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 14-26, which are based on Reading Passage 2 below.</p>
+                        <h2>Why zoos are good</h2>
+                        <h3>Scientist David Hone makes the case for zoos</h3>
+                        <div class="reading-passage-copy labelled-copy">
+                            <section class="passage-paragraph"><span>A</span><div><p>In my view, it is perfectly possible for many species of animals living in zoos or wildlife parks to have a quality of life as high as, or higher than, in the wild. Animals in good zoos get a varied and high-quality diet with all the supplements required, and any illnesses they might have will be treated. Their movement might be somewhat restricted, but they have a safe environment in which to live, and they are spared bullying and social ostracism by others of their kind. They do not suffer from the threat or stress of predators, or the irritation and pain of parasites or injuries. The average captive animal will have a greater life expectancy compared with its wild counterpart, and will not die of drought, of starvation or in the jaws of a predator. A lot of very nasty things happen to truly "wild" animals that simply don't happen in good zoos, and to view a life that is "free" as one that is automatically "good" is, I think, an error.</p></div></section>
+                            <section class="passage-paragraph"><span>B</span><div><p>Furthermore, zoos serve several key purposes. Firstly, zoos aid conservation. Colossal numbers of species are becoming extinct across the world, and many more are increasingly threatened and therefore risk extinction. Moreover, some of these collapses have been sudden, dramatic and unexpected, or were simply discovered very late in the day. A species protected in captivity can be bred up to provide a reservoir population against a population crash or extinction in the wild. A good number of species only exist in captivity, with many of these living in zoos. Still more only exist in the wild because they have been reintroduced from zoos, or have wild populations that have been boosted by captive bred animals. Without these efforts there would be fewer species alive today. Although reintroduction successes are few and far between, the numbers are increasing, and the very fact that species have been saved or reintroduced as a result of captive breeding proves the value of such initiatives.</p></div></section>
+                            <section class="passage-paragraph"><span>C</span><div><p>Zoos also provide education. Many children and adults, especially those in cities, will never see a wild animal beyond a fox or pigeon. While it is true that television documentaries are becoming ever more detailed and impressive, and many natural history specimens are on display in museums, there really is nothing to compare with seeing a living creature in the flesh, hearing it, smelling it, watching what it does and having the time to absorb details. That alone will bring a greater understanding and perspective to many, and hopefully give them a greater appreciation for wildlife, conservation efforts and how they can contribute.</p></div></section>
+                            <section class="passage-paragraph"><span>D</span><div><p>In addition to this, there is also the education that can take place in zoos through signs, talks and presentations which directly communicate information to visitors about the animals they are seeing and their place in the world. This was an area where zoos used to be lacking, but they are now increasingly sophisticated in their communication and outreach work. Many zoos also work directly to educate conservation workers in other countries, or send their animal keepers abroad to contribute their knowledge and skills to those working in zoos and reserves, thereby helping to improve conditions and reintroductions all over the world.</p></div></section>
+                            <section class="passage-paragraph"><span>E</span><div><p>Zoos also play a key role in research. If we are to save wild species and restore and repair ecosystems we need to know about how key species live, act and react. Being able to undertake research on animals in zoos where there is less risk and fewer variables means real changes can be effected on wild populations. Finding out about, for example, the oestrus cycle of an animal or its breeding rate helps us manage wild populations. Procedures such as capturing and moving at-risk or dangerous individuals are bolstered by knowledge gained in zoos about doses for anaesthetics, and by experience in handling and transporting animals. This can make a real difference to conservation efforts and to the reduction of human-animal conflicts, and can provide a knowledge base for helping with the increasing threats of habitat destruction and other problems.</p></div></section>
+                            <section class="passage-paragraph"><span>F</span><div><p>In conclusion, considering the many ongoing global threats to the environment, it is hard for me to see zoos as anything other than essential to the long-term survival of numerous species. They are vital not just in terms of protecting animals, but as a means of learning about them to aid those still in the wild, as well as educating and informing the general population about these animals and their world so that they can assist or at least accept the need to be more environmentally conscious. Without them, the world would be, and would increasingly become, a much poorer place.</p></div></section>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-3">
+                        <p class="reading-passage-label">READING PASSAGE 3</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3 below.</p>
+                        <div class="reading-passage-copy">
+                            <p>Chelsea Rochman, an ecologist at the University of California, Davis, has been trying to answer a dismal question: Is everything terrible, or are things just very, very bad?</p>
+                            <p>Rochman is a member of the National Center for Ecological Analysis and Synthesis's marine-debris working group, a collection of scientists who study, among other things, the growing problem of marine debris, also known as ocean trash. Plenty of studies have sounded alarm bells about the state of marine debris; in a recent paper published in the journal <em>Ecology</em>, Rochman and her colleagues set out to determine how many of those perceived risks are real.</p>
+                            <p>Often, Rochman says, scientists will end a paper by speculating about the broader impacts of what they've found. For example, a study could show that certain seabirds eat plastic bags, and go on to warn that whole bird populations are at risk of dying out. "But the truth was that nobody had yet tested those perceived threats," Rochman says. "There wasn't a lot of information."</p>
+                            <p>Rochman and her colleagues examined more than a hundred papers on the impacts of marine debris that were published through 2013. Within each paper, they asked what threats scientists had studied - 366 perceived threats in all - and what they'd actually found.</p>
+                            <p>In 83 percent of cases, the perceived dangers of ocean trash were proven true. In the remaining cases, the working group found the studies had weaknesses in design and content which affected the validity of their conclusions - they lacked a control group, for example, or used faulty statistics.</p>
+                            <p>Strikingly, Rochman says, only one well-designed study failed to find the effect it was looking for, an investigation of mussels ingesting microscopic plastic bits. The plastic moved from the mussels' stomachs to their bloodstreams, scientists found, and stayed there for weeks - but didn't seem to stress out the shellfish.</p>
+                            <p>While mussels may be fine eating trash, though, the analysis also gave a clearer picture of the many ways that ocean debris is bothersome. Within the studies they looked at, most of the proven threats came from plastic debris, rather than other materials like metal or wood. Most of the dangers also involved large pieces of debris - animals getting entangled in trash, for example, or eating it and severely injuring themselves.</p>
+                            <p>But a lot of ocean debris is "microplastic", or pieces smaller than five millimeters. These may be ingredients used in cosmetics and toiletries, fibers shed by synthetic clothing in the wash, or eroded remnants of larger debris. Compared to the number of studies investigating large-scale debris, Rochman's group found little research on the effects of these tiny bits. "There are a lot of open questions still for microplastic," Rochman says, though she notes that more papers on the subject have been published since 2013, the cutoff point for the group's analysis.</p>
+                            <p>There are also, she adds, a lot of open questions about the ways that ocean debris can lead to sea-creature death. Many studies have looked at how plastic affects an individual animal, or that animal's tissues or cells, rather than whole populations. And in the lab, scientists often use higher concentrations of plastic than what's really in the ocean. None of that tells us how many birds or fish or sea turtles could die from plastic pollution - or how deaths in one species could affect that animal's predators, or the rest of the ecosystem.</p>
+                            <p>"We need to be asking more ecologically relevant questions," Rochman says. Usually, scientists don't know exactly how disasters such as a tanker accidentally spilling its whole cargo of oil and polluting huge areas of the ocean will affect the environment until after they've happened. "We don't ask the right questions early enough," she says. But if ecologists can understand how the slow-moving effect of ocean trash is damaging ecosystems, they might be able to prevent things from getting worse.</p>
+                            <p>Asking the right questions can help policy makers, and the public, figure out where to focus their attention. The problems that look or sound most dramatic may not be the best places to start. For example, the name of the "Great Pacific Garbage Patch" - a collection of marine debris in the northern Pacific Ocean - might conjure up a vast, floating trash island. In reality though, much of the debris is tiny or below the surface; a person could sail through the area without seeing any trash at all.</p>
+                            <p>A Dutch group called "The Ocean Cleanup" is currently working on plans to put mechanical devices in the Pacific Garbage Patch and similar areas to suck up plastic. But a recent paper used simulations to show that strategically positioning the cleanup devices closer to shore would more effectively reduce pollution over the long term.</p>
+                            <p>"I think clearing up some of these misperceptions is really important," Rochman says. Among scientists as well as in the media, she says, "A lot of the images about strandings and entanglement and all of that cause the perception that plastic debris is killing everything in the ocean." Interrogating the existing scientific literature can help ecologists figure out which problems really need addressing, and which ones they'd be better off - like the mussels - absorbing and ignoring.</p>
+                        </div>
+                    </article>
+                </aside>
+
+                <section class="reading-questions" aria-label="Reading questions">
+                    <nav class="reading-mini-nav" aria-label="Passage navigation">
+                        <a href="#passage-1">Passage 1</a>
+                        <a href="#passage-2">Passage 2</a>
+                        <a href="#passage-3">Passage 3</a>
+                    </nav>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 1</h2>
+                        <p class="ielts-instr">Questions 1-8</p>
+                        <p class="ielts-instr">Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <div class="ielts-note-box">
+                            <h3>Ysabel Giraldo's research</h3>
+                            <p>Focused on a total of <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> different age groups of ants, analysing:</p>
+                            <p class="ielts-blue-title black">Behaviour:</p>
+                            <ul>
+                                <li>how well ants looked after their <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li>their ability to locate <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> using a scent trail</li>
+                                <li>the effect that <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> had on them</li>
+                                <li>how <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span> they attacked prey</li>
+                            </ul>
+                            <p class="ielts-blue-title black">Brains:</p>
+                            <ul>
+                                <li>comparison between age and the <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> of dying cells in the brains of ants</li>
+                                <li>condition of synaptic complexes, areas in which <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> meet, in the brain's "mushroom bodies"</li>
+                                <li>level of two <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> in the brain associated with ageing</li>
+                            </ul>
+                        </div>
+
+                        <p class="ielts-instr">Questions 9-13</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:9 %}<div class="mc-question"><input type="hidden" name="answer_9" value="{{ selected }}"><p><span class="qnum">9</span> <em>Pheidole dentata</em> ants are the only known animals which remain active for almost their whole lives.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:10 %}<div class="mc-question"><input type="hidden" name="answer_10" value="{{ selected }}"><p><span class="qnum">10</span> Ysabel Giraldo was the first person to study <em>Pheidole dentata</em> ants using precise data about the insects' ages.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> The ants in Giraldo's experiments behaved as she had predicted that they would.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> The recent studies of bees used different methods of measuring age-related decline.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> <em>Pheidole dentata</em> ants kept in laboratory conditions tend to live longer lives.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 2</h2>
+                        <p class="ielts-instr">Questions 14-17</p>
+                        <p>Reading Passage 2 has six paragraphs, <strong>A-F</strong>. Which paragraph contains the following information?</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> a reference to how quickly animal species can die out</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> reasons why it is preferable to study animals in captivity rather than in the wild</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> mention of two ways of learning about animals other than visiting them in zoos</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> reasons why animals in zoos may be healthier than those in the wild</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 18-22</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 2?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:18 %}<div class="mc-question"><input type="hidden" name="answer_18" value="{{ selected }}"><p><span class="qnum">18</span> An animal is likely to live longer in a zoo than in the wild.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:19 %}<div class="mc-question"><input type="hidden" name="answer_19" value="{{ selected }}"><p><span class="qnum">19</span> There are some species in zoos which can no longer be found in the wild.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:20 %}<div class="mc-question"><input type="hidden" name="answer_20" value="{{ selected }}"><p><span class="qnum">20</span> Improvements in the quality of TV wildlife documentaries have resulted in increased numbers of zoo visitors.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> Zoos have always excelled at transmitting information about animals to the public.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> Studying animals in zoos is less stressful for the animals than studying them in the wild.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 23 and 24</p>
+                        <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO of the following are stated about zoo staff in the text?</p>
+                        <div class="multi-answer-question">
+                            <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
+                            <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
+                            <div class="mc-options">
+                                <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>Some take part in television documentaries about animals.</span></button>
+                                <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>Some travel to overseas locations to join teams in zoos.</span></button>
+                                <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>Some get experience with species in the wild before taking up zoo jobs.</span></button>
+                                <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>Some teach people who are involved with conservation projects.</span></button>
+                                <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>Some specialise in caring for species which are under threat.</span></button>
+                            </div>
+                        </div>
+
+                        <p class="ielts-instr">Questions 25 and 26</p>
+                        <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO of these beliefs about zoos does the writer mention in the text?</p>
+                        <div class="multi-answer-question">
+                            <input type="hidden" name="answer_25" value="{{ attempt.answers|answer_value:25 }}">
+                            <input type="hidden" name="answer_26" value="{{ attempt.answers|answer_value:26 }}">
+                            <div class="mc-options">
+                                <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>They can help children overcome their fears of wild animals.</span></button>
+                                <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>They can increase public awareness of environmental issues.</span></button>
+                                <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>They can provide employment for a range of professional people.</span></button>
+                                <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>They can generate income to support wildlife conservation projects.</span></button>
+                                <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>They can raise animals which can later be released into the wild.</span></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 3</h2>
+                        <p class="ielts-instr">Questions 27-33</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 3?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Rochman and her colleagues were the first people to research the problem of marine debris.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> The creatures most in danger from ocean trash are certain seabirds.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> The studies Rochman has reviewed have already proved that populations of some birds will soon become extinct.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> Rochman analysed papers on the different kinds of danger caused by ocean trash.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:31 %}<div class="mc-question"><input type="hidden" name="answer_31" value="{{ selected }}"><p><span class="qnum">31</span> Most of the research analysed by Rochman and her colleagues was badly designed.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:32 %}<div class="mc-question"><input type="hidden" name="answer_32" value="{{ selected }}"><p><span class="qnum">32</span> One study examined by Rochman was expecting to find that mussels were harmed by eating plastic.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:33 %}<div class="mc-question"><input type="hidden" name="answer_33" value="{{ selected }}"><p><span class="qnum">33</span> Some mussels choose to eat plastic in preference to their natural diet.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 34-39</p>
+                        <p class="ielts-instr">Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <div class="ielts-note-box">
+                            <h3>Findings related to marine debris</h3>
+                            <p>Studies of marine debris found the biggest threats were:</p>
+                            <ul>
+                                <li>plastic, not metal or wood</li>
+                                <li>bits of debris that were <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>, harmful to animals</li>
+                            </ul>
+                            <p>There was little research into <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>, e.g. from synthetic fibres.</p>
+                            <p class="ielts-blue-title black">Drawbacks of the studies examined</p>
+                            <ul>
+                                <li>most of them focused on individual animals, not entire <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li>the <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> of plastic used in the lab did not always reflect those in the ocean</li>
+                                <li>there was insufficient information on:
+                                    <ul>
+                                        <li>numbers of animals which could be affected</li>
+                                        <li>the impact of a reduction in numbers on the <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> species</li>
+                                        <li>the impact on the ecosystem</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <p>Rochman says more information is needed on the possible impact of future <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>, e.g. involving oil.</p>
+                        </div>
+
+                        <p class="ielts-instr">Question 40</p>
+                        <p>Choose the correct letter, <strong>A, B, C</strong> or <strong>D</strong>.</p>
+                        {% with selected=attempt.answers|answer_value:40 %}<div class="mc-question"><input type="hidden" name="answer_40" value="{{ selected }}"><p><span class="qnum">40</span> What would be the best title for this passage?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Assessing the threat of marine debris</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Marine debris: who is to blame?</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>A new solution to the problem of marine debris</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>Marine debris: the need for international action</span></button></div></div>{% endwith %}
+                    </article>
+                </section>
+            </section>
+
+            <div class="practice-actions reading-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 12 Test 3 Listening | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=drag-layout-20260512">
+    <script src="{% static 'js/practice.js' %}?v=drag-multi-blank-20260512" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 12 - Test 3 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score=""
+        data-existing-band=""
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>Cambridge IELTS 12 - Test 3</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 3</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>PUBLIC LIBRARY</h3>
+                        <p><strong>Example</strong><br>The library re-opened last <span class="ielts-example">month</span>.</p>
+
+                        <p class="ielts-blue-title black">The library now has</p>
+                        <ul>
+                            <li>a seating area with magazines</li>
+                            <li>an expanded section for books on <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>a new section on local <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>a community room for meetings, and it is also possible to <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> there</li>
+                            <li>a new section of books for <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">For younger children</p>
+                        <ul>
+                            <li>the next Science Club meeting: experiments using things from your <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Reading Challenge: read six books during the holidays</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">For adults</p>
+                        <ul>
+                            <li>this Friday: a local author talks about a novel based on a real <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>IT support is available on Tuesdays - no <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> is necessary</li>
+                            <li>free check of blood <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> and cholesterol levels for people over 60</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Other information</p>
+                        <ul>
+                            <li>the library shop sells wall-charts, cards and <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>evenings and weekends: free <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> is available</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11 and 12</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO age groups are taking increasing numbers of holidays with BC Travel?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_11" value="{{ attempt.answers|answer_value:11 }}">
+                        <input type="hidden" name="answer_12" value="{{ attempt.answers|answer_value:12 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>16-30 years</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>31-42 years</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>43-54 years</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>55-64 years</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>over 65 years</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 13 and 14</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO are the main reasons given for the popularity of activity holidays?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_13" value="{{ attempt.answers|answer_value:13 }}">
+                        <input type="hidden" name="answer_14" value="{{ attempt.answers|answer_value:14 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>Clients make new friends.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>Clients learn a useful skill.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>Clients learn about a different culture.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>Clients are excited by the risk involved.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>Clients find them good value for money.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 15-17</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> How does BC Travel plan to expand the painting holidays?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>by adding to the number of locations</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>by increasing the range of levels</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>by employing more teachers</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> Why are BC Travel's cooking holidays unusual?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>They only use organic foods.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>They have an international focus.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>They mainly involve vegetarian dishes.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> What does the speaker say about the photography holidays?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Clients receive individual tuition.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>The tutors are also trained guides.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Advice is given on selling photographs.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 18-20</p>
+                    <p class="ielts-instr">Complete the table below. Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <table class="ielts-table-box">
+                        <thead>
+                            <tr><th>Fitness Holidays</th><th>Main focus</th><th>Location</th><th>Other comments</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>general fitness</td>
+                                <td>Ireland and Italy</td>
+                                <td>personally designed programme; also reduces <span class="qnum">18</span> <span class="ielts-blank"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off"><span>......................</span></span></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><span class="qnum">19</span> <span class="ielts-blank"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off"><span>......................</span></span> control</td>
+                                <td>Greece</td>
+                                <td>includes exercise on the beach</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>mountain biking</td>
+                                <td>Morocco</td>
+                                <td>wide variety of levels; one holiday that is specially designed for <span class="qnum">20</span> <span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>......................</span></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-26</p>
+                    <p>Complete the flow-chart below.</p>
+                    <p class="ielts-instr">Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 21-26.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>patterns</span></p>
+                        <p><strong>B</strong><span>names</span></p>
+                        <p><strong>C</strong><span>sources</span></p>
+                        <p><strong>D</strong><span>questions</span></p>
+                        <p><strong>E</strong><span>employees</span></p>
+                        <p><strong>F</strong><span>solutions</span></p>
+                        <p><strong>G</strong><span>headings</span></p>
+                        <p><strong>H</strong><span>officials</span></p>
+                    </div>
+                    <div class="ielts-note-box compact-box">
+                        <h3>STAGES IN DOING A TOURISM CASE STUDY</h3>
+                        <p class="ielts-blue-title">RESEARCH</p>
+                        <p>Locate and read relevant articles, noting key information and also <span class="qnum">21</span> <span class="ielts-blank short"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                        <p>Identify a problem or need.</p>
+                        <p>Select interviewees - these may be site <span class="qnum">22</span> <span class="ielts-blank short"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off" maxlength="1"><span>............</span></span>, city <span class="qnum">23</span> <span class="ielts-blank short"><input name="answer_23" value="{{ attempt.answers|answer_value:23 }}" autocomplete="off" maxlength="1"><span>............</span></span>, visitors or tourists.</p>
+                        <p>Prepare and carry out interviews. If possible, collect statistics. Check whether <span class="qnum">24</span> <span class="ielts-blank short"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off" maxlength="1"><span>............</span></span> of interviewees can be used.</p>
+
+                        <p class="ielts-blue-title">ANALYSIS</p>
+                        <p>Select relevant information and try to identify <span class="qnum">25</span> <span class="ielts-blank short"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                        <p>Decide on the best form of visuals.</p>
+
+                        <p class="ielts-blue-title">WRITING THE CASE STUDY</p>
+                        <p>Give some background before writing the main sections.</p>
+                        <p>Do <strong>NOT</strong> end with <span class="qnum">26</span> <span class="ielts-blank short"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                    </div>
+
+                    <p class="ielts-instr">Questions 27-30</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">The Horton Castle site</h3>
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Natalie and Dave agree one reason why so few people visit Horton Castle is that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the publicity is poor.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>it is difficult to get to.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>there is little there of interest.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Natalie and Dave agree that the greatest problem with a visitor centre could be</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>covering the investment costs.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>finding a big enough space for it.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>dealing with planning restrictions.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> What does Dave say about conditions in the town of Horton?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>There is a lot of unemployment.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>There are few people of working age.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>There are opportunities for skilled workers.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> According to Natalie, one way to prevent damage to the castle site would be to</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>insist visitors have a guide.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>make visitors keep to the paths.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>limit visitor numbers.</span></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>The effects of environmental change on birds</h3>
+                        <p class="ielts-blue-title black">Mercury (Hg)</p>
+                        <ul>
+                            <li>Highly toxic</li>
+                            <li>Released into the atmosphere from coal</li>
+                            <li>In water it may be consumed by fish</li>
+                            <li>It has also recently been found to affect birds which feed on <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Research on effects of mercury on birds</p>
+                        <p>Claire Varian-Ramos is investigating:</p>
+                        <ul>
+                            <li>the effects on birds' <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>, or mental processes, e.g. memory</li>
+                            <li>the effects on bird song, usually learned from a bird's <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Findings</p>
+                        <ul>
+                            <li>songs learned by birds exposed to mercury are less <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>this may have a negative effect on birds' <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Lab-based studies</p>
+                        <ul>
+                            <li>allow more <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> for the experimenter</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Implications for humans</p>
+                        <ul>
+                            <li>Migrating birds such as <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> containing mercury may be eaten by humans</li>
+                            <li>Mercury also causes problems in learning <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Mercury in a mother's body from <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> may affect the unborn child</li>
+                            <li>New regulations for mercury emissions will affect everyone's energy <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions ielts-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

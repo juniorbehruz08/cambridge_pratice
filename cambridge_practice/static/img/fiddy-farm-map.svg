@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 960" role="img" aria-labelledby="title desc">
+  <title id="title">Fiddy Working Heritage Farm map</title>
+  <desc id="desc">Black and white farm map with labels A to I, road, footpath, farm yard, main path, fish pool, car park, side path, new barn and you are here marker.</desc>
+  <defs>
+    <pattern id="brickHatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#111" stroke-width="2"/>
+      <line x1="5" y1="0" x2="5" y2="10" stroke="#111" stroke-width=".7"/>
+    </pattern>
+    <pattern id="barnHatch" width="12" height="7" patternUnits="userSpaceOnUse">
+      <path d="M0 2 H12 M2 5 H14" stroke="#111" stroke-width="1.4"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="960" fill="#fff"/>
+  <g font-family="Arial, Helvetica, sans-serif" stroke-linecap="square" stroke-linejoin="miter">
+    <rect x="18" y="18" width="964" height="924" fill="#fff" stroke="#111" stroke-width="4"/>
+
+    <line x1="18" y1="78" x2="982" y2="78" stroke="#111" stroke-width="4"/>
+    <line x1="18" y1="128" x2="982" y2="128" stroke="#111" stroke-width="4"/>
+    <text x="220" y="114" font-size="31" font-weight="700">Road</text>
+
+    <path d="M364 128 L463 330 L566 390" fill="none" stroke="#111" stroke-width="2.4"/>
+    <path d="M692 128 L592 386" fill="none" stroke="#111" stroke-width="4"/>
+    <path d="M742 128 L630 386" fill="none" stroke="#111" stroke-width="4"/>
+    <text x="646" y="326" transform="rotate(-64 646 326)" font-size="31" font-weight="700">Main Path</text>
+
+    <path d="M121 128 C218 208 307 306 436 346 C486 362 535 382 584 398" fill="none" stroke="#111" stroke-width="2.5" stroke-dasharray="8 10"/>
+    <path d="M146 128 C242 220 324 322 448 365 C496 382 542 400 584 414" fill="none" stroke="#111" stroke-width="2.5" stroke-dasharray="8 10"/>
+    <text x="270" y="260" transform="rotate(48 270 260)" font-size="32" font-weight="700">Footpath</text>
+
+    <text x="438" y="190" font-size="34" font-weight="700">Farm Yard</text>
+    <path d="M483 303 L577 342 L611 224 L643 238 L603 370 L468 329 Z" fill="url(#brickHatch)" stroke="#111" stroke-width="3"/>
+    <path d="M489 322 L589 364 L616 269" fill="none" stroke="#111" stroke-width="2"/>
+
+    <path d="M425 441 C395 428 362 431 344 457 C323 487 351 511 386 504 C425 496 465 507 519 508 C546 509 566 498 563 474 C559 444 506 436 476 448 Z" fill="#fff" stroke="#111" stroke-width="4"/>
+    <path d="M606 448 C648 427 719 429 750 457 C769 475 754 505 719 509 C671 515 629 504 582 508 C562 510 552 489 564 470 C574 456 591 456 606 448 Z" fill="#fff" stroke="#111" stroke-width="4"/>
+    <text x="462" y="483" font-size="32" font-weight="700">Fish</text>
+    <text x="640" y="483" font-size="32" font-weight="700">Pool</text>
+
+    <rect x="557" y="443" width="57" height="56" fill="#fff" stroke="#111" stroke-width="4"/>
+    <line x1="557" y1="455" x2="614" y2="455" stroke="#111" stroke-width="2"/>
+    <line x1="557" y1="466" x2="614" y2="466" stroke="#111" stroke-width="2"/>
+    <line x1="557" y1="478" x2="614" y2="478" stroke="#111" stroke-width="2"/>
+    <line x1="557" y1="489" x2="614" y2="489" stroke="#111" stroke-width="2"/>
+
+    <path d="M584 386 L584 804" stroke="#111" stroke-width="4"/>
+    <path d="M626 386 L626 804" stroke="#111" stroke-width="4"/>
+    <text x="605" y="675" transform="rotate(-90 605 675)" font-size="31" font-weight="700">Main Path</text>
+
+    <path d="M626 498 H813 Q847 498 847 534 V784 Q847 818 813 818 H626" fill="none" stroke="#111" stroke-width="4"/>
+    <rect x="625" y="535" width="198" height="268" fill="none" stroke="#111" stroke-width="4"/>
+    <text x="841" y="704" transform="rotate(-90 841 704)" font-size="31" font-weight="700">Side Path</text>
+
+    <rect x="304" y="688" width="280" height="235" fill="none" stroke="#111" stroke-width="4"/>
+    <path d="M455 805 H584" stroke="#111" stroke-width="4"/>
+    <path d="M455 846 H584" stroke="#111" stroke-width="4"/>
+    <text x="337" y="775" font-size="31" font-weight="700">Car Park</text>
+
+    <path d="M584 806 C604 870 668 900 757 900" fill="none" stroke="#111" stroke-width="3"/>
+    <path d="M584 795 L573 817 M574 795 L595 817" stroke="#111" stroke-width="4"/>
+    <line x1="584" y1="800" x2="584" y2="942" stroke="#111" stroke-width="4"/>
+    <line x1="626" y1="800" x2="626" y2="942" stroke="#111" stroke-width="4"/>
+    <text x="607" y="898" transform="rotate(-90 607 898)" font-size="31" font-weight="700">Road</text>
+
+    <rect x="630" y="810" width="146" height="43" fill="#fff" stroke="#111" stroke-width="4"/>
+    <rect x="636" y="818" width="134" height="27" fill="url(#barnHatch)" stroke="#111" stroke-width="1"/>
+    <text x="648" y="840" fill="#111" font-size="30" font-weight="700">New Barn</text>
+    <text x="758" y="907" font-size="31" font-weight="700">You are here</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700" text-anchor="middle" dominant-baseline="middle">
+    <rect x="55" y="30" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="79" y="55">A</text>
+    <rect x="596" y="185" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="620" y="210">B</text>
+    <rect x="674" y="363" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="698" y="388">C</text>
+    <rect x="862" y="535" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="886" y="560">D</text>
+    <rect x="862" y="632" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="886" y="657">E</text>
+    <rect x="512" y="700" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="536" y="725">F</text>
+    <rect x="648" y="715" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="672" y="740">G</text>
+    <rect x="861" y="754" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="885" y="779">H</text>
+    <rect x="470" y="789" width="48" height="48" fill="#fff" stroke="#111" stroke-width="4"/><text x="494" y="814">I</text>
+  </g>
+</svg>

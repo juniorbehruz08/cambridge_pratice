@@ -1,0 +1,255 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 13 Test 4 Listening | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 13 - Test 4 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score=""
+        data-existing-band=""
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>Cambridge IELTS 13 - Test 4</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 4</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>Alex's Training</h3>
+                        <p class="ielts-blue-title black">Example</p>
+                        <p>Alex completed his training in <span class="ielts-example">2014</span>.</p>
+
+                        <p class="ielts-blue-title black">About the applicant:</p>
+                        <ul>
+                            <li>At first, Alex did his training in the <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> department.</li>
+                            <li>Alex didn't have a qualification from school in <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Alex thinks he should have done the diploma in <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> skills.</li>
+                            <li>Age of other trainees: the youngest was <span class="qnum">4</span> <span class="ielts-blank short"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>............</span></span>.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Benefits of doing training at JPNW:</p>
+                        <ul>
+                            <li>Lots of opportunities because of the size of the organisation.</li>
+                            <li>Trainees receive the same amount of <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span> as permanent staff.</li>
+                            <li>The training experience increases people's confidence a lot.</li>
+                            <li>Trainees go to <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> one day per month.</li>
+                            <li>The company is in a convenient <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Advice for interview:</p>
+                        <ul>
+                            <li>Don't wear <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Don't be <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Make sure you <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-16</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">The Snow Centre</h3>
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> Annie recommends that when cross-country skiing, the visitors should</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>get away from the regular trails.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>stop to enjoy views of the scenery.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>go at a slow speed at the beginning.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> What does Annie tell the group about this afternoon's dog-sled trip?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Those who want to can take part in a race.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Anyone has the chance to drive a team of dogs.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>One group member will be chosen to lead the trail.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> What does Annie say about the team relay event?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>All participants receive a medal.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>The course is 4 km long.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Each team is led by a teacher.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> On the snow-shoe trip, the visitors will</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>visit an old gold mine.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>learn about unusual flowers.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>climb to the top of a mountain.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> The cost of accommodation in the mountain hut includes</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>a supply of drinking water.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>transport of visitors' luggage.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>cooked meals.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> If there is a storm while the visitors are in the hut, they should</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>contact the bus driver.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>wait until the weather improves.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>use the emergency locator beacon.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 17-20</p>
+                    <p>What information does Annie give about skiing on each of the following mountain trails?</p>
+                    <p class="ielts-instr">Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A-F</strong>, next to Questions 17-20.</p>
+                    <div class="ielts-choice-box">
+                        <h3 class="ielts-center-title">Information</h3>
+                        <p><strong>A</strong><span>It has a good place to stop and rest.</span></p>
+                        <p><strong>B</strong><span>It is suitable for all abilities.</span></p>
+                        <p><strong>C</strong><span>It involves crossing a river.</span></p>
+                        <p><strong>D</strong><span>It demands a lot of skill.</span></p>
+                        <p><strong>E</strong><span>It may be closed in bad weather.</span></p>
+                        <p><strong>F</strong><span>It has some very narrow sections.</span></p>
+                    </div>
+                    <div class="ielts-report-list">
+                        <label><strong>17</strong><span>Highland Trail</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>18</strong><span>Pine Trail</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>19</strong><span>Stony Trail</span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>20</strong><span>Loser's Trail</span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-26</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Labels giving nutritional information on food packaging</h3>
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> What was Jack's attitude to nutritional food labels before this project?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>He didn't read everything on them.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>He didn't think they were important.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>He thought they were too complicated.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> Alice says that before doing this project,</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>she was unaware of what certain foods contained.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>she was too lazy to read food labels.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>she was only interested in the number of calories.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> When discussing supermarket brands of pizza, Jack agrees with Alice that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the list of ingredients is shocking.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>he will hesitate before buying pizza again.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the nutritional label is misleading.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> Jack prefers the daily value system to other labelling systems because it is</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>more accessible.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>more logical.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>more comprehensive.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> What surprised both students about one flavour of crisps?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>The percentage of artificial additives given was incorrect.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>The products did not contain any meat.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>The labels did not list all the ingredients.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> What do the students think about research into the impact of nutritional food labelling?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>It did not produce clear results.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>It focused on the wrong people.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>It made unrealistic recommendations.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 27 and 28</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO things surprised the students about the traffic-light system for nutritional labels?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_27" value="{{ attempt.answers|answer_value:27 }}">
+                        <input type="hidden" name="answer_28" value="{{ attempt.answers|answer_value:28 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>its widespread use</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>the fact that it is voluntary for supermarkets</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>how little research was done before its introduction</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>its unpopularity with food manufacturers</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the way that certain colours are used</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 29 and 30</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO things are true about the participants in the study on the traffic-light system?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_29" value="{{ attempt.answers|answer_value:29 }}">
+                        <input type="hidden" name="answer_30" value="{{ attempt.answers|answer_value:30 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>They had low literacy levels.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>They were regular consumers of packaged food.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>They were selected randomly.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>They were from all socio-economic groups.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>They were interviewed face-to-face.</span></button>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>The history of coffee</h3>
+                        <p class="ielts-blue-title black">Coffee in the Arab world</p>
+                        <ul>
+                            <li>There was small-scale trade in wild coffee from Ethiopia.</li>
+                            <li>1522: Coffee was approved in the Ottoman court as a type of medicine.</li>
+                            <li>1623: In Constantinople, the ruler ordered the <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> of every coffee house.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Coffee arrives in Europe (17th century)</p>
+                        <ul>
+                            <li>Coffee shops were compared to <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>They played an important part in social and <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> changes.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Coffee and European colonisation</p>
+                        <ul>
+                            <li>European powers established coffee plantations in their colonies.</li>
+                            <li>Types of coffee were often named according to the <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> they came from.</li>
+                            <li>In Brazil and the Caribbean, most cultivation depended on <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>In Java, coffee was used as a form of <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Coffee became almost as important as <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>The move towards the consumption of <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> in Britain did not also take place in the USA.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Coffee in the 19th century</p>
+                        <ul>
+                            <li>Prices dropped because of improvements in <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Industrial workers found coffee helped them to work at <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions ielts-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

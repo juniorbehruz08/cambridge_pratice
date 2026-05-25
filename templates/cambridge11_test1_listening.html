@@ -1,0 +1,378 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 11 Test 1 Listening | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 11 - Test 1 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>Cambridge IELTS 11 - Test 1</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 1</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>HIRING A PUBLIC ROOM</h3>
+
+                        <p class="ielts-small-title">Example</p>
+                        <ul>
+                            <li>the Main Hall - seats <span class="ielts-example">200</span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Room and cost</p>
+                        <ul>
+                            <li>the <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> Room - seats 100</li>
+                            <li class="main-hall-cost">Cost of Main Hall for Saturday evening: £ <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span><span class="deposit-line">+ £250 deposit (<span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> payment is required)</span></li>
+                            <li>Cost includes use of tables and chairs and also <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>Additional charge for use of the kitchen: £25</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Before the event</p>
+                        <ul>
+                            <li>Will need a <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> licence</li>
+                            <li>Need to contact caretaker (Mr Evans) in advance to arrange <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title">During the event</p>
+                        <ul>
+                            <li>The building is no smoking</li>
+                            <li>The band should use the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> door at the back</li>
+                            <li>Don't touch the system that controls the volume</li>
+                            <li>For microphones, contact the caretaker</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">After the event</p>
+                        <ul>
+                            <li>Need to know the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> for the cleaning cupboard</li>
+                            <li>The <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> must be washed and rubbish placed in black bags</li>
+                            <li>All <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> must be taken down</li>
+                            <li>Chairs and tables must be piled up</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-14</p>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD</strong> for each answer.</p>
+
+                    <div class="ielts-note-box compact-box">
+                        <h3>Fiddy Working Heritage Farm</h3>
+                        <p class="ielts-small-title italic">Advice about visiting the farm</p>
+                        <p>Visitors should</p>
+                        <ul>
+                            <li>take care not to harm any <span class="qnum">11</span> <span class="ielts-blank"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>not touch any <span class="qnum">12</span> <span class="ielts-blank"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>wear <span class="qnum">13</span> <span class="ielts-blank"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>not bring <span class="qnum">14</span> <span class="ielts-blank"><input name="answer_14" value="{{ attempt.answers|answer_value:14 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> into the farm, with certain exceptions</li>
+                        </ul>
+                    </div>
+
+                    <p class="ielts-instr map-title">Questions 15-20</p>
+                    <p class="ielts-instr">Label the map below.</p>
+                    <p class="ielts-instr">Write the correct letter <strong>A-I</strong>, next to Questions 15-20.</p>
+
+                    <img class="farm-map-image" src="{% static 'img/fiddy-farm-map.png' %}" alt="Fiddy Working Heritage Farm map with labels A to I">
+
+                    <div class="map-answers">
+                        <label><strong>15</strong> Scarecrow <span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>18</strong> Black Barn <span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>16</strong> Maze <span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>19</strong> Covered picnic area <span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>17</strong> Café <span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>20</strong> Fiddy House <span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Study on Gender in Physics</h3>
+
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:21 %}
+                            <div class="mc-question" data-question="21">
+                                <input type="hidden" name="answer_21" value="{{ selected }}">
+                                <p><span class="qnum">21</span> The students in Akira Miyake's study were all majoring in</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>physics.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>psychology or physics.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>science, technology, engineering or mathematics.</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}
+                            <div class="mc-question" data-question="22">
+                                <input type="hidden" name="answer_22" value="{{ selected }}">
+                                <p><span class="qnum">22</span> The aim of Miyake's study was to investigate</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>what kind of women choose to study physics.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>a way of improving women's performance in physics.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>whether fewer women than men study physics at college.</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}
+                            <div class="mc-question" data-question="23">
+                                <input type="hidden" name="answer_23" value="{{ selected }}">
+                                <p><span class="qnum">23</span> The female physics students were wrong to believe that</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>the teachers marked them in an unfair way.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>the male students expected them to do badly.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>their test results were lower than the male students'.</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}
+                            <div class="mc-question" data-question="24">
+                                <input type="hidden" name="answer_24" value="{{ selected }}">
+                                <p><span class="qnum">24</span> Miyake's team asked the students to write about</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>what they enjoyed about studying physics.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>the successful experiences of other people.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>something that was important to them personally.</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:25 %}
+                            <div class="mc-question" data-question="25">
+                                <input type="hidden" name="answer_25" value="{{ selected }}">
+                                <p><span class="qnum">25</span> What was the aim of the writing exercise done by the subjects?</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>to reduce stress</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>to strengthen verbal ability</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>to encourage logical thinking</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}
+                            <div class="mc-question" data-question="26">
+                                <input type="hidden" name="answer_26" value="{{ selected }}">
+                                <p><span class="qnum">26</span> What surprised the researchers about the study?</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>how few students managed to get A grades</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>the positive impact it had on physics results for women</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>the difference between male and female performance</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}
+                            <div class="mc-question" data-question="27">
+                                <input type="hidden" name="answer_27" value="{{ selected }}">
+                                <p><span class="qnum">27</span> Greg and Lisa think Miyake's results could have been affected by</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>the length of the writing task.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>the number of students who took part.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>the information the students were given.</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}
+                            <div class="mc-question" data-question="28">
+                                <input type="hidden" name="answer_28" value="{{ selected }}">
+                                <p><span class="qnum">28</span> Greg and Lisa decide that in their own project, they will compare the effects of</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>two different writing tasks.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>a writing task with an oral task.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>two different oral tasks.</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}
+                            <div class="mc-question" data-question="29">
+                                <input type="hidden" name="answer_29" value="{{ selected }}">
+                                <p><span class="qnum">29</span> The main finding of Smolinsky's research was that class teamwork activities</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>were most effective when done by all-women groups.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>had no effect on the performance of men or women.</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>improved the results of men more than of women.</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}
+                            <div class="mc-question" data-question="30">
+                                <input type="hidden" name="answer_30" value="{{ selected }}">
+                                <p><span class="qnum">30</span> What will Lisa and Greg do next?</p>
+                                <div class="mc-options">
+                                    <button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>A</strong><span>talk to a professor</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>B</strong><span>observe a science class</span></button>
+                                    <button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C" {% if attempt.status == 'completed' %}disabled{% endif %}><strong>C</strong><span>look at the science timetable</span></button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box ocean-box">
+                        <h3>Ocean Biodiversity</h3>
+
+                        <p class="ielts-blue-title black">Biodiversity hotspots</p>
+                        <ul>
+                            <li>areas containing many different species</li>
+                            <li>important for locating targets for <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>at first only identified on land</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Boris Worm, 2005</p>
+                        <ul>
+                            <li>identified hotspots for large ocean predators, e.g. sharks</li>
+                            <li>found that ocean hotspots:</li>
+                        </ul>
+                        <ul class="ielts-dash">
+                            <li>were not always rich in <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>had higher temperatures at the <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>had sufficient <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> in the water</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Lisa Ballance, 2007</p>
+                        <ul>
+                            <li>looked for hotspots for marine <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>found these were all located where ocean currents meet</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Census of Marine Life</p>
+                        <ul>
+                            <li>found new ocean species living:</li>
+                        </ul>
+                        <ul class="ielts-dash">
+                            <li>under the <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                            <li>near volcanoes on the ocean floor</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Global Marine Species Assessment</p>
+                        <ul>
+                            <li>want to list endangered ocean species, considering:</li>
+                        </ul>
+                        <ul class="ielts-dash">
+                            <li>population size</li>
+                            <li>geographical distribution</li>
+                            <li>rate of <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                        </ul>
+                        <ul>
+                            <li>Aim: to assess 20,000 species and make a distribution <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span><br>for each one</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Recommendations to retain ocean biodiversity</p>
+                        <ul>
+                            <li>increase the number of ocean reserves</li>
+                            <li>establish <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span> corridors (e.g. for turtles)</li>
+                            <li>reduce fishing quotas</li>
+                            <li>catch fish only for the purpose of <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off" {% if attempt.status == 'completed' %}disabled{% endif %}><span>......................</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions ielts-actions">
+                <button class="button primary" type="submit" {% if attempt.status == 'completed' %}disabled{% endif %}>
+                    Finish practice
+                </button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                    Back to sections
+                </a>
+                {% if attempt.status == 'completed' %}
+                    <span class="completed-pill">
+                        Completed{% if result %}: {{ result.score }}/{{ result.total_questions }}{% endif %}
+                    </span>
+                {% endif %}
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

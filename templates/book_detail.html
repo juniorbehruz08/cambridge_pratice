@@ -1,0 +1,65 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ book.title }} | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{% url 'cambridge_practice:home' %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge Practice</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="{% url 'cambridge_practice:home' %}#books">Books</a>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+                <a href="{% url 'cambridge_practice:logout' %}">Sign out</a>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+                <a class="nav-button" href="{% url 'cambridge_practice:register' %}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        <section class="book-hero">
+            <p class="eyebrow">Cambridge book {{ book.number }}</p>
+            <h1>{{ book.title }}</h1>
+            <p>
+                {% if is_preview %}
+                    Free preview mode includes only Test 1. Your score is shown after submit and is not saved.
+                {% else %}
+                    Choose a practice test below. Each book contains four practice tests for reading and listening study.
+                {% endif %}
+            </p>
+        </section>
+
+        <section class="section test-section">
+            <div class="section-heading compact">
+                <p class="eyebrow">Practice tests</p>
+                <h2>{% if is_preview %}Test 1 preview{% else %}Tests 1-4{% endif %}</h2>
+            </div>
+
+            <div class="test-grid">
+                {% for test in tests %}
+                    <a class="test-card test-card-link" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                        <div class="test-number">{{ test.number }}</div>
+                        <div>
+                            <h3>{{ test.title }}</h3>
+                            <p>{{ test.description }}</p>
+                        </div>
+                        <span class="book-status">{% if is_preview %}Preview{% else %}Open test{% endif %}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

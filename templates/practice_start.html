@@ -1,0 +1,60 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Start {{ section_title }} | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>{{ book.title }} - {{ test.title }}</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+                <a href="{% url 'cambridge_practice:logout' %}">Sign out</a>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+                <a class="nav-button" href="{% url 'cambridge_practice:register' %}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="auth-page">
+        <section class="start-warning-card">
+            <p class="eyebrow">{{ section_title }} section</p>
+            <h1>Before you start</h1>
+            <div class="warning-list">
+                <p>The timer starts when you press Start.</p>
+                <p>If you leave the page or close the browser before submitting, your final result will not be saved.</p>
+                <p>When time ends, the test will submit automatically.</p>
+                {% if section == 'listening' %}
+                    <p>After you press Start, the listening audio starts automatically.</p>
+                    <p>The audio player is hidden. You cannot pause it, stop it, move it forward, or move it backward.</p>
+                    <p>After the audio finishes, you will have 2 minutes to check your answers.</p>
+                {% endif %}
+                {% if is_preview %}
+                    <p>This is free preview mode. Your score is shown only on this page and is not saved to your account or the database.</p>
+                {% else %}
+                    <p>Your result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <div class="hero-actions">
+                <a class="button primary" href="{% url 'cambridge_practice:practice_section' book.number test.number section %}?start=1">
+                    Start {{ section_title }}
+                </a>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                    Back
+                </a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

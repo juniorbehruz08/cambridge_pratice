@@ -1,0 +1,153 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{% url 'cambridge_practice:home' %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge Practice</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="#practice">Practice</a>
+            <a href="#books">Books</a>
+            <a href="#start">Start</a>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+                <a href="{% url 'cambridge_practice:logout' %}">Sign out</a>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+                <a class="nav-button" href="{% url 'cambridge_practice:register' %}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">IELTS Academic preparation</p>
+                <h1>Practice Cambridge IELTS books with audio and focused reading sections.</h1>
+                <p class="hero-text">
+                    {% if is_preview %}
+                        Try Cambridge IELTS 11 Test 1 as a free mock preview. Your preview score is shown only on the page and is not saved.
+                    {% else %}
+                        This website is a simple study space for Cambridge IELTS materials from books 11 to 20.
+                        Students can follow listening audio and organize practice for reading and listening.
+                    {% endif %}
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#books">Browse books</a>
+                    <a class="button secondary" href="#practice">View practice areas</a>
+                </div>
+            </div>
+            <div class="hero-panel" aria-label="Website summary">
+                <div class="panel-topline">Included materials</div>
+                <div class="big-number">{{ book_count }}</div>
+                <p>
+                    {% if has_pro_access %}
+                        Cambridge IELTS books available for your pro account.
+                    {% elif is_preview %}
+                        Free preview mock exam available without login.
+                    {% else %}
+                        Cambridge IELTS books available for normal users.
+                    {% endif %}
+                </p>
+                <div class="mini-grid">
+                    <span>Books</span>
+                    <span>Audio</span>
+                    <span>Tests</span>
+                    <span>Practice</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="practice">
+            <div class="section-heading">
+                <p class="eyebrow">What kind of website is this?</p>
+                <h2>A practice platform for IELTS self-study.</h2>
+                <p>
+                    It is built for learners who want one place to review Cambridge IELTS books,
+                    listen to test audio, and practice reading and listening skill by skill.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <span class="feature-icon">R</span>
+                    <h3>Reading</h3>
+                    <p>Work through academic passages, question types, and answer review.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon">L</span>
+                    <h3>Listening</h3>
+                    <p>Use the included audio folders to practice sections, maps, lectures, and conversations.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section books-section" id="books">
+            <div class="section-heading compact">
+                <p class="eyebrow">Cambridge library</p>
+                <h2>
+                    {% if is_preview %}
+                        Free preview
+                    {% elif has_pro_access %}
+                        Books 11-20
+                    {% else %}
+                        Books 11-18
+                    {% endif %}
+                </h2>
+                <p>
+                    {% if is_preview %}
+                        Login to unlock all normal-user books. Preview results are not saved to the database.
+                    {% else %}
+                        Book cards are shown here for practice. PDF files are private and are not opened from the website.
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="book-grid">
+                {% for book in books %}
+                    <a class="book-card book-card-link" href="{% url 'cambridge_practice:book_detail' book.number %}">
+                        <div class="book-number">{{ book.number }}</div>
+                        <div>
+                            <h3>{{ book.title }}</h3>
+                            <p>
+                                {% if is_preview %}
+                                    Open Test 1 mock preview.
+                                {% else %}
+                                    Open four practice tests for this book.
+                                {% endif %}
+                            </p>
+                        </div>
+                        {% if book.requires_pro %}
+                            <span class="book-status pro-status">Pro</span>
+                        {% else %}
+                            <span class="book-status">Open</span>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section start-section" id="start">
+            <div>
+                <p class="eyebrow">Next step</p>
+                <h2>Choose a book and start one test.</h2>
+            </div>
+            <p>
+                A good study flow is simple: open a book, complete one section, check answers,
+                and repeat with the audio until the timing feels natural.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

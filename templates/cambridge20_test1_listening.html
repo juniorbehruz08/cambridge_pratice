@@ -1,0 +1,262 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 20 Test 1 Listening | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 20 - Test 1 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score=""
+        data-existing-band=""
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>Cambridge IELTS 20 - Test 1</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 1</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                    <table class="ielts-table">
+                        <thead>
+                            <tr>
+                                <th>Name of restaurant</th>
+                                <th>Location</th>
+                                <th>Reason for recommendation</th>
+                                <th>Other comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>The Junction</td>
+                                <td>Greyson Street, near the station</td>
+                                <td>Good for people who are especially keen on <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></td>
+                                <td>Quite expensive. The <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> is a good place for a drink.</td>
+                            </tr>
+                            <tr>
+                                <td>Paloma</td>
+                                <td>In Bow Street next to the cinema</td>
+                                <td><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> food, good for sharing</td>
+                                <td>Staff are very friendly. Need to pay 50 pounds deposit. A limited selection of <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> food on the menu.</td>
+                            </tr>
+                            <tr>
+                                <td>The <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></td>
+                                <td>At the top of a <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></td>
+                                <td>A famous chef. All the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> are very good. Only uses <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> ingredients.</td>
+                                <td>Set lunch costs <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> per person. Portions probably of <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> size.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-16</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> Heather says pottery differs from other art forms because</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>it lasts longer in the ground.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>it is practised by more people.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>it can be repaired more easily.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> Archaeologists sometimes identify the use of ancient pottery from</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the clay it was made with.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the marks that are on it.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the basic shape of it.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> Some people join Heather's pottery class because they want to</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>create an item that looks very old.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>find something that they are good at.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>make something that will outlive them.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> What does Heather value most about being a potter?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>its calming effect</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>its messy nature</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>its physical benefits</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> Most of the visitors to Edelman Pottery</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>bring friends to join courses.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>have never made a pot before.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>try to learn techniques too quickly.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> Heather reminds her visitors that they should</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>put on their aprons.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>change their clothes.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>take off their jewellery.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 17 and 18</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> things does Heather explain about kilns?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_17" value="{{ attempt.answers|answer_value:17 }}">
+                        <input type="hidden" name="answer_18" value="{{ attempt.answers|answer_value:18 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>what their function is</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>when they were invented</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>ways of keeping them safe</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>where to put one in your home</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>what some people use instead of one</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 19 and 20</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> points does Heather make about a potter's tools?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_19" value="{{ attempt.answers|answer_value:19 }}">
+                        <input type="hidden" name="answer_20" value="{{ attempt.answers|answer_value:20 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>Some are hard to hold.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>Some are worth buying.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>Some are essential items.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>Some have memorable names.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>Some are available for use by participants.</span></button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21 and 22</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> things do the students both believe are responsible for the increase in loneliness?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_21" value="{{ attempt.answers|answer_value:21 }}">
+                        <input type="hidden" name="answer_22" value="{{ attempt.answers|answer_value:22 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>social media</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>smaller nuclear families</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>urban design</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>longer lifespans</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>a mobile workforce</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 23 and 24</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> health risks associated with loneliness do the students agree are based on solid evidence?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
+                        <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>a weakened immune system</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>dementia</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>cancer</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>obesity</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>cardiovascular disease</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 25 and 26</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> opinions do both the students express about the evolutionary theory of loneliness?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_25" value="{{ attempt.answers|answer_value:25 }}">
+                        <input type="hidden" name="answer_26" value="{{ attempt.answers|answer_value:26 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>It has little practical relevance.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>It needs further investigation.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>It is misleading.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>It should be more widely accepted.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>It is difficult to understand.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 27-30</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3>Loneliness and mental health</h3>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> When comparing loneliness to depression, the students</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>doubt that there will ever be a medical cure for loneliness.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>claim that the link between loneliness and mental health is overstated.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>express frustration that loneliness is not taken more seriously.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Why do the students decide to start their presentation with an example from their own experience?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>to explain how difficult loneliness can be</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>to highlight a situation that most students will recognise</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>to emphasise that feeling lonely is more common for men than women</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> The students agree that talking to strangers is a good strategy for dealing with loneliness because</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>it creates a sense of belonging.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>it builds self-confidence.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>it makes people feel more positive.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> The students find it difficult to understand why solitude is considered to be</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>similar to loneliness.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>necessary for mental health.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>an enjoyable experience.</span></button></div></div>{% endwith %}
+                    </div>
+                </section>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Reclaiming urban rivers</h3>
+                        <p class="ielts-blue-title black">Historical background</p>
+                        <ul>
+                            <li>Nearly all major cities were built on a river.</li>
+                            <li>Rivers were traditionally used by city dwellers for transport, fishing and recreation.</li>
+                            <li>Industrial development and rising populations later led to:
+                                <ul>
+                                    <li>more sewage from houses being discharged into the river</li>
+                                    <li>pollution from <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> on the river bank</li>
+                                </ul>
+                            </li>
+                            <li>In 1957, the River Thames in London was declared biologically <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Recent improvements</p>
+                        <ul>
+                            <li>Seals and even a <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> have been seen in the River Thames.</li>
+                            <li>Riverside warehouses are converted to restaurants and <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>In Los Angeles, there are plans to:
+                                <ul>
+                                    <li>build a riverside <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span></li>
+                                    <li>display <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> projects</li>
+                                </ul>
+                            </li>
+                            <li>In Paris, <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> are created on the sides of the river every summer.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Transport possibilities</p>
+                        <ul>
+                            <li>Over 2 billion passengers already travel by <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> in cities round the world.</li>
+                            <li>Changes in shopping habits mean the number of deliveries that are made is increasing.</li>
+                            <li>Instead of road transport, goods could be transported by large freight barges and electric <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> or, in future, by <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

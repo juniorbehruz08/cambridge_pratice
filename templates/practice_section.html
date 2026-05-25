@@ -1,0 +1,133 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ book.title }} {{ test.title }} {{ section_title }} | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>{{ book.title }} - {{ test.title }}</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">{% if section == 'listening' %}Audio{% else %}60:00{% endif %}</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="practice-title">
+            <div>
+                <p class="eyebrow">{{ section_title }}</p>
+                <h1>{{ book.title }} - {{ test.title }}</h1>
+                <p>
+                    Answer questions 1-40.
+                    {% if is_preview %}
+                        Preview answers are not saved; submit to see your score here.
+                    {% else %}
+                        Your final result is saved only after submit.
+                    {% endif %}
+                    {% if section == 'listening' %}
+                        When the audio ends, a two-minute checking timer starts.
+                    {% endif %}
+                </p>
+            </div>
+            {% if attempt.status == 'completed' %}
+                <span class="completed-pill">
+                    Completed{% if result %}: {{ result.score }}/{{ result.total_questions }}{% endif %}
+                </span>
+            {% endif %}
+            <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+        </section>
+
+        {% if section == 'listening' %}
+            <section class="audio-panel">
+                <div>
+                    <p class="eyebrow">Listening audio</p>
+                    <h2>Listening audio</h2>
+                    <p>The audio starts automatically and is locked for the test. After it ends, you will have two minutes to check answers.</p>
+                </div>
+                <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                    <source src="{% static audio_path %}" type="audio/mpeg">
+                </audio>
+                <div class="review-banner" id="reviewBanner" hidden>
+                    Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+                </div>
+            </section>
+        {% endif %}
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+            <div class="question-paper">
+                {% for group in question_groups %}
+                    <section class="question-group">
+                        <div class="question-heading">
+                            <p class="eyebrow">{{ group.title }}</p>
+                            <h2>{{ group.label }}</h2>
+                        </div>
+
+                        <div class="question-copy">
+                            <p>
+                                This practice space follows the Cambridge test structure. Use your book material
+                                while answering in the numbered boxes below.
+                            </p>
+                        </div>
+
+                        <div class="answer-grid">
+                            {% for question in group.questions %}
+                                <label class="answer-field">
+                                    <span>{{ question.number }}</span>
+                                    <input
+                                        type="text"
+                                        name="{{ question.name }}"
+                                        value="{{ question.value }}"
+                                        autocomplete="off"
+                                        {% if attempt.status == 'completed' %}disabled{% endif %}
+                                    >
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endfor %}
+            </div>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit" {% if attempt.status == 'completed' %}disabled{% endif %}>
+                    Submit practice
+                </button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                    Back to sections
+                </a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

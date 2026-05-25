@@ -1,0 +1,271 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 12 Test 1 Listening | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 12 - Test 1 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score=""
+        data-existing-band=""
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>Cambridge IELTS 12 - Test 1</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 1</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>FAMILY EXCURSIONS</h3>
+                        <p class="ielts-blue-title black">Cruise on a lake</p>
+                        <p class="ielts-small-title italic">Example</p>
+                        <ul>
+                            <li>Travel on an old <span class="ielts-example">steamship</span></li>
+                            <li>Can take photos of the <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> that surround the lake</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Farm visit</p>
+                        <ul>
+                            <li>Children can help feed the sheep</li>
+                            <li>Visit can include a 40-minute ride on a <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Visitors can walk in the farm's <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> by the lake</li>
+                            <li><span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> is available at extra cost</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Cycling trips</p>
+                        <ul>
+                            <li>Cyclists explore the Back Road</li>
+                            <li>A <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span> is provided</li>
+                            <li>Only suitable for cyclists who have some <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                        <ul class="ielts-dash">
+                            <li>Bikes can be hired from <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> by the lake, near the Cruise Ship Terminal</li>
+                        </ul>
+                        <ul>
+                            <li>Cyclists need:</li>
+                        </ul>
+                        <ul class="ielts-dash">
+                            <li>a repair kit</li>
+                            <li>food and drink</li>
+                            <li>a <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> (can be hired)</li>
+                        </ul>
+                        <ul>
+                            <li>There are no <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> or accommodation in the area</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Cost</p>
+                        <ul>
+                            <li>Total cost for whole family of cruise and farm visit: <span class="qnum">10</span> $ <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-14</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Talk to new kitchen assistants</h3>
+
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> According to the manager, what do most people like about the job of kitchen assistant?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the variety of work</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the friendly atmosphere</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the opportunities for promotion</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> The manager is concerned about some of the new staff's</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>jewellery.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>hair styles.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>shoes.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> The manager says that the day is likely to be busy for kitchen staff because</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>it is a public holiday.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the head chef is absent.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the restaurant is almost fully booked.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> Only kitchen staff who are 18 or older are allowed to use</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the waste disposal unit.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the electric mixer.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the meat slicer.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 15 and 16</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. According to the manager, which TWO things can make the job of kitchen assistant stressful?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_15" value="{{ attempt.answers|answer_value:15 }}">
+                        <input type="hidden" name="answer_16" value="{{ attempt.answers|answer_value:16 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>They have to follow orders immediately.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>The kitchen gets very hot.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>They may not be able to take a break.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>They have to do overtime.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>The work is physically demanding.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 17-20</p>
+                    <p>What is the responsibility of each of the following restaurant staff?</p>
+                    <p class="ielts-instr">Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A-F</strong>, next to Questions 17-20.</p>
+                    <div class="ielts-choice-box">
+                        <h3 class="ielts-center-title">Responsibilities</h3>
+                        <p><strong>A</strong><span>training courses</span></p>
+                        <p><strong>B</strong><span>food stocks</span></p>
+                        <p><strong>C</strong><span>first aid</span></p>
+                        <p><strong>D</strong><span>breakages</span></p>
+                        <p><strong>E</strong><span>staff discounts</span></p>
+                        <p><strong>F</strong><span>timetables</span></p>
+                    </div>
+                    <div class="ielts-report-list">
+                        <label><strong>17</strong><span>Joy Parkins</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>18</strong><span>David Field</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>19</strong><span>Dexter Wills</span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>20</strong><span>Mike Smith</span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-23</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Paper on Public Libraries</h3>
+
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> What will be the main topic of Trudie and Stewart's paper?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>how public library services are organised in different countries</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>how changes in society are reflected in public libraries</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>how the funding of public libraries has changed</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> They agree that one disadvantage of free digitalised books is that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>they may take a long time to read.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>they can be difficult to read.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>they are generally old.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> Stewart expects that in the future libraries will</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>maintain their traditional function.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>become centres for local communities.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>no longer contain any books.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 24-30</p>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box compact-box">
+                        <h3>Study of local library: possible questions</h3>
+                        <ul>
+                            <li>whether it has a <span class="qnum">24</span> <span class="ielts-blank"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off"><span>......................</span></span> of its own</li>
+                            <li>its policy regarding noise of various kinds</li>
+                            <li>how it is affected by laws regarding all aspects of <span class="qnum">25</span> <span class="ielts-blank"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>how the design needs to take the <span class="qnum">26</span> <span class="ielts-blank"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off"><span>......................</span></span> of customers into account</li>
+                            <li>what <span class="qnum">27</span> <span class="ielts-blank"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off"><span>......................</span></span> is required in case of accidents</li>
+                            <li>why a famous person's <span class="qnum">28</span> <span class="ielts-blank"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off"><span>......................</span></span> is located in the library</li>
+                            <li>whether it has a <span class="qnum">29</span> <span class="ielts-blank"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off"><span>......................</span></span> of local organisations</li>
+                            <li>how it is different from a library in a <span class="qnum">30</span> <span class="ielts-blank"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>Four business values</h3>
+                        <ul>
+                            <li>Many business values can result in <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Senior managers need to understand and deal with the potential <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> that may result.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Collaboration</p>
+                        <ul>
+                            <li>During a training course, the speaker was in a team that had to build a <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Other teams experienced <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> from trying to collaborate.</li>
+                            <li>The speaker's team won because they reduced collaboration.</li>
+                            <li>Sales of a <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> were poor because of collaboration.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Industriousness</p>
+                        <ul>
+                            <li>Hard work may be a bad use of various company <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>The word "lazy" in this context refers to people who avoid doing tasks that are <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Creativity</p>
+                        <ul>
+                            <li>An advertising campaign for a <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> was memorable but failed to boost sales.</li>
+                            <li>Creativity should be used as a response to a particular <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Excellence</p>
+                        <ul>
+                            <li>According to one study, on average, pioneers had a <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> that was far higher than that of followers.</li>
+                            <li>Companies that always aim at excellence may miss opportunities.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions ielts-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 11 Test 4 Reading | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=falkirk-wheel-layout-3">
+    <script src="{% static 'js/practice.js' %}?v=multi-blank-drag" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 11 - Test 4 Reading</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell reading-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score=""
+        data-existing-band=""
+    >
+        <form method="post" class="practice-form reading-practice-form" id="practiceForm">
+            {% csrf_token %}
+            <section class="reading-topbar">
+                <div>
+                    <p class="eyebrow">Reading</p>
+                    <h1>Cambridge IELTS 11 - Test 4</h1>
+                    <p>Passages are on the left and questions are on the right. Select passage text to highlight it.</p>
+                </div>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </section>
+
+            <section class="reading-split">
+                <aside class="reading-passages" aria-label="Reading passages">
+                    <article class="reading-passage-block" id="passage-1">
+                        <p class="reading-passage-label">READING PASSAGE 1</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1 below.</p>
+                        <h2>Research using twins</h2>
+                        <div class="reading-passage-copy">
+                            <p>To biomedical researchers all over the world, twins offer a precious opportunity to untangle the influence of genes and the environment - of nature and nurture. Because identical twins come from a single fertilized egg that splits into two, they share virtually the same genetic code. Any differences between them - one twin having younger looking skin, for example - must be due to environmental factors such as less time spent in the sun.</p>
+                            <p>Alternatively, by comparing the experiences of identical twins with those of fraternal twins, who come from separate eggs and share on average half their DNA, researchers can quantify the extent to which our genes affect our lives. If identical twins are more similar to each other with respect to an ailment than fraternal twins are, then vulnerability to the disease must be rooted at least in part in heredity.</p>
+                            <p>These two lines of research - studying the differences between identical twins to pinpoint the influence of environment, and comparing identical twins with fraternal ones to measure inheritance - have been crucial to understanding the interplay of nature and nurture in determining personalities, behaviour and vulnerability to disease.</p>
+                            <p>The idea of using twins to measure heredity dates back to 1875, when the English scientist Francis Galton first suggested the approach and coined the phrase "nature and nurture". But twin studies took a surprising twist in the 1980s, with studies of identical twins who had been separated at birth and reunited as adults. Over two decades, 137 sets of twins visited Thomas Bouchard's lab in what became known as the Minnesota Study of Twins Reared Apart. Numerous tests were carried out, and each twin was asked more than 15,000 questions.</p>
+                            <p>Bouchard and his colleagues used this mountain of data to identify how far twins were affected by their genetic makeup. Their key tool was a statistical concept called heritability. In broad terms, the heritability of a trait measures the extent to which differences among members of a population can be explained by differences in their genetics. Wherever Bouchard and other scientists looked, they found the invisible hand of genetic influence helping to shape our lives.</p>
+                            <p>Lately, however, twin studies have helped lead scientists to a radical new conclusion: nature and nurture are not the only elemental forces at work. According to the recent field of epigenetics, a third factor is also in play. In some cases it serves as a bridge between the environment and our genes, and in others it operates on its own to shape who we are.</p>
+                            <p>Epigenetic processes are chemical reactions tied to neither nature nor nurture but representing what researchers have called a "third component". These reactions influence how our genetic code is expressed: how each gene is strengthened or weakened, even turned on or off, to build our bones, brains and all the other parts of our bodies.</p>
+                            <p>If our DNA is imagined as an immense piano keyboard and our genes as the keys, each key symbolizing a segment of DNA responsible for a particular note or trait, then epigenetic processes determine when and how each key can be struck, changing the tune being played.</p>
+                            <p>One way epigenetics is revolutionizing biology is by revealing a mechanism by which the environment directly impacts genes. Studies of animals have shown that when a rat experiences stress during pregnancy, it can cause epigenetic changes in a fetus that lead to behavioural problems as the rodent grows up. Other epigenetic processes appear to occur randomly, while others are normal, such as those that guide embryonic cells as they become heart, brain or liver cells.</p>
+                            <p>Geneticist Danielle Reed has worked with many twins and thought deeply about what twin studies have taught us. She says it is clear that much of what twins share is hardwired, but also that other things differ. In her view, epigenetics is the origin of many of those differences.</p>
+                            <p>Reed credits Thomas Bouchard's work for today's surge in twin studies. She says he was the trailblazer, reminding us that 50 years ago conditions such as heart disease were thought to be caused entirely by lifestyle and schizophrenia was blamed on poor mothering. Twin studies have allowed researchers to be more reflective about what people are born with and what is caused by experience.</p>
+                            <p>Reed adds that the latest work in epigenetics promises to take understanding even further. "Nature writes some things in pencil and some things in pen," she says. "Things written in pen you can't change. That's DNA. But things written in pencil you can. That's epigenetics. Now that we're actually able to look at the DNA and see where the pencil writings are, it's sort of a whole new world."</p>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-2">
+                        <p class="reading-passage-label">READING PASSAGE 2</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 14-26, which are based on Reading Passage 2 below.</p>
+                        <h2>An Introduction to Film Sound</h2>
+                        <div class="reading-passage-copy">
+                            <p>Though we might think of film as an essentially visual experience, we cannot afford to underestimate the importance of film sound. A meaningful sound track is often as complicated as the image on the screen and is ultimately just as much the responsibility of the director. The entire sound track consists of three essential ingredients: the human voice, sound effects and music. These tracks must be mixed and balanced to produce the necessary emphases which create desired effects.</p>
+                            <p>Dialogue serves to tell the story and expresses feelings and motivations of characters. Often, in film characterization, the audience perceives little or no difference between the character and the actor. For example, Humphrey Bogart is the character Sam Spade; film personality and life personality seem to merge. Perhaps this is because the texture of a performer's voice supplies an element of character. When voice textures fit the performer's appearance and gestures, a whole and realistic persona emerges.</p>
+                            <p>How dialogue is used and how much dialogue is used vary widely among films. In the science-fiction film 2001, little dialogue is evident, and most of it is banal and of little intrinsic interest. In this way, the film-maker portrays what Thomas Sobochack and Vivian Sobochack call the inadequacy of human responses when compared with magnificent technology and the visual beauties of the universe.</p>
+                            <p>The comedy Bringing Up Baby, on the other hand, presents practically non-stop dialogue delivered at breakneck speed. This underscores not only the dizzy quality of the character played by Katharine Hepburn, but also the absurdity and humour of the film itself. The audience is bounced from gag to gag and conversation to conversation, with no time for reflection. This film presents pure escapism, largely because of its frenetic dialogue.</p>
+                            <p>Synchronous sound effects are those sounds which are synchronized or matched with what is viewed. If the film portrays a character playing the piano, the sounds of the piano are projected. Synchronous sounds contribute to the realism of film and help create atmosphere. The click of a door being opened may simply convince the audience that the image is real. But if the click is part of an ominous action, such as a burglary, the sound mixer may call attention to it by increasing the volume, engaging the audience in suspense.</p>
+                            <p>Asynchronous sound effects are not matched with a visible source of sound on screen. Such sounds provide an appropriate emotional nuance and may add to realism. A film-maker might include the background sound of an ambulance siren while the foreground image portrays an arguing couple. The siren underscores the psychic injury incurred in the argument, while also acknowledging the film's city setting.</p>
+                            <p>Background music in films has become so ubiquitous that its absence is noticeable. We are aware that it adds emotion and rhythm. Usually not meant to be noticed, it provides a tone or emotional attitude toward the story and characters. It often foreshadows a change in mood; dissonant music may indicate an approaching menace or disaster. Background music may also aid viewer understanding by linking scenes, repeating a theme associated with a character or situation to remind the audience of important motifs or ideas.</p>
+                            <p>Film sound comprises conventions and innovations. We expect accelerating music during car chases and creaky doors in horror films. Yet sound is often brilliantly conceived, and its effects are often subtle, noted only by our subconscious minds. We need to foster an awareness of film sound as well as film space to truly appreciate the modern film, an art form that sprang to life during the twentieth century.</p>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-3">
+                        <p class="reading-passage-label">READING PASSAGE 3</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3 below.</p>
+                        <h2>This Marvellous Invention</h2>
+                        <div class="reading-passage-copy labelled-copy">
+                            <section class="passage-paragraph"><span>A</span><div><p>Of all mankind's manifold creations, language must take pride of place. Other inventions - the wheel, agriculture, sliced bread - may have transformed our material existence, but the advent of language is what made us human. Compared to language, all other inventions pale in significance, since everything we have ever achieved depends on language and originates from it. Without language, we could never have embarked on our ascent to unparalleled power over other animals and nature itself.</p></div></section>
+                            <section class="passage-paragraph"><span>B</span><div><p>But language is foremost not just because it came first. It is a tool of extraordinary sophistication, based on an idea of ingenious simplicity: composing out of twenty-five or thirty sounds an infinite variety of expressions which allow us to disclose to others the secrets of our mind. This was how, in 1660, the French grammarians of the Port-Royal abbey distilled the essence of language, and no one since has celebrated more eloquently the magnitude of its achievement.</p></div></section>
+                            <section class="passage-paragraph"><span>C</span><div><p>Even so, there is one flaw in these hymns of praise: homage to language's unique accomplishment conceals a simple yet critical incongruity. Language is mankind's greatest invention, except that it was never invented. This paradox is central to our fascination with language and holds many of its secrets.</p></div></section>
+                            <section class="passage-paragraph"><span>D</span><div><p>Language often seems so skilfully drafted that one can hardly imagine it as anything other than the perfected handiwork of a master craftsman. How else could this instrument make so much out of barely three dozen morsels of sound? In themselves, these configurations of mouth, lips and so on are only random noises with no meaning or power. But run them through the language machine, let it arrange them in special orders, and there is nothing that these meaningless streams of air cannot do, from sighing boredom to unravelling the fundamental order of the universe.</p></div></section>
+                            <section class="passage-paragraph"><span>E</span><div><p>The most extraordinary thing about language is that one does not have to be a genius to set its wheels in motion. The language machine allows almost everybody, from pre-modern foragers to post-modern philosophers, to tie these meaningless sounds together into an infinite variety of subtle senses, apparently without exertion. Yet this deceptive ease makes language a victim of its own success: in everyday life its triumphs are usually taken for granted, and one rarely stops to think about the resourcefulness that must have gone into making it tick.</p></div></section>
+                            <section class="passage-paragraph"><span>F</span><div><p>Often, only the estrangement of foreign tongues, with their exotic features, brings home the wonder of language's design. Some languages can build words of breath-breaking length and express in one word what English needs a whole sentence to say. Turkish offers examples of huge words whose components cannot stand alone.</p><p>Sumerian, spoken on the banks of the Euphrates some 5,000 years ago by the people who invented writing and enabled the documentation of history, shows the opposite: thrifty compactness. A Sumerian word may be made of slots, each corresponding to a portion of meaning. This sleek design allows single sounds to convey information, and even the absence of a sound can express something specific. The technology is so fine-tuned that a non-sound, carefully placed, has a function.</p></div></section>
+                        </div>
+                    </article>
+                </aside>
+
+                <section class="reading-questions" aria-label="Reading questions">
+                    <nav class="reading-mini-nav" aria-label="Passage navigation">
+                        <a href="#passage-1">Passage 1</a>
+                        <a href="#passage-2">Passage 2</a>
+                        <a href="#passage-3">Passage 3</a>
+                    </nav>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 1</h2>
+                        <p class="ielts-instr">Questions 1-4</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:1 %}<div class="mc-question"><input type="hidden" name="answer_1" value="{{ selected }}"><p><span class="qnum">1</span> There may be genetic causes for the differences in how young the skin of identical twins looks.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:2 %}<div class="mc-question"><input type="hidden" name="answer_2" value="{{ selected }}"><p><span class="qnum">2</span> Twins are at greater risk of developing certain illnesses than non-twins.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:3 %}<div class="mc-question"><input type="hidden" name="answer_3" value="{{ selected }}"><p><span class="qnum">3</span> Bouchard advertised in newspapers for twins who had been separated at birth.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:4 %}<div class="mc-question"><input type="hidden" name="answer_4" value="{{ selected }}"><p><span class="qnum">4</span> Epigenetic processes are different from both genetic and environmental processes.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 5-9</p>
+                        <p>Look at the following statements and the list of researchers below. Match each statement with the correct researcher, <strong>A, B</strong> or <strong>C</strong>.</p>
+                        <p class="ielts-instr">You may use any letter more than once.</p>
+                        <div class="scientist-box">
+                            <h3>List of Researchers</h3>
+                            <p><strong>A</strong> Francis Galton</p>
+                            <p><strong>B</strong> Thomas Bouchard</p>
+                            <p><strong>C</strong> Danielle Reed</p>
+                        </div>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">5</span> invented a term used to distinguish two factors affecting human characteristics <span class="ielts-blank short"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">6</span> expressed the view that the study of epigenetics will increase our knowledge <span class="ielts-blank short"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">7</span> developed a mathematical method of measuring genetic influences <span class="ielts-blank short"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">8</span> pioneered research into genetics using twins <span class="ielts-blank short"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">9</span> carried out research into twins who had lived apart <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 10-13</p>
+                        <p>Complete the summary using the list of words, <strong>A-F</strong>, below.</p>
+                        <div class="scientist-box headings-box">
+                            <p><strong>A</strong> nurture</p><p><strong>B</strong> organs</p><p><strong>C</strong> code</p><p><strong>D</strong> chemicals</p><p><strong>E</strong> environment</p><p><strong>F</strong> behaviour/behavior</p>
+                        </div>
+                        <h3 class="ielts-center-title">Epigenetic processes</h3>
+                        <div class="sentence-questions">
+                            <p>In epigenetic processes, <span class="qnum">10</span> <span class="ielts-blank short"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off" maxlength="1"><span>............</span></span> influence the activity of our genes, for example in creating our internal <span class="qnum">11</span> <span class="ielts-blank short"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                            <p>The study of epigenetic processes is uncovering a way in which our genes can be affected by our <span class="qnum">12</span> <span class="ielts-blank short"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                            <p>One example is that if a pregnant rat suffers stress, the newborn rat may later show problems in its <span class="qnum">13</span> <span class="ielts-blank short"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 2</h2>
+                        <p class="ielts-instr">Questions 14-18</p>
+                        <p class="ielts-instr">Choose the correct letter, <strong>A, B, C</strong> or <strong>D</strong>.</p>
+                        <div class="ielts-mc-list">
+                            {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> In the first paragraph, the writer makes the point that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the director should plan the sound track early in filming.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>it would be wrong to overlook the contribution of sound to the artistry of films.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the music industry can benefit sound in film.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>sound workers should have sole responsibility for film sound.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> One reason that the writer refers to Humphrey Bogart is to exemplify</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the importance of actor and character appearing to have similar personalities.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the audience's wish that actors are visually appropriate for their roles.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the value of the actor having had similar feelings to the character.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>the audience's preference for authentic dialogue.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> In the third paragraph, the writer suggests that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>audiences are likely to criticise film dialogue that does not reflect their experience.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>film dialogue that appears dull may have a specific purpose.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>film-makers vary considerably in handling dialogue.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>the most successful films have high-quality dialogue.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> What does the writer suggest about Bringing Up Baby?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>The plot suffers because humorous dialogue is prioritised.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>The dialogue makes it one of the best comedy films ever produced.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>There is a mismatch between dialogue speed and action speed.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>The nature of the dialogue emphasises key elements of the film.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:18 %}<div class="mc-question"><input type="hidden" name="answer_18" value="{{ selected }}"><p><span class="qnum">18</span> The writer refers to the "click" of a door to make the point that realistic sounds</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>are often used to give a false impression of events.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>may be interpreted differently by different audience members.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>may be modified to manipulate the audience's response.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>tend to be more significant in realistic films.</span></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 19-23</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 2?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:19 %}<div class="mc-question"><input type="hidden" name="answer_19" value="{{ selected }}"><p><span class="qnum">19</span> Audiences are likely to be surprised if a film lacks background music.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:20 %}<div class="mc-question"><input type="hidden" name="answer_20" value="{{ selected }}"><p><span class="qnum">20</span> Background music may anticipate a development in a film.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> Background music has more effect on some people than on others.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> Background music may help the audience to make certain connections within the film.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> Audiences tend to be aware of how the background music is affecting them.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 24-26</p>
+                        <p>Complete each sentence with the correct ending, <strong>A-E</strong>, below.</p>
+                        <div class="scientist-box headings-box">
+                            <p><strong>A</strong> when the audience listens to the dialogue.</p>
+                            <p><strong>B</strong> if the film reflects the audience's own concerns.</p>
+                            <p><strong>C</strong> if voice, sound and music are combined appropriately.</p>
+                            <p><strong>D</strong> when the director is aware of how the audience will respond.</p>
+                            <p><strong>E</strong> when the actor's appearance, voice and moves are consistent with each other.</p>
+                        </div>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">24</span> The audience's response to different parts of a film can be controlled <span class="ielts-blank short"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">25</span> The feelings and motivations of characters become clear <span class="ielts-blank short"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">26</span> A character seems to be a real person rather than an actor <span class="ielts-blank short"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 3</h2>
+                        <p class="ielts-instr">Questions 27-32</p>
+                        <p>Reading Passage 3 has six paragraphs, <strong>A-F</strong>. Choose the correct heading for paragraphs A-F from the list of headings below.</p>
+                        <div class="scientist-box headings-box">
+                            <h3>List of Headings</h3>
+                            <p><strong>i</strong> Differences between languages highlight their impressiveness</p>
+                            <p><strong>ii</strong> The way in which a few sounds are organised to convey a huge range of meaning</p>
+                            <p><strong>iii</strong> Why the sounds used in different languages are not identical</p>
+                            <p><strong>iv</strong> Apparently incompatible characteristics of language</p>
+                            <p><strong>v</strong> Even silence can be meaningful</p>
+                            <p><strong>vi</strong> Why language is the most important invention of all</p>
+                            <p><strong>vii</strong> The universal ability to use language</p>
+                        </div>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">27</span> Paragraph A <span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">28</span> Paragraph B <span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">29</span> Paragraph C <span class="ielts-blank short"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">30</span> Paragraph D <span class="ielts-blank short"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">31</span> Paragraph E <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">32</span> Paragraph F <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>............</span></span></p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 33-36</p>
+                        <p>Complete the summary using the list of words, <strong>A-G</strong>, below.</p>
+                        <div class="scientist-box headings-box">
+                            <p><strong>A</strong> difficult</p><p><strong>B</strong> complex</p><p><strong>C</strong> original</p><p><strong>D</strong> admired</p><p><strong>E</strong> material</p><p><strong>F</strong> easy</p><p><strong>G</strong> fundamental</p>
+                        </div>
+                        <h3 class="ielts-center-title">The importance of language</h3>
+                        <div class="sentence-questions">
+                            <p>The wheel is one invention that has had a major impact on <span class="qnum">33</span> <span class="ielts-blank short"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off" maxlength="1"><span>............</span></span> aspects of life, but no impact has been as <span class="qnum">34</span> <span class="ielts-blank short"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off" maxlength="1"><span>............</span></span> as that of language.</p>
+                            <p>Language is very <span class="qnum">35</span> <span class="ielts-blank short"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off" maxlength="1"><span>............</span></span>, yet composed of just a small number of sounds.</p>
+                            <p>Language appears to be <span class="qnum">36</span> <span class="ielts-blank short"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off" maxlength="1"><span>............</span></span> to use. However, its sophistication is often overlooked.</p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 37-40</p>
+                        <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+                        <p class="tfng-key"><strong>YES</strong> if the statement agrees with the views of the writer<br><strong>NO</strong> if the statement contradicts the views of the writer<br><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:37 %}<div class="mc-question"><input type="hidden" name="answer_37" value="{{ selected }}"><p><span class="qnum">37</span> Human beings might have achieved their present position without language.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:38 %}<div class="mc-question"><input type="hidden" name="answer_38" value="{{ selected }}"><p><span class="qnum">38</span> The Port-Royal grammarians did justice to the nature of language.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:39 %}<div class="mc-question"><input type="hidden" name="answer_39" value="{{ selected }}"><p><span class="qnum">39</span> A complex idea can be explained more clearly in a sentence than in a single word.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:40 %}<div class="mc-question"><input type="hidden" name="answer_40" value="{{ selected }}"><p><span class="qnum">40</span> The Sumerians were responsible for starting the recording of events.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+                    </article>
+                </section>
+            </section>
+
+            <div class="practice-actions reading-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

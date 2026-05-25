@@ -1,0 +1,246 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambridge IELTS 18 Test 1 Listening | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>Cambridge IELTS 18 - Test 1 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score=""
+        data-existing-band=""
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>Cambridge IELTS 18 - Test 1</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 1</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Transport survey</h3>
+                        <p><strong>Name:</strong> Sadie Jones</p>
+                        <p><strong>Year of birth:</strong> 1991</p>
+                        <p><strong>Postcode:</strong> <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></p>
+                        <p class="ielts-blue-title black">Travelling by bus</p>
+                        <ul>
+                            <li>Date of bus journey: <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Reason for trip: shopping and visit to the <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Travelled by bus because cost of <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> too high</li>
+                            <li>Got on bus at <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span> Street</li>
+                            <li>Complaints about bus service:
+                                <ul>
+                                    <li>bus today was <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
+                                    <li>frequency of buses in the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p class="ielts-blue-title black">Travelling by car</p>
+                        <ul>
+                            <li>Goes to the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> by car</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Travelling by bicycle</p>
+                        <ul>
+                            <li>Dislikes travelling by bike in the city centre because of the <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>Doesn't own a bike because of a lack of <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-13</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Becoming a volunteer for ACE</h3>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> Why does the speaker apologise about the seats?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>They are too small.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>There are not enough of them.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Some of them are very close together.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> What does the speaker say about the age of volunteers?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>The age of volunteers is less important than other factors.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Young volunteers are less reliable than older ones.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Most volunteers are about 60 years old.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> What does the speaker say about training?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>It is continuous.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>It is conducted by a manager.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>It takes place online.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 14 and 15</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> issues does the speaker ask the audience to consider before they apply to be volunteers?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_14" value="{{ attempt.answers|answer_value:14 }}">
+                        <input type="hidden" name="answer_15" value="{{ attempt.answers|answer_value:15 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>their financial situation</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>their level of commitment</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>their work experience</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>their ambition</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>their availability</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 16-20</p>
+                    <p>What does the speaker suggest would be helpful for each of the following areas of voluntary work?</p>
+                    <p class="ielts-instr">Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A-G</strong>, next to Questions 16-20.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>experience on stage</span></p>
+                        <p><strong>B</strong><span>original, new ideas</span></p>
+                        <p><strong>C</strong><span>parenting skills</span></p>
+                        <p><strong>D</strong><span>an understanding of food and diet</span></p>
+                        <p><strong>E</strong><span>retail experience</span></p>
+                        <p><strong>F</strong><span>a good memory</span></p>
+                        <p><strong>G</strong><span>a good level of fitness</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> Fundraising</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> Litter collection</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:18 %}<div class="mc-question"><input type="hidden" name="answer_18" value="{{ selected }}"><p><span class="qnum">18</span> Playmates</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:19 %}<div class="mc-question"><input type="hidden" name="answer_19" value="{{ selected }}"><p><span class="qnum">19</span> Story club</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:20 %}<div class="mc-question"><input type="hidden" name="answer_20" value="{{ selected }}"><p><span class="qnum">20</span> First aid</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-26</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Talk on jobs in fashion design</h3>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> What problem did Chantal have at the start of the talk?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Her view of the speaker was blocked.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>She was unable to find an empty seat.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>The students next to her were talking.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> What were Hugo and Chantal surprised to hear about the job market?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>It has become more competitive than it used to be.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>There is more variety in it than they had realised.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Some areas of it are more exciting than others.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> Hugo and Chantal agree that the speaker's message was</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>unfair to them at times.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>hard for them to follow.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>critical of the industry.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> What do Hugo and Chantal criticise about their school careers advice?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>when they received the advice</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>how much advice was given</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>who gave the advice</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> When discussing their future, Hugo and Chantal disagree on</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>which is the best career in fashion.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>when to choose a career in fashion.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>why they would like a career in fashion.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> How does Hugo feel about being an unpaid assistant?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>He is realistic about the practice.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>He feels the practice is dishonest.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>He thinks others want to change the practice.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 27 and 28</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which <strong>TWO</strong> mistakes did the speaker admit she made in her first job?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_27" value="{{ attempt.answers|answer_value:27 }}">
+                        <input type="hidden" name="answer_28" value="{{ attempt.answers|answer_value:28 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>being dishonest to her employer</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>paying too much attention to how she looked</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>expecting to become well known</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>trying to earn a lot of money</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>openly disliking her client</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 29 and 30</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which <strong>TWO</strong> pieces of retail information do Hugo and Chantal agree would be useful?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_29" value="{{ attempt.answers|answer_value:29 }}">
+                        <input type="hidden" name="answer_30" value="{{ attempt.answers|answer_value:30 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>the reasons people return fashion items</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>how much time people have to shop for clothes</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>fashion designs people want but can't find</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the best time of year for fashion buying</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the most popular fashion sizes</span></button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Elephant translocation</h3>
+                        <p class="ielts-blue-title black">Reasons for overpopulation at Majete National Park</p>
+                        <ul>
+                            <li>strict enforcement of anti-poaching laws</li>
+                            <li>successful breeding</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Problems caused by elephant overpopulation</p>
+                        <ul>
+                            <li>greater competition, causing hunger for elephants</li>
+                            <li>damage to <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> in the park</li>
+                        </ul>
+                        <p class="ielts-blue-title black">The translocation process</p>
+                        <ul>
+                            <li>a suitable group of elephants from the same <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> was selected</li>
+                            <li>vets and park staff made use of <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> to help guide the elephants into an open plain</li>
+                            <li>elephants were immobilised with tranquilisers - this process had to be completed quickly to reduce <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>elephants had to be turned on their <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> to avoid damage to their lungs</li>
+                            <li>elephants' <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> had to be monitored constantly</li>
+                            <li>tracking devices were fitted to the matriarchs</li>
+                            <li>data including the size of their tusks and <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> was taken</li>
+                            <li>elephants were taken by truck to their new reserve</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Advantages of translocation at Nkhotakota Wildlife Park</p>
+                        <ul>
+                            <li><span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> opportunities</li>
+                            <li>a reduction in the number of poachers and <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>an example of conservation that other parks can follow</li>
+                            <li>an increase in <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> as a contributor to GDP</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>
