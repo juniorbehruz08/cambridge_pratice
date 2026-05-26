@@ -50,11 +50,41 @@ document.addEventListener('DOMContentLoaded', () => {
         timerDisplay.hidden = true;
     }
 
+    function normalizeSubmittedAnswer(value) {
+        return String(value || '').trim().toUpperCase();
+    }
+
+    function normalizeAnswerInput(input) {
+        if (!input || !/^answer_\d+$/.test(input.name || '')) {
+            return;
+        }
+
+        const normalized = normalizeSubmittedAnswer(input.value);
+        if (input.value === normalized) {
+            return;
+        }
+
+        const canRestoreSelection = input.type !== 'hidden';
+        const start = canRestoreSelection ? input.selectionStart : null;
+        const end = canRestoreSelection ? input.selectionEnd : null;
+        input.value = normalized;
+        if (canRestoreSelection && start !== null && end !== null) {
+            input.setSelectionRange(start, end);
+        }
+    }
+
+    function normalizeAllAnswerInputs() {
+        form.querySelectorAll('input[name^="answer_"]').forEach(normalizeAnswerInput);
+    }
+
     function collectAnswers() {
         const answers = {};
         for (let index = 1; index <= 40; index += 1) {
             const input = form.querySelector(`[name="answer_${index}"]`);
-            answers[String(index)] = input ? input.value : '';
+            if (input) {
+                normalizeAnswerInput(input);
+            }
+            answers[String(index)] = input ? normalizeSubmittedAnswer(input.value) : '';
         }
         return answers;
     }
@@ -113,6 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const multiQuestion = input.closest('.multi-answer-question');
         if (multiQuestion) {
+            const submittedValue = normalizeSubmittedAnswer(input.value);
+            if (submittedValue) {
+                const selectedOption = Array.from(multiQuestion.querySelectorAll('.multi-option'))
+                    .find((button) => button.dataset.value === submittedValue);
+                if (selectedOption) {
+                    return {
+                        highlight: selectedOption,
+                        badge: selectedOption,
+                    };
+                }
+            }
+
             return {
                 highlight: multiQuestion,
                 badge: multiQuestion,
@@ -1293,7 +1335,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    form.addEventListener('input', scheduleSave);
+    form.addEventListener('input', (event) => {
+        normalizeAnswerInput(event.target);
+        scheduleSave();
+    });
     form.querySelectorAll('.mc-option').forEach((button) => {
         button.addEventListener('click', () => {
             if (completed || button.disabled) {
@@ -1351,6 +1396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setupDragChoiceAssignments();
+    normalizeAllAnswerInputs();
     updateFilledBlanks();
     updateMultipleChoice();
     updateMultiAnswerChoices();

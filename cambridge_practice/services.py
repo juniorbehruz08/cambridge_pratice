@@ -1,5 +1,4 @@
 import re
-from collections import Counter
 
 from .models import AnswerKey, PracticeResult
 
@@ -44,6 +43,27 @@ def normalize_answer(value):
     return value
 
 
+def compact_answer_variant(value):
+    value = normalize_answer(value)
+    if not any(character.isdigit() for character in value):
+        return ''
+
+    return re.sub(r'\s+', '', value)
+
+
+def normalized_answer_variants(value):
+    normalized = normalize_answer(value)
+    if not normalized:
+        return set()
+
+    variants = {normalized}
+    compact_value = compact_answer_variant(normalized)
+    if compact_value:
+        variants.add(compact_value)
+
+    return variants
+
+
 def format_answer_for_display(value):
     value = str(value or '').strip()
     value = re.sub(r'\s*/\s*', ' / ', value)
@@ -79,9 +99,7 @@ def alternatives_for(value):
         values = value
     else:
         value = str(value or '')
-        full_value = normalize_answer(value)
-        if full_value:
-            alternatives.add(full_value)
+        alternatives.update(normalized_answer_variants(value))
         value = value.replace(' I ', ' / ')
         values = [part.strip() for part in value.split('/')]
         if len(values) > 1:
@@ -100,9 +118,7 @@ def alternatives_for(value):
         if not str(part).strip():
             continue
         for variant in expand_optional_parentheses(part):
-            normalized = normalize_answer(variant)
-            if normalized:
-                alternatives.add(normalized)
+            alternatives.update(normalized_answer_variants(variant))
 
     return list(alternatives)
 
@@ -125,9 +141,9 @@ def grade_answers(answer_key, submitted_answers):
         if q in grouped_questions:
             continue
 
-        user_answer = normalize_answer(submitted.get(q, ''))
-        official_answers = alternatives_for(official.get(q, ''))
-        is_correct = bool(user_answer and user_answer in official_answers)
+        user_answers = normalized_answer_variants(submitted.get(q, ''))
+        official_answers = set(alternatives_for(official.get(q, '')))
+        is_correct = bool(user_answers and user_answers.intersection(official_answers))
         if is_correct:
             score += 1
 
@@ -139,24 +155,32 @@ def grade_answers(answer_key, submitted_answers):
 
     for group in either_order_groups:
         question_ids = [str(question) for question in group]
-        official_values = [
-            normalize_answer(official.get(question_id, ''))
+        remaining_official_answers = [
+            {
+                'question_id': question_id,
+                'answers': set(alternatives_for(official.get(question_id, ''))),
+            }
             for question_id in question_ids
         ]
-        submitted_values = [
-            normalize_answer(submitted.get(question_id, ''))
-            for question_id in question_ids
-        ]
-        is_group_correct = Counter(submitted_values) == Counter(official_values)
-
-        if is_group_correct:
-            score += len(question_ids)
 
         for question_id in question_ids:
+            submitted_variants = normalized_answer_variants(submitted.get(question_id, ''))
+            matched_official = None
+            if submitted_variants:
+                for index, candidate in enumerate(remaining_official_answers):
+                    if submitted_variants.intersection(candidate['answers']):
+                        matched_official = remaining_official_answers.pop(index)
+                        break
+
+            is_correct = matched_official is not None
+            if is_correct:
+                score += 1
+
+            official_question_id = matched_official['question_id'] if matched_official else question_id
             details[question_id] = {
                 'submitted': submitted.get(question_id, ''),
-                'official': official_answer_for_display(answer_key, question_id),
-                'correct': is_group_correct,
+                'official': official_answer_for_display(answer_key, official_question_id),
+                'correct': is_correct,
                 'either_order_group': question_ids,
             }
 

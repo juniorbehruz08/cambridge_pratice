@@ -119,6 +119,17 @@ class UnsavedAttempt:
     answers = {}
 
 
+def normalize_submitted_answer(value):
+    return str(value or '').strip().upper()
+
+
+def clean_submitted_answers(raw_answers, field_prefix=''):
+    return {
+        str(number): normalize_submitted_answer(raw_answers.get(f'{field_prefix}{number}', ''))
+        for number in range(1, 41)
+    }
+
+
 def user_can_access_book(user, book):
     if not user.is_authenticated:
         return book['number'] == PREVIEW_BOOK_NUMBER
@@ -322,10 +333,7 @@ def practice_section(request, book_number, test_number, section):
     result = None
 
     if request.method == 'POST':
-        answers = {
-            str(number): request.POST.get(f'answer_{number}', '').strip()
-            for number in range(1, 41)
-        }
+        answers = clean_submitted_answers(request.POST, field_prefix='answer_')
         if is_preview:
             return redirect('cambridge_practice:practice_section', book_number, test_number, section)
 
@@ -862,10 +870,7 @@ def save_practice_answers(request):
     if not isinstance(answers, dict):
         answers = {}
 
-    cleaned_answers = {
-        str(number): str(answers.get(str(number), '')).strip()
-        for number in range(1, 41)
-    }
+    cleaned_answers = clean_submitted_answers(answers)
 
     if not request.user.is_authenticated:
         answer_key = AnswerKey.objects.filter(
