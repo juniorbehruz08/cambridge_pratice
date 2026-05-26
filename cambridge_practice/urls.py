@@ -13,6 +13,12 @@ urlpatterns = [
         views.test_detail,
         name='test_detail',
     ),
+    path('past-results/', views.past_results, name='past_results'),
+    path(
+        'past-results/<int:result_id>/',
+        views.practice_result_detail,
+        name='practice_result_detail',
+    ),
     path(
         'books/<int:book_number>/tests/<int:test_number>/<str:section>/start/',
         views.practice_start,

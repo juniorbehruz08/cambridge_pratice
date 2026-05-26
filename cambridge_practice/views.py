@@ -1,12 +1,16 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import Http404, JsonResponse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.template import TemplateDoesNotExist
+from django.template.loader import get_template
 from django.utils import timezone
 import json
 
 from .forms import RegisterForm
-from .models import AnswerKey, PracticeAttempt
+from .models import AnswerKey, PracticeAttempt, PracticeResult
 from .services import band_score_for, create_or_update_result, grade_answers
 
 
@@ -274,6 +278,16 @@ def build_question_groups(section, answers):
     ]
 
 
+def practice_template_name(book_number, test_number, section):
+    template_name = f'cambridge{book_number}_test{test_number}_{section}.html'
+    try:
+        get_template(template_name)
+    except TemplateDoesNotExist:
+        return 'practice_section.html'
+
+    return template_name
+
+
 def test_detail(request, book_number, test_number):
     book = get_practice_book_or_404(book_number, request.user)
     test = get_test_or_404(test_number)
@@ -286,6 +300,55 @@ def test_detail(request, book_number, test_number):
         'sections': PRACTICE_SECTIONS,
         'has_pro_access': has_pro_access(request.user),
         'is_preview': not request.user.is_authenticated,
+    })
+
+
+@login_required
+def past_results(request):
+    results = (
+        PracticeResult.objects
+        .select_related('attempt', 'answer_key')
+        .filter(attempt__user=request.user)
+        .order_by('-attempt__completed_at', '-created_at')[:50]
+    )
+
+    return render(request, 'past_results.html', {
+        'results': results,
+        'has_pro_access': has_pro_access(request.user),
+    })
+
+
+@login_required
+def practice_result_detail(request, result_id):
+    result = get_object_or_404(
+        PracticeResult.objects.select_related('attempt', 'answer_key'),
+        pk=result_id,
+        attempt__user=request.user,
+    )
+    attempt = result.attempt
+    book = get_practice_book_or_404(attempt.book_number, request.user)
+    test = get_test_or_404(attempt.test_number)
+    groups = build_question_groups(attempt.section, attempt.answers)
+    section_title = dict(PracticeAttempt.SECTION_CHOICES)[attempt.section]
+
+    return render(request, practice_template_name(
+        attempt.book_number,
+        attempt.test_number,
+        attempt.section,
+    ), {
+        'attempt': attempt,
+        'book': book,
+        'test': test,
+        'section': attempt.section,
+        'section_title': section_title,
+        'question_groups': groups,
+        'audio_path': f'{attempt.book_number}/audio/test{attempt.test_number}/merged.mp3',
+        'duration_seconds': 3600,
+        'review_seconds': 120,
+        'has_pro_access': has_pro_access(request.user),
+        'result': result,
+        'result_details': result.details,
+        'is_preview': False,
     })
 
 

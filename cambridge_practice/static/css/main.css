@@ -2301,6 +2301,114 @@ h3 {
     color: #d8dee8;
 }
 
+.results-hero {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 54px 0 18px;
+}
+
+.results-hero h1 {
+    margin-bottom: 14px;
+    font-size: clamp(38px, 5vw, 64px);
+}
+
+.results-hero p:last-child {
+    max-width: 680px;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.results-section {
+    padding-top: 18px;
+}
+
+.results-list {
+    display: grid;
+    gap: 12px;
+}
+
+.result-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: center;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.result-row:hover {
+    border-color: rgba(31, 122, 95, 0.45);
+    box-shadow: 0 14px 34px rgba(22, 32, 50, 0.08);
+    transform: translateY(-2px);
+}
+
+.result-row h2 {
+    margin-bottom: 6px;
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.result-row p {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+.result-date {
+    margin-bottom: 6px !important;
+    color: var(--red) !important;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.result-score {
+    display: grid;
+    min-width: 120px;
+    justify-items: end;
+    gap: 6px;
+}
+
+.result-score span {
+    color: var(--green-dark);
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.result-score strong {
+    display: inline-flex;
+    min-height: 30px;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 8px;
+    background: #f6e9d0;
+    color: #8a570d;
+    font-size: 13px;
+}
+
+.empty-results {
+    max-width: 620px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+}
+
+.empty-results h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.empty-results p {
+    margin-bottom: 20px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
 @media (max-width: 900px) {
     .hero,
     .start-section {
@@ -2406,6 +2514,14 @@ h3 {
 
     .book-card {
         grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .result-row {
+        grid-template-columns: 1fr;
+    }
+
+    .result-score {
+        justify-items: start;
     }
 
     .book-status {

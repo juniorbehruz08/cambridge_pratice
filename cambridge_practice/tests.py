@@ -1,6 +1,16 @@
-from django.test import SimpleTestCase
+import json
+import re
+from types import SimpleNamespace
 
-from .models import AnswerKey, PracticeAttempt
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AnonymousUser
+from django.template.loader import render_to_string
+from django.test import RequestFactory, SimpleTestCase, TestCase
+from django.urls import reverse
+from django.utils import timezone
+
+from .models import AnswerKey, PracticeAttempt, PracticeResult
 from .services import grade_answers
 from .views import clean_submitted_answers
 
@@ -93,3 +103,181 @@ class AnswerNormalizationTests(SimpleTestCase):
         self.assertEqual(score, 2)
         self.assertTrue(details['11']['correct'])
         self.assertTrue(details['12']['correct'])
+
+
+class PracticeContentIntegrityTests(SimpleTestCase):
+    def test_answer_key_json_has_all_40_answers_for_every_section(self):
+        data_path = settings.BASE_DIR / 'cambridge_practice' / 'data' / 'answer_keys.json'
+        answer_keys = json.loads(data_path.read_text(encoding='utf-8'))
+
+        self.assertEqual(len(answer_keys), 80)
+        for answer_key in answer_keys:
+            with self.subTest(
+                book=answer_key['book_number'],
+                test=answer_key['test_number'],
+                section=answer_key['section'],
+            ):
+                expected_questions = {str(number) for number in range(1, 41)}
+                self.assertEqual(set(answer_key['answers']), expected_questions)
+
+    def test_each_section_template_has_answer_inputs_1_to_40(self):
+        data_path = settings.BASE_DIR / 'cambridge_practice' / 'data' / 'answer_keys.json'
+        answer_keys = json.loads(data_path.read_text(encoding='utf-8'))
+
+        for answer_key in answer_keys:
+            template_path = (
+                settings.BASE_DIR
+                / 'templates'
+                / f"cambridge{answer_key['book_number']}_test{answer_key['test_number']}_{answer_key['section']}.html"
+            )
+            with self.subTest(template=template_path.name):
+                self.assertTrue(template_path.exists())
+                template = template_path.read_text(encoding='utf-8')
+                inputs = set(re.findall(r'name=["\']answer_(\d+)["\']', template))
+                expected_questions = {str(number) for number in range(1, 41)}
+                self.assertEqual(inputs, expected_questions)
+
+    def test_official_answer_keys_grade_to_full_score(self):
+        data_path = settings.BASE_DIR / 'cambridge_practice' / 'data' / 'answer_keys.json'
+        answer_keys = json.loads(data_path.read_text(encoding='utf-8'))
+
+        for answer_key_data in answer_keys:
+            answer_key = AnswerKey(
+                book_number=answer_key_data['book_number'],
+                test_number=answer_key_data['test_number'],
+                section=answer_key_data['section'],
+                answers=answer_key_data['answers'],
+                scoring_rules=answer_key_data.get('scoring_rules', {}),
+            )
+            with self.subTest(
+                book=answer_key.book_number,
+                test=answer_key.test_number,
+                section=answer_key.section,
+            ):
+                score, details = grade_answers(answer_key, answer_key.answers)
+                self.assertEqual(score, 40, [
+                    question
+                    for question, detail in details.items()
+                    if not detail['correct']
+                ])
+
+    def test_each_section_template_renders(self):
+        data_path = settings.BASE_DIR / 'cambridge_practice' / 'data' / 'answer_keys.json'
+        answer_keys = json.loads(data_path.read_text(encoding='utf-8'))
+        request = RequestFactory().get('/')
+        request.user = AnonymousUser()
+
+        for answer_key in answer_keys:
+            template_name = (
+                f"cambridge{answer_key['book_number']}_test"
+                f"{answer_key['test_number']}_{answer_key['section']}.html"
+            )
+            attempt = SimpleNamespace(
+                status=PracticeAttempt.STATUS_IN_PROGRESS,
+                time_remaining_seconds=3600,
+                review_remaining_seconds=None,
+                answers={},
+            )
+            context = {
+                'attempt': attempt,
+                'book': {
+                    'number': answer_key['book_number'],
+                    'title': f"Cambridge IELTS {answer_key['book_number']}",
+                },
+                'test': {
+                    'number': answer_key['test_number'],
+                    'title': f"Test {answer_key['test_number']}",
+                },
+                'section': answer_key['section'],
+                'section_title': answer_key['section'].title(),
+                'question_groups': [],
+                'audio_path': (
+                    f"{answer_key['book_number']}/audio/"
+                    f"test{answer_key['test_number']}/merged.mp3"
+                ),
+                'duration_seconds': 3600,
+                'review_seconds': 120,
+                'has_pro_access': False,
+                'result': None,
+                'result_details': {},
+                'is_preview': False,
+            }
+
+            with self.subTest(template=template_name):
+                html = render_to_string(template_name, context, request=request)
+                self.assertIn('practiceForm', html)
+
+
+class PastResultsViewTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username='student',
+            password='strong-pass-123',
+        )
+        self.attempt = PracticeAttempt.objects.create(
+            user=self.user,
+            book_number=11,
+            test_number=2,
+            section=PracticeAttempt.SECTION_READING,
+            answers={
+                str(number): ''
+                for number in range(1, 41)
+            } | {'11': 'STABILISING GUIDES'},
+            status=PracticeAttempt.STATUS_COMPLETED,
+            time_remaining_seconds=0,
+            completed_at=timezone.now(),
+        )
+        self.result = PracticeResult.objects.create(
+            attempt=self.attempt,
+            score=35,
+            band_score=8.0,
+            total_questions=40,
+            submitted_answers=self.attempt.answers,
+            correct_answers={'11': 'stabilising guides'},
+            details={
+                '11': {
+                    'submitted': 'STABILISING GUIDES',
+                    'official': 'stabilising guides',
+                    'correct': True,
+                },
+            },
+        )
+
+    def test_past_results_lists_saved_results(self):
+        self.client.login(username='student', password='strong-pass-123')
+
+        response = self.client.get(reverse('cambridge_practice:past_results'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Cambridge IELTS 11 - Test 2')
+        self.assertContains(response, '35/40')
+        self.assertContains(response, 'Band 8.0')
+        self.assertContains(
+            response,
+            reverse('cambridge_practice:practice_result_detail', args=[self.result.id]),
+        )
+
+    def test_result_detail_renders_completed_attempt_for_review(self):
+        self.client.login(username='student', password='strong-pass-123')
+
+        response = self.client.get(
+            reverse('cambridge_practice:practice_result_detail', args=[self.result.id])
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-status="completed"')
+        self.assertContains(response, 'data-existing-score="35"')
+        self.assertContains(response, 'STABILISING GUIDES')
+
+    def test_result_detail_does_not_show_another_users_result(self):
+        other_user = get_user_model().objects.create_user(
+            username='other',
+            password='strong-pass-123',
+        )
+        self.client.force_login(other_user)
+
+        response = self.client.get(
+            reverse('cambridge_practice:practice_result_detail', args=[self.result.id])
+        )
+
+        self.assertEqual(response.status_code, 404)

@@ -18,6 +18,7 @@
             <a href="#books">Books</a>
             <a href="#start">Start</a>
             {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
                 <span class="user-pill">
                     {{ user.username }}
                     {% if has_pro_access %}<span>Pro</span>{% endif %}

@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let saveInFlight = false;
     let allowNavigation = false;
     const dragChoiceGroups = [];
+    const existingScore = shell.dataset.existingScore || '';
+    const existingBand = shell.dataset.existingBand || '';
 
     if (saveStatus) {
         saveStatus.textContent = isPreview ? 'Preview' : 'Not submitted';
@@ -227,6 +229,15 @@ document.addEventListener('DOMContentLoaded', () => {
             : '';
         resultDisplay.textContent = `${isPreview ? 'Preview score' : 'Score'}: ${score}/${totalQuestions || 40}${bandText}`;
         resultDisplay.hidden = false;
+    }
+
+    function completedStatusText(score, totalQuestions, bandScore) {
+        const bandText = bandScore !== null && bandScore !== undefined && bandScore !== ''
+            ? ` | Band ${bandScore}`
+            : '';
+        return score !== null && score !== undefined && score !== ''
+            ? `Completed: ${score}/${totalQuestions || 40}${bandText}`
+            : 'Completed';
     }
 
     function valueEquals(left, right) {
@@ -1330,7 +1341,26 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewRemaining = null;
         updateTimers();
         await savePractice('completed');
-        form.querySelectorAll('input, button[type="submit"]').forEach((element) => {
+        lockCompletedForm();
+    }
+
+    function initialResultDetails() {
+        const detailsElement = document.querySelector('#resultDetails');
+        if (!detailsElement) {
+            return {};
+        }
+
+        try {
+            return JSON.parse(detailsElement.textContent || '{}');
+        } catch (error) {
+            return {};
+        }
+    }
+
+    function lockCompletedForm() {
+        form.querySelectorAll(
+            'input, button[type="submit"], .mc-option, .multi-option, .drag-choice-remove'
+        ).forEach((element) => {
             element.disabled = true;
         });
     }
@@ -1403,6 +1433,15 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimers();
     setupHighlighter();
     setupExitWarning();
+
+    if (completed) {
+        if (saveStatus) {
+            saveStatus.textContent = completedStatusText(existingScore, 40, existingBand);
+        }
+        showResult(existingScore, 40, existingBand);
+        applyResultDetails(initialResultDetails());
+        lockCompletedForm();
+    }
 
     window.setInterval(() => {
         if (completed) {
