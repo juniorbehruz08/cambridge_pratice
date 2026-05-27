@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 20 Test 1 Listening | Cambridge Practice</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=book20-table-short-20260527">
     <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
 </head>
 <body>
@@ -78,7 +78,13 @@
                     <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
-                    <table class="ielts-table">
+                    <table class="ielts-table restaurant-recommendations-table">
+                        <colgroup>
+                            <col class="restaurant-name-col">
+                            <col class="restaurant-location-col">
+                            <col class="restaurant-reason-col">
+                            <col class="restaurant-comments-col">
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th>Name of restaurant</th>
@@ -90,21 +96,21 @@
                         <tbody>
                             <tr>
                                 <td>The Junction</td>
-                                <td>Greyson Street, near the station</td>
+                                <td>Greyson Street,<br>near the station</td>
                                 <td>Good for people who are especially keen on <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></td>
-                                <td>Quite expensive. The <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> is a good place for a drink.</td>
+                                <td>Quite expensive<br>The <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> is a good place for a drink</td>
                             </tr>
                             <tr>
                                 <td>Paloma</td>
-                                <td>In Bow Street next to the cinema</td>
+                                <td>In Bow Street next<br>to the cinema</td>
                                 <td><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> food, good for sharing</td>
-                                <td>Staff are very friendly. Need to pay 50 pounds deposit. A limited selection of <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> food on the menu.</td>
+                                <td>Staff are very friendly<br>Need to pay 50 pounds deposit<br>A limited selection of <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> food on the menu</td>
                             </tr>
                             <tr>
-                                <td>The <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></td>
-                                <td>At the top of a <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></td>
-                                <td>A famous chef. All the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> are very good. Only uses <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> ingredients.</td>
-                                <td>Set lunch costs <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> per person. Portions probably of <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> size.</td>
+                                <td>The <span class="qnum">5</span><br><span class="ielts-blank restaurant-short-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>............</span></span></td>
+                                <td>At the top of a <span class="qnum">6</span><br><span class="ielts-blank restaurant-short-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>............</span></span></td>
+                                <td>A famous chef<br>All the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> are very good<br>Only uses <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> ingredients</td>
+                                <td>Set lunch costs <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> per person<br>Portions probably of <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> size</td>
                             </tr>
                         </tbody>
                     </table>

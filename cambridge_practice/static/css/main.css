@@ -947,6 +947,69 @@ h3 {
     text-align: left;
 }
 
+.ielts-table {
+    width: 100%;
+    margin: 14px 0 0;
+    border: 2px solid #111;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #fff;
+    color: #000;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.ielts-table th,
+.ielts-table td {
+    border: 1px solid #111;
+    padding: 7px 8px;
+    vertical-align: top;
+}
+
+.ielts-table th {
+    background: #f1f1f1;
+    color: #111;
+    font-weight: 800;
+    text-align: center;
+}
+
+.restaurant-recommendations-table {
+    margin-top: 14px;
+}
+
+.restaurant-recommendations-table .restaurant-name-col {
+    width: 15.5%;
+}
+
+.restaurant-recommendations-table .restaurant-location-col {
+    width: 20%;
+}
+
+.restaurant-recommendations-table .restaurant-reason-col {
+    width: 34%;
+}
+
+.restaurant-recommendations-table .restaurant-comments-col {
+    width: 30.5%;
+}
+
+.restaurant-recommendations-table td {
+    min-height: 70px;
+}
+
+.restaurant-recommendations-table .ielts-blank {
+    width: 104px;
+}
+
+.restaurant-recommendations-table .restaurant-short-blank {
+    width: 76px;
+    margin-top: 2px;
+}
+
+.restaurant-recommendations-table .qnum {
+    margin-right: 0;
+}
+
 .ielts-choice-box {
     width: min(440px, 100%);
     margin: 18px auto;
