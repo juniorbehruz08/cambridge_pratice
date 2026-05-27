@@ -137,6 +137,22 @@ class PracticeContentIntegrityTests(SimpleTestCase):
                 expected_questions = {str(number) for number in range(1, 41)}
                 self.assertEqual(inputs, expected_questions)
 
+    def test_listening_parts_are_separate_papers(self):
+        for template_path in sorted((settings.BASE_DIR / 'templates').glob('cambridge*_test*_listening.html')):
+            with self.subTest(template=template_path.name):
+                template = template_path.read_text(encoding='utf-8')
+                section_count = template.count('<section class="ielts-section">')
+                paper_count = template.count('<article class="ielts-paper">')
+                self.assertGreaterEqual(section_count, 4)
+                self.assertEqual(paper_count, section_count)
+
+    def test_reading_passages_and_question_sections_are_separate(self):
+        for template_path in sorted((settings.BASE_DIR / 'templates').glob('cambridge*_test*_reading.html')):
+            with self.subTest(template=template_path.name):
+                template = template_path.read_text(encoding='utf-8')
+                self.assertEqual(template.count('<article class="reading-passage-block"'), 3)
+                self.assertEqual(template.count('<article class="reading-question-card"'), 3)
+
     def test_official_answer_keys_grade_to_full_score(self):
         data_path = settings.BASE_DIR / 'cambridge_practice' / 'data' / 'answer_keys.json'
         answer_keys = json.loads(data_path.read_text(encoding='utf-8'))
