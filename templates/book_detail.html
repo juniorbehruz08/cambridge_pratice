@@ -6,15 +6,946 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ book.title }} | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <style>
+        :root {
+            --cp-bg: #f6f8fc;
+            --cp-card: #ffffff;
+            --cp-text: #0f172a;
+            --cp-muted: #64748b;
+            --cp-line: #e2e8f0;
+            --cp-blue: #2563eb;
+            --cp-blue-dark: #1d4ed8;
+            --cp-green: #16a34a;
+            --cp-orange: #f97316;
+            --cp-purple: #7c3aed;
+            --cp-red: #ef4444;
+            --cp-shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
+            --cp-radius: 28px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--cp-bg);
+        }
+
+        .book-page {
+            min-height: calc(100vh - 76px);
+            color: var(--cp-text);
+            background:
+                radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.14), transparent 32%),
+                radial-gradient(circle at 100% 8%, rgba(124, 58, 237, 0.12), transparent 31%),
+                linear-gradient(180deg, #f8fbff 0%, #eef4ff 46%, #ffffff 100%);
+            padding-bottom: 70px;
+        }
+
+        .book-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .book-hero {
+            padding: 68px 0 32px;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .hero-main {
+            position: relative;
+            overflow: hidden;
+            border-radius: 36px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(18px);
+            box-shadow: var(--cp-shadow);
+            padding: 44px;
+        }
+
+        .hero-main::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 999px;
+            top: -140px;
+            right: -120px;
+            background: rgba(37, 99, 235, 0.11);
+        }
+
+        .hero-main::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 999px;
+            left: -95px;
+            bottom: -110px;
+            background: rgba(124, 58, 237, 0.09);
+        }
+
+        .hero-main > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            margin: 0 0 16px;
+            padding: 8px 13px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #dbeafe;
+            font-size: 12px;
+            font-weight: 950;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
+        }
+
+        .hero-main h1 {
+            margin: 0;
+            max-width: 780px;
+            font-size: clamp(40px, 5vw, 70px);
+            line-height: 0.95;
+            letter-spacing: -0.065em;
+            color: #0f172a;
+        }
+
+        .hero-main .hero-copy {
+            max-width: 720px;
+            margin: 22px 0 0;
+            color: #64748b;
+            font-size: 17px;
+            line-height: 1.78;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .cp-btn {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 19px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 950;
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+        }
+
+        .cp-btn.primary {
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            box-shadow: 0 16px 32px rgba(37, 99, 235, 0.22);
+        }
+
+        .cp-btn.secondary {
+            color: #0f172a;
+            background: #ffffff;
+            border-color: #e2e8f0;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+        }
+
+        .cp-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .cp-btn.secondary:hover {
+            color: #2563eb;
+            border-color: #bfdbfe;
+        }
+
+        .hero-mini-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 34px;
+        }
+
+        .mini-stat {
+            padding: 16px;
+            border-radius: 20px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.045);
+        }
+
+        .mini-stat strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            color: #0f172a;
+        }
+
+        .mini-stat span {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .hero-side {
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+            border-radius: 36px;
+            background: #0f172a;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 26px 75px rgba(15, 23, 42, 0.18);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-side::before {
+            content: "";
+            position: absolute;
+            width: 310px;
+            height: 310px;
+            border-radius: 999px;
+            right: -150px;
+            top: -120px;
+            background: rgba(59, 130, 246, 0.32);
+        }
+
+        .hero-side::after {
+            content: "";
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 999px;
+            left: -180px;
+            bottom: -170px;
+            background: rgba(124, 58, 237, 0.28);
+        }
+
+        .hero-side > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .side-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .book-number-badge {
+            width: 88px;
+            height: 88px;
+            border-radius: 28px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 950;
+            letter-spacing: -0.07em;
+        }
+
+        .mode-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border-radius: 999px;
+            color: #dbeafe;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            font-size: 12px;
+            font-weight: 950;
+            white-space: nowrap;
+        }
+
+        .mode-pill::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: {% if is_preview %}#f97316{% else %}#22c55e{% endif %};
+        }
+
+        .side-title {
+            margin-top: 36px;
+        }
+
+        .side-title strong {
+            display: block;
+            color: #93c5fd;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .side-title span {
+            display: block;
+            font-size: 32px;
+            line-height: 1.08;
+            font-weight: 950;
+            letter-spacing: -0.05em;
+        }
+
+        .side-progress {
+            margin-top: 32px;
+        }
+
+        .progress-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            color: #cbd5e1;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 9px;
+        }
+
+        .progress-track {
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.13);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: {% if is_preview %}25%{% else %}100%{% endif %};
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #22c55e, #60a5fa);
+        }
+
+        .side-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .side-stat {
+            padding: 15px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .side-stat strong {
+            display: block;
+            font-size: 23px;
+            line-height: 1;
+            margin-bottom: 7px;
+        }
+
+        .side-stat span {
+            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .section-block {
+            padding: 34px 0;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 22px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .section-heading p:not(.eyebrow) {
+            margin: 0;
+            max-width: 470px;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+            text-align: right;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .test-card {
+            position: relative;
+            isolation: isolate;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 22px;
+            padding: 24px;
+            border-radius: var(--cp-radius);
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: 0 16px 38px rgba(15, 23, 42, 0.06);
+            text-decoration: none;
+            color: #0f172a;
+            overflow: hidden;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+        }
+
+        .test-card::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            inset: auto -60px -80px auto;
+            width: 160px;
+            height: 160px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.08);
+            transition: transform 0.22s ease, background 0.22s ease;
+        }
+
+        .test-card:hover {
+            transform: translateY(-6px);
+            border-color: #bfdbfe;
+            background: #ffffff;
+            box-shadow: 0 26px 60px rgba(37, 99, 235, 0.13);
+        }
+
+        .test-card:hover::before {
+            transform: scale(1.15);
+            background: rgba(37, 99, 235, 0.13);
+        }
+
+        .test-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .test-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 21px;
+            display: grid;
+            place-items: center;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            font-size: 25px;
+            font-weight: 950;
+            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.20);
+        }
+
+        .book-status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: {% if is_preview %}#fff7ed{% else %}#ecfdf5{% endif %};
+            color: {% if is_preview %}#c2410c{% else %}#047857{% endif %};
+            border: 1px solid {% if is_preview %}#fed7aa{% else %}#bbf7d0{% endif %};
+            font-size: 11px;
+            font-weight: 950;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .test-card h3 {
+            margin: 0 0 10px;
+            color: #0f172a;
+            font-size: 22px;
+            line-height: 1.12;
+            letter-spacing: -0.035em;
+        }
+
+        .test-card p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .test-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 10px;
+            border-radius: 13px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .test-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding-top: 18px;
+            border-top: 1px solid #eef2f7;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: 950;
+        }
+
+        .arrow-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            color: #2563eb;
+            background: #eff6ff;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .test-card:hover .arrow-circle {
+            transform: translateX(3px);
+            background: #dbeafe;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 18px;
+        }
+
+        .feature-card {
+            border-radius: 30px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.055);
+            overflow: hidden;
+        }
+
+        .feature-card.large {
+            padding: 28px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 12px;
+            color: #0f172a;
+            font-size: 25px;
+            letter-spacing: -0.04em;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .skills-preview {
+            display: grid;
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .skill-row {
+            display: grid;
+            grid-template-columns: 46px 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 15px;
+            border-radius: 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .skill-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            color: #ffffff;
+            font-weight: 950;
+        }
+
+        .skill-icon.reading {
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+        }
+
+        .skill-icon.listening {
+            background: linear-gradient(135deg, #16a34a, #86efac);
+        }
+
+        .skill-row strong {
+            display: block;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .skill-row span {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .skill-badge {
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 11px;
+            font-weight: 950;
+            white-space: nowrap;
+        }
+
+        .mock-browser {
+            background: #ffffff;
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.055);
+            overflow: hidden;
+        }
+
+        .browser-top {
+            padding: 14px 16px;
+            background: #0f172a;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .browser-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+            background: #ef4444;
+        }
+
+        .browser-dot:nth-child(2) {
+            background: #f59e0b;
+        }
+
+        .browser-dot:nth-child(3) {
+            background: #22c55e;
+        }
+
+        .browser-body {
+            padding: 18px;
+        }
+
+        .test-preview-bar {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            padding: 13px;
+            border-radius: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 14px;
+            font-size: 13px;
+            font-weight: 950;
+        }
+
+        .timer-pill {
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 12px;
+            font-weight: 950;
+        }
+
+        .preview-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .preview-panel {
+            min-height: 230px;
+            padding: 14px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+        }
+
+        .preview-panel strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-line {
+            height: 10px;
+            border-radius: 999px;
+            background: #e2e8f0;
+            margin-bottom: 10px;
+        }
+
+        .skeleton-line.w95 { width: 95%; }
+        .skeleton-line.w86 { width: 86%; }
+        .skeleton-line.w74 { width: 74%; }
+        .skeleton-line.w60 { width: 60%; }
+
+        .q-demo {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .q-num {
+            width: 25px;
+            height: 25px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 950;
+            flex-shrink: 0;
+        }
+
+        .q-input {
+            height: 28px;
+            flex: 1;
+            border-radius: 9px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .step-card {
+            padding: 24px;
+            border-radius: 28px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 16px 38px rgba(15, 23, 42, 0.055);
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            font-weight: 950;
+        }
+
+        .step-card h3 {
+            margin: 0 0 10px;
+            color: #0f172a;
+            font-size: 20px;
+            letter-spacing: -0.03em;
+        }
+
+        .step-card p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        .cta-panel {
+            margin-top: 34px;
+            border-radius: 34px;
+            padding: 36px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #ffffff;
+            box-shadow: 0 24px 65px rgba(37, 99, 235, 0.22);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-panel::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 999px;
+            right: -120px;
+            top: -130px;
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .cta-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-panel h2 {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .cta-panel p {
+            margin: 12px 0 0;
+            max-width: 700px;
+            color: #dbeafe;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .cta-panel .cp-btn {
+            background: #ffffff;
+            color: #1d4ed8;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+
+        .empty-state {
+            padding: 34px;
+            border-radius: 28px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            box-shadow: 0 16px 38px rgba(15, 23, 42, 0.055);
+            text-align: center;
+        }
+
+        @media (max-width: 1050px) {
+            .hero-layout,
+            .feature-grid,
+            .cta-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .test-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .section-heading p:not(.eyebrow) {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .book-container {
+                width: min(100% - 28px, 1180px);
+            }
+
+            .book-hero {
+                padding-top: 28px;
+            }
+
+            .hero-main,
+            .hero-side,
+            .feature-card.large,
+            .cta-panel {
+                border-radius: 24px;
+                padding: 24px;
+            }
+
+            .hero-main h1 {
+                font-size: 38px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .cp-btn {
+                width: 100%;
+            }
+
+            .hero-mini-stats,
+            .side-stats,
+            .steps-grid,
+            .test-grid,
+            .preview-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-row {
+                grid-template-columns: 46px 1fr;
+            }
+
+            .skill-badge {
+                grid-column: 1 / -1;
+                width: fit-content;
+            }
+
+            .cta-panel .cp-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <header class="site-header">
         <a class="brand" href="{% url 'cambridge_practice:home' %}">
             <span class="brand-mark">CP</span>
             <span>Cambridge Practice</span>
         </a>
+
         <nav class="nav-links" aria-label="Main navigation">
             <a href="{% url 'cambridge_practice:home' %}#books">Books</a>
+
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
                 <span class="user-pill">
@@ -29,36 +960,336 @@
         </nav>
     </header>
 
-    <main>
+    <main class="book-page">
         <section class="book-hero">
-            <p class="eyebrow">Cambridge book {{ book.number }}</p>
-            <h1>{{ book.title }}</h1>
-            <p>
-                {% if is_preview %}
-                    Free preview mode includes only Test 1. Your score is shown after submit and is not saved.
-                {% else %}
-                    Choose a practice test below. Each book contains four practice tests for reading and listening study.
-                {% endif %}
-            </p>
+            <div class="book-container">
+                <div class="hero-layout">
+                    <div class="hero-main">
+                        <p class="eyebrow">Cambridge book {{ book.number }}</p>
+
+                        <h1>{{ book.title }}</h1>
+
+                        <p class="hero-copy">
+                            {% if is_preview %}
+                                Free preview mode gives access to Test 1. You can try the test interface, submit answers, and see your score immediately. Preview results are not saved.
+                            {% else %}
+                                Practice complete Reading and Listening tests from this book in a clean exam-style interface. Choose a test, complete the questions, submit your answers, and review your result instantly.
+                            {% endif %}
+                        </p>
+
+                        <div class="hero-actions">
+                            {% if tests %}
+                                {% for test in tests %}
+                                    {% if forloop.first %}
+                                        <a class="cp-btn primary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                                            Start Test {{ test.number }}
+                                            <span>→</span>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if user.is_authenticated %}
+                                <a class="cp-btn secondary" href="{% url 'cambridge_practice:past_results' %}">
+                                    View past results
+                                </a>
+                            {% else %}
+                                <a class="cp-btn secondary" href="{% url 'cambridge_practice:register' %}">
+                                    Create free account
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="hero-mini-stats">
+                            <div class="mini-stat">
+                                <strong>{% if is_preview %}1{% else %}4{% endif %}</strong>
+                                <span>{% if is_preview %}available test{% else %}practice tests{% endif %}</span>
+                            </div>
+
+                            <div class="mini-stat">
+                                <strong>2</strong>
+                                <span>skills included</span>
+                            </div>
+
+                            <div class="mini-stat">
+                                <strong>40</strong>
+                                <span>questions per test</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="hero-side" aria-label="Book overview">
+                        <div>
+                            <div class="side-top">
+                                <div class="book-number-badge">{{ book.number }}</div>
+                                <div class="mode-pill">
+                                    {% if is_preview %}Preview mode{% else %}Full access{% endif %}
+                                </div>
+                            </div>
+
+                            <div class="side-title">
+                                <strong>Current book</strong>
+                                <span>{{ book.title }}</span>
+                            </div>
+
+                            <div class="side-progress">
+                                <div class="progress-row">
+                                    <span>{% if is_preview %}Preview unlocked{% else %}Book unlocked{% endif %}</span>
+                                    <span>{% if is_preview %}25%{% else %}100%{% endif %}</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="side-stats">
+                            <div class="side-stat">
+                                <strong>{% if is_preview %}1{% else %}4{% endif %}</strong>
+                                <span>Tests</span>
+                            </div>
+
+                            <div class="side-stat">
+                                <strong>R/L</strong>
+                                <span>Skills</span>
+                            </div>
+
+                            <div class="side-stat">
+                                <strong>Score</strong>
+                                <span>Instant</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
         </section>
 
-        <section class="section test-section">
-            <div class="section-heading compact">
-                <p class="eyebrow">Practice tests</p>
-                <h2>{% if is_preview %}Test 1 preview{% else %}Tests 1-4{% endif %}</h2>
-            </div>
+        <section class="section-block">
+            <div class="book-container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Practice tests</p>
+                        <h2>{% if is_preview %}Test 1 preview{% else %}Tests 1–4{% endif %}</h2>
+                    </div>
 
-            <div class="test-grid">
-                {% for test in tests %}
-                    <a class="test-card test-card-link" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
-                        <div class="test-number">{{ test.number }}</div>
-                        <div>
-                            <h3>{{ test.title }}</h3>
-                            <p>{{ test.description }}</p>
+                    <p>
+                        {% if is_preview %}
+                            Preview mode shows how the platform works before users sign in or unlock full access.
+                        {% else %}
+                            Open any test below and practice with an exam-style layout, timer, answers, and instant score review.
+                        {% endif %}
+                    </p>
+                </div>
+
+                {% if tests %}
+                    <div class="test-grid">
+                        {% for test in tests %}
+                            <a class="test-card" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                                <div class="test-card-top">
+                                    <div class="test-number">{{ test.number }}</div>
+                                    <span class="book-status">
+                                        {% if is_preview %}Preview{% else %}Open test{% endif %}
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <h3>{{ test.title }}</h3>
+                                    <p>{{ test.description }}</p>
+
+                                    <div class="test-meta">
+                                        <span class="meta-pill">Reading</span>
+                                        <span class="meta-pill">Listening</span>
+                                        <span class="meta-pill">Timer</span>
+                                        <span class="meta-pill">Score</span>
+                                    </div>
+                                </div>
+
+                                <div class="test-card-footer">
+                                    <span>{% if is_preview %}Try preview{% else %}Start practice{% endif %}</span>
+                                    <span class="arrow-circle">→</span>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        No tests are available for this book yet.
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="section-block">
+            <div class="book-container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Test experience</p>
+                        <h2>Built for focused practice</h2>
+                    </div>
+
+                    <p>
+                        The page is designed to make the test flow clear before students begin: choose a test, complete sections, submit, and review.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card large">
+                        <h3>Reading and Listening in one clean practice flow</h3>
+                        <p>
+                            Each test is organized so students can focus on answering questions instead of fighting the interface. The structure is simple: open a test, work through the tasks, submit answers, and check results.
+                        </p>
+
+                        <div class="skills-preview">
+                            <div class="skill-row">
+                                <div class="skill-icon reading">R</div>
+                                <div>
+                                    <strong>Reading practice</strong>
+                                    <span>Passage-based questions with answer fields and clean exam-style spacing.</span>
+                                </div>
+                                <span class="skill-badge">Included</span>
+                            </div>
+
+                            <div class="skill-row">
+                                <div class="skill-icon listening">L</div>
+                                <div>
+                                    <strong>Listening practice</strong>
+                                    <span>Audio-based test sections with structured answers and score checking.</span>
+                                </div>
+                                <span class="skill-badge">Included</span>
+                            </div>
                         </div>
-                        <span class="book-status">{% if is_preview %}Preview{% else %}Open test{% endif %}</span>
-                    </a>
-                {% endfor %}
+                    </div>
+
+                    <div class="mock-browser" aria-label="Interface preview">
+                        <div class="browser-top">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+
+                        <div class="browser-body">
+                            <div class="test-preview-bar">
+                                <span>{{ book.title }} · Test Preview</span>
+                                <span class="timer-pill">60:00</span>
+                            </div>
+
+                            <div class="preview-columns">
+                                <div class="preview-panel">
+                                    <strong>Passage / Audio Section</strong>
+                                    <div class="skeleton-line w95"></div>
+                                    <div class="skeleton-line w86"></div>
+                                    <div class="skeleton-line w95"></div>
+                                    <div class="skeleton-line w74"></div>
+                                    <br>
+                                    <div class="skeleton-line w95"></div>
+                                    <div class="skeleton-line w86"></div>
+                                    <div class="skeleton-line w60"></div>
+                                </div>
+
+                                <div class="preview-panel">
+                                    <strong>Questions</strong>
+
+                                    <div class="q-demo">
+                                        <span class="q-num">1</span>
+                                        <span class="q-input"></span>
+                                    </div>
+
+                                    <div class="q-demo">
+                                        <span class="q-num">2</span>
+                                        <span class="q-input"></span>
+                                    </div>
+
+                                    <div class="q-demo">
+                                        <span class="q-num">3</span>
+                                        <span class="q-input"></span>
+                                    </div>
+
+                                    <div class="q-demo">
+                                        <span class="q-num">4</span>
+                                        <span class="q-input"></span>
+                                    </div>
+
+                                    <div class="q-demo">
+                                        <span class="q-num">5</span>
+                                        <span class="q-input"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <div class="book-container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">How it works</p>
+                        <h2>Simple test workflow</h2>
+                    </div>
+
+                    <p>
+                        The book page should make the next action obvious, especially for first-time users.
+                    </p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Choose a test</h3>
+                        <p>
+                            Students select one of the available tests from this Cambridge book.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Complete answers</h3>
+                        <p>
+                            They work through Reading and Listening questions in a clean practice interface.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Submit and review</h3>
+                        <p>
+                            After submitting, students can see their score and review their answers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cta-panel">
+                    <div>
+                        <h2>
+                            {% if is_preview %}
+                                Try the free preview test
+                            {% else %}
+                                Continue practicing this book
+                            {% endif %}
+                        </h2>
+
+                        <p>
+                            {% if is_preview %}
+                                Open Test 1 to experience the interface before creating an account or unlocking full access.
+                            {% else %}
+                                Open the first test now, or choose any test above to continue your Cambridge IELTS practice.
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    {% if tests %}
+                        {% for test in tests %}
+                            {% if forloop.first %}
+                                <a class="cp-btn" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                                    Start Test {{ test.number }}
+                                    <span>→</span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </section>
     </main>

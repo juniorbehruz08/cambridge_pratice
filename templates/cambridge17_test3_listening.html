@@ -6,7 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 17 Test 3 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .surfing-note-box,
+        .bird-migration-box {
+            padding: 12px 18px 12px;
+        }
+
+        .surfing-note-box h3,
+        .bird-migration-box h3 {
+            text-align: center;
+            margin: 0 0 12px;
+            font-size: 20px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .surf-section,
+        .bird-section {
+            font-weight: 700;
+            margin: 12px 0 6px;
+        }
+
+        .surf-row,
+        .bird-row {
+            display: grid;
+            grid-template-columns: 16px 1fr;
+            gap: 10px;
+            align-items: baseline;
+            margin: 6px 0;
+            line-height: 1.28;
+        }
+
+        .surf-row.sub,
+        .bird-row.sub {
+            margin-left: 32px;
+        }
+
+        .bird-row.deep {
+            margin-left: 58px;
+        }
+
+        .surf-marker,
+        .bird-marker {
+            text-align: center;
+        }
+
+        .surf-text,
+        .bird-text {
+            min-width: 0;
+        }
+
+        .surfing-note-box .ielts-blank,
+        .bird-migration-box .ielts-blank {
+            min-width: 135px;
+        }
+
+        .surfing-note-box .ielts-blank.short,
+        .bird-migration-box .ielts-blank.short {
+            min-width: 105px;
+        }
+
+        .surfing-note-box .ielts-blank.medium,
+        .bird-migration-box .ielts-blank.medium {
+            min-width: 125px;
+        }
+
+        .surfing-note-box .ielts-blank.long,
+        .bird-migration-box .ielts-blank.long {
+            min-width: 155px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -78,35 +149,72 @@
                     <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="ielts-note-box surfing-note-box">
                         <h3>Advice on surfing holidays</h3>
-                        <p class="ielts-blue-title black">Jack's advice</p>
-                        <ul>
-                            <li>Recommends surfing for <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> holidays in the summer</li>
-                            <li>Need to be quite <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
-                        </ul>
-                        <p class="ielts-blue-title black">Irish surfing locations</p>
-                        <p><strong>County Clare</strong></p>
-                        <ul>
-                            <li>Lahinch has some good quality <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> and surf schools</li>
-                            <li>There are famous cliffs nearby</li>
-                        </ul>
-                        <p><strong>County Mayo</strong></p>
-                        <ul>
-                            <li>Good surf school at <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> beach</li>
-                            <li>Surf camp lasts for one <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Can also explore the local <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> by kayak</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Weather</p>
-                        <ul>
-                            <li>Best month to go: <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Average temperature in summer: approx. <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> degrees</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Costs</p>
-                        <ul>
-                            <li>Wetsuit and surfboard: <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> euros per day</li>
-                            <li>Also advisable to hire <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> for warmth</li>
-                        </ul>
+
+                        <div class="surf-section">Jack's advice</div>
+                        <div class="surf-row">
+                            <span class="surf-marker">•</span>
+                            <span class="surf-text">Recommends surfing for <span class="qnum">1</span> <span class="ielts-blank medium"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> holidays in the summer</span>
+                        </div>
+                        <div class="surf-row">
+                            <span class="surf-marker">•</span>
+                            <span class="surf-text">Need to be quite <span class="qnum">2</span> <span class="ielts-blank medium"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+
+                        <div class="surf-section">Irish surfing locations</div>
+                        <div class="surf-row">
+                            <span class="surf-marker">•</span>
+                            <span class="surf-text">County Clare</span>
+                        </div>
+                        <div class="surf-row sub">
+                            <span class="surf-marker">–</span>
+                            <span class="surf-text">Lahinch has some good quality <span class="qnum">3</span> <span class="ielts-blank long"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> and surf schools</span>
+                        </div>
+                        <div class="surf-row sub">
+                            <span class="surf-marker">–</span>
+                            <span class="surf-text">There are famous cliffs nearby</span>
+                        </div>
+                        <div class="surf-row">
+                            <span class="surf-marker">•</span>
+                            <span class="surf-text">County Mayo</span>
+                        </div>
+                        <div class="surf-row sub">
+                            <span class="surf-marker">–</span>
+                            <span class="surf-text">Good surf school at <span class="qnum">4</span> <span class="ielts-blank medium"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> beach</span>
+                        </div>
+                        <div class="surf-row sub">
+                            <span class="surf-marker">–</span>
+                            <span class="surf-text">Surf camp lasts for one <span class="qnum">5</span> <span class="ielts-blank medium"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="surf-row sub">
+                            <span class="surf-marker">–</span>
+                            <span class="surf-text">Can also explore the local <span class="qnum">6</span> <span class="ielts-blank medium"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> by kayak</span>
+                        </div>
+
+                        <div class="surf-section">Weather</div>
+                        <div class="surf-row">
+                            <span class="surf-marker">•</span>
+                            <span class="surf-text">Best month to go: <span class="qnum">7</span> <span class="ielts-blank medium"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="surf-row">
+                            <span class="surf-marker">•</span>
+                            <span class="surf-text">Average temperature in summer: approx. <span class="qnum">8</span> <span class="ielts-blank medium"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> degrees</span>
+                        </div>
+
+                        <div class="surf-section">Costs</div>
+                        <div class="surf-row">
+                            <span class="surf-marker">•</span>
+                            <span class="surf-text">Equipment</span>
+                        </div>
+                        <div class="surf-row sub">
+                            <span class="surf-marker">–</span>
+                            <span class="surf-text">Wetsuit and surfboard: <span class="qnum">9</span> <span class="ielts-blank medium"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> euros per day</span>
+                        </div>
+                        <div class="surf-row sub">
+                            <span class="surf-marker">–</span>
+                            <span class="surf-text">Also advisable to hire <span class="qnum">10</span> <span class="ielts-blank medium"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> for warmth</span>
+                        </div>
                     </div>
                 </section>
             </article>
@@ -216,33 +324,66 @@
                     <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="ielts-note-box bird-migration-box">
                         <h3>Bird Migration Theory</h3>
+
                         <p>Most birds are believed to migrate seasonally.</p>
-                        <p class="ielts-blue-title black">Hibernation theory</p>
-                        <ul>
-                            <li>It was believed that birds hibernated underwater or buried themselves in <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span>.</li>
-                            <li>This theory was later disproved by experiments on caged birds.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Transmutation theory</p>
-                        <ul>
-                            <li>Aristotle believed birds changed from one species into another in summer and winter.</li>
-                            <li>In autumn he observed that redstarts experience the loss of <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> and thought they then turned into robins.</li>
-                            <li>Aristotle's assumptions were logical because the two species of birds had a similar <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span>.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">17th century</p>
-                        <ul>
-                            <li>Charles Morton popularised the idea that birds fly to the <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> in winter.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Scientific developments</p>
-                        <ul>
-                            <li>In 1822, a stork was killed in Germany which had an African spear in its <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>.</li>
-                            <li>Previously there had been no <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> that storks migrate to Africa.</li>
-                            <li>Little was known about the <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> and journeys of migrating birds until the practice of ringing was established.</li>
-                            <li>It was thought large birds carried small birds on some journeys because they were considered incapable of travelling across huge <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span>.</li>
-                            <li>Ringing depended on what is called the <span class="qnum">39</span> "<span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>" of dead birds.</li>
-                            <li>In 1931, the first <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> to show the migration of European birds was printed.</li>
-                        </ul>
+
+                        <div class="bird-section">Hibernation theory</div>
+                        <div class="bird-row">
+                            <span class="bird-marker">•</span>
+                            <span class="bird-text">It was believed that birds hibernated underwater or buried themselves<br>in <span class="qnum">31</span> <span class="ielts-blank medium"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="bird-row">
+                            <span class="bird-marker">•</span>
+                            <span class="bird-text">This theory was later disproved by experiments on caged birds.</span>
+                        </div>
+
+                        <div class="bird-section">Transmutation theory</div>
+                        <div class="bird-row">
+                            <span class="bird-marker">•</span>
+                            <span class="bird-text">Aristotle believed birds changed from one species into another in summer<br>and winter</span>
+                        </div>
+                        <div class="bird-row sub">
+                            <span class="bird-marker">–</span>
+                            <span class="bird-text">In autumn he observed that redstarts experience the loss of<br><span class="qnum">32</span> <span class="ielts-blank medium"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> and thought they then turned into robins.</span>
+                        </div>
+                        <div class="bird-row sub">
+                            <span class="bird-marker">–</span>
+                            <span class="bird-text">Aristotle's assumptions were logical because the two species of birds had a<br>similar <span class="qnum">33</span> <span class="ielts-blank medium"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+
+                        <div class="bird-section">17th century</div>
+                        <div class="bird-row">
+                            <span class="bird-marker">•</span>
+                            <span class="bird-text">Charles Morton popularised the idea that birds fly to the <span class="qnum">34</span> <span class="ielts-blank long"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span><br>in winter.</span>
+                        </div>
+
+                        <div class="bird-section">Scientific developments</div>
+                        <div class="bird-row">
+                            <span class="bird-marker">•</span>
+                            <span class="bird-text">In 1822, a stork was killed in Germany which had an African spear in<br>its <span class="qnum">35</span> <span class="ielts-blank medium"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="bird-row sub">
+                            <span class="bird-marker">–</span>
+                            <span class="bird-text">previously there had been no <span class="qnum">36</span> <span class="ielts-blank long"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> that storks migrate to Africa</span>
+                        </div>
+                        <div class="bird-row">
+                            <span class="bird-marker">•</span>
+                            <span class="bird-text">Little was known about the <span class="qnum">37</span> <span class="ielts-blank medium"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> and journeys of migrating birds<br>until the practice of ringing was established.</span>
+                        </div>
+                        <div class="bird-row sub">
+                            <span class="bird-marker">–</span>
+                            <span class="bird-text">It was thought large birds carried small birds on some journeys because they<br>were considered incapable of travelling across huge <span class="qnum">38</span> <span class="ielts-blank medium"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="bird-row sub">
+                            <span class="bird-marker">–</span>
+                            <span class="bird-text">Ringing depended on what is called the <span class="qnum">39</span> <span class="ielts-blank medium"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> of dead birds.</span>
+                        </div>
+                        <div class="bird-row">
+                            <span class="bird-marker">•</span>
+                            <span class="bird-text">In 1931, the first <span class="qnum">40</span> <span class="ielts-blank medium"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> to show the migration of European birds<br>was printed.</span>
+                        </div>
                     </div>
                 </section>
             </article>

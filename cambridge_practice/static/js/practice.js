@@ -586,7 +586,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 target.classList.toggle('has-choice', Boolean(value));
                 target.dataset.value = value || '';
-                chip.textContent = value;
+                if (description && value) {
+                    chip.innerHTML = '';
+                    const chipLabel = document.createElement('strong');
+                    chipLabel.textContent = value;
+                    const chipDesc = document.createElement('span');
+                    chipDesc.className = 'chip-description';
+                    chipDesc.textContent = description;
+                    chip.appendChild(chipLabel);
+                    chip.appendChild(chipDesc);
+                } else {
+                    chip.textContent = value;
+                }
                 chip.title = description;
                 chip.draggable = Boolean(value);
                 chip.hidden = !value;

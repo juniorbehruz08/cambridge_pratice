@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 11 Test 2 Reading | Cambridge Practice</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=drag-layout-20260512">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=paragraph-heading-drag-20260531">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 11 - Test 2 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -212,14 +212,14 @@
                             <p><strong>viii</strong> How the statues made a situation worse</p>
                             <p><strong>ix</strong> Diminishing food resources</p>
                         </div>
-                        <div class="answer-grid">
-                            <label class="answer-field"><span>14</span><input name="answer_14" value="{{ attempt.answers|answer_value:14 }}" placeholder="Paragraph A" autocomplete="off"></label>
-                            <label class="answer-field"><span>15</span><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" placeholder="Paragraph B" autocomplete="off"></label>
-                            <label class="answer-field"><span>16</span><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" placeholder="Paragraph C" autocomplete="off"></label>
-                            <label class="answer-field"><span>17</span><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" placeholder="Paragraph D" autocomplete="off"></label>
-                            <label class="answer-field"><span>18</span><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" placeholder="Paragraph E" autocomplete="off"></label>
-                            <label class="answer-field"><span>19</span><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" placeholder="Paragraph F" autocomplete="off"></label>
-                            <label class="answer-field"><span>20</span><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" placeholder="Paragraph G" autocomplete="off"></label>
+                        <div class="sentence-questions paragraph-heading-answer-list">
+                            <p><span class="qnum">14</span><span class="paragraph-heading-label">Paragraph <b>A</b></span><span class="ielts-blank short"><input name="answer_14" value="{{ attempt.answers|answer_value:14 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">15</span><span class="paragraph-heading-label">Paragraph <b>B</b></span><span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">16</span><span class="paragraph-heading-label">Paragraph <b>C</b></span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">17</span><span class="paragraph-heading-label">Paragraph <b>D</b></span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">18</span><span class="paragraph-heading-label">Paragraph <b>E</b></span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">19</span><span class="paragraph-heading-label">Paragraph <b>F</b></span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">20</span><span class="paragraph-heading-label">Paragraph <b>G</b></span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
                         </div>
 
                         <p class="ielts-instr">Questions 21-24</p>

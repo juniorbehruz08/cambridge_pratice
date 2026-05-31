@@ -6,7 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 14 Test 1 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .crime-report-form {
+            width: 470px;
+            max-width: 100%;
+            margin: 14px auto 0;
+            border: 1px solid #111;
+            font-family: inherit;
+            font-size: 12px;
+            line-height: 1.25;
+            color: inherit;
+            box-sizing: border-box;
+        }
+
+        .crime-report-title {
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            padding: 7px 8px 6px;
+            border-bottom: 1px solid #111;
+        }
+
+        .crime-row {
+            display: grid;
+            grid-template-columns: 132px 1fr;
+            column-gap: 8px;
+            padding: 2px 8px;
+            align-items: baseline;
+            box-sizing: border-box;
+        }
+
+        .crime-row.tight {
+            padding-top: 1px;
+            padding-bottom: 1px;
+        }
+
+        .crime-row.section-row {
+            display: block;
+            font-weight: 700;
+            padding: 4px 8px 2px;
+            border-top: 1px solid #111;
+            border-bottom: 0;
+        }
+
+        .crime-row.section-row.no-bottom {
+            border-bottom: 0;
+        }
+
+        .crime-label {
+            font-weight: 400;
+        }
+
+        .crime-label.bold {
+            font-weight: 700;
+        }
+
+        .crime-value {
+            min-width: 0;
+        }
+
+        .crime-example {
+            font-style: italic;
+        }
+
+        .crime-name-row {
+            display: grid;
+            grid-template-columns: 132px 1fr;
+            column-gap: 8px;
+            padding: 2px 8px 5px;
+            align-items: start;
+            box-sizing: border-box;
+        }
+
+        .crime-name-left span {
+            display: block;
+        }
+
+        .crime-name-left .crime-example {
+            margin-bottom: 4px;
+        }
+
+        .crime-name-value {
+            padding-top: 18px;
+        }
+
+        .crime-name-value .ielts-example {
+            display: inline-block;
+            min-width: 58px;
+            text-align: center;
+            margin-left: 28px;
+            border-bottom: 1px solid #111;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .crime-dash-line {
+            display: block;
+            margin: 0 0 2px;
+        }
+
+        .crime-dash-line::before {
+            content: "–";
+            display: inline-block;
+            width: 16px;
+        }
+
+        .crime-reference {
+            display: grid;
+            grid-template-columns: 132px 1fr;
+            column-gap: 8px;
+            padding: 6px 8px 9px;
+            align-items: baseline;
+            box-sizing: border-box;
+        }
+
+        .crime-reference .crime-label {
+            grid-column: 1 / -1;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .crime-reference .crime-value {
+            grid-column: 2;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -42,7 +167,7 @@
         data-status="{{ attempt.status }}"
         data-preview="{% if is_preview %}true{% else %}false{% endif %}"
         data-existing-score="{% if result %}{{ result.score }}{% endif %}"
-        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+        data-existing-band="{% if result %}{{ result.band_score|default_if_none:'' }}{% endif %}"
     >
         <section class="audio-panel ielts-audio-panel">
             <div>
@@ -79,27 +204,162 @@
                     <p class="ielts-instr">Complete the form below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
 
-                    <table class="ielts-table-box">
-                        <thead><tr><th colspan="2">CRIME REPORT FORM</th></tr></thead>
-                        <tbody>
-                            <tr><td>Type of crime:</td><td>theft</td></tr>
-                            <tr><td colspan="2"><strong>Personal information</strong></td></tr>
-                            <tr><td>Example<br>Name</td><td>Louise <span class="ielts-example">Taylor</span></td></tr>
-                            <tr><td>Nationality</td><td><span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                            <tr><td>Date of birth</td><td>14 December 1977</td></tr>
-                            <tr><td>Occupation</td><td>interior designer</td></tr>
-                            <tr><td>Reason for visit</td><td>business (to buy antique <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span>)</td></tr>
-                            <tr><td>Length of stay</td><td>two months</td></tr>
-                            <tr><td>Current address</td><td><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> Apartments (No 15)</td></tr>
-                            <tr><td colspan="2"><strong>Details of theft</strong></td></tr>
-                            <tr><td>Items stolen</td><td>a wallet containing approximately <span class="qnum">4</span> &pound; <span class="ielts-blank short"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>............</span></span><br>a <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                            <tr><td>Date of theft</td><td><span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                            <tr><td colspan="2"><strong>Possible time and place of theft</strong></td></tr>
-                            <tr><td>Location</td><td>outside the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> at about 4 pm</td></tr>
-                            <tr><td>Details of suspect</td><td>some boys asked for the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> then ran off<br>one had a T-shirt with a picture of a tiger<br>he was about 12, slim build with <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> hair</td></tr>
-                            <tr><td>Crime reference number allocated</td><td><span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                        </tbody>
-                    </table>
+                    <div class="crime-report-form">
+                        <div class="crime-report-title">CRIME REPORT FORM</div>
+
+                        <div class="crime-row">
+                            <div class="crime-label bold">Type of crime:</div>
+                            <div class="crime-value">theft</div>
+                        </div>
+
+                        <div class="crime-row section-row no-bottom">Personal information</div>
+
+                        <div class="crime-name-row">
+                            <div class="crime-name-left">
+                                <span class="crime-example">Example</span>
+                                <span>Name</span>
+                            </div>
+                            <div class="crime-name-value">
+                                Louise <span class="ielts-example">Taylor</span>
+                            </div>
+                        </div>
+
+                        <div class="crime-row tight">
+                            <div class="crime-label">Nationality</div>
+                            <div class="crime-value">
+                                <span class="qnum">1</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="crime-row tight">
+                            <div class="crime-label">Date of birth</div>
+                            <div class="crime-value">14 December 1977</div>
+                        </div>
+
+                        <div class="crime-row tight">
+                            <div class="crime-label">Occupation</div>
+                            <div class="crime-value">interior designer</div>
+                        </div>
+
+                        <div class="crime-row tight">
+                            <div class="crime-label">Reason for visit</div>
+                            <div class="crime-value">
+                                business (to buy antique
+                                <span class="qnum">2</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>)
+                            </div>
+                        </div>
+
+                        <div class="crime-row tight">
+                            <div class="crime-label">Length of stay</div>
+                            <div class="crime-value">two months</div>
+                        </div>
+
+                        <div class="crime-row tight">
+                            <div class="crime-label">Current address</div>
+                            <div class="crime-value">
+                                <span class="qnum">3</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Apartments (No 15)
+                            </div>
+                        </div>
+
+                        <div class="crime-row section-row">Details of theft</div>
+
+                        <div class="crime-row">
+                            <div class="crime-label">Items stolen</div>
+                            <div class="crime-value">
+                                <span class="crime-dash-line">
+                                    a wallet containing approximately
+                                    <span class="qnum">4</span>
+                                    &pound;
+                                    <span class="ielts-blank short">
+                                        <input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off">
+                                        <span>............</span>
+                                    </span>
+                                </span>
+                                <span class="crime-dash-line">
+                                    a <span class="qnum">5</span>
+                                    <span class="ielts-blank">
+                                        <input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off">
+                                        <span>......................</span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="crime-row">
+                            <div class="crime-label">Date of theft</div>
+                            <div class="crime-value">
+                                <span class="qnum">6</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="crime-row section-row">Possible time and place of theft</div>
+
+                        <div class="crime-row tight">
+                            <div class="crime-label">Location</div>
+                            <div class="crime-value">
+                                outside the
+                                <span class="qnum">7</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                at about 4 pm
+                            </div>
+                        </div>
+
+                        <div class="crime-row">
+                            <div class="crime-label">Details of suspect</div>
+                            <div class="crime-value">
+                                <span class="crime-dash-line">
+                                    some boys asked for the
+                                    <span class="qnum">8</span>
+                                    <span class="ielts-blank">
+                                        <input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off">
+                                        <span>......................</span>
+                                    </span>
+                                    then ran off
+                                </span>
+                                <span class="crime-dash-line">one had a T-shirt with a picture of a tiger</span>
+                                <span class="crime-dash-line">
+                                    he was about 12, slim build with
+                                    <span class="qnum">9</span>
+                                    <span class="ielts-blank">
+                                        <input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off">
+                                        <span>......................</span>
+                                    </span>
+                                    hair
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="crime-reference">
+                            <div class="crime-label">Crime reference number allocated</div>
+                            <div class="crime-value">
+                                <span class="qnum">10</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </article>
 
@@ -143,6 +403,7 @@
                     <p class="ielts-instr">Questions 15-20</p>
                     <p>What does the manager say about each of the following aspects of the company policy for apprentices?</p>
                     <p class="ielts-instr">Write the correct letter, <strong>A, B</strong> or <strong>C</strong>, next to Questions 15-20.</p>
+                    <p class="ielts-instr">You may use any letter more than once.</p>
                     <div class="ielts-choice-box">
                         <p><strong>A</strong><span>It is encouraged.</span></p>
                         <p><strong>B</strong><span>There are some restrictions.</span></p>

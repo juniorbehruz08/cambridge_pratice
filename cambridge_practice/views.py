@@ -174,6 +174,10 @@ def home(request):
     })
 
 
+def custom_404(request, exception=None, unmatched_path=''):
+    return render(request, '404.html', status=404)
+
+
 def book_detail(request, number):
     book = get_book_or_404(number, request.user)
     tests = [

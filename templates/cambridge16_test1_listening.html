@@ -6,7 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 16 Test 1 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .stevenson-map-answers {
+            width: 300px;
+            margin-top: 10px;
+        }
+
+        .stevenson-map-row {
+            display: grid;
+            grid-template-columns: 28px 1fr 92px;
+            gap: 8px;
+            align-items: baseline;
+            margin: 7px 0;
+            font-size: 14px;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        .stevenson-map-row .qnum {
+            font-weight: 700;
+        }
+
+        .stevenson-map-row .ielts-blank {
+            min-width: 82px;
+        }
+
+        .stoicism-box {
+            padding: 10px 18px 10px;
+            font-size: 14px;
+            line-height: 1.18;
+        }
+
+        .stoicism-box h3 {
+            text-align: center;
+            margin: 0 0 6px;
+            font-size: 20px;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .stoic-section {
+            font-weight: 700;
+            margin: 12px 0 4px;
+        }
+
+        .stoic-row {
+            display: grid;
+            grid-template-columns: 14px 1fr;
+            gap: 8px;
+            align-items: baseline;
+            margin: 4px 0;
+        }
+
+        .stoic-row.sub {
+            margin-left: 28px;
+        }
+
+        .stoic-marker {
+            text-align: center;
+        }
+
+        .stoic-text {
+            min-width: 0;
+        }
+
+        .stoicism-box .ielts-blank {
+            min-width: 120px;
+        }
+
+        .stoicism-box .ielts-blank.short {
+            min-width: 92px;
+        }
+
+        .stoicism-box .ielts-blank.medium {
+            min-width: 108px;
+        }
+
+        .stoicism-box .ielts-blank.long {
+            min-width: 145px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -124,13 +205,13 @@
                     <p class="ielts-instr">Label the map below.</p>
                     <p class="ielts-instr">Write the correct letter, <strong>A-J</strong>, next to Questions 15-20.</p>
                     <img class="farm-map-image" src="{% static 'img/cambridge16/test1/listening/stevenson-site.png' %}" alt="Plan of Stevenson's site">
-                    <div class="ielts-note-box">
-                        <p><span class="qnum">15</span> coffee room <span class="ielts-blank"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><span class="qnum">16</span> warehouse <span class="ielts-blank"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><span class="qnum">17</span> staff canteen <span class="ielts-blank"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><span class="qnum">18</span> meeting room <span class="ielts-blank"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><span class="qnum">19</span> human resources <span class="ielts-blank"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><span class="qnum">20</span> boardroom <span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>......................</span></span></p>
+                    <div class="stevenson-map-answers">
+                        <label class="stevenson-map-row"><span class="qnum">15</span><span>coffee room</span><span class="ielts-blank"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">16</span><span>warehouse</span><span class="ielts-blank"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">17</span><span>staff canteen</span><span class="ielts-blank"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">18</span><span>meeting room</span><span class="ielts-blank"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">19</span><span>human resources</span><span class="ielts-blank"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">20</span><span>boardroom</span><span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
                     </div>
                 </section>
             </article>
@@ -207,42 +288,85 @@
                     <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="ielts-note-box stoicism-box">
                         <h3>Stoicism</h3>
-                        <ul>
-                            <li>Stoicism is still relevant today because of its <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> appeal.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Ancient Stoics</p>
-                        <ul>
-                            <li>Stoicism was founded over 2,000 years ago in Greece.</li>
-                            <li>The Stoics' ideas are surprisingly well known, despite not being intended for <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Stoic principles</p>
-                        <ul>
-                            <li>Happiness could be achieved by leading a virtuous life.</li>
-                            <li>Controlling emotions was essential.</li>
-                            <li>Epictetus said that external events cannot be controlled but the <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> people make in response can be controlled.</li>
-                            <li>A Stoic is someone who has a different view on experiences which others would consider as <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">The influence of Stoicism</p>
-                        <ul>
-                            <li>George Washington organised a <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> about Cato to motivate his men.</li>
-                            <li>The French artist Delacroix was a Stoic.</li>
-                            <li>Adam Smith's ideas on <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> were influenced by Stoicism.</li>
-                            <li>Some of today's political leaders are inspired by the Stoics.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Cognitive Behaviour Therapy (CBT)</p>
-                        <ul>
-                            <li>is based on ideas from Stoicism</li>
-                            <li>is the treatment for <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>people learn to base their thinking on <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span></li>
-                        </ul>
-                        <p>In business, people benefit from Stoicism by identifying obstacles as <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>.</p>
-                        <p class="ielts-blue-title black">Relevance of Stoicism</p>
-                        <ul>
-                            <li>It requires a lot of <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>, but Stoicism can help people to lead a good life.</li>
-                            <li>It teaches people that having a strong character is more important than anything else.</li>
-                        </ul>
+
+                        <div class="stoic-row">
+                            <span class="stoic-marker"></span>
+                            <span class="stoic-text">Stoicism is still relevant today because of its <span class="qnum">31</span> <span class="ielts-blank long"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> appeal.</span>
+                        </div>
+
+                        <div class="stoic-section">Ancient Stoics</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Stoicism was founded over 2,000 years ago in Greece.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">The Stoics' ideas are surprisingly well known, despite not being intended<br>for <span class="qnum">32</span> <span class="ielts-blank medium"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>.</span>
+                        </div>
+
+                        <div class="stoic-section">Stoic principles</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Happiness could be achieved by leading a virtuous life.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Controlling emotions was essential.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Epictetus said that external events cannot be controlled but the<br><span class="qnum">33</span> <span class="ielts-blank medium"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> people make in response can be controlled.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">A Stoic is someone who has a different view on experiences which others would<br>consider as <span class="qnum">34</span> <span class="ielts-blank medium"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</span>
+                        </div>
+
+                        <div class="stoic-section">The influence of Stoicism</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">George Washington organised a <span class="qnum">35</span> <span class="ielts-blank long"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> about Cato to motivate<br>his men.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">The French artist Delacroix was a Stoic.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Adam Smith's ideas on <span class="qnum">36</span> <span class="ielts-blank long"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> were influenced by Stoicism.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Some of today's political leaders are inspired by the Stoics.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Cognitive Behaviour Therapy (CBT)</span>
+                        </div>
+                        <div class="stoic-row sub">
+                            <span class="stoic-marker">–</span>
+                            <span class="stoic-text">the treatment for <span class="qnum">37</span> <span class="ielts-blank medium"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> is based on ideas from Stoicism</span>
+                        </div>
+                        <div class="stoic-row sub">
+                            <span class="stoic-marker">–</span>
+                            <span class="stoic-text">people learn to base their thinking on <span class="qnum">38</span> <span class="ielts-blank medium"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">In business, people benefit from Stoicism by identifying obstacles as<br><span class="qnum">39</span> <span class="ielts-blank medium"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>.</span>
+                        </div>
+
+                        <div class="stoic-section">Relevance of Stoicism</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">It requires a lot of <span class="qnum">40</span> <span class="ielts-blank medium"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> but Stoicism can help people to lead a<br>good life.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">It teaches people that having a strong character is more important than<br>anything else.</span>
+                        </div>
                     </div>
                 </section>
             </article>

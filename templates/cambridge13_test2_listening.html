@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 13 Test 2 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -220,33 +220,38 @@
 
                     <div class="ielts-note-box">
                         <h3>Episodic memory</h3>
-                        <p>The ability to recall details, e.g. the time and <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> of past events.</p>
-                        <p>Different to semantic memory - the ability to remember general information about the <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>, which does not involve recalling <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> information.</p>
+                        <ul>
+                            <li>the ability to recall details, e.g. the time and <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> of past events</li>
+                            <li>different to semantic memory – the ability to remember general information about the <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>, which does not involve recalling <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> information</li>
+                        </ul>
 
                         <p class="ielts-blue-title black">Forming episodic memories involves three steps:</p>
+
                         <p class="ielts-blue-title black">Encoding</p>
                         <ul>
-                            <li>Involves receiving and processing information.</li>
-                            <li>The more <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> given to an event, the more successfully it can be encoded.</li>
-                            <li>To remember a <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>, it is useful to have a strategy for encoding such information.</li>
+                            <li>involves receiving and processing information</li>
+                            <li>the more <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> given to an event, the more successfully it can be encoded</li>
+                            <li>to remember a <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>, it is useful to have a strategy for encoding such information</li>
                         </ul>
 
                         <p class="ielts-blue-title black">Consolidation</p>
                         <ul>
-                            <li>How memories are strengthened and stored.</li>
-                            <li>Most effective when memories can be added to a <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> of related information.</li>
-                            <li>The <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> of retrieval affects the strength of memories.</li>
+                            <li>how memories are strengthened and stored</li>
+                            <li>most effective when memories can be added to a <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> of related information</li>
+                            <li>the <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> of retrieval affects the strength of memories</li>
                         </ul>
 
                         <p class="ielts-blue-title black">Retrieval</p>
-                        <p>Memory retrieval often depends on using a prompt, e.g. the <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> of an object near to the place where you left your car.</p>
+                        <ul>
+                            <li>memory retrieval often depends on using a prompt, e.g. the <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> of an object near to the place where you left your car</li>
+                        </ul>
 
                         <p class="ielts-blue-title black">Episodic memory impairments</p>
                         <ul>
-                            <li>These affect people with a wide range of medical conditions.</li>
-                            <li>Games which stimulate the <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> have been found to help people with schizophrenia.</li>
-                            <li>Children with autism may have difficulty forming episodic memories - possibly because their concept of the <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> may be absent.</li>
-                            <li>Memory training may help autistic children develop social skills.</li>
+                            <li>these affect people with a wide range of medical conditions</li>
+                            <li>games which stimulate the <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> have been found to help people with schizophrenia</li>
+                            <li>children with autism may have difficulty forming episodic memories – possibly because their concept of the <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> may be absent</li>
+                            <li>memory training may help autistic children develop social skills</li>
                         </ul>
                     </div>
                 </section>

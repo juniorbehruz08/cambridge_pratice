@@ -6,7 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 16 Test 4 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .qanat-diagram {
+            margin: 10px 0 18px !important;
+        }
+
+        .qanat-stage {
+            position: relative !important;
+            width: 560px !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        .qanat-stage img {
+            display: block !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .qanat-answer {
+            position: absolute !important;
+            display: block !important;
+            height: 17px !important;
+            z-index: 5 !important;
+        }
+
+        .qanat-answer input,
+        .qanat-answer input:disabled {
+            display: block !important;
+            width: 100% !important;
+            height: 17px !important;
+            min-width: 0 !important;
+            border: 0 !important;
+            border-bottom: 0 !important;
+            outline: 0 !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            padding: 0 2px !important;
+            margin: 0 !important;
+            font-size: 13px !important;
+            line-height: 17px !important;
+            color: #111 !important;
+            opacity: 1 !important;
+            -webkit-text-fill-color: #111 !important;
+        }
+
+        .qanat-answer input:focus,
+        .qanat-answer input:not(:placeholder-shown),
+        .qanat-answer input:disabled:not(:placeholder-shown) {
+            background: #fff !important;
+        }
+
+        .qanat-answer input::placeholder {
+            color: transparent !important;
+        }
+
+        /*
+           Tuned to the displayed diagram.
+           These overlays sit exactly on the printed dotted blanks.
+        */
+        .qanat-answer-1 { left: 10.9% !important; top: 7.5% !important; width: 23.0% !important; }
+        .qanat-answer-2 { left: 69.8% !important; top: 7.5% !important; width: 23% !important; }
+        .qanat-answer-3 { left: 70.8% !important; top: 39.5% !important; width: 23% !important; }
+        .qanat-answer-4 { left: 48% !important; top: 50.7% !important; width: 22.8% !important; }
+        .qanat-answer-5 { left: 45.2% !important; top: 90.3% !important; width: 22.8% !important; }
+        .qanat-answer-6 { left: 42.8% !important; top: 95.7% !important; width: 24.1% !important; }
+
+        @media (max-width: 760px) {
+            .qanat-answer {
+                height: 14px !important;
+            }
+
+            .qanat-answer input,
+            .qanat-answer input:disabled {
+                height: 14px !important;
+                font-size: 11px !important;
+                line-height: 14px !important;
+            }
+        }
+    </style>
+
+
+    <style>
+        /* Qanat result mode: don't show completed answers inside tiny diagram blanks. */
+        .qanat-stage.is-completed .qanat-answer input,
+        .qanat-stage.is-completed .qanat-answer input:disabled {
+            color: transparent !important;
+            -webkit-text-fill-color: transparent !important;
+            caret-color: transparent !important;
+        }
+
+        .qanat-correct-answers {
+            margin: 10px auto 14px;
+            width: 560px;
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px 10px;
+        }
+
+        .qanat-correct-chip {
+            background: #fff3b0;
+            border: 1px solid #d8bd4a;
+            border-radius: 6px;
+            padding: 5px 8px;
+            font-size: 13px;
+            line-height: 1.2;
+            color: #111;
+        }
+
+        .qanat-correct-chip strong {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 760px) {
+            .qanat-correct-answers {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +138,7 @@
             <span>Cambridge IELTS 16 - Test 4 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -113,17 +236,45 @@
                         <h2>Reading Passage 1</h2>
                         <p class="ielts-instr">Questions 1-6</p>
                         <p class="ielts-instr">Label the diagrams below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
-                        <div class="ielts-note-box">
-                            <h3>The Persian Qanat Method</h3>
-                            <p><span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> used to direct the tunnelling</p>
-                            <p>Water runs into a <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> used by local people.</p>
-                            <p>Vertical shafts were used to remove earth and for <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span>.</p>
-                        </div>
-                        <div class="ielts-note-box">
-                            <h3>Cross-section of a Roman Qanat Shaft</h3>
-                            <p>A <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> made of wood or stone covered the shaft.</p>
-                            <p>A <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span> was attached to the plumb line.</p>
-                            <p>Handholds and footholds were used for <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span>.</p>
+                        <div class="qanat-diagram" aria-label="The Persian Qanat Method and Cross-section of a Roman Qanat Shaft">
+                            <div class="qanat-stage {% if attempt.status == 'completed' %}is-completed{% endif %}">
+                                <img src="{% static '16/images/qanat.jpg' %}" alt="The Persian Qanat Method and Cross-section of a Roman Qanat Shaft">
+                                <label class="qanat-answer qanat-answer-1">
+                                    <span class="sr-only">Question 1</span>
+                                    <input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off" placeholder=" " {% if attempt.status == 'completed' %}disabled{% endif %}>
+                                </label>
+                                <label class="qanat-answer qanat-answer-2">
+                                    <span class="sr-only">Question 2</span>
+                                    <input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off" placeholder=" " {% if attempt.status == 'completed' %}disabled{% endif %}>
+                                </label>
+                                <label class="qanat-answer qanat-answer-3">
+                                    <span class="sr-only">Question 3</span>
+                                    <input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off" placeholder=" " {% if attempt.status == 'completed' %}disabled{% endif %}>
+                                </label>
+                                <label class="qanat-answer qanat-answer-4">
+                                    <span class="sr-only">Question 4</span>
+                                    <input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off" placeholder=" " {% if attempt.status == 'completed' %}disabled{% endif %}>
+                                </label>
+                                <label class="qanat-answer qanat-answer-5">
+                                    <span class="sr-only">Question 5</span>
+                                    <input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off" placeholder=" " {% if attempt.status == 'completed' %}disabled{% endif %}>
+                                </label>
+                                <label class="qanat-answer qanat-answer-6">
+                                    <span class="sr-only">Question 6</span>
+                                    <input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off" placeholder=" " {% if attempt.status == 'completed' %}disabled{% endif %}>
+                                </label>
+                            </div>
+
+                            {% if attempt.status == 'completed' %}
+                                <div class="qanat-correct-answers" aria-label="Correct answers for Questions 1 to 6">
+                                    <div class="qanat-correct-chip"><strong>1</strong> posts</div>
+                                    <div class="qanat-correct-chip"><strong>2</strong> canal</div>
+                                    <div class="qanat-correct-chip"><strong>3</strong> ventilation</div>
+                                    <div class="qanat-correct-chip"><strong>4</strong> lid</div>
+                                    <div class="qanat-correct-chip"><strong>5</strong> weight</div>
+                                    <div class="qanat-correct-chip"><strong>6</strong> climbing</div>
+                                </div>
+                            {% endif %}
                         </div>
 
                         <p class="ielts-instr">Questions 7-10</p>

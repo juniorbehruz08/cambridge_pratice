@@ -6,7 +6,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 18 Test 2 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .restaurant-jobs-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 20px;
+            font-size: 12.5px;
+            line-height: 1.18;
+            table-layout: fixed;
+        }
+
+        .restaurant-jobs-table th,
+        .restaurant-jobs-table td {
+            border: 1px solid #777;
+            padding: 6px 7px;
+            vertical-align: top;
+        }
+
+        .restaurant-jobs-table thead th {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .restaurant-jobs-table .col-location {
+            width: 15%;
+        }
+
+        .restaurant-jobs-table .col-title {
+            width: 24%;
+        }
+
+        .restaurant-jobs-table .col-duties {
+            width: 31%;
+        }
+
+        .restaurant-jobs-table .col-pay {
+            width: 30%;
+        }
+
+        .restaurant-jobs-table ul {
+            margin: 0;
+            padding-left: 14px;
+        }
+
+        .restaurant-jobs-table li {
+            margin: 0 0 5px;
+        }
+
+        .restaurant-jobs-table .ielts-blank {
+            display: inline-block;
+            min-width: 0 !important;
+            width: 72px !important;
+            max-width: 72px !important;
+            overflow: hidden;
+            white-space: nowrap;
+            vertical-align: baseline;
+        }
+
+        .restaurant-jobs-table .ielts-blank.short {
+            width: 44px !important;
+            max-width: 44px !important;
+        }
+
+        .restaurant-jobs-table .ielts-blank.long {
+            width: 92px !important;
+            max-width: 92px !important;
+        }
+
+        .restaurant-jobs-table .ielts-blank input {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .restaurant-jobs-table .ielts-blank > span {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .restaurant-jobs-table .qnum {
+            font-weight: 700;
+        }
+
+        .restaurant-jobs-table .table-note {
+            display: block;
+            margin-top: 4px;
+        }
+
+        .map-answer-list {
+            max-width: 300px;
+            margin-top: 12px;
+        }
+
+        .map-answer-row {
+            display: grid;
+            grid-template-columns: 28px 1fr 96px;
+            gap: 8px;
+            align-items: baseline;
+            margin-bottom: 7px;
+            white-space: nowrap;
+        }
+
+        .map-answer-row strong {
+            font-weight: 700;
+        }
+
+        .map-answer-row .ielts-blank.short {
+            min-width: 92px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -98,23 +211,80 @@
                     <p class="ielts-instr">Questions 6-10</p>
                     <p class="ielts-instr">Complete the table below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
-                    <div class="ielts-note-box">
-                        <h3>Restaurant jobs</h3>
-                        <p><strong>Location:</strong> <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> Street</p>
-                        <p><strong>Job title:</strong> Breakfast supervisor</p>
-                        <ul>
-                            <li>Checking portions, etc. are correct</li>
-                            <li>Making sure <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> is clean</li>
-                        </ul>
-                        <p><strong>Pay and conditions:</strong> Starting salary &pound;<span class="qnum">8</span> <span class="ielts-blank short"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>............</span></span> per hour; start work at 5.30 a.m.</p>
-                        <p><strong>Location:</strong> City Road</p>
-                        <p><strong>Job title:</strong> Junior chef</p>
-                        <ul>
-                            <li>Supporting senior chefs</li>
-                            <li>Maintaining stock and organising <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></li>
-                        </ul>
-                        <p><strong>Pay and conditions:</strong> Annual salary &pound;23,000; no work on a <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> once a month</p>
-                    </div>
+
+                    <table class="restaurant-jobs-table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">Restaurant jobs</th>
+                            </tr>
+                            <tr>
+                                <th class="col-location">Location</th>
+                                <th class="col-title">Job title</th>
+                                <th class="col-duties">Main responsibilities</th>
+                                <th class="col-pay">Pay and conditions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="qnum">6</span>
+                                    <span class="ielts-blank">
+                                        <input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off">
+                                        <span>......................</span>
+                                    </span>
+                                    <span class="table-note">Street</span>
+                                </td>
+                                <td>Breakfast supervisor</td>
+                                <td>
+                                    <ul>
+                                        <li>Checking portions, etc. are correct</li>
+                                        <li>Making sure
+                                            <span class="qnum">7</span>
+                                            <span class="ielts-blank long">
+                                                <input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off">
+                                                <span>......................</span>
+                                            </span>
+                                            is clean
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Starting salary &pound;<span class="qnum">8</span>
+                                    <span class="ielts-blank short">
+                                        <input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off">
+                                        <span>............</span>
+                                    </span> per hour
+                                    <span class="table-note">Start work at 5.30 a.m.</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>City Road</td>
+                                <td>Junior chef</td>
+                                <td>
+                                    <ul>
+                                        <li>Supporting senior chefs</li>
+                                        <li>Maintaining stock and organising
+                                            <span class="qnum">9</span>
+                                            <span class="ielts-blank long">
+                                                <input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off">
+                                                <span>......................</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Annual salary &pound;23,000
+                                    <span class="table-note">No work on a <span class="qnum">10</span>
+                                        <span class="ielts-blank">
+                                            <input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off">
+                                            <span>......................</span>
+                                        </span>
+                                        once a month
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </article>
 
@@ -160,14 +330,13 @@
                     <p class="ielts-instr">Label the map below.</p>
                     <p class="ielts-instr">Write the correct letter, <strong>A-I</strong>, next to Questions 15-20.</p>
                     <img class="farm-map-image" src="{% static '18/images/test2_housing_map.png' %}" alt="Housing development map with labels A to I">
-                    <p class="ielts-instr">Key: striped blocks show housing.</p>
-                    <div class="map-answers">
-                        <label><strong>15</strong> School <span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>18</strong> Community centre <span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>16</strong> Sports centre <span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>19</strong> Supermarket <span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>17</strong> Clinic <span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>20</strong> Playground <span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    <div class="map-answer-list">
+                        <label class="map-answer-row"><strong>15</strong><span>School</span><span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>16</strong><span>Sports centre</span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>17</strong><span>Clinic</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>18</strong><span>Community centre</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>19</strong><span>Supermarket</span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>20</strong><span>Playground</span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
                     </div>
                 </section>
             </article>

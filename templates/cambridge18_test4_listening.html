@@ -6,7 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 18 Test 4 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .employment-agency-box {
+            padding: 12px 18px 10px;
+        }
+
+        .employment-agency-box h3 {
+            text-align: center;
+            margin: 0 0 16px;
+            font-size: 20px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #666;
+        }
+
+        .employment-grid {
+            display: grid;
+            grid-template-columns: 92px 1fr;
+            column-gap: 16px;
+            row-gap: 8px;
+            align-items: baseline;
+            font-size: 15px;
+            line-height: 1.25;
+        }
+
+        .employment-label {
+            font-weight: 700;
+            color: #666;
+        }
+
+        .employment-value {
+            min-width: 0;
+        }
+
+        .employment-section-title {
+            grid-column: 1 / -1;
+            font-weight: 700;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .employment-bullets {
+            grid-column: 1 / -1;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .employment-bullets li {
+            margin: 8px 0;
+            line-height: 1.28;
+        }
+
+        .employment-agency-box .ielts-blank {
+            min-width: 145px;
+        }
+
+        .employment-agency-box .ielts-blank.short {
+            min-width: 105px;
+        }
+
+        .employment-agency-box .ielts-blank.medium {
+            min-width: 125px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -78,30 +141,61 @@
                     <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="ielts-note-box employment-agency-box">
                         <h3>Job details from employment agency</h3>
-                        <p><strong>Role</strong> <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><strong>Location</strong> Fordham <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> Centre</p>
-                        <p><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> Road, Fordham</p>
-                        <p class="ielts-blue-title black">Work involves</p>
-                        <ul>
-                            <li>dealing with enquiries</li>
-                            <li>making <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> and reorganising them</li>
-                            <li>maintaining the internal <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>general administration</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Requirements</p>
-                        <ul>
-                            <li><span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> (essential)</li>
-                            <li>a calm and <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> manner</li>
-                            <li>good IT skills</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Other information</p>
-                        <ul>
-                            <li>a <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> job - further opportunities may be available</li>
-                            <li>hours: 7.45 a.m. to <span class="qnum">9</span> <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>............</span></span> p.m. Monday to Friday</li>
-                            <li><span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> is available onsite</li>
-                        </ul>
+
+                        <div class="employment-grid">
+                            <div class="employment-label">Role</div>
+                            <div class="employment-value">
+                                <span class="qnum">1</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </div>
+
+                            <div class="employment-label">Location</div>
+                            <div class="employment-value">
+                                Fordham <span class="qnum">2</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Centre
+                            </div>
+
+                            <div></div>
+                            <div class="employment-value">
+                                <span class="qnum">3</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Road, Fordham
+                            </div>
+
+                            <div class="employment-section-title">Work involves</div>
+                            <ul class="employment-bullets">
+                                <li>dealing with enquiries</li>
+                                <li>making <span class="qnum">4</span> <span class="ielts-blank medium"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> and reorganising them</li>
+                                <li>maintaining the internal <span class="qnum">5</span> <span class="ielts-blank medium"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li>general administration</li>
+                            </ul>
+
+                            <div class="employment-section-title">Requirements</div>
+                            <ul class="employment-bullets">
+                                <li><span class="qnum">6</span> <span class="ielts-blank medium"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> (essential)</li>
+                                <li>a calm and <span class="qnum">7</span> <span class="ielts-blank medium"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> manner</li>
+                                <li>good IT skills</li>
+                            </ul>
+
+                            <div class="employment-section-title">Other information</div>
+                            <ul class="employment-bullets">
+                                <li>a <span class="qnum">8</span> <span class="ielts-blank medium"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> job – further opportunities may be available</li>
+                                <li>hours: 7.45 a.m. to <span class="qnum">9</span> <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>............</span></span> p.m. Monday to Friday</li>
+                                <li><span class="qnum">10</span> <span class="ielts-blank medium"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> is available onsite</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
             </article>

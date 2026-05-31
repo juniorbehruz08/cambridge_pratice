@@ -17,7 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from cambridge_practice import views
+
 urlpatterns = [
     path('', include('cambridge_practice.urls')),
     path('admin/', admin.site.urls),
+    path('<path:unmatched_path>/', views.custom_404, name='custom_404'),
+    path('<path:unmatched_path>', views.custom_404),
 ]
+
+handler404 = 'cambridge_practice.views.custom_404'

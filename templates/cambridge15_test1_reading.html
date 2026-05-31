@@ -6,7 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 15 Test 1 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+<style>
+.nutmeg-history-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    margin:8px 0 18px;
+    font-size:13px;
+    line-height:1.18;
+    color:#222;
+}
+.nutmeg-history-table td{
+    border:1px solid #666;
+    vertical-align:top;
+    padding:6px 7px;
+}
+.nutmeg-history-table .period-cell{width:23%;white-space:nowrap}
+.nutmeg-history-table .events-cell{width:77%}
+.nutmeg-history-table .event-line{margin:0 0 5px}
+.nutmeg-history-table .event-line:last-child{margin-bottom:0}
+.nutmeg-history-table .dutch-list{margin-top:8px}
+.nutmeg-history-table .dash-line{
+    display:grid;
+    grid-template-columns:12px 1fr;
+    column-gap:6px;
+    margin:3px 0;
+}
+.nutmeg-history-table .ielts-blank{min-width:110px}
+.nutmeg-history-table .ielts-blank.short{min-width:82px}
+.nutmeg-history-table .ielts-blank.medium{min-width:105px}
+</style>
+
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +47,7 @@
             <span>Cambridge IELTS 15 - Test 1 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -116,6 +148,7 @@
                                 <li><span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> surrounds the fruit and breaks open when the fruit is ripe</li>
                                 <li><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> is used to produce the spice nutmeg</li>
                                 <li>the covering known as the aril is used to produce <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li>the tree has yellow flowers and fruit</li>
                             </ul>
                         </div>
 
@@ -130,29 +163,35 @@
 
                         <p class="ielts-instr">Questions 8-13</p>
                         <p class="ielts-instr">Complete the table below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
-                        <table class="ielts-table-box">
-                            <thead>
-                                <tr>
-                                    <th>Period</th>
-                                    <th>Events in the history of nutmeg</th>
-                                </tr>
-                            </thead>
+                        <table class="nutmeg-history-table">
                             <tbody>
                                 <tr>
-                                    <td>Middle Ages</td>
-                                    <td>Nutmeg was brought to Europe by the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span>.</td>
+                                    <td class="period-cell">Middle Ages</td>
+                                    <td class="events-cell">Nutmeg was brought to Europe by the <span class="qnum">8</span> <span class="ielts-blank medium"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></td>
                                 </tr>
                                 <tr>
-                                    <td>16th century</td>
-                                    <td>European nations took control of the nutmeg trade.</td>
+                                    <td class="period-cell">16th century</td>
+                                    <td class="events-cell">European nations took control of the nutmeg trade</td>
                                 </tr>
                                 <tr>
-                                    <td>17th century</td>
-                                    <td>Demand for nutmeg grew, as it was believed to be effective against the disease known as <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span>. The Dutch restricted production and put <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> on nutmeg to prevent cultivation outside the islands. They finally obtained the island of <span class="qnum">11</span> <span class="ielts-blank"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off"><span>......................</span></span> from the British.</td>
+                                    <td class="period-cell">17th century</td>
+                                    <td class="events-cell">
+                                        <div class="event-line">Demand for nutmeg grew, as it was believed to be effective</div>
+                                        <div class="event-line">against the disease known as the <span class="qnum">9</span> <span class="ielts-blank medium"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></div>
+                                        <div class="dutch-list">The Dutch</div>
+                                        <div class="dash-line"><span>–</span><span>took control of the Banda Islands</span></div>
+                                        <div class="dash-line"><span>–</span><span>restricted nutmeg production to a few areas</span></div>
+                                        <div class="dash-line"><span>–</span><span>put <span class="qnum">10</span> <span class="ielts-blank short"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>............</span></span> on nutmeg to avoid it being cultivated outside the islands</span></div>
+                                        <div class="dash-line"><span>–</span><span>finally obtained the island of <span class="qnum">11</span> <span class="ielts-blank medium"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off"><span>......................</span></span> from the British</span></div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Late 18th century</td>
-                                    <td>In 1770, nutmeg plants were secretly taken to <span class="qnum">12</span> <span class="ielts-blank"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off"><span>......................</span></span>. From 1778, half the Banda Islands' nutmeg plantations were destroyed by a <span class="qnum">13</span> <span class="ielts-blank"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off"><span>......................</span></span>.</td>
+                                    <td class="period-cell">Late 18th century</td>
+                                    <td class="events-cell">
+                                        <div class="event-line">1770 – nutmeg plants were secretly taken to <span class="qnum">12</span> <span class="ielts-blank medium"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off"><span>......................</span></span></div>
+                                        <div class="event-line">1778 – half the Banda Islands' nutmeg plantations were destroyed</div>
+                                        <div class="event-line">by a <span class="qnum">13</span> <span class="ielts-blank medium"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off"><span>......................</span></span></div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -162,6 +201,16 @@
                         <h2>Reading Passage 2</h2>
                         <p class="ielts-instr">Questions 14-18</p>
                         <p>Reading Passage 2 has seven sections, <strong>A-G</strong>. Which section contains the following information?</p>
+                        <div class="ielts-note-box">
+                            <h3>List of Sections</h3>
+                            <p><strong>A</strong> Section A</p>
+                            <p><strong>B</strong> Section B</p>
+                            <p><strong>C</strong> Section C</p>
+                            <p><strong>D</strong> Section D</p>
+                            <p><strong>E</strong> Section E</p>
+                            <p><strong>F</strong> Section F</p>
+                            <p><strong>G</strong> Section G</p>
+                        </div>
                         <div class="reading-choice-list">
                             {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> reference to the amount of time when a car is not in use</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
                             {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> mention of several advantages of driverless vehicles for individual road-users</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
@@ -174,8 +223,8 @@
                         <p class="ielts-instr">Complete the summary below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
                         <div class="ielts-note-box">
                             <h3>The impact of driverless cars</h3>
-                            <p>Figures from the Transport Research Laboratory indicate that most motor accidents are partly due to <span class="qnum">19</span> <span class="ielts-blank"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off"><span>......................</span></span>, so driverless vehicles may be safer. Schemes for <span class="qnum">20</span> <span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>......................</span></span> will also become more workable, especially in towns and cities, meaning fewer cars may be needed.</p>
-                            <p>Research from the University of Michigan Transportation Research Institute found that there could be a 43 percent drop in <span class="qnum">21</span> <span class="ielts-blank"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off"><span>......................</span></span> of cars. However, the yearly <span class="qnum">22</span> <span class="ielts-blank"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off"><span>......................</span></span> of each car would be twice as high.</p>
+                            <p>Figures from the Transport Research Laboratory indicate that most motor accidents are partly due to <span class="qnum">19</span> <span class="ielts-blank"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off"><span>......................</span></span>, so the introduction of driverless vehicles will result in greater safety. In addition to the direct benefits of automation, it may bring other advantages. For example, schemes for <span class="qnum">20</span> <span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>......................</span></span> will be more workable, especially in towns and cities, resulting in fewer cars on the road.</p>
+                            <p>According to the University of Michigan Transportation Research Institute, there could be a 43 percent drop in <span class="qnum">21</span> <span class="ielts-blank"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off"><span>......................</span></span> of cars. However, this would mean that the yearly <span class="qnum">22</span> <span class="ielts-blank"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off"><span>......................</span></span> of each car would, on average, be twice as high as it currently is. This would lead to a higher turnover of vehicles, and therefore no reduction in automotive manufacturing.</p>
                         </div>
 
                         <p class="ielts-instr">Questions 23 and 24</p>
@@ -243,7 +292,7 @@
                         <div class="ielts-note-box">
                             <h3>The writer's own experience</h3>
                             <p>The writer has experience of a large number of <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span>, and was the first stranger that certain previously <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> people had encountered.</p>
-                            <p>He believes there is no need for further exploration of the Earth's <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>, except to answer specific questions.</p>
+                            <p>He believes there is no need for further exploration of the Earth's <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>, except to answer specific questions such as how buffalo eat.</p>
                         </div>
                     </article>
                 </section>

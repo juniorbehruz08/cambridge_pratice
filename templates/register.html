@@ -6,35 +6,361 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        body {
+            background: #f6f8fc;
+        }
+
+        .auth-shell {
+            min-height: 100vh;
+            color: #0f172a;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.14), transparent 31%),
+                radial-gradient(circle at 100% 4%, rgba(124, 58, 237, 0.12), transparent 30%),
+                linear-gradient(180deg, #f8fbff 0%, #eef4ff 48%, #ffffff 100%);
+        }
+
+        .auth-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.95);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+        }
+
+        .auth-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .auth-nav a {
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 13px;
+            border-radius: 999px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            color: #334155;
+            font-size: 13px;
+            font-weight: 900;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.035);
+        }
+
+        .auth-nav .auth-nav-primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: #ffffff;
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+        }
+
+        .auth-stage {
+            width: min(1120px, calc(100% - 40px));
+            min-height: calc(100vh - 72px);
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 450px;
+            gap: 28px;
+            align-items: center;
+            margin: 0 auto;
+            padding: 54px 0;
+        }
+
+        .auth-panel {
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 36px;
+            padding: 38px;
+            background: #0f172a;
+            color: #ffffff;
+            box-shadow: 0 26px 75px rgba(15, 23, 42, 0.18);
+        }
+
+        .auth-panel::before,
+        .auth-panel::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+        }
+
+        .auth-panel::before {
+            width: 330px;
+            height: 330px;
+            top: -130px;
+            right: -135px;
+            background: rgba(59, 130, 246, 0.34);
+        }
+
+        .auth-panel::after {
+            width: 360px;
+            height: 360px;
+            left: -185px;
+            bottom: -180px;
+            background: rgba(124, 58, 237, 0.28);
+        }
+
+        .auth-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-kicker {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #dbeafe;
+            font-size: 12px;
+            font-weight: 950;
+        }
+
+        .auth-kicker::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+        }
+
+        .auth-panel h1 {
+            max-width: 640px;
+            margin: 34px 0 0;
+            color: #ffffff;
+            font-size: 68px;
+            line-height: 0.94;
+            letter-spacing: 0;
+        }
+
+        .auth-panel p {
+            max-width: 560px;
+            margin: 22px 0 0;
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        .auth-proof {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 36px;
+        }
+
+        .auth-proof span {
+            padding: 15px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .auth-card-modern {
+            position: relative;
+            overflow: hidden;
+            border-radius: 34px;
+            padding: 34px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+        }
+
+        .auth-card-modern::before {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            top: -95px;
+            right: -95px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.09);
+        }
+
+        .auth-card-modern > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-card-modern .brand {
+            margin-bottom: 30px;
+        }
+
+        .auth-heading .eyebrow {
+            margin-bottom: 12px;
+        }
+
+        .auth-heading h2 {
+            margin: 0;
+            color: #0f172a;
+            font-size: 38px;
+            line-height: 1;
+            letter-spacing: 0;
+        }
+
+        .auth-heading p {
+            margin: 14px 0 0;
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .auth-form {
+            margin-top: 26px;
+        }
+
+        .form-fields p {
+            margin-bottom: 14px;
+        }
+
+        .form-fields label {
+            color: #334155;
+        }
+
+        .form-fields input {
+            min-height: 46px;
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .form-fields input:focus {
+            border-color: #2563eb;
+            outline: 4px solid rgba(37, 99, 235, 0.12);
+        }
+
+        .form-fields .helptext,
+        .form-fields ul {
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .auth-card-modern .button.primary {
+            min-height: 48px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            box-shadow: 0 16px 32px rgba(37, 99, 235, 0.22);
+        }
+
+        .auth-switch {
+            margin-top: 22px;
+        }
+
+        .auth-switch a {
+            color: #2563eb;
+        }
+
+        @media (max-width: 920px) {
+            .auth-stage {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-panel {
+                min-height: 420px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .auth-header {
+                padding: 12px 16px;
+            }
+
+            .auth-stage {
+                width: min(100% - 28px, 1120px);
+                padding: 28px 0 44px;
+            }
+
+            .auth-panel,
+            .auth-card-modern {
+                border-radius: 26px;
+                padding: 24px;
+            }
+
+            .auth-panel h1 {
+                font-size: 44px;
+            }
+
+            .auth-proof {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <main class="auth-page">
-        <section class="auth-card">
-            <a class="brand auth-brand" href="{% url 'cambridge_practice:home' %}">
+    <div class="auth-shell">
+        <header class="auth-header">
+            <a class="brand" href="{% url 'cambridge_practice:home' %}">
                 <span class="brand-mark">CP</span>
                 <span>Cambridge Practice</span>
             </a>
 
-            <div class="auth-heading">
-                <p class="eyebrow">Create account</p>
-                <h1>Register</h1>
-                <p>Create a normal user account. Pro access can be turned on later in Django admin.</p>
-            </div>
+            <nav class="auth-nav" aria-label="Authentication navigation">
+                <a href="{% url 'cambridge_practice:home' %}">Home</a>
+                <a class="auth-nav-primary" href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            </nav>
+        </header>
 
-            <form method="post" class="auth-form">
-                {% csrf_token %}
-                {{ form.non_field_errors }}
-                <div class="form-fields">
-                    {{ form.as_p }}
+        <main class="auth-stage">
+            <section class="auth-panel">
+                <div>
+                    <span class="auth-kicker">Create account</span>
+                    <h1>Start your Cambridge IELTS practice library</h1>
+                    <p>Create a free account to use the available books. Pro access can still be enabled later from Django admin.</p>
                 </div>
-                <button class="button primary full-button" type="submit">Create account</button>
-            </form>
 
-            <p class="auth-switch">
-                Already registered?
-                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
-            </p>
-        </section>
-    </main>
+                <div class="auth-proof" aria-label="Practice features">
+                    <span>Free preview</span>
+                    <span>Saved after submit</span>
+                    <span>Admin pro access</span>
+                </div>
+            </section>
+
+            <section class="auth-card-modern">
+                <a class="brand auth-brand" href="{% url 'cambridge_practice:home' %}">
+                    <span class="brand-mark">CP</span>
+                    <span>Cambridge Practice</span>
+                </a>
+
+                <div class="auth-heading">
+                    <p class="eyebrow">Create account</p>
+                    <h2>Register</h2>
+                    <p>Create a normal user account. Pro access can be turned on later in Django admin.</p>
+                </div>
+
+                <form method="post" class="auth-form">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="form-fields">
+                        {{ form.as_p }}
+                    </div>
+                    <button class="button primary full-button" type="submit">Create account</button>
+                </form>
+
+                <p class="auth-switch">
+                    Already registered?
+                    <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+                </p>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

@@ -6,7 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 19 Test 3 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .flowchart-choice-box {
+            width: 260px;
+            margin: 18px auto 22px;
+            padding: 10px 20px;
+            border: 1px solid #777;
+            background: #fff;
+        }
+
+        .flowchart-choice-box p {
+            display: grid;
+            grid-template-columns: 34px 1fr;
+            margin: 3px 0;
+            line-height: 1.25;
+        }
+
+        .flowchart-wrapper {
+            width: 100%;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .flowchart-step {
+            border: 1px solid #777;
+            padding: 14px 22px;
+            margin: 0 auto;
+            min-height: 42px;
+            background: #fff;
+            line-height: 1.45;
+        }
+
+        .flowchart-arrow {
+            text-align: center;
+            font-size: 34px;
+            line-height: 1;
+            margin: 2px 0;
+            color: #555;
+        }
+
+        .flowchart-step .ielts-blank.short {
+            min-width: 120px;
+        }
+
+        .flowchart-step .ielts-blank.short input {
+            text-align: center;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -204,7 +253,7 @@
                     <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
                     <p class="ielts-instr">Questions 21-25</p>
                     <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
-                    <h3>Science experiment for Year 12 students</h3>
+                    <h3 style="text-align:center; color: #005eb8">Science experiment for Year 12 students</h3>
                     <div class="reading-choice-list">
                         {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> How does Clare feel about the students in her Year 12 science class?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>worried that they are not making progress</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>challenged by their poor behaviour in class</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>frustrated at their lack of interest in the subject</span></button></div></div>{% endwith %}
                         {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> How does Jake react to Clare's suggestion about an experiment based on children's diet?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>He is concerned that the results might not be meaningful.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>He feels some of the data might be difficult to obtain.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>He suspects that the conclusions might be upsetting.</span></button></div></div>{% endwith %}
@@ -216,7 +265,8 @@
                     <p class="ielts-instr">Questions 26-30</p>
                     <p>Complete the flowchart below.</p>
                     <p class="ielts-instr">Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 26-30.</p>
-                    <div class="ielts-choice-box">
+
+                    <div class="flowchart-choice-box">
                         <p><strong>A</strong><span>size</span></p>
                         <p><strong>B</strong><span>escape</span></p>
                         <p><strong>C</strong><span>age</span></p>
@@ -226,15 +276,63 @@
                         <p><strong>G</strong><span>changes</span></p>
                         <p><strong>H</strong><span>colour</span></p>
                     </div>
-                    <div class="ielts-note-box">
-                        <p>Choose mice which are all the same <span class="qnum">26</span> {% with selected=attempt.answers|answer_value:26 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_26" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></span></span>{% endwith %}</p>
-                        <p>Divide the mice into two groups, each with a different <span class="qnum">27</span> {% with selected=attempt.answers|answer_value:27 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_27" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></span></span>{% endwith %}</p>
-                        <p>Put each group in a separate cage.</p>
-                        <p>Feed group A commercial mouse food.</p>
-                        <p>Feed group B the same, but also sugar contained in <span class="qnum">28</span> {% with selected=attempt.answers|answer_value:28 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_28" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></span></span>{% endwith %}</p>
-                        <p>Take measurements using an electronic scale.</p>
-                        <p>Place them in a weighing chamber to prevent <span class="qnum">29</span> {% with selected=attempt.answers|answer_value:29 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_29" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></span></span>{% endwith %}</p>
-                        <p>Do all necessary <span class="qnum">30</span> {% with selected=attempt.answers|answer_value:30 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_30" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></span></span>{% endwith %}</p>
+
+                    <div class="flowchart-wrapper">
+                        <div class="flowchart-step">
+                            Choose mice which are all the same
+                            <span class="qnum">26</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>.
+                        </div>
+
+                        <div class="flowchart-arrow">↓</div>
+
+                        <div class="flowchart-step">
+                            Divide the mice into two groups, each with a different
+                            <span class="qnum">27</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>.
+                        </div>
+
+                        <div class="flowchart-arrow">↓</div>
+
+                        <div class="flowchart-step">
+                            Put each group in a separate cage.<br>
+                            Feed group A commercial mouse food.<br>
+                            Feed group B the same, but also sugar contained in
+                            <span class="qnum">28</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>.
+                        </div>
+
+                        <div class="flowchart-arrow">↓</div>
+
+                        <div class="flowchart-step">
+                            Take measurements using an electronic scale.<br>
+                            Place them in a weighing chamber to prevent
+                            <span class="qnum">29</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>.
+                        </div>
+
+                        <div class="flowchart-arrow">↓</div>
+
+                        <div class="flowchart-step">
+                            Do all necessary
+                            <span class="qnum">30</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>.
+                        </div>
                     </div>
                 </section>
             </article>

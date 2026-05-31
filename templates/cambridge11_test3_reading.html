@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 11 Test 3 Reading | Cambridge Practice</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=silk-notes-drag-20260531">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 11 - Test 3 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -119,18 +119,39 @@
                     <article class="reading-question-card">
                         <h2>Reading Passage 1</h2>
                         <p class="ielts-instr">Questions 1-9</p>
-                        <p class="ielts-instr">Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
-                        <h3 class="ielts-center-title">The Story of Silk</h3>
-                        <div class="sentence-questions">
-                            <p><span class="qnum">1</span> A silkworm cocoon fell into the emperor's wife's <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span>.</p>
-                            <p><span class="qnum">2</span> The emperor's wife invented a <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> to pull out silk fibres.</p>
-                            <p><span class="qnum">3</span> Only <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> were allowed to produce silk.</p>
-                            <p><span class="qnum">4</span> Only <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> were allowed to wear silk.</p>
-                            <p><span class="qnum">5</span> Silk was used as a form of <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span>.</p>
-                            <p><span class="qnum">6</span> Evidence was found of <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> made from silk around 168 AD.</p>
-                            <p><span class="qnum">7</span> Merchants used the Silk Road to take silk westward and bring back <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> and precious metals.</p>
-                            <p><span class="qnum">8</span> In 550 AD, <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> hid silkworm eggs in canes and took them to Constantinople.</p>
-                            <p><span class="qnum">9</span> In the 20th century, <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> and other man-made fibres caused silk production to decline.</p>
+                        <p class="ielts-instr">Complete the notes below.</p>
+                        <p class="ielts-instr">Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <p class="ielts-instr">Write your answers in boxes <strong>1-9</strong> on your answer sheet.</p>
+                        <div class="story-silk-notes">
+                            <h3>The Story of Silk</h3>
+                            <p class="story-silk-subhead">Early silk production in China</p>
+                            <ul>
+                                <li>Around 3000 BC, according to legend:
+                                    <ul>
+                                        <li>silkworm cocoon fell into emperor's wife's <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></li>
+                                        <li>emperor's wife invented a <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> to pull out silk fibres</li>
+                                    </ul>
+                                </li>
+                                <li>Only <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> were allowed to produce silk</li>
+                                <li>Only <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> were allowed to wear silk</li>
+                                <li>Silk used as a form of <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span>
+                                    <ul>
+                                        <li>e.g. farmers' taxes consisted partly of silk</li>
+                                    </ul>
+                                </li>
+                                <li>Silk used for many purposes
+                                    <ul>
+                                        <li>e.g. evidence found of <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> made from silk around 168 AD</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <p class="story-silk-subhead">Silk reaches rest of world</p>
+                            <ul>
+                                <li>Merchants use Silk Road to take silk westward and bring back <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> and precious metals</li>
+                                <li>550 AD: <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> hide silkworm eggs in canes and take them to Constantinople</li>
+                                <li>Silk production spreads across Middle East and Europe</li>
+                                <li>20th century: <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> and other man-made fibres cause decline in silk production</li>
+                            </ul>
                         </div>
 
                         <p class="ielts-instr">Questions 10-13</p>
@@ -180,7 +201,7 @@
                         <h3 class="ielts-center-title">The migration of pronghorns</h3>
                         <div class="sentence-questions">
                             <p>Pronghorns rely on their eyesight and <span class="qnum">23</span> <span class="ielts-blank"><input name="answer_23" value="{{ attempt.answers|answer_value:23 }}" autocomplete="off"><span>......................</span></span> to avoid predators.</p>
-                            <p>One particular population's summer habitat is a national park, and their winter home is on the <span class="qnum">24</span> <span class="ielts-blank"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off"><span>......................</span></span>, where they avoid the danger presented by snow.</p>
+                            <p>One particular population's summer habitat is a national park, and their winter home is on the <span class="qnum">24</span> <span class="ielts-blank"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off"><span>......................</span></span>, where they avoid the danger presented by snow at that time of year.</p>
                             <p>However, their route between these two areas contains three <span class="qnum">25</span> <span class="ielts-blank"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off"><span>......................</span></span>.</p>
                             <p>One problem is the construction of new homes in a narrow <span class="qnum">26</span> <span class="ielts-blank"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off"><span>......................</span></span> of land on the pronghorns' route.</p>
                         </div>
@@ -191,6 +212,15 @@
                         <p class="ielts-instr">Questions 27-34</p>
                         <p>Reading Passage 3 has seven sections, <strong>A-G</strong>. Which section contains the following information?</p>
                         <p class="ielts-instr">You may use any letter more than once.</p>
+                        <div class="scientist-box headings-box paragraph-letter-bank">
+                            <p><strong>A</strong> Section A</p>
+                            <p><strong>B</strong> Section B</p>
+                            <p><strong>C</strong> Section C</p>
+                            <p><strong>D</strong> Section D</p>
+                            <p><strong>E</strong> Section E</p>
+                            <p><strong>F</strong> Section F</p>
+                            <p><strong>G</strong> Section G</p>
+                        </div>
                         <div class="sentence-questions">
                             <p><span class="qnum">27</span> a reference to books that assume a lack of mathematical knowledge <span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
                             <p><span class="qnum">28</span> the way in which this is not a typical book about mathematics <span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>

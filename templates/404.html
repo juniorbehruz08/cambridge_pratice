@@ -1,0 +1,30 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found | Cambridge Practice</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <main class="auth-page">
+        <section class="auth-card">
+            <a class="brand auth-brand" href="{% url 'cambridge_practice:home' %}">
+                <span class="brand-mark">CP</span>
+                <span>Cambridge Practice</span>
+            </a>
+
+            <div class="auth-heading">
+                <p class="eyebrow">404</p>
+                <h1>Page not found</h1>
+                <p>The page you opened does not exist or is not available.</p>
+            </div>
+
+            <a class="button primary full-button" href="{% url 'cambridge_practice:home' %}">
+                Back to main page
+            </a>
+        </section>
+    </main>
+</body>
+</html>

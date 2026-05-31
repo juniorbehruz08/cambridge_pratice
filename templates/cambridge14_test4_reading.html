@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 14 Test 4 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 14 - Test 4 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -42,7 +42,7 @@
         data-status="{{ attempt.status }}"
         data-preview="{% if is_preview %}true{% else %}false{% endif %}"
         data-existing-score="{% if result %}{{ result.score }}{% endif %}"
-        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+        data-existing-band="{% if result %}{{ result.band_score|default_if_none:'' }}{% endif %}"
     >
         <form method="post" class="practice-form reading-practice-form" id="practiceForm">
             {% csrf_token %}
@@ -135,7 +135,7 @@
                             <p class="ielts-blue-title black">Brains:</p>
                             <ul>
                                 <li>comparison between age and the <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> of dying cells in the brains of ants</li>
-                                <li>condition of synaptic complexes, areas in which <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> meet, in the brain's "mushroom bodies"</li>
+                                <li>condition of synaptic complexes (areas in which <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> meet) in the brain's "mushroom bodies"</li>
                                 <li>level of two <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> in the brain associated with ageing</li>
                             </ul>
                         </div>
@@ -156,6 +156,14 @@
                         <h2>Reading Passage 2</h2>
                         <p class="ielts-instr">Questions 14-17</p>
                         <p>Reading Passage 2 has six paragraphs, <strong>A-F</strong>. Which paragraph contains the following information?</p>
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong><span>Paragraph A</span></p>
+                            <p><strong>B</strong><span>Paragraph B</span></p>
+                            <p><strong>C</strong><span>Paragraph C</span></p>
+                            <p><strong>D</strong><span>Paragraph D</span></p>
+                            <p><strong>E</strong><span>Paragraph E</span></p>
+                            <p><strong>F</strong><span>Paragraph F</span></p>
+                        </div>
                         <div class="reading-choice-list">
                             {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> a reference to how quickly animal species can die out</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
                             {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> reasons why it is preferable to study animals in captivity rather than in the wild</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
@@ -224,8 +232,8 @@
                             <h3>Findings related to marine debris</h3>
                             <p>Studies of marine debris found the biggest threats were:</p>
                             <ul>
-                                <li>plastic, not metal or wood</li>
-                                <li>bits of debris that were <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>, harmful to animals</li>
+                                <li>plastic (not metal or wood)</li>
+                                <li>bits of debris that were <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> (harmful to animals)</li>
                             </ul>
                             <p>There was little research into <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>, e.g. from synthetic fibres.</p>
                             <p class="ielts-blue-title black">Drawbacks of the studies examined</p>
@@ -235,12 +243,12 @@
                                 <li>there was insufficient information on:
                                     <ul>
                                         <li>numbers of animals which could be affected</li>
-                                        <li>the impact of a reduction in numbers on the <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> species</li>
+                                        <li>the impact of a reduction in numbers on the <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> of that species</li>
                                         <li>the impact on the ecosystem</li>
                                     </ul>
                                 </li>
                             </ul>
-                            <p>Rochman says more information is needed on the possible impact of future <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>, e.g. involving oil.</p>
+                            <p>Rochman says more information is needed on the possible impact of future <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> (e.g. involving oil).</p>
                         </div>
 
                         <p class="ielts-instr">Question 40</p>

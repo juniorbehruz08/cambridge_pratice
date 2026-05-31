@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 15 Test 4 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 15 - Test 4 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -42,7 +42,7 @@
         data-status="{{ attempt.status }}"
         data-preview="{% if is_preview %}true{% else %}false{% endif %}"
         data-existing-score="{% if result %}{{ result.score }}{% endif %}"
-        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+        data-existing-band="{% if result %}{{ result.band_score|default_if_none:'' }}{% endif %}"
     >
         <form method="post" class="practice-form reading-practice-form" id="practiceForm">
             {% csrf_token %}
@@ -202,19 +202,30 @@
                     <article class="reading-question-card">
                         <h2>Reading Passage 3</h2>
                         <p class="ielts-instr">Questions 27-31</p>
-                        <p>Complete the summary using the list of words, <strong>A-J</strong>, below.</p>
+                        <p class="ielts-instr">Complete the summary using the list of words, <strong>A-J</strong>, below.</p>
+                        <p class="ielts-instr">Write the correct letter, <strong>A-J</strong>, in boxes 27-31 on your answer sheet.</p>
+
                         <div class="ielts-note-box">
-                            <h3>List of words</h3>
-                            <p><strong>A</strong> funding &nbsp; <strong>B</strong> trees &nbsp; <strong>C</strong> rare species</p>
-                            <p><strong>D</strong> moral standards &nbsp; <strong>E</strong> control &nbsp; <strong>F</strong> involvement</p>
-                            <p><strong>G</strong> flooding &nbsp; <strong>H</strong> overfishing &nbsp; <strong>I</strong> worker support &nbsp; <strong>J</strong> regulation</p>
+                            <h3>Big businesses</h3>
+                            <p>
+                                Many big businesses today are prepared to harm people and the environment in
+                                order to make money, and they appear to have no <span class="qnum">27</span>
+                                <span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off" maxlength="1"><span>............</span></span>.
+                                Lack of <span class="qnum">28</span>
+                                <span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                by governments and lack of public <span class="qnum">29</span>
+                                <span class="ielts-blank short"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                can lead to environmental problems such as <span class="qnum">30</span>
+                                <span class="ielts-blank short"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                or the destruction of <span class="qnum">31</span>
+                                <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off" maxlength="1"><span>............</span></span>.
+                            </p>
                         </div>
-                        <div class="reading-choice-list">
-                            {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Big businesses appear to have no ... when damaging the environment brings profit.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button></div></div>{% endwith %}
-                            {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Lack of ... by governments can lead to environmental problems.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button></div></div>{% endwith %}
-                            {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> Lack of public ... can lead to destructive environmental policies.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button></div></div>{% endwith %}
-                            {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> One environmental problem mentioned is ...</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button></div></div>{% endwith %}
-                            {% with selected=attempt.answers|answer_value:31 %}<div class="mc-question"><input type="hidden" name="answer_31" value="{{ selected }}"><p><span class="qnum">31</span> Another problem is the destruction of ...</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button></div></div>{% endwith %}
+
+                        <div class="ielts-note-box">
+                            <p><strong>A</strong> funding &nbsp;&nbsp;&nbsp;&nbsp; <strong>B</strong> trees &nbsp;&nbsp;&nbsp;&nbsp; <strong>C</strong> rare species</p>
+                            <p><strong>D</strong> moral standards &nbsp;&nbsp;&nbsp;&nbsp; <strong>E</strong> control &nbsp;&nbsp;&nbsp;&nbsp; <strong>F</strong> involvement</p>
+                            <p><strong>G</strong> flooding &nbsp;&nbsp;&nbsp;&nbsp; <strong>H</strong> overfishing &nbsp;&nbsp;&nbsp;&nbsp; <strong>I</strong> worker support &nbsp;&nbsp;&nbsp;&nbsp; <strong>J</strong> regulation</p>
                         </div>
 
                         <p class="ielts-instr">Questions 32-34</p>

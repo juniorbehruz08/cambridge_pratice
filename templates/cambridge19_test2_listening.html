@@ -6,7 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 19 Test 2 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .guitar-form-box {
+            padding: 16px 22px;
+        }
+
+        .guitar-form-box h3 {
+            text-align: center;
+            margin: 0 0 12px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .guitar-form-row {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            align-items: baseline;
+            gap: 14px;
+            margin: 8px 0;
+            line-height: 1.35;
+        }
+
+        .guitar-form-row .form-label {
+            font-weight: 600;
+        }
+
+        .guitar-form-row .form-value {
+            display: inline-flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .guitar-form-row.no-label .form-value {
+            grid-column: 2;
+        }
+
+        .guitar-form-box .ielts-blank {
+            min-width: 150px;
+        }
+
+        .guitar-form-box .ielts-blank.short {
+            min-width: 105px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -79,15 +125,79 @@
                     <p class="ielts-instr">Questions 1-6</p>
                     <p class="ielts-instr">Complete the form below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+
+                    <div class="ielts-note-box guitar-form-box">
                         <h3>Guitar Group</h3>
-                        <p><strong>Coordinator:</strong> Gary <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><strong>Level:</strong> <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><strong>Place:</strong> the <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> Street</p>
-                        <p>First floor, Room T347</p>
-                        <p><strong>Time:</strong> Thursday morning at <span class="qnum">5</span> <span class="ielts-blank short"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>............</span></span></p>
-                        <p><strong>Recommended website:</strong> "The perfect <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span>"</p>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Coordinator:</span>
+                            <span class="form-value">
+                                Gary <span class="qnum">1</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Level:</span>
+                            <span class="form-value">
+                                <span class="qnum">2</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Place:</span>
+                            <span class="form-value">
+                                the <span class="qnum">3</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row no-label">
+                            <span class="form-value">
+                                <span class="qnum">4</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Street
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row no-label">
+                            <span class="form-value">First floor, Room T347</span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Time:</span>
+                            <span class="form-value">
+                                Thursday morning at <span class="qnum">5</span>
+                                <span class="ielts-blank short">
+                                    <input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off">
+                                    <span>............</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Recommended website:</span>
+                            <span class="form-value">
+                                "The perfect <span class="qnum">6</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>"
+                            </span>
+                        </div>
                     </div>
 
                     <p class="ielts-instr">Questions 7-10</p>

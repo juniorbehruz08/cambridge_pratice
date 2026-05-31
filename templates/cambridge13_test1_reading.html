@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 13 Test 1 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}?v=drag-layout-20260512">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 13 - Test 1 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -119,11 +119,38 @@
                         <table class="ielts-table-box">
                             <thead><tr><th>Section of website</th><th>Comments</th></tr></thead>
                             <tbody>
-                                <tr><td>Database of tourism services</td><td>easy for tourism-related businesses to get on the list; allowed businesses to <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> information regularly; provided a country-wide evaluation of businesses, including their impact on the <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                                <tr><td>Special features on local topics</td><td>e.g. an interview with a former sports <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span>, and an interactive tour of various locations used in <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                                <tr><td>Information on driving routes</td><td>varied depending on the <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                                <tr><td>Travel Planner</td><td>included a map showing selected places, details of public transport and local <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></td></tr>
-                                <tr><td>Your Words</td><td>travellers could send a link to their <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></td></tr>
+                                <tr>
+                                    <td>Database of tourism services</td>
+                                    <td><ul>
+                                        <li>easy for tourism-related businesses to get on the list</li>
+                                        <li>allowed businesses to <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> information regularly</li>
+                                        <li>provided a country-wide evaluation of businesses, including their impact on the <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                                    </ul></td>
+                                </tr>
+                                <tr>
+                                    <td>Special features on local topics</td>
+                                    <td><ul>
+                                        <li>e.g. an interview with a former sports <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span>, and an interactive tour of various locations used in <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span></li>
+                                    </ul></td>
+                                </tr>
+                                <tr>
+                                    <td>Information on driving routes</td>
+                                    <td><ul>
+                                        <li>varied depending on the <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
+                                    </ul></td>
+                                </tr>
+                                <tr>
+                                    <td>Travel Planner</td>
+                                    <td><ul>
+                                        <li>included a map showing selected places, details of public transport and local <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
+                                    </ul></td>
+                                </tr>
+                                <tr>
+                                    <td>'Your Words'</td>
+                                    <td><ul>
+                                        <li>travellers could send a link to their <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></li>
+                                    </ul></td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -144,7 +171,7 @@
                         <h2>Reading Passage 2</h2>
                         <p class="ielts-instr">Questions 14-19</p>
                         <p>Reading Passage 2 has six paragraphs, <strong>A-F</strong>. Choose the correct heading for each paragraph from the list of headings below.</p>
-                        <div class="scientist-box headings-box">
+                        <div class="scientist-box headings-box" style="width:100%">
                             <h3>List of Headings</h3>
                             <p><strong>i</strong> The productive outcomes that may result from boredom</p>
                             <p><strong>ii</strong> What teachers can do to prevent boredom</p>
@@ -166,7 +193,7 @@
 
                         <p class="ielts-instr">Questions 20-23</p>
                         <p>Look at the following people and the list of ideas below. Match each person with the correct idea, <strong>A-E</strong>.</p>
-                        <div class="scientist-box headings-box">
+                        <div class="scientist-box headings-box" style="width:100%">
                             <h3>List of Ideas</h3>
                             <p><strong>A</strong> The way we live today may encourage boredom.</p>
                             <p><strong>B</strong> One sort of boredom is worse than all the others.</p>
@@ -203,7 +230,7 @@
 
                         <p class="ielts-instr">Questions 32-37</p>
                         <p>Complete each sentence with the correct ending, <strong>A-G</strong>, below.</p>
-                        <div class="scientist-box headings-box">
+                        <div class="scientist-box headings-box" style="width:100%">
                             <p><strong>A</strong> generating work that was virtually indistinguishable from that of humans.</p>
                             <p><strong>B</strong> knowing whether it was the work of humans or software.</p>
                             <p><strong>C</strong> producing work entirely dependent on the imagination of its creator.</p>

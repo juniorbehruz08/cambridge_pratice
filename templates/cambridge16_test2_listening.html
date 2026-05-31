@@ -6,7 +6,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 16 Test 2 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .assignment-flowchart {
+            width: 430px;
+            margin: 8px auto 0;
+            text-align: center;
+            color: #333;
+        }
+
+        .assignment-flowchart h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .assignment-flowchart .flow-box {
+            width: 392px;
+            box-sizing: border-box;
+            border: 1px solid #666;
+            background: #fff;
+            margin: 0 auto;
+            padding: 7px 12px;
+            font-size: 13px;
+            line-height: 1.24;
+            text-align: center;
+        }
+
+        .assignment-flowchart .flow-box.research {
+            min-height: 69px;
+            padding-top: 9px;
+        }
+
+        .assignment-flowchart .flow-box.sample {
+            min-height: 58px;
+            padding-top: 9px;
+        }
+
+        .assignment-flowchart .flow-box.method {
+            min-height: 54px;
+            padding-top: 9px;
+        }
+
+        .assignment-flowchart .flow-box.procedure {
+            min-height: 57px;
+            padding-top: 9px;
+        }
+
+        .assignment-flowchart .flow-box.ethics {
+            min-height: 76px;
+            padding-top: 9px;
+            text-align: left;
+            padding-left: 18px;
+        }
+
+        .assignment-flowchart .flow-box.analyse {
+            min-height: 60px;
+            padding-top: 9px;
+        }
+
+        .assignment-flowchart .flow-box.final {
+            min-height: 38px;
+            padding-top: 9px;
+        }
+
+        .assignment-flowchart .flow-heading {
+            font-weight: 400;
+            margin: 0 0 5px;
+        }
+
+        .assignment-flowchart .flow-line {
+            margin: 1px 0;
+        }
+
+        .assignment-flowchart .flow-arrow {
+            height: 20px;
+            line-height: 20px;
+            font-size: 22px;
+            color: #444;
+            margin: 6px auto;
+            position: relative;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .assignment-flowchart .ielts-blank {
+            min-width: 108px;
+        }
+
+        .assignment-flowchart .ielts-blank.short {
+            min-width: 92px;
+        }
+
+        .assignment-flowchart .ielts-blank.medium {
+            min-width: 105px;
+        }
+
+        .dance-box {
+            padding: 8px 12px 10px;
+            font-size: 14px;
+            line-height: 1.15;
+        }
+
+        .dance-box h3 {
+            text-align: center;
+            margin: 0 0 8px;
+            font-size: 18px;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #444;
+        }
+
+        .dance-section {
+            font-weight: 700;
+            margin: 10px 0 5px;
+        }
+
+        .dance-row {
+            display: grid;
+            grid-template-columns: 12px 1fr;
+            column-gap: 10px;
+            align-items: baseline;
+            margin: 4px 0;
+        }
+
+        .dance-row.sub {
+            margin-left: 28px;
+        }
+
+        .dance-marker {
+            text-align: center;
+        }
+
+        .dance-text {
+            min-width: 0;
+        }
+
+        .dance-box .ielts-blank {
+            min-width: 105px;
+        }
+
+        .dance-box .ielts-blank.short {
+            min-width: 88px;
+        }
+
+        .dance-box .ielts-blank.medium {
+            min-width: 100px;
+        }
+
+        .dance-box .ielts-blank.long {
+            min-width: 122px;
+        }
+    </style>
+
 </head>
 <body>
     <header class="site-header practice-header">
@@ -170,7 +325,7 @@
                     <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
                     <p class="ielts-instr">Questions 21-24</p>
                     <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
-                    <h3 class="ielts-centered-title">Assignment on sleep and dreams</h3>
+                    <h3 class="ielts-centered-title" style="text-align:center; color: #005eb8">Assignment on sleep and dreams</h3>
                     <div class="reading-choice-list">
                         {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> Luke read that one reason why we often forget dreams is that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>our memories cannot cope with too much information.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>we might otherwise be confused about what is real.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>we do not think they are important.</span></button></div></div>{% endwith %}
                         {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> What do Luke and Susie agree about dreams predicting the future?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>It may just be due to chance.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>It only happens with certain types of event.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>It happens more often than some people think.</span></button></div></div>{% endwith %}
@@ -181,22 +336,56 @@
                     <p class="ielts-instr">Questions 25-30</p>
                     <p class="ielts-instr">Complete the flow chart below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="assignment-flowchart">
                         <h3>Assignment plan</h3>
-                        <p><strong>Decide on research question:</strong> Is there a relationship between hours of sleep and number of dreams?</p>
-                        <p><strong>Decide on sample:</strong> Twelve students from the <span class="qnum">25</span> <span class="ielts-blank"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off"><span>......................</span></span> department</p>
-                        <p><strong>Decide on methodology:</strong> Self-reporting</p>
-                        <p><strong>Decide on procedure:</strong></p>
-                        <ul>
-                            <li>Answers on <span class="qnum">26</span> <span class="ielts-blank"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Check ethical guidelines for working with <span class="qnum">27</span> <span class="ielts-blank"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Ensure that risk is assessed and <span class="qnum">28</span> <span class="ielts-blank"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off"><span>......................</span></span> is kept to a minimum</li>
-                        </ul>
-                        <p><strong>Analyse the results:</strong></p>
-                        <ul>
-                            <li>Calculate the correlation and make a <span class="qnum">29</span> <span class="ielts-blank"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off"><span>......................</span></span>.</li>
-                            <li><span class="qnum">30</span> <span class="ielts-blank"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off"><span>......................</span></span> the research.</li>
-                        </ul>
+
+                        <div class="flow-box research">
+                            <div class="flow-heading">Decide on research question:</div>
+                            <div class="flow-line">Is there a relationship between hours of sleep and number of</div>
+                            <div class="flow-line">dreams?</div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-box sample">
+                            <div class="flow-heading">Decide on sample:</div>
+                            <div class="flow-line">Twelve students from the <span class="qnum">25</span> <span class="ielts-blank medium"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off"><span>......................</span></span> department</div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-box method">
+                            <div class="flow-heading">Decide on methodology:</div>
+                            <div class="flow-line">Self-reporting</div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-box procedure">
+                            <div class="flow-heading">Decide on procedure:</div>
+                            <div class="flow-line">Answers on <span class="qnum">26</span> <span class="ielts-blank medium"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off"><span>......................</span></span></div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-box ethics">
+                            <div class="flow-line">Check ethical guidelines for working with <span class="qnum">27</span> <span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off"><span>............</span></span></div>
+                            <div class="flow-line">Ensure that risk is assessed and <span class="qnum">28</span> <span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off"><span>............</span></span> is kept</div>
+                            <div class="flow-line" style="text-align:center;">to a minimum</div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-box analyse">
+                            <div class="flow-heading">Analyse the results</div>
+                            <div class="flow-line">Calculate the correlation and make a <span class="qnum">29</span> <span class="ielts-blank short"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off"><span>............</span></span></div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-box final">
+                            <div class="flow-line"><span class="qnum">30</span> <span class="ielts-blank medium"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off"><span>......................</span></span> the research</div>
+                        </div>
                     </div>
                 </section>
             </article>
@@ -211,31 +400,74 @@
                     <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="ielts-note-box dance-box">
                         <h3>Health benefits of dance</h3>
-                        <p class="ielts-blue-title black">Recent findings</p>
-                        <ul>
-                            <li>All forms of dance produce various hormones associated with feelings of happiness.</li>
-                            <li>Dancing with others has a more positive impact than dancing alone.</li>
-                            <li>An experiment on university students suggested that dance increases <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span>.</li>
-                            <li>For those with mental illness, dance could be used as a form of <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>.</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Benefits of dance for older people</p>
-                        <ul>
-                            <li>accessible for people with low levels of <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>reduces the risk of heart disease</li>
-                            <li>better <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> reduces the risk of accidents</li>
-                            <li>improves <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> function by making it work faster</li>
-                            <li>improves participants' general well-being</li>
-                            <li>gives people more <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> to take exercise</li>
-                            <li>can lessen the feeling of <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span>, very common in older people</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Benefits of Zumba</p>
-                        <ul>
-                            <li>A study at The University of Wisconsin showed that doing Zumba for 40 minutes uses up as many <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> as other quite intense forms of exercise.</li>
-                            <li>The American Journal of Health Behavior study showed that women suffering from <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> benefited from doing Zumba.</li>
-                            <li>Zumba became a <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> for the participants.</li>
-                        </ul>
+
+                        <div class="dance-section">Recent findings:</div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">All forms of dance produce various hormones associated with feelings of<br>happiness.</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">Dancing with others has a more positive impact than dancing alone.</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">An experiment on university students suggested that dance<br>increases <span class="qnum">31</span> <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>............</span></span>.</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">For those with mental illness, dance could be used as a form of<br><span class="qnum">32</span> <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>............</span></span>.</span>
+                        </div>
+
+                        <div class="dance-section">Benefits of dance for older people:</div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">accessible for people with low levels of <span class="qnum">33</span> <span class="ielts-blank short"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>............</span></span></span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">reduces the risk of heart disease</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">better <span class="qnum">34</span> <span class="ielts-blank short"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>............</span></span> reduces the risk of accidents</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">improves <span class="qnum">35</span> <span class="ielts-blank short"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>............</span></span> function by making it work faster</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">improves participants' general well-being</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">gives people more <span class="qnum">36</span> <span class="ielts-blank short"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>............</span></span> to take exercise</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">can lessen the feeling of <span class="qnum">37</span> <span class="ielts-blank short"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>............</span></span>, very common in older people</span>
+                        </div>
+
+                        <div class="dance-section">Benefits of Zumba:</div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">A study at The University of Wisconsin showed that doing Zumba for<br>40 minutes uses up as many <span class="qnum">38</span> <span class="ielts-blank short"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>............</span></span> as other quite intense forms<br>of exercise.</span>
+                        </div>
+                        <div class="dance-row">
+                            <span class="dance-marker">•</span>
+                            <span class="dance-text">The <em>American Journal of Health Behavior</em> study showed that:</span>
+                        </div>
+                        <div class="dance-row sub">
+                            <span class="dance-marker">–</span>
+                            <span class="dance-text">women suffering from <span class="qnum">39</span> <span class="ielts-blank short"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>............</span></span> benefited from doing Zumba.</span>
+                        </div>
+                        <div class="dance-row sub">
+                            <span class="dance-marker">–</span>
+                            <span class="dance-text">Zumba became a <span class="qnum">40</span> <span class="ielts-blank short"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>............</span></span> for the participants.</span>
+                        </div>
                     </div>
                 </section>
             </article>

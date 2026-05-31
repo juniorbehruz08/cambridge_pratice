@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 12 Test 3 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}?v=drag-layout-20260512">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -197,7 +197,7 @@
                     <p class="ielts-instr">Questions 21-26</p>
                     <p>Complete the flow-chart below.</p>
                     <p class="ielts-instr">Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 21-26.</p>
-                    <div class="ielts-choice-box">
+                    <div class="ielts-choice-box four-col">
                         <p><strong>A</strong><span>patterns</span></p>
                         <p><strong>B</strong><span>names</span></p>
                         <p><strong>C</strong><span>sources</span></p>
@@ -207,21 +207,27 @@
                         <p><strong>G</strong><span>headings</span></p>
                         <p><strong>H</strong><span>officials</span></p>
                     </div>
-                    <div class="ielts-note-box compact-box">
-                        <h3>STAGES IN DOING A TOURISM CASE STUDY</h3>
-                        <p class="ielts-blue-title">RESEARCH</p>
-                        <p>Locate and read relevant articles, noting key information and also <span class="qnum">21</span> <span class="ielts-blank short"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
-                        <p>Identify a problem or need.</p>
-                        <p>Select interviewees - these may be site <span class="qnum">22</span> <span class="ielts-blank short"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off" maxlength="1"><span>............</span></span>, city <span class="qnum">23</span> <span class="ielts-blank short"><input name="answer_23" value="{{ attempt.answers|answer_value:23 }}" autocomplete="off" maxlength="1"><span>............</span></span>, visitors or tourists.</p>
-                        <p>Prepare and carry out interviews. If possible, collect statistics. Check whether <span class="qnum">24</span> <span class="ielts-blank short"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off" maxlength="1"><span>............</span></span> of interviewees can be used.</p>
-
-                        <p class="ielts-blue-title">ANALYSIS</p>
-                        <p>Select relevant information and try to identify <span class="qnum">25</span> <span class="ielts-blank short"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
-                        <p>Decide on the best form of visuals.</p>
-
-                        <p class="ielts-blue-title">WRITING THE CASE STUDY</p>
-                        <p>Give some background before writing the main sections.</p>
-                        <p>Do <strong>NOT</strong> end with <span class="qnum">26</span> <span class="ielts-blank short"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                    <div class="ielts-note-box flow-chart-outer">
+                        <p class="flow-chart-title">STAGES IN DOING A TOURISM CASE STUDY</p>
+                        <div class="flow-chart-section">
+                            <p class="flow-chart-header">RESEARCH</p>
+                            <p>Locate and read relevant articles, noting key information and also <span class="qnum">21</span> <span class="ielts-blank short"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                            <p>Identify a problem or need.</p>
+                            <p>Select interviewees – these may be site <span class="qnum">22</span> <span class="ielts-blank short"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off" maxlength="1"><span>............</span></span>, city <span class="qnum">23</span> <span class="ielts-blank short"><input name="answer_23" value="{{ attempt.answers|answer_value:23 }}" autocomplete="off" maxlength="1"><span>............</span></span>, visitors or tourists.</p>
+                            <p>Prepare and carry out interviews. If possible, collect statistics. Check whether <span class="qnum">24</span> <span class="ielts-blank short"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off" maxlength="1"><span>............</span></span> of interviewees can be used.</p>
+                        </div>
+                        <p class="ielts-flow-arrow">▼</p>
+                        <div class="flow-chart-section">
+                            <p class="flow-chart-header">ANALYSIS</p>
+                            <p>Select relevant information and try to identify <span class="qnum">25</span> <span class="ielts-blank short"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                            <p>Decide on the best form of visuals.</p>
+                        </div>
+                        <p class="ielts-flow-arrow">▼</p>
+                        <div class="flow-chart-section">
+                            <p class="flow-chart-header">WRITING THE CASE STUDY</p>
+                            <p>Give some background before writing the main sections.</p>
+                            <p>Do <strong>NOT</strong> end with <span class="qnum">26</span> <span class="ielts-blank short"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                        </div>
                     </div>
 
                     <p class="ielts-instr">Questions 27-30</p>
@@ -260,7 +266,7 @@
                         <p>Claire Varian-Ramos is investigating:</p>
                         <ul>
                             <li>the effects on birds' <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>, or mental processes, e.g. memory</li>
-                            <li>the effects on bird song, usually learned from a bird's <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>the effects on bird song (usually learned from a bird's <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span>)</li>
                         </ul>
 
                         <p class="ielts-blue-title black">Findings</p>

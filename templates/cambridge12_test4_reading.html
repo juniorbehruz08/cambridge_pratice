@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 12 Test 4 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}?v=drag-layout-20260512">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 12 - Test 4 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -181,7 +181,7 @@
                         <h2>Reading Passage 3</h2>
                         <p class="ielts-instr">Questions 27-33</p>
                         <p>Reading Passage 3 has seven paragraphs, <strong>A-G</strong>. Choose the correct heading for each paragraph from the list of headings below.</p>
-                        <div class="scientist-box headings-box">
+                        <div class="scientist-box headings-box" style="width:100%">
                             <h3>List of Headings</h3>
                             <p><strong>i</strong> Disputes over financial arrangements regarding senior managers</p>
                             <p><strong>ii</strong> The impact on companies of being subjected to close examination</p>

@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 11 Test 2 Listening | Cambridge Practice</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=theatre-plan-answers-left">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -169,11 +169,11 @@
                     <p class="ielts-instr">Label the plan below.</p>
                     <p class="ielts-instr">Write the correct letter, <strong>A-G</strong>, next to Questions 17-20.</p>
                     <img class="theatre-plan-image" src="{% static 'img/cambridge11/test2/listening/theatre-plan.png' %}" alt="Ground floor plan of theatre with labels A to G">
-                    <div class="map-answers">
-                        <label><strong>17</strong> box office <span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>18</strong> theatre manager's office <span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>19</strong> lighting box <span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>20</strong> artistic director's office <span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    <div class="theatre-plan-answers">
+                        <label><strong>17</strong><span class="map-answer-text">box office</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>18</strong><span class="map-answer-text">theatre manager's office</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>19</strong><span class="map-answer-text">lighting box</span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>20</strong><span class="map-answer-text">artistic director's office</span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
                     </div>
                 </section>
             </article>

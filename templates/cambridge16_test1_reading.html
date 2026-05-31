@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 16 Test 1 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 16 - Test 1 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -212,12 +212,10 @@
                         </div>
                         <div class="ielts-note-box">
                             <h3>The 'algorithmication' of jobs</h3>
-                            <div class="reading-choice-list">
-                                {% with selected=attempt.answers|answer_value:31 %}<div class="mc-question"><input type="hidden" name="answer_31" value="{{ selected }}"><p>Stella Pachidi of Cambridge Judge Business School has been focusing on the 'algorithmication' of jobs which rely not on production but on <span class="qnum">31</span> ...............</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
-                                {% with selected=attempt.answers|answer_value:32 %}<div class="mc-question"><input type="hidden" name="answer_32" value="{{ selected }}"><p>While monitoring a telecommunications company, Pachidi observed a growing <span class="qnum">32</span> ............... on the recommendations made by AI, as workers begin to learn through the 'algorithm's eyes'.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
-                                {% with selected=attempt.answers|answer_value:33 %}<div class="mc-question"><input type="hidden" name="answer_33" value="{{ selected }}"><p>Meanwhile, staff are deterred from experimenting and using their own <span class="qnum">33</span> ..............., and are therefore prevented from achieving innovation.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
-                                {% with selected=attempt.answers|answer_value:34 %}<div class="mc-question"><input type="hidden" name="answer_34" value="{{ selected }}"><p>Researchers are trying to make AI's decision-making process easier to comprehend, and to increase users' <span class="qnum">34</span> ............... with regard to the technology.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
-                            </div>
+                            <p>Stella Pachidi of Cambridge Judge Business School has been focusing on the 'algorithmication' of jobs which rely not on production but on <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></p>
+                            <p>While monitoring a telecommunications company, Pachidi observed a growing <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> on the recommendations made by AI, as workers begin to learn through the 'algorithm's eyes'.</p>
+                            <p>Meanwhile, staff are deterred from experimenting and using their own <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span>, and are therefore prevented from achieving innovation.</p>
+                            <p>Researchers are trying to make AI's decision-making process easier to comprehend, and to increase users' <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> with regard to the technology.</p>
                         </div>
 
                         <p class="ielts-instr">Questions 35-40</p>

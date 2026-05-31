@@ -6,7 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 14 Test 3 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .flanders-form {
+            width: 620px;
+            max-width: 100%;
+            margin: 14px auto 0;
+            border: 1px solid #111;
+            box-sizing: border-box;
+            font-family: inherit;
+            color: inherit;
+            font-size: 14px;
+            line-height: 1.32;
+        }
+        .flanders-form * { box-sizing: border-box; }
+        .flanders-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 10px 12px 9px;
+            border-bottom: 1px solid #111;
+        }
+        .flanders-example {
+            display: grid;
+            grid-template-columns: 235px 1fr;
+            padding: 10px 18px 9px;
+            border-bottom: 1px solid #111;
+            align-items: end;
+        }
+        .flanders-example-left .example-word {
+            display: block;
+            font-style: italic;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .flanders-example-right .ielts-example {
+            display: inline-block;
+            min-width: 66px;
+            text-align: center;
+            margin-left: 18px;
+            border-bottom: 1px solid #111;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .flanders-body { padding: 12px 20px 14px; }
+        .flanders-heading {
+            font-weight: 700;
+            margin: 11px 0 6px;
+        }
+        .flanders-heading:first-child { margin-top: 0; }
+        .flanders-line {
+            display: grid;
+            grid-template-columns: 20px 1fr;
+            column-gap: 10px;
+            align-items: baseline;
+            margin: 6px 0;
+        }
+        .flanders-bullet { text-align: center; }
+        .flanders-text { min-width: 0; }
+        .flanders-indent {
+            display: block;
+            padding-left: 32px;
+            margin-top: 6px;
+        }
+        .flanders-form .ielts-blank { vertical-align: baseline; }
+        .flanders-form .ielts-blank input { font-family: inherit; }
+    </style>
+
 </head>
 <body>
     <header class="site-header practice-header">
@@ -42,7 +110,7 @@
         data-status="{{ attempt.status }}"
         data-preview="{% if is_preview %}true{% else %}false{% endif %}"
         data-existing-score="{% if result %}{{ result.score }}{% endif %}"
-        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+        data-existing-band="{% if result %}{{ result.band_score|default_if_none:'' }}{% endif %}"
     >
         <section class="audio-panel ielts-audio-panel">
             <div>
@@ -79,40 +147,72 @@
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
 
-                    <div class="ielts-note-box">
-                        <h3>Flanders Conference Hotel</h3>
-                        <p><strong>Example</strong> Customer Services Manager: <span class="ielts-example">Angela</span></p>
+                    <div class="flanders-form">
+                        <div class="flanders-title">Flanders Conference Hotel</div>
 
-                        <p class="ielts-blue-title black">Date available</p>
-                        <ul>
-                            <li>weekend beginning February 4th</li>
-                        </ul>
+                        <div class="flanders-example">
+                            <div class="flanders-example-left">
+                                <span class="example-word">Example</span>
+                                <span>Customer Services Manager:</span>
+                            </div>
+                            <div class="flanders-example-right"><span class="ielts-example">Angela</span></div>
+                        </div>
 
-                        <p class="ielts-blue-title black">Conference facilities</p>
-                        <ul>
-                            <li>the <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> room for talks</li>
-                            <li>projector and <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> available</li>
-                            <li>area for coffee and an <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>free <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> throughout</li>
-                            <li>a standard buffet lunch costs <span class="qnum">5</span> $ <span class="ielts-blank short"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>............</span></span> per head</li>
-                        </ul>
+                        <div class="flanders-body">
+                            <div class="flanders-heading">Date available</div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">weekend beginning February 4th</span>
+                            </div>
 
-                        <p class="ielts-blue-title black">Accommodation</p>
-                        <ul>
-                            <li>Rooms will cost <span class="qnum">6</span> $ <span class="ielts-blank short"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>............</span></span> including breakfast.</li>
-                        </ul>
+                            <div class="flanders-heading">Conference facilities</div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">the <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> room for talks</span>
+                            </div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet"></span>
+                                <span class="flanders-text">(projector and <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> available)</span>
+                            </div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">area for coffee and an <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></span>
+                            </div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">free <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> throughout</span>
+                            </div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">a standard buffet lunch costs $ <span class="qnum">5</span> <span class="ielts-blank short"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>............</span></span> per head</span>
+                            </div>
 
-                        <p class="ielts-blue-title black">Other facilities</p>
-                        <ul>
-                            <li>The hotel also has a spa and rooftop <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>There's a free shuttle service to the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></li>
-                        </ul>
+                            <div class="flanders-heading">Accommodation</div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">Rooms will cost $ <span class="qnum">6</span> <span class="ielts-blank short"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>............</span></span> including breakfast.</span>
+                            </div>
 
-                        <p class="ielts-blue-title black">Location</p>
-                        <ul>
-                            <li>Wilby Street (quite near the <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span>)</li>
-                            <li>near to restaurants and many <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></li>
-                        </ul>
+                            <div class="flanders-heading">Other facilities</div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">The hotel also has a spa and rooftop <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></span>
+                            </div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">There's a free shuttle service to the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></span>
+                            </div>
+
+                            <div class="flanders-heading">Location</div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">Wilby Street (quite near the <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span>)</span>
+                            </div>
+                            <div class="flanders-line">
+                                <span class="flanders-bullet">•</span>
+                                <span class="flanders-text">near to restaurants and many <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></span>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </article>

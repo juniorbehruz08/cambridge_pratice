@@ -6,7 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 17 Test 2 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .village-events-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 18px;
+            font-size: 14px;
+            line-height: 1.2;
+            table-layout: fixed;
+        }
+
+        .village-events-table th,
+        .village-events-table td {
+            border: 1px solid #777;
+            padding: 4px 6px;
+            vertical-align: top;
+        }
+
+        .village-events-table thead th {
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .village-events-table .table-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .village-events-table .col-date {
+            width: 10%;
+        }
+
+        .village-events-table .col-event {
+            width: 30%;
+        }
+
+        .village-events-table .col-location {
+            width: 20%;
+        }
+
+        .village-events-table .col-help {
+            width: 40%;
+        }
+
+        .village-events-table .ielts-blank {
+            min-width: 130px;
+        }
+
+        .village-events-table .ielts-blank.short {
+            min-width: 105px;
+        }
+
+        .village-events-table .ielts-blank.long {
+            min-width: 150px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -102,12 +158,39 @@
                     <p class="ielts-instr">Questions 8-10</p>
                     <p class="ielts-instr">Complete the table below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
-                    <div class="ielts-note-box">
-                        <h3>Village social events</h3>
-                        <p><strong>19 Oct:</strong> <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span>, Village hall, help needed providing refreshments</p>
-                        <p><strong>18 Nov:</strong> dance, Village hall, help needed checking <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><strong>31 Dec:</strong> New Year's Eve party, Mountfort Hotel, help needed designing the <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></p>
-                    </div>
+                    <table class="village-events-table">
+                        <thead>
+                            <tr>
+                                <th colspan="4" class="table-title">Village social events</th>
+                            </tr>
+                            <tr>
+                                <th class="col-date">Date</th>
+                                <th class="col-event">Event</th>
+                                <th class="col-location">Location</th>
+                                <th class="col-help">Help needed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>19 Oct</td>
+                                <td><span class="qnum">8</span> <span class="ielts-blank long"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></td>
+                                <td>Village hall</td>
+                                <td>providing refreshments</td>
+                            </tr>
+                            <tr>
+                                <td>18 Nov</td>
+                                <td>dance</td>
+                                <td>Village hall</td>
+                                <td>checking <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></td>
+                            </tr>
+                            <tr>
+                                <td>31 Dec</td>
+                                <td>New Year's Eve party</td>
+                                <td>Mountfort Hotel</td>
+                                <td>designing the <span class="qnum">10</span> <span class="ielts-blank short"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>............</span></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </article>
 

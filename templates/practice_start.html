@@ -6,56 +6,865 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Start {{ section_title }} | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
-<body>
-    <header class="site-header">
-        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
-            <span class="brand-mark">CP</span>
-            <span>{{ book.title }} - {{ test.title }}</span>
-        </a>
-        <nav class="nav-links" aria-label="Main navigation">
-            {% if user.is_authenticated %}
-                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
-                <span class="user-pill">
-                    {{ user.username }}
-                    {% if has_pro_access %}<span>Pro</span>{% endif %}
-                </span>
-                <a href="{% url 'cambridge_practice:logout' %}">Sign out</a>
-            {% else %}
-                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
-                <a class="nav-button" href="{% url 'cambridge_practice:register' %}">Register</a>
-            {% endif %}
-        </nav>
-    </header>
 
-    <main class="auth-page">
-        <section class="start-warning-card">
-            <p class="eyebrow">{{ section_title }} section</p>
-            <h1>Before you start</h1>
-            <div class="warning-list">
-                <p>The timer starts when you press Start.</p>
-                <p>If you leave the page or close the browser before submitting, your final result will not be saved.</p>
-                <p>When time ends, the test will submit automatically.</p>
-                {% if section == 'listening' %}
-                    <p>After you press Start, the listening audio starts automatically.</p>
-                    <p>The audio player is hidden. You cannot pause it, stop it, move it forward, or move it backward.</p>
-                    <p>After the audio finishes, you will have 2 minutes to check your answers.</p>
+    <style>
+        :root {
+            --start-bg: #f6f8fc;
+            --start-card: #ffffff;
+            --start-text: #0f172a;
+            --start-muted: #64748b;
+            --start-line: #e2e8f0;
+            --start-blue: #2563eb;
+            --start-blue-dark: #1d4ed8;
+            --start-green: #16a34a;
+            --start-orange: #f97316;
+            --start-red: #ef4444;
+            --start-purple: #7c3aed;
+            --start-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+            --start-soft-shadow: 0 16px 38px rgba(15, 23, 42, 0.055);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--start-bg);
+        }
+
+        .start-page {
+            width: 100%;
+            min-height: calc(100vh - 76px);
+            padding: 44px 0 72px;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.14), transparent 31%),
+                radial-gradient(circle at 100% 4%, rgba(124, 58, 237, 0.12), transparent 30%),
+                linear-gradient(180deg, #f8fbff 0%, #eef4ff 48%, #ffffff 100%);
+            color: var(--start-text);
+        }
+
+        .start-container {
+            width: min(1060px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .start-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .start-warning-card {
+            position: relative;
+            overflow: hidden;
+            padding: 38px;
+            border-radius: 36px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: var(--start-shadow);
+        }
+
+        .start-warning-card::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 999px;
+            top: -130px;
+            right: -115px;
+            background: rgba(37, 99, 235, 0.10);
+        }
+
+        .start-warning-card::after {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border-radius: 999px;
+            left: -120px;
+            bottom: -130px;
+            background: rgba(124, 58, 237, 0.08);
+        }
+
+        .start-warning-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .start-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            margin: 0 0 16px;
+            padding: 8px 13px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #dbeafe;
+            font-size: 12px;
+            font-weight: 950;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .start-eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: {% if section == 'listening' %}#f97316{% else %}#22c55e{% endif %};
+            box-shadow: 0 0 0 4px {% if section == 'listening' %}rgba(249, 115, 22, 0.14){% else %}rgba(34, 197, 94, 0.14){% endif %};
+        }
+
+        .start-warning-card h1 {
+            margin: 0;
+            max-width: 720px;
+            color: #0f172a;
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 0.95;
+            letter-spacing: -0.065em;
+        }
+
+        .start-intro {
+            max-width: 760px;
+            margin: 18px 0 0;
+            color: #64748b;
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .warning-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .warning-list p {
+            position: relative;
+            margin: 0;
+            padding: 16px 16px 16px 52px;
+            border-radius: 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.62;
+            font-weight: 700;
+        }
+
+        .warning-list p::before {
+            content: "!";
+            position: absolute;
+            top: 15px;
+            left: 16px;
+            width: 24px;
+            height: 24px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: #fff7ed;
+            color: #c2410c;
+            border: 1px solid #fed7aa;
+            font-size: 13px;
+            font-weight: 950;
+        }
+
+        .warning-list p.safe-note::before {
+            content: "✓";
+            background: #ecfdf5;
+            color: #047857;
+            border-color: #bbf7d0;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .start-button {
+            min-height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 20px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 950;
+            text-decoration: none;
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                border-color 0.18s ease,
+                background 0.18s ease,
+                color 0.18s ease;
+        }
+
+        .start-button.primary {
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            box-shadow: 0 16px 32px rgba(37, 99, 235, 0.22);
+        }
+
+        .start-button.secondary {
+            color: #0f172a;
+            background: #ffffff;
+            border-color: #e2e8f0;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .start-button.secondary:hover {
+            color: #2563eb;
+            border-color: #bfdbfe;
+        }
+
+        .start-side-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 36px;
+            padding: 28px;
+            background: #0f172a;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 26px 75px rgba(15, 23, 42, 0.18);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .start-side-card::before {
+            content: "";
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            border-radius: 999px;
+            right: -130px;
+            top: -120px;
+            background: rgba(37, 99, 235, 0.34);
+        }
+
+        .start-side-card::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 999px;
+            left: -170px;
+            bottom: -160px;
+            background: rgba(124, 58, 237, 0.28);
+        }
+
+        .start-side-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-badge {
+            width: 82px;
+            height: 82px;
+            border-radius: 28px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+            font-size: 34px;
+            font-weight: 950;
+        }
+
+        .side-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            margin-top: 20px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: #dbeafe;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            font-size: 12px;
+            font-weight: 950;
+        }
+
+        .side-label::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: {% if is_preview %}#f97316{% else %}#22c55e{% endif %};
+        }
+
+        .start-side-card h2 {
+            margin: 30px 0 0;
+            color: #ffffff;
+            font-size: 30px;
+            line-height: 1.08;
+            letter-spacing: -0.045em;
+        }
+
+        .start-side-card p {
+            margin: 14px 0 0;
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .side-stats {
+            display: grid;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .side-stat {
+            padding: 15px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .side-stat strong {
+            display: block;
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1;
+            margin-bottom: 7px;
+        }
+
+        .side-stat span {
+            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        body .start-page {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            display: block !important;
+        }
+
+        body .start-container {
+            width: min(1060px, calc(100% - 40px)) !important;
+            max-width: 1060px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        body .start-warning-card,
+        body .start-side-card {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+        }
+
+        body .start-button {
+            text-decoration: none !important;
+        }
+
+        /* Listening compact layout: keeps almost everything visible without scrolling on laptop screens */
+        body .listening-start-page {
+            padding: 24px 0 40px !important;
+        }
+
+        body .listening-start-page .start-container {
+            width: min(1120px, calc(100% - 34px)) !important;
+            max-width: 1120px !important;
+        }
+
+        body .listening-start-page .start-layout {
+            grid-template-columns: minmax(0, 1fr) 300px !important;
+            gap: 18px !important;
+        }
+
+        body .listening-start-page .start-warning-card,
+        body .listening-start-page .start-side-card {
+            padding: 24px !important;
+            border-radius: 28px !important;
+        }
+
+        body .listening-start-page .start-eyebrow {
+            margin-bottom: 10px !important;
+            padding: 7px 11px !important;
+            font-size: 11px !important;
+        }
+
+        body .listening-start-page .start-warning-card h1 {
+            font-size: clamp(32px, 4vw, 48px) !important;
+            line-height: 0.96 !important;
+        }
+
+        body .listening-start-page .start-intro {
+            margin-top: 10px !important;
+            font-size: 14px !important;
+            line-height: 1.55 !important;
+        }
+
+        body .listening-start-page .warning-list {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 10px !important;
+            margin-top: 18px !important;
+        }
+
+        body .listening-start-page .warning-list p {
+            padding: 12px 12px 12px 42px !important;
+            border-radius: 15px !important;
+            font-size: 13px !important;
+            line-height: 1.42 !important;
+        }
+
+        body .listening-start-page .warning-list p::before {
+            top: 11px !important;
+            left: 12px !important;
+            width: 22px !important;
+            height: 22px !important;
+            font-size: 12px !important;
+        }
+
+        body .listening-start-page .hero-actions {
+            margin-top: 20px !important;
+        }
+
+        body .listening-start-page .start-button {
+            min-height: 44px !important;
+            padding: 11px 17px !important;
+        }
+
+        body .listening-start-page .section-badge {
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 22px !important;
+            font-size: 28px !important;
+        }
+
+        body .listening-start-page .side-label {
+            margin-top: 14px !important;
+            padding: 7px 10px !important;
+            font-size: 11px !important;
+        }
+
+        body .listening-start-page .start-side-card h2 {
+            margin-top: 18px !important;
+            font-size: 23px !important;
+        }
+
+        body .listening-start-page .start-side-card p {
+            margin-top: 10px !important;
+            font-size: 13px !important;
+            line-height: 1.55 !important;
+        }
+
+        body .listening-start-page .side-stats {
+            gap: 9px !important;
+            margin-top: 18px !important;
+        }
+
+        body .listening-start-page .side-stat {
+            padding: 12px !important;
+            border-radius: 15px !important;
+        }
+
+        body .listening-start-page .side-stat strong {
+            font-size: 16px !important;
+            margin-bottom: 5px !important;
+        }
+
+        body .listening-start-page .side-stat span {
+            font-size: 11px !important;
+        }
+
+        @media (max-width: 920px) {
+            .start-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .start-side-card {
+                min-height: auto;
+            }
+
+            body .listening-start-page .start-layout {
+                grid-template-columns: 1fr !important;
+            }
+
+            body .listening-start-page .warning-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .start-page {
+                padding: 26px 0 54px;
+            }
+
+            .start-container {
+                width: min(100% - 28px, 1060px) !important;
+            }
+
+            .start-warning-card,
+            .start-side-card {
+                border-radius: 26px;
+                padding: 24px;
+            }
+
+            .start-warning-card h1 {
+                font-size: 38px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .start-button {
+                width: 100%;
+            }
+
+            body .listening-start-page .start-container {
+                width: min(100% - 28px, 1120px) !important;
+            }
+
+            body .listening-start-page .warning-list {
+                grid-template-columns: 1fr !important;
+            }
+
+            body .listening-start-page .start-warning-card,
+            body .listening-start-page .start-side-card {
+                padding: 20px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header
+    class="site-header"
+    style="
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: 100%;
+        min-height: 72px;
+        padding: 14px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(226, 232, 240, 0.95);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    "
+>
+    <a
+        class="brand"
+        href="{% url 'cambridge_practice:home' %}"
+        style="
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            min-width: 0;
+            color: #0f172a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 950;
+            letter-spacing: -0.025em;
+            white-space: nowrap;
+        "
+    >
+        <span
+            class="brand-mark"
+            style="
+                width: 42px;
+                height: 42px;
+                min-width: 42px;
+                border-radius: 15px;
+                display: grid;
+                place-items: center;
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                color: #ffffff;
+                font-size: 15px;
+                font-weight: 950;
+                box-shadow: 0 12px 26px rgba(37, 99, 235, 0.22);
+            "
+        >
+            CP
+        </span>
+
+        <span
+            style="
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 220px;
+            "
+        >
+            Cambridge Practice
+        </span>
+    </a>
+
+    <nav
+        class="nav-links"
+        aria-label="Main navigation"
+        style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            min-width: 0;
+            flex-wrap: wrap;
+        "
+    >
+        <a
+            href="{% url 'cambridge_practice:book_detail' book.number %}"
+            style="
+                min-height: 38px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 9px 13px;
+                border-radius: 999px;
+                background: #eff6ff;
+                color: #1d4ed8;
+                border: 1px solid #dbeafe;
+                text-decoration: none;
+                font-size: 13px;
+                font-weight: 900;
+                max-width: 170px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            "
+        >
+            {{ book.title }}
+        </a>
+
+        {% if user.is_authenticated %}
+            <a
+                href="{% url 'cambridge_practice:past_results' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #ffffff;
+                    color: #334155;
+                    border: 1px solid #e2e8f0;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 900;
+                    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.035);
+                "
+            >
+                Past results
+            </a>
+
+            <span
+                class="user-pill"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 7px;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #f8fafc;
+                    color: #0f172a;
+                    border: 1px solid #e2e8f0;
+                    font-size: 13px;
+                    font-weight: 950;
+                    max-width: 170px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                "
+            >
+                {{ user.username }}
+
+                {% if has_pro_access %}
+                    <span
+                        style="
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 3px 7px;
+                            border-radius: 999px;
+                            background: #f5f3ff;
+                            color: #6d28d9;
+                            border: 1px solid #ddd6fe;
+                            font-size: 10px;
+                            font-weight: 950;
+                            text-transform: uppercase;
+                            letter-spacing: 0.04em;
+                        "
+                    >
+                        Pro
+                    </span>
                 {% endif %}
-                {% if is_preview %}
-                    <p>This is free preview mode. Your score is shown only on this page and is not saved to your account or the database.</p>
-                {% else %}
-                    <p>Your result is saved only after you submit the section.</p>
-                {% endif %}
+            </span>
+
+            <a
+                href="{% url 'cambridge_practice:logout' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #fff7ed;
+                    color: #c2410c;
+                    border: 1px solid #fed7aa;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 900;
+                "
+            >
+                Sign out
+            </a>
+        {% else %}
+            <a
+                href="{% url 'cambridge_practice:login' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #ffffff;
+                    color: #334155;
+                    border: 1px solid #e2e8f0;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 900;
+                    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.035);
+                "
+            >
+                Sign in
+            </a>
+
+            <a
+                class="nav-button"
+                href="{% url 'cambridge_practice:register' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 15px;
+                    border-radius: 999px;
+                    background: linear-gradient(135deg, #2563eb, #4f46e5);
+                    color: #ffffff;
+                    border: 1px solid transparent;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 950;
+                    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+                "
+            >
+                Register
+            </a>
+        {% endif %}
+    </nav>
+</header>
+
+    <main class="start-page {% if section == 'listening' %}listening-start-page{% endif %}">
+        <div class="start-container">
+            <div class="start-layout">
+                <section class="start-warning-card">
+                    <p class="start-eyebrow">{{ section_title }} section</p>
+
+                    <h1>Before you start</h1>
+
+                    <p class="start-intro">
+                        Please read these rules before starting. The test begins immediately after you press the start button.
+                    </p>
+
+                    <div class="warning-list">
+                        <p>The timer starts when you press Start.</p>
+
+                        <p>If you leave the page or close the browser before submitting, your final result will not be saved.</p>
+
+                        <p>When time ends, the test will submit automatically.</p>
+
+                        {% if section == 'listening' %}
+                            <p>Audio starts automatically after Start.</p>
+
+                            <p>You cannot pause, stop, rewind, or fast-forward the audio.</p>
+
+                            <p>After the audio finishes, you get 2 minutes to check answers.</p>
+                        {% endif %}
+
+                        {% if is_preview %}
+                            <p class="safe-note">This is free preview mode. Your score is shown only on this page and is not saved to your account or the database.</p>
+                        {% else %}
+                            <p class="safe-note">Your result is saved only after you submit the section.</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class="start-button primary" href="{% url 'cambridge_practice:practice_section' book.number test.number section %}?start=1">
+                            Start {{ section_title }}
+                            <span>→</span>
+                        </a>
+
+                        <a class="start-button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+                            Back
+                        </a>
+                    </div>
+                </section>
+
+                <aside class="start-side-card" aria-label="Section summary">
+                    <div>
+                        <div class="section-badge">
+                            {% if section == 'listening' %}L{% else %}R{% endif %}
+                        </div>
+
+                        <div class="side-label">
+                            {% if is_preview %}Preview mode{% else %}Practice mode{% endif %}
+                        </div>
+
+                        <h2>{{ book.title }} - {{ test.title }}</h2>
+
+                        <p>
+                            You are about to start the {{ section_title }} section. Make sure you are ready before pressing Start.
+                        </p>
+                    </div>
+
+                    <div class="side-stats">
+                        <div class="side-stat">
+                            <strong>{{ section_title }}</strong>
+                            <span>Current section</span>
+                        </div>
+
+                        <div class="side-stat">
+                            <strong>{% if section == 'listening' %}Audio{% else %}60:00{% endif %}</strong>
+                            <span>{% if section == 'listening' %}Locked audio test{% else %}Reading timer{% endif %}</span>
+                        </div>
+
+                        <div class="side-stat">
+                            <strong>{% if is_preview %}Preview{% else %}Saved{% endif %}</strong>
+                            <span>{% if is_preview %}Result not saved{% else %}After submission{% endif %}</span>
+                        </div>
+                    </div>
+                </aside>
             </div>
-            <div class="hero-actions">
-                <a class="button primary" href="{% url 'cambridge_practice:practice_section' book.number test.number section %}?start=1">
-                    Start {{ section_title }}
-                </a>
-                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
-                    Back
-                </a>
-            </div>
-        </section>
+        </div>
     </main>
 </body>
 </html>

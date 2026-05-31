@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 11 Test 1 Listening | Cambridge Practice</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=fiddy-map-inputs-aligned">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -150,13 +150,13 @@
 
                     <img class="farm-map-image" src="{% static 'img/fiddy-farm-map.png' %}" alt="Fiddy Working Heritage Farm map with labels A to I">
 
-                    <div class="map-answers">
-                        <label><strong>15</strong> Scarecrow <span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
-                        <label><strong>18</strong> Black Barn <span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
-                        <label><strong>16</strong> Maze <span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
-                        <label><strong>19</strong> Covered picnic area <span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
-                        <label><strong>17</strong> Café <span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
-                        <label><strong>20</strong> Fiddy House <span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                    <div class="map-answers farm-map-answers">
+                        <label><strong>15</strong><span class="map-answer-text">Scarecrow</span><span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>18</strong><span class="map-answer-text">Black Barn</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>16</strong><span class="map-answer-text">Maze</span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>19</strong><span class="map-answer-text">Covered picnic area</span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>17</strong><span class="map-answer-text">Caf&eacute;</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
+                        <label><strong>20</strong><span class="map-answer-text">Fiddy House</span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></label>
                     </div>
                 </section>
             </article>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 16 Test 3 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 16 - Test 3 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -126,7 +126,7 @@
                             <p>Warships were designed so that they were <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> and moved quickly. They often remained afloat after battles and were able to sail close to land as they lacked any additional weight.</p>
                             <p>A battering ram made of <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> was included in the design for attacking and damaging the timber and oars of enemy ships. Warships, such as the trireme, had rowers on three different <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span>.</p>
                             <p>Unlike warships, merchant ships had a broad <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> that lay far below the surface of the sea. Merchant ships were steered through the water with the help of large rudders and a tiller bar. They had both square and <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> sails.</p>
-                            <p>On merchant ships and warships, <span class="qnum">11</span> <span class="ielts-blank"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off"><span>......................</span></span> was used to ensure rowers moved their oars in and out of the water at the same time. Quantities of agricultural goods such as <span class="qnum">12</span> <span class="ielts-blank"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off"><span>......................</span></span> were transported by merchant ships to two main ports in Italy. The ships were pulled to the shore by <span class="qnum">13</span> <span class="ielts-blank"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off"><span>......................</span></span>.</p>
+                            <p>On merchant ships and warships, <span class="qnum">11</span> <span class="ielts-blank"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off"><span>......................</span></span> was used to ensure rowers moved their oars in and out of the water at the same time. Quantities of agricultural goods such as <span class="qnum">12</span> <span class="ielts-blank"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off"><span>......................</span></span> were transported by merchant ships to two main ports in Italy. The ships were pulled to the shore by <span class="qnum">13</span> <span class="ielts-blank"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off"><span>......................</span></span>. When the weather was clear and they could see islands or land, sailors used landmarks that they knew to help them navigate their route.</p>
                         </div>
                     </article>
 
@@ -134,6 +134,16 @@
                         <h2>Reading Passage 2</h2>
                         <p class="ielts-instr">Questions 14-19</p>
                         <p>Reading Passage 2 has eight sections, <strong>A-H</strong>. Which section contains the following information?</p>
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong></p>
+                            <p><strong>B</strong></p>
+                            <p><strong>C</strong></p>
+                            <p><strong>D</strong></p>
+                            <p><strong>E</strong></p>
+                            <p><strong>F</strong></p>
+                            <p><strong>G</strong></p>
+                            <p><strong>H</strong></p>
+                        </div>
                         <div class="reading-choice-list">
                             {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> an explanation for weapons being left behind in the mountains</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
                             {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> a reference to the physical difficulties involved in an archaeological expedition</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
@@ -147,8 +157,8 @@
                         <p class="ielts-instr">Complete the summary below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
                         <div class="ielts-note-box">
                             <h3>Interesting finds at an archaeological site</h3>
-                            <p>Organic materials such as animal skins and textiles are not discovered very often at archaeological sites. They have little protection against <span class="qnum">20</span> <span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>......................</span></span>, which means that they decay relatively quickly.</p>
-                            <p>A team of archaeologists have been working in the mountains in Oppland in Norway to recover artefacts revealed by shrinking ice cover. In the past, there were trade routes through these mountains and <span class="qnum">21</span> <span class="ielts-blank"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off"><span>......................</span></span> gathered there in the summer months to avoid being attacked by <span class="qnum">22</span> <span class="ielts-blank"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off"><span>......................</span></span> on lower ground.</p>
+                            <p>Organic materials such as animal skins and textiles are not discovered very often at archaeological sites. They have little protection against <span class="qnum">20</span> <span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>......................</span></span>, which means that they decay relatively quickly. But this is not always the case. If temperature are low enough, fragile artifacts can be preserved for thousands of years.</p>
+                            <p>A team of archaeologists have been working in the mountains in Oppland in Norway to recover artefacts revealed by shrinking ice cover. In the past, there were trade routes through these mountains and <span class="qnum">21</span> <span class="ielts-blank"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off"><span>......................</span></span> gathered there in the summer months to avoid being attacked by <span class="qnum">22</span> <span class="ielts-blank"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off"><span>......................</span></span> on lower ground. The people who used these mountains left things behind and it is those objects that are of interest to archaeologists.</p>
                         </div>
 
                         <p class="ielts-instr">Questions 23 and 24</p>
@@ -196,6 +206,16 @@
 
                         <p class="ielts-instr">Questions 33-37</p>
                         <p>Reading Passage 3 has eight sections, <strong>A-H</strong>. Which section contains the following information?</p>
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong></p>
+                            <p><strong>B</strong></p>
+                            <p><strong>C</strong></p>
+                            <p><strong>D</strong></p>
+                            <p><strong>E</strong></p>
+                            <p><strong>F</strong></p>
+                            <p><strong>G</strong></p>
+                            <p><strong>H</strong></p>
+                        </div>
                         <div class="reading-choice-list">
                             {% with selected=attempt.answers|answer_value:33 %}<div class="mc-question"><input type="hidden" name="answer_33" value="{{ selected }}"><p><span class="qnum">33</span> mention of specialists who can make use of the research findings</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
                             {% with selected=attempt.answers|answer_value:34 %}<div class="mc-question"><input type="hidden" name="answer_34" value="{{ selected }}"><p><span class="qnum">34</span> a reference to a potential benefit of the research findings</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
@@ -206,7 +226,7 @@
 
                         <p class="ielts-instr">Questions 38-40</p>
                         <p class="ielts-instr">Complete the sentences below. Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
-                        <div class="ielts-note-box">
+                        <div class="ielts-note-box" style="border:none">
                             <p><span class="qnum">38</span> Daffodils are likely to flower early in response to <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> weather.</p>
                             <p><span class="qnum">39</span> If ash trees come into leaf before oak trees, the weather in <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> will probably be wet.</p>
                             <p><span class="qnum">40</span> The research was carried out using a particular species of <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>.</p>

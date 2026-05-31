@@ -6,7 +6,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 14 Test 2 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .health-clinic-form {
+            width: 620px;
+            max-width: 100%;
+            margin: 14px auto 0;
+            border: 1px solid #111;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 1.28;
+        }
+        .health-clinic-form * { box-sizing: border-box; }
+        .health-clinic-title {
+            text-align: center;
+            font-weight: 700;
+            padding: 5px 10px 4px;
+            border-bottom: 1px solid #111;
+            letter-spacing: 0.01em;
+        }
+        .health-clinic-body { padding: 10px 16px 13px; }
+        .health-main-heading {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .health-subheading {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .health-example-row {
+            display: grid;
+            grid-template-columns: 112px 1fr;
+            align-items: end;
+            gap: 0;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #111;
+            margin-bottom: 6px;
+        }
+        .health-example-left div { margin-bottom: 3px; }
+        .health-example-left .example-word { font-style: italic; }
+        .health-example-right { padding-left: 2px; }
+        .health-example-right .ielts-example {
+            display: inline-block;
+            min-width: 58px;
+            text-align: center;
+            margin-left: 6px;
+            border-bottom: 1px solid #111;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .health-grid {
+            display: grid;
+            grid-template-columns: 165px 1fr;
+            column-gap: 0;
+            row-gap: 6px;
+        }
+        .health-grid .health-label,
+        .health-grid .health-value {
+            min-width: 0;
+        }
+        .health-grid .health-label {
+            padding-left: 42px;
+        }
+        .health-grid .health-value { white-space: normal; }
+        .health-block-title {
+            font-weight: 700;
+            margin: 13px 0 7px;
+        }
+        .health-two-line {
+            grid-column: 2;
+        }
+        .health-indent-line {
+            display: block;
+            margin-bottom: 4px;
+        }
+        .health-answer-only {
+            padding-left: 42px;
+            margin-top: 2px;
+        }
+        .branley-map-page {
+            max-width: 610px;
+            margin: 0 auto;
+        }
+        .branley-map-page .map-title {
+            margin-top: 0;
+        }
+        .branley-map-heading {
+            text-align: center;
+            font-size: 20px;
+            margin: 14px 0 10px;
+            font-weight: 700;
+        }
+        .branley-map-image {
+            display: block;
+            width: 510px;
+            max-width: 100%;
+            margin: 0 auto 14px;
+        }
+        .branley-answer-list {
+            width: 510px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .branley-answer-list label {
+            display: grid;
+            grid-template-columns: 34px 1fr 120px;
+            gap: 10px;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+        .branley-answer-list label strong {
+            font-weight: 700;
+        }
+    </style>
+
+
+<style>
+    .health-clinic-form {
+        width: 620px !important;
+        max-width: 100% !important;
+        font-size: 14px !important;
+        line-height: 1.28 !important;
+    }
+    .health-clinic-body {
+        padding: 10px 16px 13px !important;
+    }
+    .health-example-row {
+        grid-template-columns: 155px 1fr !important;
+        min-height: 52px !important;
+    }
+    .health-grid {
+        grid-template-columns: 185px 1fr !important;
+        row-gap: 6px !important;
+    }
+    .health-grid .health-label {
+        padding-left: 40px !important;
+    }
+    .branley-map-page {
+        max-width: 620px !important;
+    }
+    .branley-map-image,
+    .branley-answer-list {
+        width: 520px !important;
+    }
+</style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -42,7 +187,7 @@
         data-status="{{ attempt.status }}"
         data-preview="{% if is_preview %}true{% else %}false{% endif %}"
         data-existing-score="{% if result %}{{ result.score }}{% endif %}"
-        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+        data-existing-band="{% if result %}{{ result.band_score|default_if_none:'' }}{% endif %}"
     >
         <section class="audio-panel ielts-audio-panel">
             <div>
@@ -79,41 +224,55 @@
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
 
-                    <div class="ielts-note-box">
-                        <h3>TOTAL HEALTH CLINIC</h3>
-                        <p class="ielts-blue-title black">PATIENT DETAILS</p>
-                        <p class="ielts-blue-title black">Personal information</p>
-                        <p><strong>Example</strong> Name: Julie Anne <span class="ielts-example">Garcia</span></p>
-                        <ul>
-                            <li>Contact phone: <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Date of birth: <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span>, 1992</li>
-                            <li>Occupation: works as a <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Insurance company: <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> Life Insurance</li>
-                        </ul>
+                    <div class="health-clinic-form">
+                        <div class="health-clinic-title">TOTAL HEALTH CLINIC</div>
+                        <div class="health-clinic-body">
+                            <div class="health-main-heading">PATIENT DETAILS</div>
+                            <div class="health-subheading">Personal information</div>
 
-                        <p class="ielts-blue-title black">Details of the problem</p>
-                        <ul>
-                            <li>Type of problem: pain in her left <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>When it began: <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> ago</li>
-                            <li>Action already taken: has taken painkillers and applied ice</li>
-                        </ul>
+                            <div class="health-example-row">
+                                <div class="health-example-left">
+                                    <div class="example-word">Example</div>
+                                    <div>Name</div>
+                                </div>
+                                <div class="health-example-right">Julie Anne <span class="ielts-example">Garcia</span></div>
+                            </div>
 
-                        <p class="ielts-blue-title black">Other information</p>
-                        <ul>
-                            <li>Sports played:
-                                <ul>
-                                    <li>belongs to a <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> club</li>
-                                    <li>goes <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> regularly</li>
-                                </ul>
-                            </li>
-                            <li>Medical history:
-                                <ul>
-                                    <li>injured her <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> last year</li>
-                                    <li>no allergies</li>
-                                    <li>no regular medication apart from <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <div class="health-grid">
+                                <div class="health-label">Contact phone</div>
+                                <div class="health-value"><span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></div>
+
+                                <div class="health-label">Date of birth</div>
+                                <div class="health-value"><span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span>, 1992</div>
+
+                                <div class="health-label">Occupation</div>
+                                <div class="health-value">works as a <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></div>
+
+                                <div class="health-label">Insurance company</div>
+                                <div class="health-value"><span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> Life Insurance</div>
+                            </div>
+
+                            <div class="health-block-title">Details of the problem</div>
+                            <div class="health-grid">
+                                <div class="health-label">Type of problem</div>
+                                <div class="health-value">pain in her left <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></div>
+
+                                <div class="health-label">When it began</div>
+                                <div class="health-value"><span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> ago</div>
+
+                                <div class="health-label">Action already taken</div>
+                                <div class="health-value">has taken painkillers and applied ice</div>
+                            </div>
+
+                            <div class="health-block-title">Other information</div>
+                            <div class="health-grid">
+                                <div class="health-label">Sports played</div>
+                                <div class="health-value"><span class="health-indent-line">belongs to a <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> club</span><span class="health-indent-line">goes <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> regularly</span></div>
+
+                                <div class="health-label">Medical history</div>
+                                <div class="health-value"><span class="health-indent-line">injured her <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> last year</span><span class="health-indent-line">no allergies</span><span class="health-indent-line">no regular medication apart from <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></span></div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </article>
@@ -137,11 +296,21 @@
                         {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> At the end of the visit, the group will have</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>afternoon tea in the conservatory.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the chance to meet the castle's owners.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>a photograph together on the Great Staircase.</span></button></div></div>{% endwith %}
                     </div>
 
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section branley-map-page">
                     <p class="ielts-instr map-title">Questions 16-20</p>
                     <p class="ielts-instr">Label the plan below.</p>
                     <p class="ielts-instr">Write the correct letter, <strong>A-H</strong>, next to Questions 16-20.</p>
-                    <img class="farm-map-image" src="{% static 'img/cambridge14/test2/listening/branley-castle.png' %}" alt="Branley Castle plan">
-                    <div class="map-answers">
+                    <h3 class="branley-map-heading">Branley Castle</h3>
+                    <img class="branley-map-image" src="{% static 'img/cambridge14/test2/listening/branley-castle.png' %}" alt="Branley Castle plan">
+                    <div class="branley-answer-list">
                         <label><strong>16</strong><span>Starting point for walking the walls</span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
                         <label><strong>17</strong><span>Bow and arrow display</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
                         <label><strong>18</strong><span>Hunting birds display</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>

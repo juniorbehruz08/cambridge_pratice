@@ -947,6 +947,23 @@ h3 {
     text-align: left;
 }
 
+.ielts-table-box td ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.ielts-table-box td li {
+    margin: 4px 0;
+}
+
+.ielts-table-box td li:first-child {
+    margin-top: 0;
+}
+
+.ielts-table-box td li:last-child {
+    margin-bottom: 0;
+}
+
 .ielts-table {
     width: 100%;
     margin: 14px 0 0;
@@ -1027,6 +1044,75 @@ h3 {
 
 .ielts-choice-box strong {
     color: #005eb8;
+}
+
+.ielts-choice-box.four-col {
+    width: min(560px, 100%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px 0;
+}
+
+.ielts-choice-box.four-col p {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    margin: 0;
+}
+
+.ielts-flow-arrow {
+    text-align: center;
+    font-size: 22px;
+    line-height: 1;
+    margin: 8px 0;
+    color: #111;
+}
+
+.ielts-note-box.flow-chart-outer {
+    border: none;
+    background: none;
+    padding: 0;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flow-chart-title {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 14px;
+    color: #111;
+    letter-spacing: 0.02em;
+}
+
+.flow-chart-section {
+    border: 1px solid #555;
+    text-align: center;
+    background: #fff;
+}
+
+.flow-chart-header {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px 16px 5px;
+    margin: 0;
+    border-bottom: 1px solid #555;
+}
+
+.flow-chart-header + p {
+    padding-top: 8px;
+}
+
+.flow-chart-section p:not(.flow-chart-header) {
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 3px 20px;
+    margin: 0;
+}
+
+.flow-chart-section p:last-child {
+    padding-bottom: 8px;
 }
 
 .ielts-facility-list,
@@ -1283,11 +1369,126 @@ h3 {
     margin-left: 8px;
 }
 
+.farm-map-answers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px 48px;
+    width: min(100%, 560px);
+    margin-top: 2px;
+}
+
+.farm-map-answers label {
+    display: grid;
+    grid-template-columns: 22px 86px 104px;
+    align-items: end;
+    gap: 6px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.farm-map-answers label:nth-child(even) {
+    grid-template-columns: 22px 142px 104px;
+}
+
+.farm-map-answers label strong {
+    margin-right: 0;
+}
+
+.farm-map-answers .map-answer-text {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.farm-map-answers .ielts-blank.short {
+    width: 104px;
+    margin-left: 0;
+}
+
+.theatre-plan-answers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    width: min(100%, 680px);
+    margin: 2px auto 0;
+    font-size: 13px;
+}
+
+.theatre-plan-answers label {
+    display: grid;
+    grid-template-columns: 22px 150px 92px;
+    width: 270px;
+    align-items: end;
+    gap: 6px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.theatre-plan-answers label strong {
+    margin-right: 0;
+}
+
+.theatre-plan-answers .map-answer-text {
+    white-space: nowrap;
+}
+
+.theatre-plan-answers .ielts-blank.short {
+    width: 92px;
+    margin-left: 0;
+}
+
 .ielts-center-title {
     margin: 20px 0 16px;
     color: #005eb8;
     font-size: 18px;
     text-align: center;
+}
+
+.story-silk-notes {
+    margin: 20px 0 24px;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.story-silk-notes h3 {
+    margin: 0 0 18px;
+    color: #005eb8;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.story-silk-subhead {
+    margin: 14px 0 7px;
+    color: #2c7fba;
+    font-weight: 800;
+}
+
+.story-silk-notes ul {
+    margin: 0 0 8px;
+    padding-left: 18px;
+}
+
+.story-silk-notes li {
+    margin: 5px 0;
+    padding-left: 8px;
+}
+
+.story-silk-notes li::marker {
+    font-size: 0.8em;
+}
+
+.story-silk-notes ul ul {
+    margin-top: 4px;
+    padding-left: 28px;
+    list-style-type: "-  ";
+}
+
+.story-silk-notes .ielts-blank {
+    width: 104px;
 }
 
 .ielts-mc-list {
@@ -1343,7 +1544,7 @@ h3 {
 
 .mc-question.is-drag-assignment {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 132px;
+    grid-template-columns: minmax(0, 1fr) minmax(132px, 220px);
     gap: 10px 14px;
     align-items: center;
     margin: 8px 0;
@@ -1415,11 +1616,29 @@ h3 {
     min-height: 24px;
     align-items: center;
     justify-content: center;
+    gap: 6px;
+    padding: 0 8px;
     border-radius: 4px;
     background: #005eb8;
     color: #fff;
     font-weight: 900;
     cursor: grab;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.drag-assigned-chip strong {
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.drag-assigned-chip .chip-description {
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .drag-choice-remove {
@@ -1493,6 +1712,43 @@ h3 {
     display: block;
     min-width: 0;
     overflow-wrap: anywhere;
+}
+
+.sentence-questions.compact-summary-drag {
+    gap: 7px;
+    line-height: 1.7;
+}
+
+.sentence-questions.compact-summary-drag p {
+    line-height: 1.7;
+}
+
+.sentence-questions.compact-summary-drag p.is-drag-assignment {
+    display: block;
+}
+
+.sentence-questions.compact-summary-drag p.is-drag-assignment .drag-assignment-text {
+    display: inline;
+    overflow-wrap: normal;
+}
+
+.sentence-questions.compact-summary-drag .drag-assignment-target {
+    display: inline-flex;
+    width: 96px;
+    min-width: 96px;
+    min-height: 27px;
+    margin: 0 3px;
+    padding: 1px 7px;
+    vertical-align: middle;
+}
+
+.sentence-questions.compact-summary-drag .drag-target-placeholder {
+    font-size: 11px;
+}
+
+.sentence-questions.compact-summary-drag .drag-assigned-chip {
+    min-height: 20px;
+    padding: 0 6px;
 }
 
 .mc-options {
@@ -1805,6 +2061,64 @@ h3 {
     margin: 12px 0 20px;
 }
 
+.paragraph-heading-answer-list {
+    display: grid;
+    gap: 6px;
+    width: max-content;
+    max-width: 100%;
+    margin: 16px 0 20px;
+    font-size: 14px;
+}
+
+.paragraph-heading-answer-list p {
+    display: grid;
+    grid-template-columns: 20px 92px 94px;
+    gap: 8px;
+    align-items: end;
+    min-height: 22px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.paragraph-heading-answer-list p.is-drag-assignment {
+    grid-template-columns: 120px 112px;
+    align-items: center;
+    min-height: 34px;
+}
+
+.sentence-questions.paragraph-heading-answer-list p.is-drag-assignment .drag-assignment-text {
+    display: grid;
+    grid-template-columns: 20px 92px;
+    gap: 8px;
+    align-items: center;
+}
+
+.paragraph-heading-answer-list b {
+    color: #005eb8;
+    font-weight: 800;
+}
+
+.paragraph-heading-answer-list .qnum {
+    margin-right: 0;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.paragraph-heading-answer-list .paragraph-heading-label {
+    color: #000;
+}
+
+.paragraph-heading-answer-list .ielts-blank.short {
+    width: 94px;
+}
+
+.sentence-questions.paragraph-heading-answer-list p.is-drag-assignment .drag-assignment-target {
+    width: 112px;
+    min-width: 112px;
+    min-height: 30px;
+    padding: 2px 8px;
+}
+
 .sentence-questions p,
 .reading-choice-list p {
     margin-bottom: 0;
@@ -2104,6 +2418,123 @@ h3 {
     width: 10.6%;
 }
 
+.qanat-diagram {
+    width: 100%;
+    max-width: 610px;
+    margin: 14px auto 18px;
+    line-height: 1;
+}
+
+.qanat-stage {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+
+.qanat-stage img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.qanat-answer {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    height: 3.9%;
+    background: rgba(255, 255, 255, 0.92);
+    box-sizing: border-box;
+}
+
+.qanat-answer::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18%;
+    z-index: 1;
+    border-bottom: 2px dotted #666;
+}
+
+.qanat-answer input {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    border: 0;
+    padding: 0 2px;
+    background: transparent;
+    color: #000;
+    font: 12px Arial, Helvetica, sans-serif;
+    line-height: 1;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.qanat-answer input:focus {
+    background: rgba(0, 94, 184, 0.1);
+}
+
+.qanat-answer input:not(:placeholder-shown) {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.qanat-answer input:not(:placeholder-shown) + .correct-answer-badge,
+.qanat-answer.answer-correct::after,
+.qanat-answer.answer-wrong::after,
+.qanat-answer.answer-skipped::after {
+    border-color: transparent;
+}
+
+.qanat-answer .correct-answer-badge {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 4;
+    min-width: 100%;
+    margin: 2px 0 0;
+    justify-content: center;
+}
+
+.qanat-answer-1 {
+    top: 11%;
+    left: 4%;
+    width: 27%;
+}
+
+.qanat-answer-2 {
+    top: 11%;
+    left: 73%;
+    width: 24%;
+}
+
+.qanat-answer-3 {
+    top: 53%;
+    left: 57.5%;
+    width: 38%;
+}
+
+.qanat-answer-4 {
+    top: 63%;
+    left: 25%;
+    width: 30%;
+}
+
+.qanat-answer-5 {
+    top: 85%;
+    left: 24%;
+    width: 32%;
+}
+
+.qanat-answer-6 {
+    top: 95.5%;
+    left: 57.5%;
+    width: 37%;
+}
+
 .mary-rose-answer-9 {
     top: -4.5%;
     left: 37.5%;
@@ -2217,6 +2648,19 @@ h3 {
     }
 
     .falkirk-answer input {
+        padding: 0 1px;
+        font-size: 8px;
+    }
+
+    .qanat-answer {
+        height: 4.2%;
+    }
+
+    .qanat-answer::after {
+        border-bottom-width: 1px;
+    }
+
+    .qanat-answer input {
         padding: 0 1px;
         font-size: 8px;
     }
@@ -2622,5 +3066,10 @@ h3 {
 
     .sentence-questions p.is-drag-assignment {
         grid-template-columns: 1fr;
+    }
+
+    .farm-map-answers {
+        grid-template-columns: 1fr;
+        gap: 5px;
     }
 }

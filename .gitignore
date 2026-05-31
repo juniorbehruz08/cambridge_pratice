@@ -17,3 +17,4 @@ logs/
 runserver.*.log
 tmp_*
 private_books/
+templates_backup*/

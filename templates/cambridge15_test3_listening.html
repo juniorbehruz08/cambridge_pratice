@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 15 Test 3 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -202,16 +202,61 @@
                     <p class="ielts-instr">Questions 27-30</p>
                     <p>What does Hazel decide to do about each of the following types of articles?</p>
                     <p>Write the correct letter, <strong>A, B</strong> or <strong>C</strong>, next to Questions 27-30.</p>
+                    <p class="ielts-instr">NB You may use any letter more than once.</p>
                     <div class="ielts-note-box">
+                        <h3>List of options</h3>
                         <p><strong>A</strong> She will definitely look for a suitable article.</p>
                         <p><strong>B</strong> She may look for a suitable article.</p>
                         <p><strong>C</strong> She definitely won't look for an article.</p>
                     </div>
                     <div class="reading-choice-list">
-                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> national news item</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
-                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> editorial</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
-                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> human interest</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
-                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> arts</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}
+                        <div class="mc-question">
+                            <input type="hidden" name="answer_27" value="{{ selected }}">
+                            <p><span class="qnum">27</span> national news item</p>
+                            <div class="mc-options compact-options">
+                                <button type="button" class="mc-option" data-value="A"><strong>A</strong></button>
+                                <button type="button" class="mc-option" data-value="B"><strong>B</strong></button>
+                                <button type="button" class="mc-option" data-value="C"><strong>C</strong></button>
+                            </div>
+                        </div>
+                        {% endwith %}
+
+                        {% with selected=attempt.answers|answer_value:28 %}
+                        <div class="mc-question">
+                            <input type="hidden" name="answer_28" value="{{ selected }}">
+                            <p><span class="qnum">28</span> editorial</p>
+                            <div class="mc-options compact-options">
+                                <button type="button" class="mc-option" data-value="A"><strong>A</strong></button>
+                                <button type="button" class="mc-option" data-value="B"><strong>B</strong></button>
+                                <button type="button" class="mc-option" data-value="C"><strong>C</strong></button>
+                            </div>
+                        </div>
+                        {% endwith %}
+
+                        {% with selected=attempt.answers|answer_value:29 %}
+                        <div class="mc-question">
+                            <input type="hidden" name="answer_29" value="{{ selected }}">
+                            <p><span class="qnum">29</span> human interest</p>
+                            <div class="mc-options compact-options">
+                                <button type="button" class="mc-option" data-value="A"><strong>A</strong></button>
+                                <button type="button" class="mc-option" data-value="B"><strong>B</strong></button>
+                                <button type="button" class="mc-option" data-value="C"><strong>C</strong></button>
+                            </div>
+                        </div>
+                        {% endwith %}
+
+                        {% with selected=attempt.answers|answer_value:30 %}
+                        <div class="mc-question">
+                            <input type="hidden" name="answer_30" value="{{ selected }}">
+                            <p><span class="qnum">30</span> arts</p>
+                            <div class="mc-options compact-options">
+                                <button type="button" class="mc-option" data-value="A"><strong>A</strong></button>
+                                <button type="button" class="mc-option" data-value="B"><strong>B</strong></button>
+                                <button type="button" class="mc-option" data-value="C"><strong>C</strong></button>
+                            </div>
+                        </div>
+                        {% endwith %}
                     </div>
                 </section>
             </article>

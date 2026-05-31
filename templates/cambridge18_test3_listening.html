@@ -6,7 +6,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 18 Test 3 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .membership-form-box,
+        .photo-competitions-box,
+        .space-traffic-box {
+            padding: 10px 14px 12px;
+        }
+
+        .membership-form-box h3,
+        .photo-competitions-box h3,
+        .space-traffic-box h3 {
+            text-align: center;
+            margin: 0 0 8px;
+            font-size: 16px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .membership-grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            column-gap: 14px;
+            row-gap: 4px;
+            align-items: baseline;
+            font-size: 14px;
+            line-height: 1.25;
+        }
+
+        .membership-label {
+            font-weight: 400;
+        }
+
+        .membership-subline {
+            grid-column: 2;
+        }
+
+        .membership-grid .ielts-blank {
+            min-width: 120px;
+        }
+
+        .membership-grid .ielts-blank.short {
+            min-width: 102px;
+        }
+
+        .photo-competitions-box {
+            padding-top: 0;
+        }
+
+        .photo-competitions-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            font-size: 14px;
+            line-height: 1.18;
+        }
+
+        .photo-competitions-table th,
+        .photo-competitions-table td {
+            border: 1px solid #777;
+            padding: 4px 6px;
+            vertical-align: top;
+        }
+
+        .photo-competitions-table thead th {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .photo-competitions-table .ielts-blank {
+            min-width: 95px;
+        }
+
+        .photo-competitions-table .ielts-blank.short {
+            min-width: 78px;
+        }
+
+        .space-traffic-box {
+            padding: 10px 14px 12px;
+        }
+
+        .space-traffic-box h3 {
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .space-traffic-section {
+            font-weight: 700;
+            margin: 10px 0 4px;
+        }
+
+        .space-traffic-list {
+            margin: 0 0 6px 0;
+            padding-left: 18px;
+        }
+
+        .space-traffic-list li {
+            margin: 7px 0;
+            line-height: 1.28;
+        }
+
+        .space-traffic-box .ielts-blank {
+            min-width: 120px;
+        }
+
+        .space-traffic-box .ielts-blank.short {
+            min-width: 90px;
+        }
+    </style>
+
 </head>
 <body>
     <header class="site-header practice-header">
@@ -79,23 +189,41 @@
                     <p class="ielts-instr">Questions 1-4</p>
                     <p class="ielts-instr">Complete the form below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
-                    <div class="ielts-note-box">
-                        <h3>Wayside Camera Club membership form</h3>
-                        <p><strong>Name:</strong> Dan Green</p>
-                        <p><strong>Email address:</strong> dan1068@market.com</p>
-                        <p><strong>Home address:</strong> 52 <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> Street, Peacetown</p>
-                        <p><strong>Heard about us:</strong> from a <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><strong>Reasons for joining:</strong> to enter competitions; to <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p><strong>Type of membership:</strong> <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> membership (&pound;30)</p>
+                    <div class="ielts-note-box membership-form-box">
+                        <h3>Wayside Camera Club<br>membership form</h3>
+                        <div class="membership-grid">
+                            <div class="membership-label">Name:</div>
+                            <div>Dan Green</div>
+
+                            <div class="membership-label">Email address:</div>
+                            <div>dan1068@market.com</div>
+
+                            <div class="membership-label">Home address:</div>
+                            <div>52 <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> Street, Peacetown</div>
+
+                            <div class="membership-label">Heard about us:</div>
+                            <div>from a <span class="qnum">2</span> <span class="ielts-blank short"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></div>
+
+                            <div class="membership-label">Reasons for joining:</div>
+                            <div>to enter competitions</div>
+
+                            <div></div>
+                            <div class="membership-subline">to <span class="qnum">3</span> <span class="ielts-blank short"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></div>
+
+                            <div class="membership-label">Type of membership:</div>
+                            <div><span class="qnum">4</span> <span class="ielts-blank short"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> membership (&pound;30)</div>
+                        </div>
                     </div>
 
                     <p class="ielts-instr">Questions 5-10</p>
                     <p class="ielts-instr">Complete the table below.</p>
                     <p class="ielts-instr">Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
-                    <div class="ielts-note-box">
-                        <h3>Photography competitions</h3>
-                        <table class="ielts-table-box">
+                    <div class="ielts-note-box photo-competitions-box" style="border:none">
+                        <table class="photo-competitions-table">
                             <thead>
+                                <tr>
+                                    <th colspan="3">Photography competitions</th>
+                                </tr>
                                 <tr>
                                     <th>Title of competition</th>
                                     <th>Instructions</th>
@@ -104,19 +232,19 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></td>
+                                    <td>5 <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></td>
                                     <td>A scene in the home</td>
                                     <td>The picture's composition was not good.</td>
                                 </tr>
                                 <tr>
-                                    <td>Beautiful Sunsets</td>
-                                    <td>Scene must show some <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></td>
-                                    <td>The <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> was wrong.</td>
+                                    <td>'Beautiful Sunsets'</td>
+                                    <td>Scene must show some <span class="qnum">6</span> <span class="ielts-blank short"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span>.</td>
+                                    <td>The <span class="qnum">7</span> <span class="ielts-blank short"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> was wrong.</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></td>
-                                    <td>Scene must show <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></td>
-                                    <td>The photograph was too <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span>.</td>
+                                    <td>8 <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></td>
+                                    <td>Scene must show <span class="qnum">9</span> <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span>.</td>
+                                    <td>The photograph was too <span class="qnum">10</span> <span class="ielts-blank short"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span>.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -246,29 +374,32 @@
                     <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="ielts-note-box space-traffic-box">
                         <h3>Space Traffic Management</h3>
-                        <p>A Space Traffic Management system is a concept similar to Air Traffic Control, but for satellites rather than planes.</p>
-                        <ul>
-                            <li>It would aim to set up legal and <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> ways of improving safety.</li>
-                            <li>It does not actually exist at present.</li>
+
+                        <p class="space-traffic-section">A Space Traffic Management system</p>
+                        <ul class="space-traffic-list">
+                            <li>is a concept similar to Air Traffic Control, but for satellites rather than planes.</li>
+                            <li>would aim to set up legal and <span class="qnum">31</span> <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> ways of improving safety.</li>
+                            <li>does not actually exist at present.</li>
                         </ul>
-                        <p class="ielts-blue-title black">Problems in developing effective Space Traffic Management</p>
-                        <ul>
-                            <li>Satellites are now quite <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> and therefore more widespread.</li>
-                            <li>There are constellations made up of <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> of satellites.</li>
-                            <li>At present, satellites are not required to transmit information to help with their <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</li>
-                            <li>There are few systems for <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> satellites.</li>
+
+                        <p class="space-traffic-section">Problems in developing effective Space Traffic Management</p>
+                        <ul class="space-traffic-list">
+                            <li>Satellites are now quite <span class="qnum">32</span> <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> and therefore more widespread (e.g. there are constellations made up of <span class="qnum">33</span> <span class="ielts-blank short"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> of satellites).</li>
+                            <li>At present, satellites are not required to transmit information to help with their <span class="qnum">34</span> <span class="ielts-blank short"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>There are few systems for <span class="qnum">35</span> <span class="ielts-blank short"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> satellites.</li>
                             <li>Small pieces of debris may be difficult to identify.</li>
-                            <li>Operators may be unwilling to share details of satellites used for <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> or commercial reasons.</li>
-                            <li>It may be hard to collect details of the object's <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> at a given time.</li>
-                            <li>Scientists can only make a <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> about where the satellite will go.</li>
+                            <li>Operators may be unwilling to share details of satellites used for <span class="qnum">36</span> <span class="ielts-blank short"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> or commercial reasons.</li>
+                            <li>It may be hard to collect details of the object's <span class="qnum">37</span> <span class="ielts-blank short"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> at a given time.</li>
+                            <li>Scientists can only make a <span class="qnum">38</span> <span class="ielts-blank short"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> about where the satellite will go.</li>
                         </ul>
-                        <p class="ielts-blue-title black">Solutions</p>
-                        <ul>
+
+                        <p class="space-traffic-section">Solutions</p>
+                        <ul class="space-traffic-list">
                             <li>Common standards should be agreed on for the presentation of information.</li>
-                            <li>The information should be combined in one <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>.</li>
-                            <li>A coordinated system must be designed to create <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> in its users.</li>
+                            <li>The information should be combined in one <span class="qnum">39</span> <span class="ielts-blank short"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>A coordinated system must be designed to create <span class="qnum">40</span> <span class="ielts-blank short"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> in its users.</li>
                         </ul>
                     </div>
                 </section>

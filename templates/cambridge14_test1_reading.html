@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 14 Test 1 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 14 - Test 1 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -42,7 +42,7 @@
         data-status="{{ attempt.status }}"
         data-preview="{% if is_preview %}true{% else %}false{% endif %}"
         data-existing-score="{% if result %}{{ result.score }}{% endif %}"
-        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+        data-existing-band="{% if result %}{{ result.band_score|default_if_none:'' }}{% endif %}"
     >
         <form method="post" class="practice-form reading-practice-form" id="practiceForm">
             {% csrf_token %}
@@ -163,6 +163,15 @@
                         <p class="ielts-instr">Questions 14-18</p>
                         <p>Reading Passage 2 has seven paragraphs, <strong>A-G</strong>. Which paragraph contains the following information?</p>
                         <p class="ielts-instr">You may use any letter more than once.</p>
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong><span>Paragraph A</span></p>
+                            <p><strong>B</strong><span>Paragraph B</span></p>
+                            <p><strong>C</strong><span>Paragraph C</span></p>
+                            <p><strong>D</strong><span>Paragraph D</span></p>
+                            <p><strong>E</strong><span>Paragraph E</span></p>
+                            <p><strong>F</strong><span>Paragraph F</span></p>
+                            <p><strong>G</strong><span>Paragraph G</span></p>
+                        </div>
                         <div class="reading-choice-list">
                             {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> a description of how people misused a bike-sharing scheme</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
                             {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> an explanation of why a proposed bike-sharing scheme was turned down</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}

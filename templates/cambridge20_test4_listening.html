@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 20 Test 4 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -83,7 +83,7 @@
                         <p class="ielts-blue-title black">Accommodation</p>
                         <ul>
                             <li><span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> Hotel on George Street</li>
-                            <li>cost of family room per night: approx. GBP <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>cost of family room per night: £ <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> (approx.)</li>
                         </ul>
                         <p class="ielts-blue-title black">Recommended trips</p>
                         <ul>
@@ -223,7 +223,7 @@
 
                     <p class="ielts-instr">Questions 25-30</p>
                     <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
-                    <h3>Teaching handwriting</h3>
+                    <h3 style="text-align:center; color:#005eb8">Teaching handwriting</h3>
                     <div class="reading-choice-list">
                         {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> What does the woman say about using laptops to teach writing to children with dyslexia?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Children often lack motivation to learn that way.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Children become fluent relatively quickly.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Children react more positively if they make a mistake.</span></button></div></div>{% endwith %}
                         {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> When discussing whether to teach cursive or print writing, the woman thinks that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>cursive writing disadvantages a certain group of children.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>print writing is associated with lower academic performance.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>most teachers in the UK prefer a traditional approach to handwriting.</span></button></div></div>{% endwith %}

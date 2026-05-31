@@ -6,7 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 18 Test 2 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .stonehenge-note-box {
+            padding: 12px 16px;
+        }
+
+        .stonehenge-note-box h3 {
+            text-align: center;
+            margin: 0 0 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .stonehenge-note-box p {
+            margin: 6px 0;
+        }
+
+        .stonehenge-note-box ul {
+            margin: 5px 0 10px;
+            padding-left: 20px;
+        }
+
+        .stonehenge-note-box li {
+            margin: 7px 0;
+            line-height: 1.35;
+        }
+
+        .stonehenge-section-title {
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .stonehenge-stage {
+            margin-top: 6px;
+        }
+
+        .stonehenge-theory {
+            display: grid;
+            grid-template-columns: 22px 118px 1fr;
+            gap: 4px;
+            align-items: baseline;
+            margin: 8px 0 6px 38px;
+        }
+
+        .stonehenge-theory-item {
+            display: grid;
+            grid-template-columns: 18px 1fr;
+            gap: 4px;
+            align-items: baseline;
+            margin: 6px 0 6px 78px;
+            line-height: 1.35;
+        }
+
+        .stonehenge-note-box .ielts-blank {
+            min-width: 145px;
+        }
+
+        .stonehenge-note-box .ielts-blank.short {
+            min-width: 120px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +76,7 @@
             <span>Cambridge IELTS 18 - Test 2 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -116,23 +177,64 @@
                         <h2>Reading Passage 1</h2>
                         <p class="ielts-instr">Questions 1-8</p>
                         <p class="ielts-instr">Complete the notes below. Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
-                        <div class="ielts-note-box">
+                        <div class="ielts-note-box stonehenge-note-box">
                             <h3>Stonehenge</h3>
-                            <p><strong>Construction</strong></p>
+
+                            <p class="stonehenge-section-title">Construction</p>
+
+                            <p class="stonehenge-stage">Stage 1:</p>
                             <ul>
-                                <li>Stage 1: the ditch and henge were dug, possibly using tools made from <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span>.</li>
-                                <li><span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> may have been arranged in deep pits inside the circle.</li>
-                                <li>Stage 2: bluestones from the Preseli Hills were placed in standing position.</li>
-                                <li>Archaeological theories about transportation: builders used <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> to make sledges and rollers; <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> pulled them on giant baskets.</li>
-                                <li>Geological theory: they were brought from Wales by <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span>.</li>
-                                <li>Stage 3: sandstone slabs were arranged into an outer crescent or ring.</li>
+                                <li>the ditch and henge were dug, possibly using tools made from <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li><span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> may have been arranged in deep pits inside the circle</li>
                             </ul>
-                            <p><strong>Builders</strong></p>
-                            <ul><li>a theory arose in the 17th century that its builders were Celtic <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li></ul>
-                            <p><strong>Purpose</strong></p>
+
+                            <p class="stonehenge-stage">Stage 2:</p>
                             <ul>
-                                <li>many experts agree it has been used as a <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> site</li>
-                                <li>in the 1960s, it was suggested that it worked as a kind of <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li>bluestones from the Preseli Hills were placed in standing position</li>
+                                <li>theories about the transportation of the bluestones:</li>
+                            </ul>
+
+                            <div class="stonehenge-theory">
+                                <span>–</span>
+                                <span>archaeological:</span>
+                                <span></span>
+                            </div>
+
+                            <div class="stonehenge-theory-item">
+                                <span>○</span>
+                                <span>builders used <span class="qnum">3</span> <span class="ielts-blank short"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> to make sledges and rollers</span>
+                            </div>
+
+                            <div class="stonehenge-theory-item">
+                                <span>○</span>
+                                <span><span class="qnum">4</span> <span class="ielts-blank short"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> pulled them on giant baskets</span>
+                            </div>
+
+                            <div class="stonehenge-theory">
+                                <span>–</span>
+                                <span>geological:</span>
+                                <span></span>
+                            </div>
+
+                            <div class="stonehenge-theory-item">
+                                <span>○</span>
+                                <span>they were brought from Wales by <span class="qnum">5</span> <span class="ielts-blank short"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></span>
+                            </div>
+
+                            <p class="stonehenge-stage">Stage 3:</p>
+                            <ul>
+                                <li>sandstone slabs were arranged into an outer crescent or ring</li>
+                            </ul>
+
+                            <p class="stonehenge-section-title">Builders</p>
+                            <ul>
+                                <li>a theory arose in the 17th century that its builders were Celtic <span class="qnum">6</span> <span class="ielts-blank short"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
+                            </ul>
+
+                            <p class="stonehenge-section-title">Purpose</p>
+                            <ul>
+                                <li>many experts agree it has been used as a <span class="qnum">7</span> <span class="ielts-blank short"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> site</li>
+                                <li>in the 1960s, it was suggested that it worked as a kind of <span class="qnum">8</span> <span class="ielts-blank short"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></li>
                             </ul>
                         </div>
 
@@ -175,9 +277,9 @@
                         <p>Complete the summary using the list of phrases, <strong>A-F</strong>, below.</p>
                         <div class="ielts-choice-box">
                             <p><strong>A</strong><span>medical practitioners</span></p>
-                            <p><strong>B</strong><span>reduced illness</span></p>
+                            <p><strong>B</strong><span>specialised tasks</span></p>
                             <p><strong>C</strong><span>available resources</span></p>
-                            <p><strong>D</strong><span>specialised tasks</span></p>
+                            <p><strong>D</strong><span>reduced illness</span></p>
                             <p><strong>E</strong><span>professional authority</span></p>
                             <p><strong>F</strong><span>technology experts</span></p>
                         </div>

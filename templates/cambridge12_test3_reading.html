@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 12 Test 3 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}?v=drag-layout-20260512">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 12 - Test 3 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -157,6 +157,16 @@
                         <p class="ielts-instr">Questions 14-19</p>
                         <p>Reading Passage 2 has eight sections, <strong>A-H</strong>. Which paragraph contains the following information?</p>
                         <p class="ielts-instr"><strong>NB</strong> You may use any letter more than once.</p>
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong></p>
+                            <p><strong>B</strong></p>
+                            <p><strong>C</strong></p>
+                            <p><strong>D</strong></p>
+                            <p><strong>E</strong></p>
+                            <p><strong>F</strong></p>
+                            <p><strong>G</strong></p>
+                            <p><strong>H</strong></p>
+                        </div>
                         <div class="sentence-questions">
                             <p><span class="qnum">14</span> an acceptance that not all diseases can be totally eliminated <span class="ielts-blank short"><input name="answer_14" value="{{ attempt.answers|answer_value:14 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
                             <p><span class="qnum">15</span> examples of physical conditions caused by human behaviour <span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 19 Test 1 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 19 - Test 1 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -142,6 +142,17 @@
                         <p class="ielts-instr">Questions 14-19</p>
                         <p>Reading Passage 2 has seven paragraphs, <strong>A-G</strong>. Which paragraph contains the following information?</p>
                         <p class="ielts-instr"><strong>NB</strong> You may use any letter more than once.</p>
+
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong><span>Paragraph A</span></p>
+                            <p><strong>B</strong><span>Paragraph B</span></p>
+                            <p><strong>C</strong><span>Paragraph C</span></p>
+                            <p><strong>D</strong><span>Paragraph D</span></p>
+                            <p><strong>E</strong><span>Paragraph E</span></p>
+                            <p><strong>F</strong><span>Paragraph F</span></p>
+                            <p><strong>G</strong><span>Paragraph G</span></p>
+                        </div>
+
                         <div class="reading-choice-list">
                             {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> a reference to a denial of involvement in piracy</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
                             {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> details of how a campaign to eradicate piracy was carried out</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
@@ -202,21 +213,23 @@
 
                         <p class="ielts-instr">Questions 31-36</p>
                         <p>Complete the summary using the list of phrases, <strong>A-J</strong>, below.</p>
-                        <div class="ielts-choice-box">
-                            <p><strong>A</strong><span>constant conflict</span></p>
-                            <p><strong>B</strong><span>experimental subjects</span></p>
-                            <p><strong>C</strong><span>different locations</span></p>
-                            <p><strong>D</strong><span>extreme distrust</span></p>
-                            <p><strong>E</strong><span>frequent exposure</span></p>
-                            <p><strong>F</strong><span>additional evidence</span></p>
-                            <p><strong>G</strong><span>different ideas</span></p>
-                            <p><strong>H</strong><span>short period</span></p>
-                            <p><strong>I</strong><span>mental operation</span></p>
-                            <p><strong>J</strong><span>dubious reason</span></p>
-                        </div>
+
                         <div class="ielts-note-box">
                             <h3>What happens when people encounter misinformation?</h3>
                             <p>Although people have <span class="qnum">31</span> <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off" maxlength="1"><span>............</span></span> to misinformation, there is debate about precisely how and when we label something as true or untrue. The philosophers Descartes and Spinoza had <span class="qnum">32</span> <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off" maxlength="1"><span>............</span></span> about how people engage with information. While Descartes believed that people accept or reject information after considering whether it is true or not, Spinoza argued that people accepted all information they encountered, and by default misinformation, and did not verify or reject it until afterwards. Moreover, Spinoza believed that a distinct <span class="qnum">33</span> <span class="ielts-blank short"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off" maxlength="1"><span>............</span></span> is involved in these stages. Recent research has provided <span class="qnum">34</span> <span class="ielts-blank short"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off" maxlength="1"><span>............</span></span> for Spinoza's theory and it would appear that people accept all encountered information as if it were true, even if this is for an extremely <span class="qnum">35</span> <span class="ielts-blank short"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off" maxlength="1"><span>............</span></span>, and do not label the information as true or false until later. This is consistent with the fact that the resources for scepticism and the resources for perceiving and encoding are in <span class="qnum">36</span> <span class="ielts-blank short"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off" maxlength="1"><span>............</span></span> in the brain.</p>
+                        </div>
+
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong><span>constant conflict</span></p>
+                            <p><strong>B</strong><span>additional evidence</span></p>
+                            <p><strong>C</strong><span>different locations</span></p>
+                            <p><strong>D</strong><span>experimental subjects</span></p>
+                            <p><strong>E</strong><span>short period</span></p>
+                            <p><strong>F</strong><span>extreme distrust</span></p>
+                            <p><strong>G</strong><span>frequent exposure</span></p>
+                            <p><strong>H</strong><span>mental operation</span></p>
+                            <p><strong>I</strong><span>dubious reason</span></p>
+                            <p><strong>J</strong><span>different ideas</span></p>
                         </div>
 
                         <p class="ielts-instr">Questions 37-40</p>

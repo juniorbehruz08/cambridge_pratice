@@ -6,7 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 18 Test 1 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .transport-survey-box {
+            padding: 10px 16px 12px;
+        }
+
+        .transport-survey-box h3 {
+            text-align: center;
+            margin: 0 0 10px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .transport-survey-grid {
+            display: grid;
+            grid-template-columns: 205px 1fr;
+            column-gap: 22px;
+            row-gap: 5px;
+            align-items: baseline;
+            line-height: 1.2;
+        }
+
+        .transport-survey-label {
+            font-weight: 600;
+        }
+
+        .transport-survey-heading {
+            grid-column: 1 / -1;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        .transport-survey-value {
+            display: inline-flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .transport-survey-value.indented {
+            padding-left: 14px;
+        }
+
+        .transport-survey-box .ielts-blank {
+            min-width: 130px;
+        }
+
+        .transport-survey-box .ielts-blank.short {
+            min-width: 100px;
+        }
+
+        .transport-survey-box .ielts-blank.long {
+            min-width: 165px;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -78,33 +133,115 @@
                     <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
-                    <div class="ielts-note-box">
+                    <div class="ielts-note-box transport-survey-box">
                         <h3>Transport survey</h3>
-                        <p><strong>Name:</strong> Sadie Jones</p>
-                        <p><strong>Year of birth:</strong> 1991</p>
-                        <p><strong>Postcode:</strong> <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p class="ielts-blue-title black">Travelling by bus</p>
-                        <ul>
-                            <li>Date of bus journey: <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Reason for trip: shopping and visit to the <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Travelled by bus because cost of <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> too high</li>
-                            <li>Got on bus at <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span> Street</li>
-                            <li>Complaints about bus service:
-                                <ul>
-                                    <li>bus today was <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
-                                    <li>frequency of buses in the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <p class="ielts-blue-title black">Travelling by car</p>
-                        <ul>
-                            <li>Goes to the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> by car</li>
-                        </ul>
-                        <p class="ielts-blue-title black">Travelling by bicycle</p>
-                        <ul>
-                            <li>Dislikes travelling by bike in the city centre because of the <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li>Doesn't own a bike because of a lack of <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></li>
-                        </ul>
+
+                        <div class="transport-survey-grid">
+                            <span class="transport-survey-label">Name:</span>
+                            <span class="transport-survey-value">Sadie Jones</span>
+
+                            <span class="transport-survey-label">Year of birth:</span>
+                            <span class="transport-survey-value">1991</span>
+
+                            <span class="transport-survey-label">Postcode:</span>
+                            <span class="transport-survey-value">
+                                <span class="qnum">1</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+
+                            <span class="transport-survey-heading">Travelling by bus</span>
+
+                            <span class="transport-survey-label">Date of bus journey:</span>
+                            <span class="transport-survey-value">
+                                <span class="qnum">2</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+
+                            <span class="transport-survey-label">Reason for trip:</span>
+                            <span class="transport-survey-value">
+                                shopping and visit to the <span class="qnum">3</span>
+                                <span class="ielts-blank long">
+                                    <input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+
+                            <span class="transport-survey-label">Travelled by bus because cost of</span>
+                            <span class="transport-survey-value">
+                                <span class="qnum">4</span>
+                                <span class="ielts-blank short">
+                                    <input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                too high
+                            </span>
+
+                            <span class="transport-survey-label">Got on bus at</span>
+                            <span class="transport-survey-value">
+                                <span class="qnum">5</span>
+                                <span class="ielts-blank short">
+                                    <input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Street
+                            </span>
+
+                            <span class="transport-survey-label">Complaints about bus service:</span>
+                            <span class="transport-survey-value indented">
+                                - bus today was <span class="qnum">6</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+
+                            <span></span>
+                            <span class="transport-survey-value indented">
+                                - frequency of buses in the <span class="qnum">7</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+
+                            <span class="transport-survey-heading">Travelling by car</span>
+
+                            <span class="transport-survey-label">Goes to the</span>
+                            <span class="transport-survey-value">
+                                <span class="qnum">8</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                by car
+                            </span>
+
+                            <span class="transport-survey-heading">Travelling by bicycle</span>
+
+                            <span class="transport-survey-label">Dislikes travelling by bike in the city centre because of the</span>
+                            <span class="transport-survey-value">
+                                <span class="qnum">9</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+
+                            <span class="transport-survey-label">Doesn't own a bike because of a lack of</span>
+                            <span class="transport-survey-value">
+                                <span class="qnum">10</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+                        </div>
                     </div>
                 </section>
             </article>

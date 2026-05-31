@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 11 Test 1 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}?v=falkirk-wheel-layout-3">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 11 - Test 1 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -209,6 +209,16 @@
                         <h2>Reading Passage 3</h2>
                         <p class="ielts-instr">Questions 27-29</p>
                         <p>Reading Passage 3 has eight paragraphs <strong>A-H</strong>. Which paragraph contains the following information?</p>
+                        <div class="scientist-box headings-box paragraph-letter-bank">
+                            <p><strong>A</strong> Paragraph A</p>
+                            <p><strong>B</strong> Paragraph B</p>
+                            <p><strong>C</strong> Paragraph C</p>
+                            <p><strong>D</strong> Paragraph D</p>
+                            <p><strong>E</strong> Paragraph E</p>
+                            <p><strong>F</strong> Paragraph F</p>
+                            <p><strong>G</strong> Paragraph G</p>
+                            <p><strong>H</strong> Paragraph H</p>
+                        </div>
                         <div class="sentence-questions">
                             <p><span class="qnum">27</span> mention of a geo-engineering project based on an earlier natural phenomenon <span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></p>
                             <p><span class="qnum">28</span> an example of a successful use of geo-engineering <span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off" maxlength="1" {% if attempt.status == 'completed' %}disabled{% endif %}><span>............</span></span></p>

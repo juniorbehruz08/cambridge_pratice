@@ -6,148 +6,1445 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <style>
+        :root {
+            --cp-bg: #f6f8fc;
+            --cp-card: #ffffff;
+            --cp-text: #0f172a;
+            --cp-muted: #64748b;
+            --cp-line: #e2e8f0;
+            --cp-blue: #2563eb;
+            --cp-blue-dark: #1d4ed8;
+            --cp-purple: #7c3aed;
+            --cp-green: #16a34a;
+            --cp-orange: #f97316;
+            --cp-red: #ef4444;
+            --cp-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+            --cp-soft-shadow: 0 16px 38px rgba(15, 23, 42, 0.055);
+            --cp-radius: 30px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--cp-bg);
+        }
+
+        .home-page {
+            min-height: calc(100vh - 76px);
+            color: var(--cp-text);
+            background:
+                radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.14), transparent 31%),
+                radial-gradient(circle at 100% 4%, rgba(124, 58, 237, 0.12), transparent 30%),
+                linear-gradient(180deg, #f8fbff 0%, #eef4ff 46%, #ffffff 100%);
+            padding-bottom: 72px;
+            overflow: hidden;
+        }
+
+        .cp-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .home-hero {
+            padding: 72px 0 36px;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.06fr) minmax(330px, 0.94fr);
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .hero-content {
+            position: relative;
+            overflow: hidden;
+            border-radius: 38px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(18px);
+            box-shadow: var(--cp-shadow);
+            padding: 46px;
+        }
+
+        .hero-content::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border-radius: 999px;
+            top: -150px;
+            right: -130px;
+            background: rgba(37, 99, 235, 0.11);
+        }
+
+        .hero-content::after {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border-radius: 999px;
+            left: -110px;
+            bottom: -120px;
+            background: rgba(124, 58, 237, 0.09);
+        }
+
+        .hero-content > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cp-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            margin: 0 0 16px;
+            padding: 8px 13px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #dbeafe;
+            font-size: 12px;
+            font-weight: 950;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .cp-eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
+        }
+
+        .hero-content h1 {
+            margin: 0;
+            max-width: 820px;
+            color: #0f172a;
+            font-size: clamp(42px, 5vw, 72px);
+            line-height: 0.95;
+            letter-spacing: -0.068em;
+        }
+
+        .hero-text {
+            max-width: 760px;
+            margin: 23px 0 0;
+            color: #64748b;
+            font-size: 17px;
+            line-height: 1.78;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .cp-button {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 19px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 950;
+            text-decoration: none;
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                border-color 0.18s ease,
+                background 0.18s ease,
+                color 0.18s ease;
+        }
+
+        .cp-button.primary {
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            box-shadow: 0 16px 32px rgba(37, 99, 235, 0.22);
+        }
+
+        .cp-button.secondary {
+            color: #0f172a;
+            background: #ffffff;
+            border-color: #e2e8f0;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+        }
+
+        .cp-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .cp-button.secondary:hover {
+            color: #2563eb;
+            border-color: #bfdbfe;
+        }
+
+        .hero-proof {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 34px;
+        }
+
+        .proof-card {
+            padding: 16px;
+            border-radius: 20px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.045);
+        }
+
+        .proof-card strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #0f172a;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .proof-card span {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .hero-panel {
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+            border-radius: 38px;
+            background: #0f172a;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 26px 75px rgba(15, 23, 42, 0.18);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-panel::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 999px;
+            right: -150px;
+            top: -125px;
+            background: rgba(59, 130, 246, 0.34);
+        }
+
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            border-radius: 999px;
+            left: -190px;
+            bottom: -185px;
+            background: rgba(124, 58, 237, 0.28);
+        }
+
+        .hero-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .panel-topline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            padding: 9px 12px;
+            border-radius: 999px;
+            color: #dbeafe;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            font-size: 12px;
+            font-weight: 950;
+            white-space: nowrap;
+        }
+
+        .panel-topline::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: {% if is_preview %}#f97316{% else %}#22c55e{% endif %};
+        }
+
+        .big-number {
+            margin-top: 34px;
+            font-size: clamp(78px, 11vw, 132px);
+            line-height: 0.85;
+            font-weight: 950;
+            letter-spacing: -0.08em;
+        }
+
+        .hero-panel p {
+            margin: 22px 0 0;
+            max-width: 420px;
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .mini-grid span {
+            padding: 15px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .mock-test {
+            margin-top: 26px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 24px;
+            padding: 16px;
+        }
+
+        .mock-test-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            font-weight: 950;
+        }
+
+        .timer-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(239, 68, 68, 0.15);
+            color: #fecaca;
+            font-size: 12px;
+            font-weight: 950;
+        }
+
+        .mock-lines {
+            display: grid;
+            gap: 9px;
+        }
+
+        .mock-line {
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .mock-line.w90 { width: 90%; }
+        .mock-line.w78 { width: 78%; }
+        .mock-line.w63 { width: 63%; }
+
+        .home-section {
+            padding: 42px 0;
+        }
+
+        .home-section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .home-section-heading h2 {
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(30px, 4vw, 46px);
+            line-height: 1;
+            letter-spacing: -0.052em;
+        }
+
+        .home-section-heading p:not(.cp-eyebrow) {
+            margin: 0;
+            max-width: 520px;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+            text-align: right;
+        }
+
+        .practice-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .cp-feature-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+            padding: 28px;
+            border-radius: var(--cp-radius);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--cp-soft-shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .cp-feature-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 999px;
+            right: -70px;
+            bottom: -80px;
+            background: rgba(37, 99, 235, 0.08);
+        }
+
+        .cp-feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #bfdbfe;
+            box-shadow: 0 26px 60px rgba(37, 99, 235, 0.12);
+        }
+
+        .cp-feature-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 950;
+            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.20);
+        }
+
+        .cp-feature-card:nth-child(1) .feature-icon {
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+        }
+
+        .cp-feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #16a34a, #86efac);
+        }
+
+        .cp-feature-card h3 {
+            margin: 22px 0 10px;
+            color: #0f172a;
+            font-size: 26px;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .cp-feature-card p {
+            margin: 0;
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .feature-points {
+            display: grid;
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        .feature-point {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #334155;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .check {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+            font-weight: 950;
+            flex-shrink: 0;
+        }
+
+        .books-section {
+            padding-top: 50px;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .book-card.book-card-link {
+            position: relative;
+            isolation: isolate;
+            min-height: 225px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 22px;
+            padding: 22px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: 0 16px 38px rgba(15, 23, 42, 0.055);
+            text-decoration: none;
+            color: #0f172a;
+            overflow: hidden;
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease,
+                border-color 0.22s ease,
+                background 0.22s ease;
+        }
+
+        .book-card.book-card-link::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            inset: auto -60px -78px auto;
+            width: 150px;
+            height: 150px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.08);
+            transition: transform 0.22s ease, background 0.22s ease;
+        }
+
+        .book-card.book-card-link:hover {
+            transform: translateY(-6px);
+            border-color: #bfdbfe;
+            background: #ffffff;
+            box-shadow: 0 26px 60px rgba(37, 99, 235, 0.13);
+        }
+
+        .book-card.book-card-link:hover::before {
+            transform: scale(1.15);
+            background: rgba(37, 99, 235, 0.13);
+        }
+
+        .book-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .book-number {
+            width: 58px;
+            height: 58px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            font-size: 24px;
+            font-weight: 950;
+            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.20);
+        }
+
+        .book-status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #bbf7d0;
+            font-size: 11px;
+            font-weight: 950;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .book-status.pro-status {
+            background: #f5f3ff;
+            color: #6d28d9;
+            border-color: #ddd6fe;
+        }
+
+        .book-card h3 {
+            margin: 0 0 10px;
+            color: #0f172a;
+            font-size: 21px;
+            line-height: 1.12;
+            letter-spacing: -0.035em;
+        }
+
+        .book-card p {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.62;
+        }
+
+        .book-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding-top: 16px;
+            border-top: 1px solid #eef2f7;
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 950;
+        }
+
+        .arrow-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            color: #2563eb;
+            background: #eff6ff;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .book-card:hover .arrow-circle {
+            transform: translateX(3px);
+            background: #dbeafe;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .workflow-card {
+            padding: 24px;
+            border-radius: 28px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--cp-soft-shadow);
+        }
+
+        .workflow-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            font-weight: 950;
+        }
+
+        .workflow-card h3 {
+            margin: 0 0 10px;
+            color: #0f172a;
+            font-size: 20px;
+            letter-spacing: -0.03em;
+        }
+
+        .workflow-card p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        .start-section {
+            margin-top: 42px;
+        }
+
+        .start-panel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 36px;
+            padding: 38px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #ffffff;
+            box-shadow: 0 24px 65px rgba(37, 99, 235, 0.22);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .start-panel::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 999px;
+            right: -130px;
+            top: -140px;
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .start-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .start-panel .cp-eyebrow {
+            background: rgba(255, 255, 255, 0.14);
+            color: #dbeafe;
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .start-panel h2 {
+            margin: 0;
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1;
+            letter-spacing: -0.052em;
+        }
+
+        .start-panel p {
+            margin: 13px 0 0;
+            max-width: 720px;
+            color: #dbeafe;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .start-panel .cp-button {
+            background: #ffffff;
+            color: #1d4ed8;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 1120px) {
+            .book-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 980px) {
+            .hero-layout,
+            .practice-layout,
+            .start-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .book-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .home-section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .home-section-heading p:not(.cp-eyebrow) {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .cp-container {
+                width: min(100% - 28px, 1180px);
+            }
+
+            .home-hero {
+                padding-top: 30px;
+            }
+
+            .hero-content,
+            .hero-panel,
+            .start-panel {
+                border-radius: 26px;
+                padding: 24px;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .cp-button {
+                width: 100%;
+            }
+
+            .hero-proof,
+            .book-grid,
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mini-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cp-feature-card {
+                min-height: auto;
+            }
+
+            .start-panel .cp-button {
+                width: 100%;
+            }
+        }
+
+        /* IMPORTANT FIXES: these force this page to ignore global main.css conflicts */
+        body .home-page {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding-bottom: 72px !important;
+        }
+
+        body .home-page .cp-container {
+            width: min(1180px, calc(100% - 40px)) !important;
+            max-width: 1180px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        body .home-page .home-hero {
+            display: block !important;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 72px 0 36px !important;
+            text-align: left !important;
+        }
+
+        body .home-page .home-hero > .cp-container {
+            width: min(1180px, calc(100% - 40px)) !important;
+            max-width: 1180px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        body .home-page .hero-layout {
+            width: 100% !important;
+            max-width: 1180px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, 1.06fr) minmax(330px, 0.94fr) !important;
+            gap: 30px !important;
+            align-items: stretch !important;
+            justify-content: center !important;
+        }
+
+        body .home-page .hero-content,
+        body .home-page .hero-panel {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+        }
+
+        body .home-page .home-section {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 42px 0 !important;
+            display: block !important;
+        }
+
+        body .home-page .home-section > .cp-container {
+            width: min(1180px, calc(100% - 40px)) !important;
+            max-width: 1180px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        body .home-page .cp-button {
+            text-decoration: none !important;
+        }
+
+        body .home-page .book-grid,
+        body .home-page .practice-layout,
+        body .home-page .workflow-grid {
+            width: 100% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        @media (max-width: 980px) {
+            body .home-page .hero-layout {
+                grid-template-columns: 1fr !important;
+            }
+
+            body .home-page .practice-layout,
+            body .home-page .start-panel {
+                grid-template-columns: 1fr !important;
+            }
+
+            body .home-page .book-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+        }
+
+        @media (max-width: 760px) {
+            body .home-page .cp-container,
+            body .home-page .home-section > .cp-container,
+            body .home-page .home-hero > .cp-container {
+                width: min(100% - 28px, 1180px) !important;
+                max-width: 1180px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            body .home-page .home-hero {
+                padding-top: 30px !important;
+            }
+
+            body .home-page .hero-layout,
+            body .home-page .hero-proof,
+            body .home-page .book-grid,
+            body .home-page .workflow-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            body .home-page .cp-button {
+                width: 100% !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <header class="site-header">
-        <a class="brand" href="{% url 'cambridge_practice:home' %}">
-            <span class="brand-mark">CP</span>
-            <span>Cambridge Practice</span>
-        </a>
-        <nav class="nav-links" aria-label="Main navigation">
-            <a href="#practice">Practice</a>
-            <a href="#books">Books</a>
-            <a href="#start">Start</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
-                <span class="user-pill">
-                    {{ user.username }}
-                    {% if has_pro_access %}<span>Pro</span>{% endif %}
-                </span>
-                <a href="{% url 'cambridge_practice:logout' %}">Sign out</a>
-            {% else %}
-                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
-                <a class="nav-button" href="{% url 'cambridge_practice:register' %}">Register</a>
-            {% endif %}
-        </nav>
-    </header>
+    <header
+    class="site-header"
+    style="
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: 100%;
+        min-height: 72px;
+        padding: 14px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(226, 232, 240, 0.95);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    "
+>
+    <a
+        class="brand"
+        href="{% url 'cambridge_practice:home' %}"
+        style="
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            min-width: 0;
+            color: #0f172a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 950;
+            letter-spacing: -0.025em;
+            white-space: nowrap;
+        "
+    >
+        <span
+            class="brand-mark"
+            style="
+                width: 42px;
+                height: 42px;
+                min-width: 42px;
+                border-radius: 15px;
+                display: grid;
+                place-items: center;
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                color: #ffffff;
+                font-size: 15px;
+                font-weight: 950;
+                box-shadow: 0 12px 26px rgba(37, 99, 235, 0.22);
+            "
+        >
+            CP
+        </span>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <p class="eyebrow">IELTS Academic preparation</p>
-                <h1>Practice Cambridge IELTS books with audio and focused reading sections.</h1>
-                <p class="hero-text">
-                    {% if is_preview %}
-                        Try Cambridge IELTS 11 Test 1 as a free mock preview. Your preview score is shown only on the page and is not saved.
-                    {% else %}
-                        This website is a simple study space for Cambridge IELTS materials from books 11 to 20.
-                        Students can follow listening audio and organize practice for reading and listening.
-                    {% endif %}
-                </p>
-                <div class="hero-actions">
-                    <a class="button primary" href="#books">Browse books</a>
-                    <a class="button secondary" href="#practice">View practice areas</a>
-                </div>
-            </div>
-            <div class="hero-panel" aria-label="Website summary">
-                <div class="panel-topline">Included materials</div>
-                <div class="big-number">{{ book_count }}</div>
-                <p>
-                    {% if has_pro_access %}
-                        Cambridge IELTS books available for your pro account.
-                    {% elif is_preview %}
-                        Free preview mock exam available without login.
-                    {% else %}
-                        Cambridge IELTS books available for normal users.
-                    {% endif %}
-                </p>
-                <div class="mini-grid">
-                    <span>Books</span>
-                    <span>Audio</span>
-                    <span>Tests</span>
-                    <span>Practice</span>
-                </div>
-            </div>
-        </section>
+        <span
+            style="
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 220px;
+            "
+        >
+            Cambridge Practice
+        </span>
+    </a>
 
-        <section class="section" id="practice">
-            <div class="section-heading">
-                <p class="eyebrow">What kind of website is this?</p>
-                <h2>A practice platform for IELTS self-study.</h2>
-                <p>
-                    It is built for learners who want one place to review Cambridge IELTS books,
-                    listen to test audio, and practice reading and listening skill by skill.
-                </p>
-            </div>
+    <nav
+        class="nav-links"
+        aria-label="Main navigation"
+        style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            min-width: 0;
+            flex-wrap: wrap;
+        "
+    >
+        
 
-            <div class="feature-grid">
-                <article class="feature-card">
-                    <span class="feature-icon">R</span>
-                    <h3>Reading</h3>
-                    <p>Work through academic passages, question types, and answer review.</p>
-                </article>
-                <article class="feature-card">
-                    <span class="feature-icon">L</span>
-                    <h3>Listening</h3>
-                    <p>Use the included audio folders to practice sections, maps, lectures, and conversations.</p>
-                </article>
-            </div>
-        </section>
+        {% if user.is_authenticated %}
+            <a
+                href="{% url 'cambridge_practice:past_results' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #ffffff;
+                    color: #334155;
+                    border: 1px solid #e2e8f0;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 900;
+                    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.035);
+                "
+            >
+                Past results
+            </a>
 
-        <section class="section books-section" id="books">
-            <div class="section-heading compact">
-                <p class="eyebrow">Cambridge library</p>
-                <h2>
-                    {% if is_preview %}
-                        Free preview
-                    {% elif has_pro_access %}
-                        Books 11-20
-                    {% else %}
-                        Books 11-18
-                    {% endif %}
-                </h2>
-                <p>
-                    {% if is_preview %}
-                        Login to unlock all normal-user books. Preview results are not saved to the database.
-                    {% else %}
-                        Book cards are shown here for practice. PDF files are private and are not opened from the website.
-                    {% endif %}
-                </p>
-            </div>
+            <span
+                class="user-pill"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 7px;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #f8fafc;
+                    color: #0f172a;
+                    border: 1px solid #e2e8f0;
+                    font-size: 13px;
+                    font-weight: 950;
+                    max-width: 170px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                "
+            >
+                {{ user.username }}
 
-            <div class="book-grid">
-                {% for book in books %}
-                    <a class="book-card book-card-link" href="{% url 'cambridge_practice:book_detail' book.number %}">
-                        <div class="book-number">{{ book.number }}</div>
+                {% if has_pro_access %}
+                    <span
+                        style="
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 3px 7px;
+                            border-radius: 999px;
+                            background: #f5f3ff;
+                            color: #6d28d9;
+                            border: 1px solid #ddd6fe;
+                            font-size: 10px;
+                            font-weight: 950;
+                            text-transform: uppercase;
+                            letter-spacing: 0.04em;
+                        "
+                    >
+                        Pro
+                    </span>
+                {% endif %}
+            </span>
+
+            <a
+                href="{% url 'cambridge_practice:logout' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #fff7ed;
+                    color: #c2410c;
+                    border: 1px solid #fed7aa;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 900;
+                "
+            >
+                Sign out
+            </a>
+        {% else %}
+            <a
+                href="{% url 'cambridge_practice:login' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 13px;
+                    border-radius: 999px;
+                    background: #ffffff;
+                    color: #334155;
+                    border: 1px solid #e2e8f0;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 900;
+                    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.035);
+                "
+            >
+                Sign in
+            </a>
+
+            <a
+                class="nav-button"
+                href="{% url 'cambridge_practice:register' %}"
+                style="
+                    min-height: 38px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 15px;
+                    border-radius: 999px;
+                    background: linear-gradient(135deg, #2563eb, #4f46e5);
+                    color: #ffffff;
+                    border: 1px solid transparent;
+                    text-decoration: none;
+                    font-size: 13px;
+                    font-weight: 950;
+                    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+                "
+            >
+                Register
+            </a>
+        {% endif %}
+    </nav>
+</header>
+
+    <main class="home-page">
+        <section class="home-hero">
+            <div class="cp-container">
+                <div class="hero-layout">
+                    <div class="hero-content">
+                        <p class="cp-eyebrow">IELTS Academic preparation</p>
+
+                        <h1>Practice Cambridge IELTS books in one clean exam-style space.</h1>
+
+                        <p class="hero-text">
+                            {% if is_preview %}
+                                Try Cambridge IELTS 11 Test 1 as a free mock preview. Your preview score is shown only on the page and is not saved.
+                            {% else %}
+                                Study Cambridge IELTS materials from books 11 to 20 with organized Reading and Listening practice, audio-based tests, book navigation, and instant result review.
+                            {% endif %}
+                        </p>
+
+                        <div class="hero-actions">
+                            <a class="cp-button primary" href="#books">
+                                Browse books
+                                <span>→</span>
+                            </a>
+
+                            <a class="cp-button secondary" href="#practice">
+                                View practice areas
+                            </a>
+                        </div>
+
+                        <div class="hero-proof">
+                            <div class="proof-card">
+                                <strong>{{ book_count }}</strong>
+                                <span>available books</span>
+                            </div>
+
+                            <div class="proof-card">
+                                <strong>2</strong>
+                                <span>skills: Reading & Listening</span>
+                            </div>
+
+                            <div class="proof-card">
+                                <strong>40</strong>
+                                <span>questions per full test</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="hero-panel" aria-label="Website summary">
                         <div>
-                            <h3>{{ book.title }}</h3>
+                            <div class="panel-topline">Included materials</div>
+
+                            <div class="big-number">{{ book_count }}</div>
+
                             <p>
-                                {% if is_preview %}
-                                    Open Test 1 mock preview.
+                                {% if has_pro_access %}
+                                    Cambridge IELTS books are available for your Pro account. Choose any book below and continue practicing.
+                                {% elif is_preview %}
+                                    Free preview mock exam is available without login. Create an account to unlock more practice.
                                 {% else %}
-                                    Open four practice tests for this book.
+                                    Cambridge IELTS books are available for normal users. Open a book and start a practice test.
                                 {% endif %}
                             </p>
+
+                            <div class="mock-test">
+                                <div class="mock-test-header">
+                                    <span>Test interface preview</span>
+                                    <span class="timer-pill">60:00</span>
+                                </div>
+
+                                <div class="mock-lines">
+                                    <span class="mock-line w90"></span>
+                                    <span class="mock-line w78"></span>
+                                    <span class="mock-line w90"></span>
+                                    <span class="mock-line w63"></span>
+                                </div>
+                            </div>
                         </div>
-                        {% if book.requires_pro %}
-                            <span class="book-status pro-status">Pro</span>
-                        {% else %}
-                            <span class="book-status">Open</span>
-                        {% endif %}
-                    </a>
-                {% endfor %}
+
+                        <div class="mini-grid">
+                            <span>Books</span>
+                            <span>Audio</span>
+                            <span>Tests</span>
+                            <span>Practice</span>
+                        </div>
+                    </aside>
+                </div>
             </div>
         </section>
 
-        <section class="section start-section" id="start">
-            <div>
-                <p class="eyebrow">Next step</p>
-                <h2>Choose a book and start one test.</h2>
+        <section class="home-section" id="practice">
+            <div class="cp-container">
+                <div class="home-section-heading">
+                    <div>
+                        <p class="cp-eyebrow">Practice areas</p>
+                        <h2>A focused IELTS self-study platform.</h2>
+                    </div>
+
+                    <p>
+                        Built for learners who want one place to open Cambridge IELTS books, practice Reading and Listening, follow audio, submit answers, and review results.
+                    </p>
+                </div>
+
+                <div class="practice-layout">
+                    <article class="cp-feature-card">
+                        <span class="feature-icon">R</span>
+
+                        <h3>Reading practice</h3>
+
+                        <p>
+                            Work through academic passages with organized question sections, answer fields, and clean spacing that feels closer to exam practice.
+                        </p>
+
+                        <div class="feature-points">
+                            <div class="feature-point">
+                                <span class="check">✓</span>
+                                Passage-based practice
+                            </div>
+
+                            <div class="feature-point">
+                                <span class="check">✓</span>
+                                Answer review after submission
+                            </div>
+
+                            <div class="feature-point">
+                                <span class="check">✓</span>
+                                Book-by-book structure
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="cp-feature-card">
+                        <span class="feature-icon">L</span>
+
+                        <h3>Listening practice</h3>
+
+                        <p>
+                            Use the included audio flow to practice conversations, maps, lectures, and section-based Listening tasks with clearer organization.
+                        </p>
+
+                        <div class="feature-points">
+                            <div class="feature-point">
+                                <span class="check">✓</span>
+                                Audio-supported tests
+                            </div>
+
+                            <div class="feature-point">
+                                <span class="check">✓</span>
+                                Section-by-section practice
+                            </div>
+
+                            <div class="feature-point">
+                                <span class="check">✓</span>
+                                Instant score checking
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
-            <p>
-                A good study flow is simple: open a book, complete one section, check answers,
-                and repeat with the audio until the timing feels natural.
-            </p>
+        </section>
+
+        <section class="home-section books-section" id="books">
+            <div class="cp-container">
+                <div class="home-section-heading compact">
+                    <div>
+                        <p class="cp-eyebrow">Cambridge library</p>
+
+                        <h2>
+                            {% if is_preview %}
+                                Free preview
+                            {% elif has_pro_access %}
+                                Books 11–20
+                            {% else %}
+                                Books 11–18
+                            {% endif %}
+                        </h2>
+                    </div>
+
+                    <p>
+                        {% if is_preview %}
+                            Login to unlock all normal-user books. Preview results are not saved to the database.
+                        {% else %}
+                            Book cards are shown here for practice. PDF files are private and are not opened from the website.
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="book-grid">
+                    {% for book in books %}
+                        <a class="book-card book-card-link" href="{% url 'cambridge_practice:book_detail' book.number %}">
+                            <div class="book-card-top">
+                                <div class="book-number">{{ book.number }}</div>
+
+                                {% if book.requires_pro %}
+                                    <span class="book-status pro-status">Pro</span>
+                                {% else %}
+                                    <span class="book-status">Open</span>
+                                {% endif %}
+                            </div>
+
+                            <div>
+                                <h3>{{ book.title }}</h3>
+
+                                <p>
+                                    {% if is_preview %}
+                                        Open Test 1 mock preview and try the platform without saving results.
+                                    {% else %}
+                                        Open four practice tests for this book and continue your Reading and Listening practice.
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            <div class="book-card-footer">
+                                <span>
+                                    {% if is_preview %}
+                                        Try preview
+                                    {% else %}
+                                        Open book
+                                    {% endif %}
+                                </span>
+                                <span class="arrow-circle">→</span>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section">
+            <div class="cp-container">
+                <div class="home-section-heading">
+                    <div>
+                        <p class="cp-eyebrow">Study workflow</p>
+                        <h2>Simple flow, less friction.</h2>
+                    </div>
+
+                    <p>
+                        The goal is to make practice feel direct: choose a book, complete one test, check your answers, and repeat with better timing.
+                    </p>
+                </div>
+
+                <div class="workflow-grid">
+                    <article class="workflow-card">
+                        <div class="workflow-number">1</div>
+
+                        <h3>Choose a book</h3>
+
+                        <p>
+                            Select one Cambridge IELTS book from the library and open its practice tests.
+                        </p>
+                    </article>
+
+                    <article class="workflow-card">
+                        <div class="workflow-number">2</div>
+
+                        <h3>Complete a test</h3>
+
+                        <p>
+                            Practice Reading or Listening with organized sections, answer inputs, and a focused layout.
+                        </p>
+                    </article>
+
+                    <article class="workflow-card">
+                        <div class="workflow-number">3</div>
+
+                        <h3>Review results</h3>
+
+                        <p>
+                            Submit your answers, check your score, and use the result to plan the next practice session.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section start-section" id="start">
+            <div class="cp-container">
+                <div class="start-panel">
+                    <div>
+                        <p class="cp-eyebrow">Next step</p>
+
+                        <h2>Choose a book and start one test.</h2>
+
+                        <p>
+                            A good study flow is simple: open a book, complete one section, check answers, and repeat with the audio until the timing feels natural.
+                        </p>
+                    </div>
+
+                    <a class="cp-button" href="#books">
+                        Browse books
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
 </body>

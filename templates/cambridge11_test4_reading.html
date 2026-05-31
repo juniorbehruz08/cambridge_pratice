@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 11 Test 4 Reading | Cambridge Practice</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=falkirk-wheel-layout-3">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=b11t4-summary-drag-20260531">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 11 - Test 4 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -150,7 +150,7 @@
                             <p><strong>A</strong> nurture</p><p><strong>B</strong> organs</p><p><strong>C</strong> code</p><p><strong>D</strong> chemicals</p><p><strong>E</strong> environment</p><p><strong>F</strong> behaviour/behavior</p>
                         </div>
                         <h3 class="ielts-center-title">Epigenetic processes</h3>
-                        <div class="sentence-questions">
+                        <div class="sentence-questions compact-summary-drag">
                             <p>In epigenetic processes, <span class="qnum">10</span> <span class="ielts-blank short"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off" maxlength="1"><span>............</span></span> influence the activity of our genes, for example in creating our internal <span class="qnum">11</span> <span class="ielts-blank short"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
                             <p>The study of epigenetic processes is uncovering a way in which our genes can be affected by our <span class="qnum">12</span> <span class="ielts-blank short"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
                             <p>One example is that if a pregnant rat suffers stress, the newborn rat may later show problems in its <span class="qnum">13</span> <span class="ielts-blank short"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
@@ -225,7 +225,7 @@
                             <p><strong>A</strong> difficult</p><p><strong>B</strong> complex</p><p><strong>C</strong> original</p><p><strong>D</strong> admired</p><p><strong>E</strong> material</p><p><strong>F</strong> easy</p><p><strong>G</strong> fundamental</p>
                         </div>
                         <h3 class="ielts-center-title">The importance of language</h3>
-                        <div class="sentence-questions">
+                        <div class="sentence-questions compact-summary-drag">
                             <p>The wheel is one invention that has had a major impact on <span class="qnum">33</span> <span class="ielts-blank short"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off" maxlength="1"><span>............</span></span> aspects of life, but no impact has been as <span class="qnum">34</span> <span class="ielts-blank short"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off" maxlength="1"><span>............</span></span> as that of language.</p>
                             <p>Language is very <span class="qnum">35</span> <span class="ielts-blank short"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off" maxlength="1"><span>............</span></span>, yet composed of just a small number of sounds.</p>
                             <p>Language appears to be <span class="qnum">36</span> <span class="ielts-blank short"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off" maxlength="1"><span>............</span></span> to use. However, its sophistication is often overlooked.</p>

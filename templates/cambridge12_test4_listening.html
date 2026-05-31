@@ -6,7 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 12 Test 4 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        /* Page-specific map answer layout: keep each map answer on one line.
+           This is scoped to this HTML file only; main.css is untouched. */
+        .sheepmarket-map-answers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+            width: min(100%, 520px);
+            margin: 0 auto;
+            font-size: 13px;
+        }
+
+        .sheepmarket-map-answers label {
+            display: grid !important;
+            grid-template-columns: 30px minmax(0, 1fr) 94px;
+            column-gap: 8px;
+            align-items: baseline;
+            line-height: 20px;
+            white-space: nowrap;
+        }
+
+        .sheepmarket-map-answers label strong {
+            margin-right: 0;
+        }
+
+        .sheepmarket-map-answers label > span:not(.ielts-blank) {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sheepmarket-map-answers .ielts-blank.short {
+            width: 94px;
+            margin-left: 0;
+            justify-self: end;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -129,7 +166,7 @@
                     <p class="ielts-instr map-title">Questions 15-20</p>
                     <p class="ielts-instr">Label the map below. Write the correct letter, <strong>A-I</strong>, next to Questions 15-20.</p>
                     <img class="farm-map-image" src="{% static 'img/cambridge12/test4/listening/sheepmarket-map.png' %}" alt="Art and History in the Sheepmarket map">
-                    <div class="map-answers">
+                    <div class="map-answers sheepmarket-map-answers">
                         <label><strong>15</strong><span>The Reynolds House</span><span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
                         <label><strong>16</strong><span>The Thumb</span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
                         <label><strong>17</strong><span>The Museum</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>

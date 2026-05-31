@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 19 Test 2 Reading | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -15,7 +15,7 @@
             <span>Cambridge IELTS 19 - Test 2 Reading</span>
         </a>
         <nav class="nav-links" aria-label="Practice navigation">
-            <span class="timer-pill" id="timerDisplay">60:00</span>
+            <span class="timer-pill" id="timerDisplay">Audio</span>
             <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
             {% if user.is_authenticated %}
                 <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
@@ -158,6 +158,16 @@
                         <p class="ielts-instr">Questions 14-18</p>
                         <p>Reading Passage 2 has six paragraphs, <strong>A-F</strong>. Which paragraph contains the following information?</p>
                         <p class="ielts-instr">NB You may use any letter more than once.</p>
+
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong><span>Paragraph A</span></p>
+                            <p><strong>B</strong><span>Paragraph B</span></p>
+                            <p><strong>C</strong><span>Paragraph C</span></p>
+                            <p><strong>D</strong><span>Paragraph D</span></p>
+                            <p><strong>E</strong><span>Paragraph E</span></p>
+                            <p><strong>F</strong><span>Paragraph F</span></p>
+                        </div>
+
                         <div class="reading-choice-list">
                             {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> reference to two chemical compounds which impact on performance</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
                             {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> examples of strategies for minimising the effects of stress</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
@@ -210,6 +220,35 @@
                         <h2>Reading Passage 3</h2>
                         <p class="ielts-instr">Questions 27-32</p>
                         <p>Complete the summary using the list of phrases, <strong>A-K</strong>, below.</p>
+
+                        <div class="ielts-note-box">
+                            <h3>Maryam Mirzakhani</h3>
+                            <p>
+                                Maryam Mirzakhani is regarded as
+                                <span class="qnum">27</span>
+                                <span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                in the field of mathematics because she was the only female holder of the prestigious Fields Medal, a record that she retained at the time of her death. However, maths held little
+                                <span class="qnum">28</span>
+                                <span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                for her as a child and in fact her performance was below average until she was
+                                <span class="qnum">29</span>
+                                <span class="ielts-blank short"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                by a difficult puzzle that one of her siblings showed her.
+                            </p>
+                            <p>
+                                Later, as a professional mathematician, she had an inquiring mind and proved herself to be
+                                <span class="qnum">30</span>
+                                <span class="ielts-blank short"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                when things did not go smoothly. She said she got the greatest
+                                <span class="qnum">31</span>
+                                <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                from making ground-breaking discoveries and in fact she was responsible for some extremely
+                                <span class="qnum">32</span>
+                                <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off" maxlength="1"><span>............</span></span>
+                                mathematical studies.
+                            </p>
+                        </div>
+
                         <div class="ielts-choice-box">
                             <p><strong>A</strong><span>appeal</span></p>
                             <p><strong>B</strong><span>determined</span></p>
@@ -217,15 +256,11 @@
                             <p><strong>D</strong><span>single</span></p>
                             <p><strong>E</strong><span>achievement</span></p>
                             <p><strong>F</strong><span>devoted</span></p>
-                            <p><strong>G</strong><span>unique</span></p>
-                            <p><strong>H</strong><span>satisfaction</span></p>
+                            <p><strong>G</strong><span>involved</span></p>
+                            <p><strong>H</strong><span>unique</span></p>
                             <p><strong>I</strong><span>innovative</span></p>
-                            <p><strong>J</strong><span>involved</span></p>
+                            <p><strong>J</strong><span>satisfaction</span></p>
                             <p><strong>K</strong><span>intent</span></p>
-                        </div>
-                        <div class="ielts-note-box">
-                            <h3>Maryam Mirzakhani</h3>
-                            <p>Maryam Mirzakhani is regarded as <span class="qnum">27</span> {% with selected=attempt.answers|answer_value:27 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_27" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button><button type="button" class="mc-option" data-value="K"><strong>K</strong></button></span></span>{% endwith %} in the field of mathematics because she was the only female holder of the prestigious Fields Medal, a record that she retained at the time of her death. However, maths held little <span class="qnum">28</span> {% with selected=attempt.answers|answer_value:28 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_28" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button><button type="button" class="mc-option" data-value="K"><strong>K</strong></button></span></span>{% endwith %} for her as a child and in fact her performance was below average until she was <span class="qnum">29</span> {% with selected=attempt.answers|answer_value:29 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_29" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button><button type="button" class="mc-option" data-value="K"><strong>K</strong></button></span></span>{% endwith %} by a difficult puzzle that one of her siblings showed her. Later, as a professional mathematician, she had an inquiring mind and proved herself to be <span class="qnum">30</span> {% with selected=attempt.answers|answer_value:30 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_30" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button><button type="button" class="mc-option" data-value="K"><strong>K</strong></button></span></span>{% endwith %} when things did not go smoothly. She said she got the greatest <span class="qnum">31</span> {% with selected=attempt.answers|answer_value:31 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_31" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button><button type="button" class="mc-option" data-value="K"><strong>K</strong></button></span></span>{% endwith %} from making ground-breaking discoveries and in fact she was responsible for some extremely <span class="qnum">32</span> {% with selected=attempt.answers|answer_value:32 %}<span class="mc-question inline-mc"><input type="hidden" name="answer_32" value="{{ selected }}"><span class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button><button type="button" class="mc-option" data-value="I"><strong>I</strong></button><button type="button" class="mc-option" data-value="J"><strong>J</strong></button><button type="button" class="mc-option" data-value="K"><strong>K</strong></button></span></span>{% endwith %} mathematical studies.</p>
                         </div>
 
                         <p class="ielts-instr">Questions 33-37</p>

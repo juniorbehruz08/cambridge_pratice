@@ -6,7 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambridge IELTS 19 Test 1 Listening | Cambridge Practice</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/practice.js' %}?v=past-results-20260526" defer></script>
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .listening-note-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 8px;
+        }
+
+        .note-subtitle {
+            margin: 8px 0 4px;
+        }
+
+        .farm-map-image {
+            display: block;
+            width: 100%;
+            max-width: 720px;
+            margin: 18px auto 18px;
+        }
+
+        .map-answers {
+            display: block !important;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            column-count: 1 !important;
+            columns: 1 !important;
+        }
+
+        .map-answers label {
+            display: grid !important;
+            grid-template-columns: 34px 260px 140px !important;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 7px 0;
+            font-size: 15px;
+            line-height: 1.35;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .map-answers label strong {
+            font-weight: 700;
+        }
+
+        .map-answers .ielts-blank {
+            width: 130px;
+        }
+
+        .map-answers .ielts-blank input {
+            text-align: center;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header practice-header">
@@ -67,10 +122,6 @@
             {% csrf_token %}
 
             <article class="ielts-paper">
-                <div class="ielts-page-top">
-                    <span>Test 1</span>
-                    <span>Listening</span>
-                </div>
                 <h1 class="ielts-test-title">Test 1</h1>
                 <div class="ielts-listening-label">LISTENING</div>
 
@@ -78,30 +129,30 @@
                     <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
                     <div class="ielts-note-box">
-                        <h3>The park</h3>
-                        <p><strong>Area:</strong> Hinchingbrooke Country Park <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> hectares</p>
+                        <h3 class="listening-note-title">Hinchingbrooke Country Park</h3>
+
+                        <p class="note-subtitle"><strong>The park</strong></p>
+                        <p><strong>Area:</strong> <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> hectares</p>
                         <p><strong>Habitats:</strong> wetland, grassland and woodland</p>
-                        <p><strong>Wetland:</strong> lakes, ponds and a <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></p>
-                        <p>Wildlife includes birds, insects and animals.</p>
+                        <p><strong>Wetland:</strong> lake, ponds and a <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></p>
+                        <p>Wildlife includes birds, insects and animals</p>
+
                         <p class="ielts-blue-title black">Subjects studied in educational visits include</p>
-                        <ul>
-                            <li><strong>Science:</strong> Children look at <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> about plants, etc.</li>
-                            <li><strong>Geography:</strong> includes learning to use a <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> and compass</li>
-                            <li><strong>History:</strong> changes in land use</li>
-                            <li><strong>Leisure and tourism:</strong> mostly concentrates on the park's <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
-                            <li><strong>Music:</strong> Children make <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> with natural materials, and experiment with rhythm and speed.</li>
-                        </ul>
+                        <p><strong>Science:</strong> Children look at <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> about plants, etc.</p>
+                        <p><strong>Geography:</strong> includes learning to use a <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> and compass</p>
+                        <p><strong>History:</strong> changes in land use</p>
+                        <p><strong>Leisure and tourism:</strong> mostly concentrates on the park's <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></p>
+                        <p><strong>Music:</strong> Children make <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> with natural materials, and experiment with rhythm and speed.</p>
+
                         <p class="ielts-blue-title black">Benefits of outdoor educational visits</p>
-                        <ul>
-                            <li>They give children a feeling of <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> that they may not have elsewhere.</li>
-                            <li>Children learn new <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> and gain self-confidence.</li>
-                        </ul>
+                        <p>They give children a feeling of <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> that they may not have elsewhere.</p>
+                        <p>Children learn new <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> and gain self-confidence.</p>
+
                         <p class="ielts-blue-title black">Practical issues</p>
-                        <ul>
-                            <li>Cost per child: <span class="qnum">9</span> <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>............</span></span></li>
-                            <li>Adults, such as <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span>, free</li>
-                        </ul>
+                        <p>Cost per child: <span class="qnum">9</span> <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>............</span></span></p>
+                        <p>Adults, such as <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span>, free</p>
                     </div>
                 </section>
             </article>
@@ -114,8 +165,10 @@
 
                 <section class="ielts-section">
                     <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+
                     <p class="ielts-instr">Questions 11-15</p>
                     <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+
                     <div class="reading-choice-list">
                         {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> During the visit to Malatte, in France, members especially enjoyed</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>going to a theme park.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>experiencing a river trip.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>visiting a cheese factory.</span></button></div></div>{% endwith %}
                         {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> What will happen in Stanthorpe to mark the 25th anniversary of the Twinning Association?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>A tree will be planted.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>A garden seat will be bought.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>A footbridge will be built.</span></button></div></div>{% endwith %}
@@ -127,13 +180,54 @@
                     <p class="ielts-instr map-title">Questions 16-20</p>
                     <p class="ielts-instr">Label the map below.</p>
                     <p class="ielts-instr">Write the correct letter, <strong>A-H</strong>, next to Questions 16-20.</p>
+
                     <img class="farm-map-image" src="{% static '19/images/test1_farley_house_map.png' %}" alt="Farley House map with labels A to H">
+
                     <div class="map-answers">
-                        <label><strong>16</strong> Farm shop <span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>17</strong> Disabled entry <span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>18</strong> Adventure playground <span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>19</strong> Kitchen gardens <span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
-                        <label><strong>20</strong> The Temple of the Four Winds <span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label>
+                            <strong>16</strong>
+                            <span>Farm shop</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>17</strong>
+                            <span>Disabled entry</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>18</strong>
+                            <span>Adventure playground</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>19</strong>
+                            <span>Kitchen gardens</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>20</strong>
+                            <span>The Temple of the Four Winds</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
                     </div>
                 </section>
             </article>
@@ -146,9 +240,11 @@
 
                 <section class="ielts-section">
                     <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+
                     <p class="ielts-instr">Questions 21 and 22</p>
                     <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
                     <p>Which <strong>TWO</strong> things did Colin find most satisfying about his bread reuse project?</p>
+
                     <div class="multi-answer-question">
                         <input type="hidden" name="answer_21" value="{{ attempt.answers|answer_value:21 }}">
                         <input type="hidden" name="answer_22" value="{{ attempt.answers|answer_value:22 }}">
@@ -164,6 +260,7 @@
                     <p class="ielts-instr">Questions 23 and 24</p>
                     <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
                     <p>Which <strong>TWO</strong> ways do the students agree that touch-sensitive sensors for food labels could be developed in future?</p>
+
                     <div class="multi-answer-question">
                         <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
                         <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
@@ -179,6 +276,7 @@
                     <p class="ielts-instr">Questions 25-30</p>
                     <p>What is the students' opinion about each of the following food trends?</p>
                     <p class="ielts-instr">Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 25-30.</p>
+
                     <div class="ielts-choice-box">
                         <p><strong>A</strong><span>This is only relevant to young people.</span></p>
                         <p><strong>B</strong><span>This may have disappointing results.</span></p>
@@ -189,6 +287,7 @@
                         <p><strong>G</strong><span>There should be stricter regulations about this.</span></p>
                         <p><strong>H</strong><span>This could be dangerous.</span></p>
                     </div>
+
                     <div class="reading-choice-list">
                         {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> Use of local products</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
                         {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> Reduction in unnecessary packaging</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
@@ -210,9 +309,11 @@
                     <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
                     <p class="ielts-instr">Complete the notes below.</p>
                     <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
                     <div class="ielts-note-box">
                         <h3>Ceide Fields</h3>
                         <p class="ielts-blue-title black">An important Neolithic archaeological site in the northwest of Ireland</p>
+
                         <p class="ielts-blue-title black">Discovery</p>
                         <ul>
                             <li>In the 1930s, a local teacher realised that stones beneath the bog surface were once <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span>.</li>
@@ -221,6 +322,7 @@
                             <li>Carbon dating later proved the site was Neolithic.</li>
                             <li>Items are well preserved in the bog because of a lack of <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</li>
                         </ul>
+
                         <p class="ielts-blue-title black">Neolithic farmers</p>
                         <ul>
                             <li>Houses were <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> in shape and had a hole in the roof.</li>
@@ -228,6 +330,7 @@
                             <li>Each field at Ceide was large enough to support a big <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span>.</li>
                             <li>The fields were probably used to restrict the grazing of animals. There is no evidence of structures to house them during <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span>.</li>
                         </ul>
+
                         <p class="ielts-blue-title black">Reasons for the decline in farming</p>
                         <ul>
                             <li>a decline in <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> quality</li>
@@ -243,6 +346,7 @@
             </div>
         </form>
     </main>
+
     {{ result_details|json_script:"resultDetails" }}
 </body>
 </html>
