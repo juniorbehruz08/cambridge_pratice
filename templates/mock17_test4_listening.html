@@ -1,0 +1,303 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 17 Test 4 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .maple-syrup-box{padding:12px 18px}.maple-syrup-box h3{text-align:center;margin:0 0 12px;font-size:20px;line-height:1.15;font-weight:700;color:#111}
+        .maple-block{border-top:1px dotted #777;padding-top:7px;margin-top:7px}.maple-block:first-of-type{border-top:0;padding-top:0;margin-top:0}
+        .maple-two-col{display:grid;grid-template-columns:1fr 1fr;column-gap:26px}.maple-section{font-weight:700;margin:0 0 5px}.maple-subsection{font-style:italic;margin:5px 0 4px}
+        .maple-row{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:baseline;margin:4px 0;line-height:1.22}.maple-marker{text-align:center}.maple-text{min-width:0}
+        .maple-syrup-box .ielts-blank{min-width:118px}.maple-syrup-box .ielts-blank.short{min-width:88px}.maple-syrup-box .ielts-blank.medium{min-width:108px}.maple-syrup-box .ielts-blank.long{min-width:140px}
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 17 - Test 4 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 17 - Test 4</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 4</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Easy Life Cleaning Services</h3>
+                        <p class="ielts-blue-title black">Basic cleaning package offered</p>
+                        <ul>
+                            <li>Cleaning all surfaces</li>
+                            <li>Cleaning the <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> throughout the apartment</li>
+                            <li>Cleaning shower, sinks, toilet etc.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Additional services agreed</p>
+                        <ul>
+                            <li>Every week
+                                <ul>
+                                    <li>Cleaning the <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                                    <li>Ironing clothes - <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> only</li>
+                                </ul>
+                            </li>
+                            <li>Every month
+                                <ul>
+                                    <li>Cleaning all the <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> from the inside</li>
+                                    <li>Washing down the <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p class="ielts-blue-title black">Other possibilities</p>
+                        <ul>
+                            <li>They can organise a plumber or an <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> if necessary.</li>
+                            <li>A special cleaning service is available for customers who are allergic to <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Information on the cleaners</p>
+                        <ul>
+                            <li>Before being hired, all cleaners have a background check carried out by the <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>References are required.</li>
+                            <li>All cleaners are given <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> for two weeks.</li>
+                            <li>Customers send a <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> after each visit.</li>
+                            <li>Usually, each customer has one regular cleaner.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-14</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> Many hotel managers are unaware that their staff often leave because of</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>a lack of training.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>long hours.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>low pay.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> What is the impact of high staff turnover on managers?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>an increased workload</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>low morale</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>an inability to meet targets</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> What mistake should managers always avoid?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>failing to treat staff equally</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>reorganising shifts without warning</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>neglecting to have enough staff during busy periods</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> What unexpected benefit did Dunwich Hotel notice after improving staff retention rates?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>a fall in customer complaints</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>an increase in loyalty club membership</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>a rise in spending per customer</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 15-20</p>
+                    <p>Which way of reducing staff turnover was used in each of the following hotels?</p>
+                    <p class="ielts-instr">Write the correct letter, <strong>A, B</strong> or <strong>C</strong>, next to Questions 15-20.</p>
+                    <p class="ielts-instr"><strong>NB</strong> You may use any letter more than once.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>improving relationships and teamwork</span></p>
+                        <p><strong>B</strong><span>offering incentives and financial benefits</span></p>
+                        <p><strong>C</strong><span>providing career opportunities</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> The Sun Club</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> The Portland</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> Bluewater Hotels</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:18 %}<div class="mc-question"><input type="hidden" name="answer_18" value="{{ selected }}"><p><span class="qnum">18</span> Pentlow Hotels</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:19 %}<div class="mc-question"><input type="hidden" name="answer_19" value="{{ selected }}"><p><span class="qnum">19</span> Green Planet</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:20 %}<div class="mc-question"><input type="hidden" name="answer_20" value="{{ selected }}"><p><span class="qnum">20</span> The Amesbury</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-22</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> points do Thomas and Jeanne make about Thomas's sporting activities at school?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_21" value="{{ attempt.answers|answer_value:21 }}">
+                        <input type="hidden" name="answer_22" value="{{ attempt.answers|answer_value:22 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>He should have felt more positive about them.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>The training was too challenging for him.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>He could have worked harder at them.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>His parents were disappointed in him.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>His fellow students admired him.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 23 and 24</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> feelings did Thomas experience when he was in Kenya?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
+                        <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>disbelief</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>relief</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>stress</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>gratitude</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>homesickness</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 25-30</p>
+                    <p>What comment do the students make about the development of each of the following items of sporting equipment?</p>
+                    <p class="ielts-instr">Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 25-30.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>It could cause excessive sweating.</span></p>
+                        <p><strong>B</strong><span>The material was being mass produced for another purpose.</span></p>
+                        <p><strong>C</strong><span>People often needed to make their own.</span></p>
+                        <p><strong>D</strong><span>It often had to be replaced.</span></p>
+                        <p><strong>E</strong><span>The material was expensive.</span></p>
+                        <p><strong>F</strong><span>It was unpopular among spectators.</span></p>
+                        <p><strong>G</strong><span>It caused injuries.</span></p>
+                        <p><strong>H</strong><span>No one using it liked it at first.</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> the table tennis bat</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> the cricket helmet</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> the cycle helmet</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> the golf club</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> the hockey stick</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> the football</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box maple-syrup-box">
+                        <h3>Maple syrup</h3>
+
+                        <div class="maple-block maple-two-col">
+                            <div>
+                                <div class="maple-section">What is maple syrup?</div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">made from the sap of the maple tree</span></div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">added to food or used in cooking</span></div>
+                            </div>
+                            <div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">colour described as <span class="qnum">31</span> <span class="ielts-blank medium"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></span></div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">very <span class="qnum">32</span> <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>............</span></span> compared to<br>refined sugar</span></div>
+                            </div>
+                        </div>
+
+                        <div class="maple-block maple-two-col">
+                            <div>
+                                <div class="maple-section">The maple tree</div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">has many species</span></div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">needs sunny days and cool nights</span></div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">maple leaf has been on the Canadian<br>flag since 1964</span></div>
+                            </div>
+                            <div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">needs moist soil but does not need<br>fertiliser as well</span></div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">best growing conditions and<br><span class="qnum">33</span> <span class="ielts-blank short"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>............</span></span> are in Canada and<br>North America</span></div>
+                            </div>
+                        </div>
+
+                        <div class="maple-block maple-two-col">
+                            <div>
+                                <div class="maple-section">Early maple sugar producers</div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">made holes in the tree trunks</span></div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">used hot <span class="qnum">34</span> <span class="ielts-blank short"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>............</span></span> to heat<br>the sap</span></div>
+                            </div>
+                            <div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">used tree bark to make containers<br>for collection</span></div>
+                                <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">sweetened food and drink with sugar</span></div>
+                            </div>
+                        </div>
+
+                        <div class="maple-block">
+                            <div class="maple-section">Today's maple syrup</div>
+                            <div class="maple-subsection">The trees</div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">Tree trunks may not have the correct <span class="qnum">35</span> <span class="ielts-blank medium"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> until they have been<br>growing for 40 years.</span></div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">The changing temperature and movement of water within the tree produces the sap.</span></div>
+
+                            <div class="maple-subsection">The production</div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">A tap is drilled into the trunk and a <span class="qnum">36</span> <span class="ielts-blank medium"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> carries the sap into a bucket.</span></div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">Large pans of sap called evaporators are heated by means of a <span class="qnum">37</span> <span class="ielts-blank long"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span>.</span></div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">A lot of <span class="qnum">38</span> <span class="ielts-blank medium"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> is produced during the evaporation process.</span></div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">'Sugar sand' is removed because it makes the syrup look <span class="qnum">39</span> <span class="ielts-blank medium"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> and<br>affects the taste.</span></div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">The syrup is ready for use.</span></div>
+                            <div class="maple-row"><span class="maple-marker">•</span><span class="maple-text">A huge quantity of sap is needed to make a <span class="qnum">40</span> <span class="ielts-blank medium"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> of maple syrup.</span></div>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

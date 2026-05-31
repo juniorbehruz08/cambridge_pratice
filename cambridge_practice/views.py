@@ -17,52 +17,52 @@ from .services import band_score_for, create_or_update_result, grade_answers
 BOOKS = [
     {
         'number': 11,
-        'title': 'Cambridge IELTS 11',
+        'title': 'IELTS Mock 11',
         'requires_pro': False,
     },
     {
         'number': 12,
-        'title': 'Cambridge IELTS 12',
+        'title': 'IELTS Mock 12',
         'requires_pro': False,
     },
     {
         'number': 13,
-        'title': 'Cambridge IELTS 13',
+        'title': 'IELTS Mock 13',
         'requires_pro': False,
     },
     {
         'number': 14,
-        'title': 'Cambridge IELTS 14',
+        'title': 'IELTS Mock 14',
         'requires_pro': False,
     },
     {
         'number': 15,
-        'title': 'Cambridge IELTS 15',
+        'title': 'IELTS Mock 15',
         'requires_pro': False,
     },
     {
         'number': 16,
-        'title': 'Cambridge IELTS 16',
+        'title': 'IELTS Mock 16',
         'requires_pro': False,
     },
     {
         'number': 17,
-        'title': 'Cambridge IELTS 17',
+        'title': 'IELTS Mock 17',
         'requires_pro': False,
     },
     {
         'number': 18,
-        'title': 'Cambridge IELTS 18',
+        'title': 'IELTS Mock 18',
         'requires_pro': False,
     },
     {
         'number': 19,
-        'title': 'Cambridge IELTS 19',
+        'title': 'IELTS Mock 19',
         'requires_pro': True,
     },
     {
         'number': 20,
-        'title': 'Cambridge IELTS 20',
+        'title': 'IELTS Mock 20',
         'requires_pro': True,
     },
 ]
@@ -76,7 +76,7 @@ PRACTICE_TESTS = [
     {
         'number': 2,
         'title': 'Test 2',
-        'description': 'Continue with the second full Cambridge practice test.',
+        'description': 'Continue with the second full mock practice test.',
     },
     {
         'number': 3,
@@ -86,7 +86,7 @@ PRACTICE_TESTS = [
     {
         'number': 4,
         'title': 'Test 4',
-        'description': 'Complete the final practice test in this Cambridge book.',
+        'description': 'Complete the final practice test in this mock book.',
     },
 ]
 
@@ -283,7 +283,7 @@ def build_question_groups(section, answers):
 
 
 def practice_template_name(book_number, test_number, section):
-    template_name = f'cambridge{book_number}_test{test_number}_{section}.html'
+    template_name = f'mock{book_number}_test{test_number}_{section}.html'
     try:
         get_template(template_name)
     except TemplateDoesNotExist:
@@ -419,481 +419,481 @@ def practice_section(request, book_number, test_number, section):
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge11_test1_listening.html'
+        template_name = 'mock11_test1_listening.html'
     elif (
         book_number == 11
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge11_test2_listening.html'
+        template_name = 'mock11_test2_listening.html'
     elif (
         book_number == 11
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge11_test3_listening.html'
+        template_name = 'mock11_test3_listening.html'
     elif (
         book_number == 11
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge11_test4_listening.html'
+        template_name = 'mock11_test4_listening.html'
     elif (
         book_number == 12
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge12_test1_listening.html'
+        template_name = 'mock12_test1_listening.html'
     elif (
         book_number == 12
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge12_test2_listening.html'
+        template_name = 'mock12_test2_listening.html'
     elif (
         book_number == 12
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge12_test3_listening.html'
+        template_name = 'mock12_test3_listening.html'
     elif (
         book_number == 12
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge12_test4_listening.html'
+        template_name = 'mock12_test4_listening.html'
     elif (
         book_number == 13
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge13_test1_listening.html'
+        template_name = 'mock13_test1_listening.html'
     elif (
         book_number == 13
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge13_test2_listening.html'
+        template_name = 'mock13_test2_listening.html'
     elif (
         book_number == 13
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge13_test3_listening.html'
+        template_name = 'mock13_test3_listening.html'
     elif (
         book_number == 13
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge13_test4_listening.html'
+        template_name = 'mock13_test4_listening.html'
     elif (
         book_number == 14
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge14_test1_listening.html'
+        template_name = 'mock14_test1_listening.html'
     elif (
         book_number == 14
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge14_test2_listening.html'
+        template_name = 'mock14_test2_listening.html'
     elif (
         book_number == 14
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge14_test3_listening.html'
+        template_name = 'mock14_test3_listening.html'
     elif (
         book_number == 14
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge14_test4_listening.html'
+        template_name = 'mock14_test4_listening.html'
     elif (
         book_number == 15
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge15_test1_listening.html'
+        template_name = 'mock15_test1_listening.html'
     elif (
         book_number == 15
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge15_test2_listening.html'
+        template_name = 'mock15_test2_listening.html'
     elif (
         book_number == 15
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge15_test3_listening.html'
+        template_name = 'mock15_test3_listening.html'
     elif (
         book_number == 15
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge15_test4_listening.html'
+        template_name = 'mock15_test4_listening.html'
     elif (
         book_number == 16
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge16_test1_listening.html'
+        template_name = 'mock16_test1_listening.html'
     elif (
         book_number == 16
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge16_test2_listening.html'
+        template_name = 'mock16_test2_listening.html'
     elif (
         book_number == 16
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge16_test3_listening.html'
+        template_name = 'mock16_test3_listening.html'
     elif (
         book_number == 16
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge16_test4_listening.html'
+        template_name = 'mock16_test4_listening.html'
     elif (
         book_number == 17
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge17_test1_listening.html'
+        template_name = 'mock17_test1_listening.html'
     elif (
         book_number == 17
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge17_test2_listening.html'
+        template_name = 'mock17_test2_listening.html'
     elif (
         book_number == 17
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge17_test3_listening.html'
+        template_name = 'mock17_test3_listening.html'
     elif (
         book_number == 17
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge17_test4_listening.html'
+        template_name = 'mock17_test4_listening.html'
     elif (
         book_number == 18
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge18_test1_listening.html'
+        template_name = 'mock18_test1_listening.html'
     elif (
         book_number == 18
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge18_test2_listening.html'
+        template_name = 'mock18_test2_listening.html'
     elif (
         book_number == 18
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge18_test3_listening.html'
+        template_name = 'mock18_test3_listening.html'
     elif (
         book_number == 18
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge18_test4_listening.html'
+        template_name = 'mock18_test4_listening.html'
     elif (
         book_number == 19
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge19_test1_listening.html'
+        template_name = 'mock19_test1_listening.html'
     elif (
         book_number == 19
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge19_test2_listening.html'
+        template_name = 'mock19_test2_listening.html'
     elif (
         book_number == 19
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge19_test3_listening.html'
+        template_name = 'mock19_test3_listening.html'
     elif (
         book_number == 19
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge19_test4_listening.html'
+        template_name = 'mock19_test4_listening.html'
     elif (
         book_number == 20
         and test_number == 1
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge20_test1_listening.html'
+        template_name = 'mock20_test1_listening.html'
     elif (
         book_number == 20
         and test_number == 2
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge20_test2_listening.html'
+        template_name = 'mock20_test2_listening.html'
     elif (
         book_number == 20
         and test_number == 3
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge20_test3_listening.html'
+        template_name = 'mock20_test3_listening.html'
     elif (
         book_number == 20
         and test_number == 4
         and section == PracticeAttempt.SECTION_LISTENING
     ):
-        template_name = 'cambridge20_test4_listening.html'
+        template_name = 'mock20_test4_listening.html'
     elif (
         book_number == 11
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge11_test1_reading.html'
+        template_name = 'mock11_test1_reading.html'
     elif (
         book_number == 11
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge11_test2_reading.html'
+        template_name = 'mock11_test2_reading.html'
     elif (
         book_number == 11
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge11_test3_reading.html'
+        template_name = 'mock11_test3_reading.html'
     elif (
         book_number == 11
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge11_test4_reading.html'
+        template_name = 'mock11_test4_reading.html'
     elif (
         book_number == 12
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge12_test1_reading.html'
+        template_name = 'mock12_test1_reading.html'
     elif (
         book_number == 12
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge12_test2_reading.html'
+        template_name = 'mock12_test2_reading.html'
     elif (
         book_number == 12
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge12_test3_reading.html'
+        template_name = 'mock12_test3_reading.html'
     elif (
         book_number == 12
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge12_test4_reading.html'
+        template_name = 'mock12_test4_reading.html'
     elif (
         book_number == 13
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge13_test1_reading.html'
+        template_name = 'mock13_test1_reading.html'
     elif (
         book_number == 13
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge13_test2_reading.html'
+        template_name = 'mock13_test2_reading.html'
     elif (
         book_number == 13
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge13_test3_reading.html'
+        template_name = 'mock13_test3_reading.html'
     elif (
         book_number == 13
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge13_test4_reading.html'
+        template_name = 'mock13_test4_reading.html'
     elif (
         book_number == 14
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge14_test1_reading.html'
+        template_name = 'mock14_test1_reading.html'
     elif (
         book_number == 14
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge14_test2_reading.html'
+        template_name = 'mock14_test2_reading.html'
     elif (
         book_number == 14
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge14_test3_reading.html'
+        template_name = 'mock14_test3_reading.html'
     elif (
         book_number == 14
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge14_test4_reading.html'
+        template_name = 'mock14_test4_reading.html'
     elif (
         book_number == 15
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge15_test1_reading.html'
+        template_name = 'mock15_test1_reading.html'
     elif (
         book_number == 15
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge15_test2_reading.html'
+        template_name = 'mock15_test2_reading.html'
     elif (
         book_number == 15
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge15_test3_reading.html'
+        template_name = 'mock15_test3_reading.html'
     elif (
         book_number == 15
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge15_test4_reading.html'
+        template_name = 'mock15_test4_reading.html'
     elif (
         book_number == 16
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge16_test1_reading.html'
+        template_name = 'mock16_test1_reading.html'
     elif (
         book_number == 16
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge16_test2_reading.html'
+        template_name = 'mock16_test2_reading.html'
     elif (
         book_number == 16
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge16_test3_reading.html'
+        template_name = 'mock16_test3_reading.html'
     elif (
         book_number == 16
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge16_test4_reading.html'
+        template_name = 'mock16_test4_reading.html'
     elif (
         book_number == 17
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge17_test1_reading.html'
+        template_name = 'mock17_test1_reading.html'
     elif (
         book_number == 17
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge17_test2_reading.html'
+        template_name = 'mock17_test2_reading.html'
     elif (
         book_number == 17
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge17_test3_reading.html'
+        template_name = 'mock17_test3_reading.html'
     elif (
         book_number == 17
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge17_test4_reading.html'
+        template_name = 'mock17_test4_reading.html'
     elif (
         book_number == 18
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge18_test1_reading.html'
+        template_name = 'mock18_test1_reading.html'
     elif (
         book_number == 18
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge18_test2_reading.html'
+        template_name = 'mock18_test2_reading.html'
     elif (
         book_number == 18
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge18_test3_reading.html'
+        template_name = 'mock18_test3_reading.html'
     elif (
         book_number == 18
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge18_test4_reading.html'
+        template_name = 'mock18_test4_reading.html'
     elif (
         book_number == 19
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge19_test1_reading.html'
+        template_name = 'mock19_test1_reading.html'
     elif (
         book_number == 19
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge19_test2_reading.html'
+        template_name = 'mock19_test2_reading.html'
     elif (
         book_number == 19
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge19_test3_reading.html'
+        template_name = 'mock19_test3_reading.html'
     elif (
         book_number == 19
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge19_test4_reading.html'
+        template_name = 'mock19_test4_reading.html'
     elif (
         book_number == 20
         and test_number == 1
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge20_test1_reading.html'
+        template_name = 'mock20_test1_reading.html'
     elif (
         book_number == 20
         and test_number == 2
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge20_test2_reading.html'
+        template_name = 'mock20_test2_reading.html'
     elif (
         book_number == 20
         and test_number == 3
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge20_test3_reading.html'
+        template_name = 'mock20_test3_reading.html'
     elif (
         book_number == 20
         and test_number == 4
         and section == PracticeAttempt.SECTION_READING
     ):
-        template_name = 'cambridge20_test4_reading.html'
+        template_name = 'mock20_test4_reading.html'
 
     return render(request, template_name, {
         'attempt': attempt,

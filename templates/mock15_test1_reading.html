@@ -1,0 +1,309 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 15 Test 1 Reading | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+<style>
+.nutmeg-history-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    margin:8px 0 18px;
+    font-size:13px;
+    line-height:1.18;
+    color:#222;
+}
+.nutmeg-history-table td{
+    border:1px solid #666;
+    vertical-align:top;
+    padding:6px 7px;
+}
+.nutmeg-history-table .period-cell{width:23%;white-space:nowrap}
+.nutmeg-history-table .events-cell{width:77%}
+.nutmeg-history-table .event-line{margin:0 0 5px}
+.nutmeg-history-table .event-line:last-child{margin-bottom:0}
+.nutmeg-history-table .dutch-list{margin-top:8px}
+.nutmeg-history-table .dash-line{
+    display:grid;
+    grid-template-columns:12px 1fr;
+    column-gap:6px;
+    margin:3px 0;
+}
+.nutmeg-history-table .ielts-blank{min-width:110px}
+.nutmeg-history-table .ielts-blank.short{min-width:82px}
+.nutmeg-history-table .ielts-blank.medium{min-width:105px}
+</style>
+
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 15 - Test 1 Reading</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell reading-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <form method="post" class="practice-form reading-practice-form" id="practiceForm">
+            {% csrf_token %}
+            <section class="reading-topbar">
+                <div>
+                    <p class="eyebrow">Reading</p>
+                    <h1>IELTS Mock 15 - Test 1</h1>
+                    <p>Passages are on the left and questions are on the right. Select passage text to highlight it.</p>
+                </div>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </section>
+
+            <section class="reading-split">
+                <aside class="reading-passages" aria-label="Reading passages">
+                    <article class="reading-passage-block" id="passage-1">
+                        <p class="reading-passage-label">READING PASSAGE 1</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1 below.</p>
+                        <h2>Nutmeg - a valuable spice</h2>
+                        <div class="reading-passage-copy">
+                            <p>The nutmeg tree, <em>Myristica fragrans</em>, is a large evergreen tree native to Southeast Asia. Until the late 18th century, it only grew in one place in the world: a small group of islands in the Banda Sea, part of the Moluccas - or Spice Islands - in northeastern Indonesia. The tree is thickly branched with dense foliage of tough, dark green oval leaves, and produces small, yellow, bell-shaped flowers and pale yellow pear-shaped fruits. The fruit is encased in a fleshy husk. When the fruit is ripe, this husk splits into two halves along a ridge running the length of the fruit. Inside is a purple-brown shiny seed 2-3 cm long by about 2 cm across, surrounded by a lacy red or crimson covering called an aril. These are the sources of the two spices nutmeg and mace, the former being produced from the dried seed and the latter from the aril.</p>
+                            <p>Nutmeg was a highly prized and costly ingredient in European cuisine in the Middle Ages, and was used as a flavouring, medicinal, and preservative agent. Throughout this period, the Arabs were the exclusive importers of the spice to Europe. They sold nutmeg for high prices to merchants based in Venice, but they never revealed the exact location of the source of this extremely valuable commodity. The Arab-Venetian dominance of the trade finally ended in 1512, when the Portuguese reached the Banda Islands and began exploiting its precious resources.</p>
+                            <p>Always in danger of competition from neighbouring Spain, the Portuguese began subcontracting their spice distribution to Dutch traders. Profits began to flow into the Netherlands, and the Dutch commercial fleet swiftly grew into one of the largest in the world. The Dutch quietly gained control of most of the shipping and trading of spices in Northern Europe. Then, in 1580, Portugal fell under Spanish rule, and by the end of the 16th century the Dutch found themselves locked out of the market. As prices for pepper, nutmeg, and other spices soared across Europe, they decided to fight back. In 1602, Dutch merchants founded the VOC, a trading corporation better known as the Dutch East India Company. By 1617, the VOC was the richest commercial operation in the world. The company had 50,000 employees worldwide, with a private army of 30,000 men and a fleet of 200 ships.</p>
+                            <p>At the same time, thousands of people across Europe were dying of the plague, a highly contagious and deadly disease. Doctors were desperate for a way to stop the spread of this disease, and they decided nutmeg held the cure. Everybody wanted nutmeg, and many were willing to spare no expense to have it. Nutmeg bought for a few pennies in Indonesia could be sold for 68,000 times its original cost on the streets of London. The only problem was the short supply. And that's where the Dutch found their opportunity.</p>
+                            <p>The Banda Islands were ruled by local sultans who insisted on maintaining a neutral trading policy towards foreign powers. This allowed them to avoid the presence of Portuguese or Spanish troops on their soil, but it also left them unprotected from other invaders. In 1621, the Dutch arrived and took over. Once securely in control of the Bandas, the Dutch went to work protecting their new investment. They concentrated all nutmeg production into a few easily guarded areas, uprooting and destroying any trees outside the plantation zones. Anyone caught growing a nutmeg seedling or carrying seeds without the proper authority was severely punished. In addition, all exported nutmeg was covered with lime to make sure there was no chance a fertile seed which could be grown elsewhere would leave the islands.</p>
+                            <p>There was only one obstacle to Dutch domination. One of the Banda Islands, a sliver of land called Run, only 3 km long by less than 1 km wide, was under the control of the British. After decades of fighting for control of this tiny island, the Dutch and British arrived at a compromise settlement, the Treaty of Breda, in 1667. Intent on securing their hold over every nutmeg-producing island, the Dutch offered a trade: if the British would give them the island of Run, they would in turn give Britain a distant and much less valuable island in North America. The British agreed. That other island was Manhattan, which is how New Amsterdam became New York. The Dutch now had a monopoly over the nutmeg trade which would last for another century.</p>
+                            <p>Then, in 1770, a Frenchman named Pierre Poivre successfully smuggled nutmeg plants to safety in Mauritius, an island off the coast of Africa. Some of these were later exported to the Caribbean where they thrived, especially on the island of Grenada. Next, in 1778, a volcanic eruption in the Banda region caused a tsunami that wiped out half the nutmeg groves. Finally, in 1809, the British returned to Indonesia and seized the Banda Islands by force. They returned the islands to the Dutch in 1817, but not before transplanting hundreds of nutmeg seedlings to plantations in several locations across southern Asia. The Dutch nutmeg monopoly was over. Today, nutmeg is grown in Indonesia, the Caribbean, India, Malaysia, Papua New Guinea and Sri Lanka, and world nutmeg production is estimated to average between 10,000 and 12,000 tonnes per year.</p>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-2">
+                        <p class="reading-passage-label">READING PASSAGE 2</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 14-26, which are based on Reading Passage 2 below.</p>
+                        <h2>Driverless cars</h2>
+                        <div class="reading-passage-copy labelled-copy">
+                            <section class="passage-paragraph"><span>A</span><div><p>The automotive sector is well used to adapting to automation in manufacturing. The implementation of robotic car manufacture from the 1970s onwards led to significant cost savings and improvements in the reliability and flexibility of vehicle mass production. A new challenge to vehicle production is now on the horizon and, again, it comes from automation. However, this time it is not to do with the manufacturing process, but with the vehicles themselves.</p><p>Research projects on vehicle automation are not new. Vehicles with limited self-driving capabilities have been around for more than 50 years, resulting in significant contributions towards driver assistance systems. But since Google announced in 2010 that it had been trialling self-driving cars on the streets of California, progress in this field has quickly gathered pace.</p></div></section>
+                            <section class="passage-paragraph"><span>B</span><div><p>There are many reasons why technology is advancing so fast. One frequently cited motive is safety; indeed, research at the UK's Transport Research Laboratory has demonstrated that more than 90 percent of road collisions involve human error as a contributory factor, and it is the primary cause in the vast majority. Automation may help to reduce the incidence of this.</p><p>Another aim is to free the time people spend driving for other purposes. If the vehicle can do some or all of the driving, it may be possible to be productive, to socialise or simply to relax while automation systems have responsibility for safe control of the vehicle. If the vehicle can do the driving, those who are challenged by existing mobility models - such as older or disabled travellers - may be able to enjoy significantly greater travel autonomy.</p></div></section>
+                            <section class="passage-paragraph"><span>C</span><div><p>Beyond these direct benefits, we can consider the wider implications for transport and society, and how manufacturing processes might need to respond as a result. At present, the average car spends more than 90 percent of its life parked. Automation means that initiatives for car-sharing become much more viable, particularly in urban areas with significant travel demand. If a significant proportion of the population choose to use shared automated vehicles, mobility demand can be met by far fewer vehicles.</p></div></section>
+                            <section class="passage-paragraph"><span>D</span><div><p>The Massachusetts Institute of Technology investigated automated mobility in Singapore, finding that fewer than 30 percent of the vehicles currently used would be required if fully automated car sharing could be implemented. If this is the case, it might mean that we need to manufacture far fewer vehicles to meet demand.</p><p>However, the number of trips being taken would probably increase, partly because empty vehicles would have to be moved from one customer to the next. Modelling work by the University of Michigan Transportation Research Institute suggests automated vehicles might reduce vehicle ownership by 43 percent, but that vehicles' average annual mileage would double as a result. As a consequence, each vehicle would be used more intensively, and might need replacing sooner. This faster rate of turnover may mean that vehicle production will not necessarily decrease.</p></div></section>
+                            <section class="passage-paragraph"><span>E</span><div><p>Automation may prompt other changes in vehicle manufacture. If we move to a model where consumers are tending not to own a single vehicle but to purchase access to a range of vehicles through a mobility provider, drivers will have the freedom to select one that best suits their needs for a particular journey, rather than making a compromise across all their requirements.</p><p>Since, for most of the time, most of the seats in most cars are unoccupied, this may boost production of a smaller, more efficient range of vehicles that suit the needs of individuals. Specialised vehicles may then be available for exceptional journeys, such as going on a family camping trip or helping a son or daughter move to university.</p></div></section>
+                            <section class="passage-paragraph"><span>F</span><div><p>There are a number of hurdles to overcome in delivering automated vehicles to our roads. These include the technical difficulties in ensuring that the vehicle works reliably in the infinite range of traffic, weather and road situations it might encounter; the regulatory challenges in understanding how liability and enforcement might change when drivers are no longer essential for vehicle operation; and the societal changes that may be required for communities to trust and accept automated vehicles as being a valuable part of the mobility landscape.</p></div></section>
+                            <section class="passage-paragraph"><span>G</span><div><p>It's clear that there are many challenges that need to be addressed but, through robust and targeted research, these can most probably be conquered within the next 10 years. Mobility will change in such potentially significant ways and in association with so many other technological developments, such as telepresence and virtual reality, that it is hard to make concrete predictions about the future. However, one thing is certain: change is coming, and the need to be flexible in response to this will be vital for those involved in manufacturing the vehicles that will deliver future mobility.</p></div></section>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-3">
+                        <p class="reading-passage-label">READING PASSAGE 3</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3 below.</p>
+                        <h2>What is exploration?</h2>
+                        <div class="reading-passage-copy">
+                            <p>We are all explorers. Our desire to discover, and then share that new-found knowledge, is part of what makes us human - indeed, this has played an important part in our success as a species. Long before the first caveman slumped down beside the fire and grunted news that there were plenty of wildebeest over yonder, our ancestors had learnt the value of sending out scouts to investigate the unknown. This questing nature of ours undoubtedly helped our species spread around the globe, just as it nowadays no doubt helps the last nomadic Penan maintain their existence in the depleted forests of Borneo, and a visitor negotiate the subways of New York.</p>
+                            <p>Over the years, we've come to think of explorers as a peculiar breed - different from the rest of us, different from those of us who are merely well travelled even; and perhaps there is a type of person more suited to seeking out the new, a type of caveman more inclined to risk venturing out. That, however, doesn't take away from the fact that we all have this enquiring instinct, even today; and that in all sorts of professions - whether artist, marine biologist or astronomer - borders of the unknown are being tested each day.</p>
+                            <p>Thomas Hardy set some of his novels in Egdon Heath, a fictional area of uncultivated land, and used the landscape to suggest the desires and fears of his characters. He is delving into matters we all recognise because they are common to humanity. This is surely an act of exploration, and into a world as remote as the author chooses.</p>
+                            <p>Explorer and travel writer Peter Fleming talks of the moment when the explorer returns to the existence he has left behind with his loved ones. The traveller who has for weeks or months seen himself only as a puny and irrelevant alien crawling laboriously over a country in which he has no roots and no background, suddenly encounters his other self, a relatively solid figure, with a place in the minds of certain people.</p>
+                            <p>In this book about the exploration of the earth's surface, I have confined myself to those whose travels were real and who also aimed at more than personal discovery. But that still left me with another problem: the word explorer has become associated with a past era. We think back to a golden age, as if exploration peaked somehow in the 19th century - as if the process of discovery is now on the decline, though the truth is that we have named only one and a half million of this planet's species, and there may be more than 10 million - and that's not including bacteria. We have studied only 5 per cent of the species we know. We have scarcely mapped the ocean floors, and know even less about ourselves; we fully understand the workings of only 10 per cent of our brains.</p>
+                            <p>Here is how some of today's explorers define the word. Ran Fiennes, dubbed the greatest living explorer, said, "An explorer is someone who has done something that no human has done before - and also done something scientifically useful." Chris Bonington, a leading mountaineer, felt exploration was to be found in the act of physically touching the unknown: "You have to have gone somewhere new." Then Robin Hanbury-Tenison, a campaigner on behalf of remote so-called tribal peoples, said, "A traveller simply records information about some far-off world, and reports back; but an explorer changes the world." Wilfred Thesiger, who crossed Arabia's Empty Quarter in 1946, and belongs to an era of unmechanised travel now lost to the rest of us, told me, "If I'd gone across by camel when I could have gone by car, it would have been a stunt." To him, exploration meant bringing back information from a remote place regardless of any great self-discovery.</p>
+                            <p>Each definition is slightly different - and tends to reflect the field of endeavour of each pioneer. It was the same whoever I asked: the prominent historian would say exploration was a thing of the past, the cutting-edge scientist would say it was of the present. And so on. They each set their own particular criteria; the common factor in their approach being that they all had, unlike many of us who simply enjoy travel or discovering new things, both a very definite objective from the outset and also a desire to record their findings.</p>
+                            <p>I'd best declare my own bias. As a writer, I'm interested in the exploration of ideas. I've done a great many expeditions and each one was unique. I've lived for months alone with isolated groups of people all around the world, even two uncontacted tribes. But none of these things is of the slightest interest to anyone unless, through my books, I've found a new slant, explored a new idea. Why? Because the world has moved on. The time has long passed for the great continental voyages - another walk to the poles, another crossing of the Empty Quarter. We know how the land surface of our planet lies; exploration of it is now down to the details - the habits of microbes, say, or the grazing behaviour of buffalo. Aside from the deep sea and deep underground, it's the era of specialists. However, this is to disregard the role the human mind has in conveying remote places; and this is what interests me: how a fresh interpretation, even of a well-travelled route, can give its readers new insights.</p>
+                        </div>
+                    </article>
+                </aside>
+
+                <section class="reading-questions" aria-label="Reading questions">
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 1</h2>
+                        <p class="ielts-instr">Questions 1-4</p>
+                        <p class="ielts-instr">Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <div class="ielts-note-box">
+                            <h3>The nutmeg tree and fruit</h3>
+                            <ul>
+                                <li>leaves of tree are <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> in shape</li>
+                                <li><span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> surrounds the fruit and breaks open when the fruit is ripe</li>
+                                <li><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> is used to produce the spice nutmeg</li>
+                                <li>the covering known as the aril is used to produce <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li>the tree has yellow flowers and fruit</li>
+                            </ul>
+                        </div>
+
+                        <p class="ielts-instr">Questions 5-7</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:5 %}<div class="mc-question"><input type="hidden" name="answer_5" value="{{ selected }}"><p><span class="qnum">5</span> In the Middle Ages, most Europeans knew where nutmeg was grown.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:6 %}<div class="mc-question"><input type="hidden" name="answer_6" value="{{ selected }}"><p><span class="qnum">6</span> The VOC was the world's first major trading company.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:7 %}<div class="mc-question"><input type="hidden" name="answer_7" value="{{ selected }}"><p><span class="qnum">7</span> Following the Treaty of Breda, the Dutch had control of all the islands where nutmeg grew.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 8-13</p>
+                        <p class="ielts-instr">Complete the table below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <table class="nutmeg-history-table">
+                            <tbody>
+                                <tr>
+                                    <td class="period-cell">Middle Ages</td>
+                                    <td class="events-cell">Nutmeg was brought to Europe by the <span class="qnum">8</span> <span class="ielts-blank medium"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="period-cell">16th century</td>
+                                    <td class="events-cell">European nations took control of the nutmeg trade</td>
+                                </tr>
+                                <tr>
+                                    <td class="period-cell">17th century</td>
+                                    <td class="events-cell">
+                                        <div class="event-line">Demand for nutmeg grew, as it was believed to be effective</div>
+                                        <div class="event-line">against the disease known as the <span class="qnum">9</span> <span class="ielts-blank medium"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></div>
+                                        <div class="dutch-list">The Dutch</div>
+                                        <div class="dash-line"><span>–</span><span>took control of the Banda Islands</span></div>
+                                        <div class="dash-line"><span>–</span><span>restricted nutmeg production to a few areas</span></div>
+                                        <div class="dash-line"><span>–</span><span>put <span class="qnum">10</span> <span class="ielts-blank short"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>............</span></span> on nutmeg to avoid it being cultivated outside the islands</span></div>
+                                        <div class="dash-line"><span>–</span><span>finally obtained the island of <span class="qnum">11</span> <span class="ielts-blank medium"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off"><span>......................</span></span> from the British</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="period-cell">Late 18th century</td>
+                                    <td class="events-cell">
+                                        <div class="event-line">1770 – nutmeg plants were secretly taken to <span class="qnum">12</span> <span class="ielts-blank medium"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off"><span>......................</span></span></div>
+                                        <div class="event-line">1778 – half the Banda Islands' nutmeg plantations were destroyed</div>
+                                        <div class="event-line">by a <span class="qnum">13</span> <span class="ielts-blank medium"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off"><span>......................</span></span></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 2</h2>
+                        <p class="ielts-instr">Questions 14-18</p>
+                        <p>Reading Passage 2 has seven sections, <strong>A-G</strong>. Which section contains the following information?</p>
+                        <div class="ielts-note-box">
+                            <h3>List of Sections</h3>
+                            <p><strong>A</strong> Section A</p>
+                            <p><strong>B</strong> Section B</p>
+                            <p><strong>C</strong> Section C</p>
+                            <p><strong>D</strong> Section D</p>
+                            <p><strong>E</strong> Section E</p>
+                            <p><strong>F</strong> Section F</p>
+                            <p><strong>G</strong> Section G</p>
+                        </div>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> reference to the amount of time when a car is not in use</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> mention of several advantages of driverless vehicles for individual road-users</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> reference to the opportunity of choosing the most appropriate vehicle for each trip</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> an estimate of how long it will take to overcome a number of problems</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:18 %}<div class="mc-question"><input type="hidden" name="answer_18" value="{{ selected }}"><p><span class="qnum">18</span> a suggestion that the use of driverless cars may have no effect on the number of vehicles manufactured</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 19-22</p>
+                        <p class="ielts-instr">Complete the summary below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <div class="ielts-note-box">
+                            <h3>The impact of driverless cars</h3>
+                            <p>Figures from the Transport Research Laboratory indicate that most motor accidents are partly due to <span class="qnum">19</span> <span class="ielts-blank"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off"><span>......................</span></span>, so the introduction of driverless vehicles will result in greater safety. In addition to the direct benefits of automation, it may bring other advantages. For example, schemes for <span class="qnum">20</span> <span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>......................</span></span> will be more workable, especially in towns and cities, resulting in fewer cars on the road.</p>
+                            <p>According to the University of Michigan Transportation Research Institute, there could be a 43 percent drop in <span class="qnum">21</span> <span class="ielts-blank"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off"><span>......................</span></span> of cars. However, this would mean that the yearly <span class="qnum">22</span> <span class="ielts-blank"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off"><span>......................</span></span> of each car would, on average, be twice as high as it currently is. This would lead to a higher turnover of vehicles, and therefore no reduction in automotive manufacturing.</p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 23 and 24</p>
+                        <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO benefits of automated vehicles does the writer mention?</p>
+                        <div class="multi-answer-question">
+                            <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
+                            <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
+                            <div class="mc-options">
+                                <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>Car travellers could enjoy considerable cost savings.</span></button>
+                                <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>It would be easier to find parking spaces in urban areas.</span></button>
+                                <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>Travellers could spend journeys doing something other than driving.</span></button>
+                                <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>People who find driving physically difficult could travel independently.</span></button>
+                                <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>A reduction in the number of cars would mean a reduction in pollution.</span></button>
+                            </div>
+                        </div>
+
+                        <p class="ielts-instr">Questions 25 and 26</p>
+                        <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO challenges to automated vehicle development does the writer mention?</p>
+                        <div class="multi-answer-question">
+                            <input type="hidden" name="answer_25" value="{{ attempt.answers|answer_value:25 }}">
+                            <input type="hidden" name="answer_26" value="{{ attempt.answers|answer_value:26 }}">
+                            <div class="mc-options">
+                                <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>making sure the general public has confidence in automated vehicles</span></button>
+                                <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>managing the pace of transition from conventional to automated vehicles</span></button>
+                                <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>deciding how to compensate professional drivers</span></button>
+                                <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>setting up infrastructure for roads</span></button>
+                                <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>getting automated vehicles to adapt to different driving conditions</span></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 3</h2>
+                        <p class="ielts-instr">Questions 27-32</p>
+                        <p>Choose the correct letter, <strong>A, B, C</strong> or <strong>D</strong>.</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> The writer refers to visitors to New York to illustrate the point that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>exploration is an intrinsic element of being human.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>most people are enthusiastic about exploring.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>exploration can lead to surprising results.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>most people find exploration daunting.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> What is the writer's view of explorers in the second paragraph?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Their discoveries have brought both benefits and disadvantages.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>The main value of their work is teaching others.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>They act on an urge that is common to everyone.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>They tend to be attracted to certain professions.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> The writer refers to Egdon Heath to suggest that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Hardy was writing from his own experience.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Hardy was mistaken about the nature of exploration.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Hardy's aim was to investigate people's emotional states.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>Hardy's aim was to show the value of isolation.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> In the fourth paragraph, the writer's use of the phrase "a golden age" suggests that</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the amount of useful information produced by exploration has decreased.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>fewer people are interested in exploring than in the past.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>modern developments have made exploration less exciting.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>it is wrong to think that exploration is no longer necessary.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:31 %}<div class="mc-question"><input type="hidden" name="answer_31" value="{{ selected }}"><p><span class="qnum">31</span> In the sixth paragraph, the writer shows that definitions of exploration</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>are related to people's own professional interests.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>prove that certain people misunderstand the nature of exploration.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>have changed in a way that is now generally accepted.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>are more valid when given by historians and scientists.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:32 %}<div class="mc-question"><input type="hidden" name="answer_32" value="{{ selected }}"><p><span class="qnum">32</span> In the last paragraph, the writer explains that he is interested in</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>how a person's personality is reflected in the places they visit.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the human ability to cast new light on familiar places.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>how travel writing has evolved over time.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>the feelings that writers develop about the places they describe.</span></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 33-37</p>
+                        <p>Look at the following statements and the list of explorers below. Match each statement with the correct explorer, <strong>A-E</strong>.</p>
+                        <div class="ielts-note-box">
+                            <h3>List of Explorers</h3>
+                            <p><strong>A</strong> Peter Fleming</p>
+                            <p><strong>B</strong> Ran Fiennes</p>
+                            <p><strong>C</strong> Chris Bonington</p>
+                            <p><strong>D</strong> Robin Hanbury-Tenison</p>
+                            <p><strong>E</strong> Wilfred Thesiger</p>
+                        </div>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:33 %}<div class="mc-question"><input type="hidden" name="answer_33" value="{{ selected }}"><p><span class="qnum">33</span> He referred to the relevance of the form of transport used.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:34 %}<div class="mc-question"><input type="hidden" name="answer_34" value="{{ selected }}"><p><span class="qnum">34</span> He described feelings on coming back home after a long journey.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:35 %}<div class="mc-question"><input type="hidden" name="answer_35" value="{{ selected }}"><p><span class="qnum">35</span> He worked for the benefit of specific groups of people.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:36 %}<div class="mc-question"><input type="hidden" name="answer_36" value="{{ selected }}"><p><span class="qnum">36</span> He did not consider learning about oneself an essential part of exploration.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:37 %}<div class="mc-question"><input type="hidden" name="answer_37" value="{{ selected }}"><p><span class="qnum">37</span> He defined exploration as being both unique and of value to others.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 38-40</p>
+                        <p class="ielts-instr">Complete the summary below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <div class="ielts-note-box">
+                            <h3>The writer's own experience</h3>
+                            <p>The writer has experience of a large number of <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span>, and was the first stranger that certain previously <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> people had encountered.</p>
+                            <p>He believes there is no need for further exploration of the Earth's <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>, except to answer specific questions such as how buffalo eat.</p>
+                        </div>
+                    </article>
+                </section>
+            </section>
+
+            <div class="practice-actions reading-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

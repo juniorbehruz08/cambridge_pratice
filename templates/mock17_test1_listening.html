@@ -1,0 +1,378 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 17 Test 1 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .labyrinths-pdf-box {
+            padding: 14px 28px 12px;
+            background: transparent;
+        }
+
+        .labyrinths-pdf-box h3 {
+            text-align: center;
+            margin: 0 0 14px;
+            font-size: 20px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .lab-section {
+            font-weight: 700;
+            margin: 11px 0 5px;
+        }
+
+        .lab-row {
+            display: grid;
+            grid-template-columns: 16px 1fr;
+            gap: 8px;
+            align-items: baseline;
+            margin: 6px 0;
+            line-height: 1.28;
+        }
+
+        .lab-row.sub {
+            grid-template-columns: 16px 1fr;
+            margin-left: 28px;
+        }
+
+        .lab-row.deep {
+            grid-template-columns: 16px 1fr;
+            margin-left: 54px;
+        }
+
+        .lab-marker {
+            text-align: center;
+        }
+
+        .lab-text {
+            min-width: 0;
+        }
+
+        .labyrinths-pdf-box .ielts-blank {
+            min-width: 125px;
+        }
+
+        .labyrinths-pdf-box .ielts-blank.short {
+            min-width: 95px;
+        }
+
+        .labyrinths-pdf-box .ielts-blank.medium {
+            min-width: 115px;
+        }
+
+        .labyrinths-pdf-box .ielts-blank.long {
+            min-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 17 - Test 1 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 17 - Test 1</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 1</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Buckworth Conservation Group</h3>
+                        <p class="ielts-blue-title black">Regular activities</p>
+                        <p><strong>Beach</strong></p>
+                        <ul>
+                            <li>making sure the beach does not have <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> on it</li>
+                            <li>no <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                        <p><strong>Nature reserve</strong></p>
+                        <ul>
+                            <li>maintaining paths</li>
+                            <li>nesting boxes for birds installed</li>
+                            <li>next task is taking action to attract <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> to the place</li>
+                            <li>identifying types of <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>building a new <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                        <p class="ielts-blue-title black">Forthcoming events</p>
+                        <p><strong>Saturday</strong></p>
+                        <ul>
+                            <li>meet at Dunsmore Beach car park</li>
+                            <li>walk across the sands and reach the <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>take a picnic</li>
+                            <li>wear appropriate <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                        <p><strong>Woodwork session</strong></p>
+                        <ul>
+                            <li>suitable for <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> to participate in</li>
+                            <li>making <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> out of wood</li>
+                            <li>17th, from 10 a.m. to 3 p.m.</li>
+                            <li>cost of session, no camping: &pound;<span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-14</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Boat trip round Tasmania</h3>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> What is the maximum number of people who can stand on each side of the boat?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>9</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>15</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>18</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> What colour are the tour boats?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>dark red</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>jet black</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>light green</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> Which lunchbox is suitable for someone who does not eat meat or fish?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Lunchbox 1</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Lunchbox 2</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Lunchbox 3</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> What should people do with their litter?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>take it home</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>hand it to a member of staff</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>put it in the bins provided on the boat</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 15 and 16</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> features of the lighthouse does Lou mention?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_15" value="{{ attempt.answers|answer_value:15 }}">
+                        <input type="hidden" name="answer_16" value="{{ attempt.answers|answer_value:16 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>why it was built</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>who built it</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>how long it took to build</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>who staffed it</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>what it was built with</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 17 and 18</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> types of creature might come close to the boat?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_17" value="{{ attempt.answers|answer_value:17 }}">
+                        <input type="hidden" name="answer_18" value="{{ attempt.answers|answer_value:18 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>sea eagles</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>fur seals</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>dolphins</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>whales</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>penguins</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 19 and 20</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> points does Lou make about the caves?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_19" value="{{ attempt.answers|answer_value:19 }}">
+                        <input type="hidden" name="answer_20" value="{{ attempt.answers|answer_value:20 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>Only large tourist boats can visit them.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>The entrances to them are often blocked.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>It is too dangerous for individuals to go near them.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>Someone will explain what is inside them.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>They cannot be reached on foot.</span></button>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-26</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Work experience for veterinary science students</h3>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> What problem did both Diana and Tim have when arranging their work experience?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>making initial contact with suitable farms</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>organising transport to and from the farm</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>finding a placement for the required length of time</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> Tim was pleased to be able to help</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>a lamb that had a broken leg.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>a sheep that was having difficulty giving birth.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>a newly born lamb that was having trouble feeding.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> Diana says the sheep on her farm</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>were of various different varieties.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>were mainly reared for their meat.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>had better quality wool than sheep on the hills.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> What did the students learn about adding supplements to chicken feed?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>These should only be given if specially needed.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>It is worth paying extra for the most effective ones.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>The amount given at one time should be limited.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> What happened when Diana was working with dairy cows?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>She identified some cows incorrectly.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>She accidentally threw some milk away.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>She made a mistake when storing milk.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> What did both farmers mention about vets and farming?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Vets are failing to cope with some aspects of animal health.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>There needs to be a fundamental change in the training of vets.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Some jobs could be done by the farmer rather than by a vet.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 27-30</p>
+                    <p>What opinion do the students give about each of the following modules on their veterinary science course?</p>
+                    <p class="ielts-instr">Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A-F</strong>, next to Questions 27-30.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>Tim found this easier than expected.</span></p>
+                        <p><strong>B</strong><span>Tim thought this was not very clearly organised.</span></p>
+                        <p><strong>C</strong><span>Diana may do some further study on this.</span></p>
+                        <p><strong>D</strong><span>They both found the reading required for this was difficult.</span></p>
+                        <p><strong>E</strong><span>Tim was shocked at something he learned on this module.</span></p>
+                        <p><strong>F</strong><span>They were both surprised how little is known about some aspects of this.</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Medical terminology</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Diet and nutrition</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> Animal disease</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> Wildlife medication</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box labyrinths-pdf-box">
+                        <h3>Labyrinths</h3>
+
+                        <div class="lab-section">Definition</div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">a winding spiral path leading to a central area</span>
+                        </div>
+
+                        <div class="lab-section">Labyrinths compared with mazes</div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">Mazes are a type of <span class="qnum">31</span> <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="lab-row sub">
+                            <span class="lab-marker">–</span>
+                            <span class="lab-text"><span class="qnum">32</span> <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> is needed to navigate through a maze</span>
+                        </div>
+                        <div class="lab-row sub">
+                            <span class="lab-marker">–</span>
+                            <span class="lab-text">the word 'maze' is derived from a word meaning a feeling of <span class="qnum">33</span> <span class="ielts-blank medium"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">Labyrinths represent a journey through life</span>
+                        </div>
+                        <div class="lab-row sub">
+                            <span class="lab-marker">–</span>
+                            <span class="lab-text">they have frequently been used in <span class="qnum">34</span> <span class="ielts-blank medium"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> and prayer</span>
+                        </div>
+
+                        <div class="lab-section">Early examples of the labyrinth spiral</div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">Ancient carvings on <span class="qnum">35</span> <span class="ielts-blank long"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> have been found across many cultures</span>
+                        </div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">The Pima, a Native American tribe, wove the symbol on baskets</span>
+                        </div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">Ancient Greeks used the symbol on <span class="qnum">36</span> <span class="ielts-blank medium"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+
+                        <div class="lab-section">Walking labyrinths</div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">The largest surviving example of a turf labyrinth once had a big <span class="qnum">37</span> <span class="ielts-blank medium"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> at its centre</span>
+                        </div>
+
+                        <div class="lab-section">Labyrinths nowadays</div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">Believed to have a beneficial impact on mental and physical health,<br>e.g. walking a maze can reduce a person's <span class="qnum">38</span> <span class="ielts-blank medium"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> rate</span>
+                        </div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">Used in medical and health and fitness settings and also prisons</span>
+                        </div>
+                        <div class="lab-row">
+                            <span class="lab-marker">•</span>
+                            <span class="lab-text">Popular with patients, visitors and staff in hospitals</span>
+                        </div>
+                        <div class="lab-row sub">
+                            <span class="lab-marker">–</span>
+                            <span class="lab-text">patients who can't walk can use 'finger labyrinths' made from <span class="qnum">39</span> <span class="ielts-blank medium"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="lab-row sub">
+                            <span class="lab-marker">–</span>
+                            <span class="lab-text">research has shown that Alzheimer's sufferers experience less <span class="qnum">40</span> <span class="ielts-blank medium"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

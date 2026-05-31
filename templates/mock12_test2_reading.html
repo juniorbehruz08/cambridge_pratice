@@ -1,0 +1,295 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 12 Test 2 Reading | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=drag-layout-20260512">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 12 - Test 2 Reading</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell reading-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <form method="post" class="practice-form reading-practice-form" id="practiceForm">
+            {% csrf_token %}
+            <section class="reading-topbar">
+                <div>
+                    <p class="eyebrow">Reading</p>
+                    <h1>IELTS Mock 12 - Test 2</h1>
+                    <p>Passages are on the left and questions are on the right. Select passage text to highlight it.</p>
+                </div>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </section>
+
+            <section class="reading-split">
+                <aside class="reading-passages" aria-label="Reading passages">
+                    <article class="reading-passage-block" id="passage-1">
+                        <p class="reading-passage-label">READING PASSAGE 1</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1 below.</p>
+                        <h2>The risks agriculture faces in developing countries</h2>
+                        <h3>Synthesis of an online debate</h3>
+                        <div class="reading-passage-copy labelled-copy">
+                            <section class="passage-paragraph"><span>A</span><div><p>Two things distinguish food production from all other productive activities: first, every single person needs food each day and has a right to it; and second, it is hugely dependent on nature. These two unique aspects, one political and the other natural, make food production highly vulnerable and different from any other business. At the same time, cultural values are highly entrenched in food and agricultural systems worldwide.</p></div></section>
+                            <section class="passage-paragraph"><span>B</span><div><p>Farmers everywhere face major risks, including extreme weather, long-term climate change, and price volatility in input and product markets. However, smallholder farmers in developing countries must in addition deal with adverse environments, both natural, in terms of soil quality, rainfall, and so on, and human, in terms of infrastructure, financial systems, markets, knowledge and technology. Counter-intuitively, hunger is prevalent among many smallholder farmers in the developing world.</p></div></section>
+                            <section class="passage-paragraph"><span>C</span><div><p>Participants in the online debate argued that our biggest challenge is to address the underlying causes of the agricultural system's inability to ensure sufficient food for all, and they identified as drivers of this problem our dependency on fossil fuels and unsupportive government policies. On the question of mitigating the risks farmers face, most essayists called for greater state intervention. Kanayo F. Nwanze, President of the International Fund for Agricultural Development, argued that governments can significantly reduce risks for farmers by providing basic services like roads to get produce more efficiently to markets, or water and food storage facilities to reduce losses. Sophia Murphy, senior advisor to the Institute for Agriculture and Trade Policy, suggested that the procurement and holding of stocks by governments can also help mitigate wild swings in food prices by alleviating uncertainties about market supply.</p></div></section>
+                            <section class="passage-paragraph"><span>D</span><div><p>Shenggen Fan, Director General of the International Food Policy Research Institute, held up social safety nets and public welfare programmes in Ethiopia, Brazil and Mexico as valuable ways to address poverty among farming families and reduce their vulnerability to agricultural shocks. However, some commentators responded that cash transfers to poor families do not necessarily translate into increased food security, as these programmes do not always strengthen food production or raise incomes.</p></div></section>
+                            <section class="passage-paragraph"><span>E</span><div><p>Regarding state subsidies for agriculture, Rokeya Kabir, Executive Director of Bangladesh Nari Progati Sangha, commented in her essay that these "have not compensated for the stranglehold exercised by private traders. In fact, studies show that sixty percent of beneficiaries of subsidies are not poor, but rich landowners and non-farmer traders."</p></div></section>
+                            <section class="passage-paragraph"><span>F</span><div><p>Nwanze, Murphy and Fan argued that private risk management tools, like private insurance, commodity futures markets, and rural finance can help small-scale producers mitigate risk and allow for investment in improvements. Kabir warned that financial support schemes often encourage the adoption of high-input agricultural practices, which in the medium term may raise production costs beyond the value of their harvests. Murphy noted that when futures markets become excessively financialised they can contribute to short-term price volatility, which increases farmers' food insecurity. Many participants and commentators emphasised that greater transparency in markets is needed to mitigate the impact of volatility, and make evident whether adequate stocks and supplies are available. Others contended that agribusiness companies should be held responsible for paying for negative side effects.</p></div></section>
+                            <section class="passage-paragraph"><span>G</span><div><p>Many essayists mentioned climate change and its consequences for small-scale agriculture. Fan explained that in addition to reducing crop yields, climate change increases the magnitude and the frequency of extreme weather events, which increase smallholder vulnerability. The growing unpredictability of weather patterns increases farmers' difficulty in managing weather-related risks. According to this author, one solution would be to develop crop varieties that are more resilient to new climate trends and extreme weather patterns. Accordingly, Pat Mooney, co-founder and executive director of the ETC Group, suggested that if we are to survive climate change, we must adopt policies that let peasants diversify the plant and animal species and varieties that make up our menus.</p></div></section>
+                            <section class="passage-paragraph"><span>H</span><div><p>Some participating authors and commentators argued in favour of community-based and autonomous risk management strategies through collective action groups, co-operatives or producers' groups. Such groups enhance market opportunities for small-scale producers, reduce marketing costs and synchronise buying and selling with seasonal price conditions. According to Murphy, collective action offers an important way for farmers to strengthen their political and economic bargaining power, and to reduce their business risks. One commentator, Giel Ton, warned that collective action does not come as a free good. It takes time, effort and money to organise, build trust and to experiment.</p></div></section>
+                            <section class="passage-paragraph"><span>I</span><div><p>Others, like Marcel Vernooij and Marcel Beukeboom, suggested that in order to apply what we already know, all stakeholders, including business, government, scientists and civil society, must work together, starting at the beginning of the value chain. Some participants explained that market price volatility is often worsened by the presence of intermediary purchasers who, taking advantage of farmers' vulnerability, dictate prices. One commentator suggested farmers can gain greater control over prices and minimise price volatility by selling directly to consumers. Similarly, Sonali Bisht, founder and advisor to the Institute of Himalayan Environmental Research and Education, wrote that community-supported agriculture, where consumers invest in local farmers by subscription and guarantee producers a fair price, is a risk-sharing model worth more attention. Direct food distribution systems not only encourage small-scale agriculture but also give consumers more control over the food they consume.</p></div></section>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-2">
+                        <p class="reading-passage-label">READING PASSAGE 2</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 14-26, which are based on Reading Passage 2 below.</p>
+                        <h2>The Lost City</h2>
+                        <h3>An explorer's encounter with the ruined city of Machu Picchu, the most famous icon of the Inca civilisation</h3>
+                        <div class="reading-passage-copy labelled-copy">
+                            <section class="passage-paragraph"><span>A</span><div><p>When the US explorer and academic Hiram Bingham arrived in South America in 1911, he was ready for what was to be the greatest achievement of his life: the exploration of the remote hinterland west of Cusco, the old capital of the Inca empire in the Andes mountains of Peru. His goal was to locate the remains of Vitcos, the last capital of the Inca civilisation. Cusco lies on a high plateau, and Bingham planned to descend from this plateau along the valley of the Urubamba river, which passes through dramatic canyons and mountain ranges.</p></div></section>
+                            <section class="passage-paragraph"><span>B</span><div><p>When Bingham and his team set off down the Urubamba in late July, they had an advantage over earlier travellers: a track had recently been blasted down the valley canyon to enable rubber to be brought up by mules from the jungle. Almost all previous travellers had left the river at Ollantaytambo and taken a high pass across the mountains, thereby never passing through the area around Machu Picchu.</p></div></section>
+                            <section class="passage-paragraph"><span>C</span><div><p>On 24 July they were a few days into their descent. Bingham tried to arrange sufficient mules for the next stage of the trek. His companions showed no interest in accompanying him up the nearby hill to see some ruins that a local farmer, Melchor Arteaga, had told them about. The morning was dull and damp, and Bingham also seems to have been less than keen on the prospect of climbing. In Lost City of the Incas, he relates that he made the ascent without the least expectation of finding anything at the top.</p></div></section>
+                            <section class="passage-paragraph"><span>D</span><div><p>Bingham writes about the approach in vivid style. He describes deadly snakes, though he sees none, then a mounting sense of discovery as he comes across terraces, a mausoleum, monumental staircases and finally the grand ceremonial buildings of Machu Picchu. "It seemed like an unbelievable dream," he wrote. "The sight held me spellbound."</p></div></section>
+                            <section class="passage-paragraph"><span>E</span><div><p>We should remember that Lost City of the Incas is a work of hindsight, written many years after his journey. His journal entries reveal a more gradual appreciation of his achievement. He spent the afternoon noting the dimensions of some buildings, then descended and rejoined his companions, to whom he seems to have said little. At this stage, he did not realise the extent or importance of the site, nor what use he could make of the discovery.</p></div></section>
+                            <section class="passage-paragraph"><span>F</span><div><p>Soon after returning it occurred to Bingham that he could make a name for himself from the discovery. When he wrote the National Geographic article that broke the story to the world in 1913, he knew he had to produce a big idea. He wondered whether the site could have been the birthplace of the first Inca, Manco the Great, and also the last city of the Incas, where the Incas fled from Spanish invaders. Bingham made desperate attempts to prove this belief for nearly forty years, but we now know that Vilcabamba actually lies 65 kilometres away in the jungle.</p></div></section>
+                            <section class="passage-paragraph"><span>G</span><div><p>One question has perplexed visitors, historians and archaeologists ever since Bingham: why the site seems to have been abandoned before the Spanish Conquest. There are no references to it by Spanish chroniclers. A widely accepted idea is that Machu Picchu was a moya, a country estate built by an Inca emperor to escape the cold winters of Cusco. Its architecture suggests it was constructed in the time of Pachacuti. By custom, Pachacuti's descendants built other estates for their own use, so Machu Picchu would have been abandoned after his death, some fifty years before the Spanish Conquest.</p></div></section>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-3">
+                        <p class="reading-passage-label">READING PASSAGE 3</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3 below.</p>
+                        <h2>The Benefits of Being Bilingual</h2>
+                        <div class="reading-passage-copy labelled-copy">
+                            <section class="passage-paragraph"><span>A</span><div><p>According to recent figures, the majority of the world's population is now bilingual or multilingual. In the past, such children were considered to be at a disadvantage compared with monolingual peers. Over the past few decades, however, technological advances have allowed researchers to look more deeply at how bilingualism interacts with and changes cognitive and neurological systems, identifying several clear benefits of being bilingual.</p></div></section>
+                            <section class="passage-paragraph"><span>B</span><div><p>Research shows that when a bilingual person uses one language, the other is active at the same time. When we hear a word, we do not hear the entire word all at once: the sounds arrive in sequential order. Long before the word is finished, the brain's language system begins to guess what that word might be. If you hear "can", you will likely activate words like "candy" and "candle" as well, at least during the earlier stages of word recognition. For bilingual people, this activation is not limited to a single language; auditory input activates corresponding words regardless of the language to which they belong. Some of the most compelling evidence for this phenomenon, called language co-activation, comes from studying eye movements. A Russian-English bilingual asked to pick up a marker from a set of objects would look more at a stamp than someone who does not know Russian, because the Russian word for stamp, marka, sounds like the English word marker.</p></div></section>
+                            <section class="passage-paragraph"><span>C</span><div><p>Having to deal with this persistent linguistic competition can result in difficulties. Knowing more than one language can cause speakers to name pictures more slowly and can increase tip-of-the-tongue states. As a result, the constant juggling of two languages creates a need to control how much a person accesses a language at any given time. For this reason, bilingual people often perform better on tasks that require conflict management. In the classic Stroop Task, people see a word and are asked to name the colour of the word's font. When the colour and word match, people name the colour more quickly than when they conflict. Bilingual people often excel at tasks such as this, which require ignoring competing perceptual information and focusing on relevant input. Bilinguals are also better at switching between two tasks; for example, when they switch from categorizing objects by colour to categorizing them by shape, they do so more quickly than monolingual people, reflecting better cognitive control.</p></div></section>
+                            <section class="passage-paragraph"><span>D</span><div><p>It also seems that the neurological roots of the bilingual advantage extend to brain areas more traditionally associated with sensory processing. When monolingual and bilingual adolescents listen to simple speech sounds without background noise, they show highly similar brain stem responses. When researchers play the same sound in the presence of background noise, however, the bilingual listeners' neural response is considerably larger, reflecting better encoding of the sound's fundamental frequency, a feature of sound closely related to pitch perception.</p></div></section>
+                            <section class="passage-paragraph"><span>E</span><div><p>Such improvements in cognitive and sensory processing may help a bilingual person process information in the environment, and help explain why bilingual adults acquire a third language better than monolingual adults master a second language. This advantage may be rooted in the skill of focussing on information about the new language while reducing interference from the languages they already know.</p></div></section>
+                            <section class="passage-paragraph"><span>F</span><div><p>Research also indicates that bilingual experience may help keep cognitive mechanisms sharp by recruiting alternate brain networks to compensate for those that become damaged during aging. Older bilinguals enjoy improved memory relative to monolingual people. In a study of over 200 patients with Alzheimer's disease, bilingual patients reported showing initial symptoms an average of five years later than monolingual patients. In a follow-up study, researchers compared the brains of bilingual and monolingual patients matched on the severity of Alzheimer's symptoms. Surprisingly, the bilinguals' brains had more physical signs of disease, even though outward behaviour and abilities were the same. If the brain is an engine, bilingualism may help it go farther on the same amount of fuel.</p></div></section>
+                            <section class="passage-paragraph"><span>G</span><div><p>Furthermore, the benefits associated with bilingual experience seem to start very early. In one study, researchers taught seven-month-old babies growing up in monolingual or bilingual homes that when they heard a tinkling sound, a puppet appeared on one side of a screen. Halfway through, the puppet began appearing on the opposite side. To get a reward, the infants had to adjust the rule they had learned; only the bilingual babies successfully learned the new rule. This suggests that navigating a multilingual environment imparts advantages far beyond language.</p></div></section>
+                        </div>
+                    </article>
+                </aside>
+
+                <section class="reading-questions" aria-label="Reading questions">
+                    <nav class="reading-mini-nav" aria-label="Passage navigation">
+                        <a href="#passage-1">Passage 1</a>
+                        <a href="#passage-2">Passage 2</a>
+                        <a href="#passage-3">Passage 3</a>
+                    </nav>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 1</h2>
+                        <p class="ielts-instr">Questions 1-3</p>
+                        <p>Reading Passage 1 has nine paragraphs, <strong>A-I</strong>. Which paragraph contains the following information?</p>
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong></p>
+                            <p><strong>B</strong></p>
+                            <p><strong>C</strong></p>
+                            <p><strong>D</strong></p>
+                            <p><strong>E</strong></p>
+                            <p><strong>F</strong></p>
+                            <p><strong>G</strong></p>
+                            <p><strong>H</strong></p>
+                            <p><strong>I</strong></p>
+                        </div>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">1</span> a reference to characteristics that only apply to food production <span class="ielts-blank short"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">2</span> a reference to challenges faced only by farmers in certain parts of the world <span class="ielts-blank short"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">3</span> a reference to difficulties in bringing about co-operation between farmers <span class="ielts-blank short"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 4-9</p>
+                        <p>Look at the following statements and the list of people below. Match each statement with the correct person, <strong>A-G</strong>.</p>
+                        <p class="ielts-instr">You may use any letter more than once.</p>
+                        <div class="scientist-box headings-box">
+                            <p><strong>A</strong> Kanayo F. Nwanze</p>
+                            <p><strong>B</strong> Sophia Murphy</p>
+                            <p><strong>C</strong> Shenggen Fan</p>
+                            <p><strong>D</strong> Rokeya Kabir</p>
+                            <p><strong>E</strong> Pat Mooney</p>
+                            <p><strong>F</strong> Giel Ton</p>
+                            <p><strong>G</strong> Sonali Bisht</p>
+                        </div>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">4</span> Financial assistance from the government does not always go to the farmers who most need it. <span class="ielts-blank short"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">5</span> Farmers can benefit from collaborating as a group. <span class="ielts-blank short"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">6</span> Financial assistance from the government can improve the standard of living of farmers. <span class="ielts-blank short"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">7</span> Farmers may be helped if there is financial input by the same individuals who buy from them. <span class="ielts-blank short"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">8</span> Governments can help to reduce variation in prices. <span class="ielts-blank short"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">9</span> Improvements to infrastructure can have a major impact on risk for farmers. <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 10 and 11</p>
+                        <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO problems are mentioned which affect farmers with small farms in developing countries?</p>
+                        <div class="multi-answer-question">
+                            <input type="hidden" name="answer_10" value="{{ attempt.answers|answer_value:10 }}">
+                            <input type="hidden" name="answer_11" value="{{ attempt.answers|answer_value:11 }}">
+                            <div class="mc-options">
+                                <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>lack of demand for locally produced food</span></button>
+                                <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>lack of irrigation programmes</span></button>
+                                <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>being unable to get insurance</span></button>
+                                <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the effects of changing weather patterns</span></button>
+                                <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>having to sell their goods to intermediary buyers</span></button>
+                            </div>
+                        </div>
+
+                        <p class="ielts-instr">Questions 12 and 13</p>
+                        <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which TWO actions are recommended for improving conditions for farmers?</p>
+                        <div class="multi-answer-question">
+                            <input type="hidden" name="answer_12" value="{{ attempt.answers|answer_value:12 }}">
+                            <input type="hidden" name="answer_13" value="{{ attempt.answers|answer_value:13 }}">
+                            <div class="mc-options">
+                                <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>reducing the size of food stocks</span></button>
+                                <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>attempting to ensure that prices rise at certain times of the year</span></button>
+                                <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>organising co-operation between a wide range of interested parties</span></button>
+                                <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>encouraging consumers to take a financial stake in farming</span></button>
+                                <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>making customers aware of the reasons for changing food prices</span></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 2</h2>
+                        <p class="ielts-instr">Questions 14-20</p>
+                        <p>Reading Passage 2 has seven paragraphs, <strong>A-G</strong>. Choose the correct heading for each paragraph from the list of headings below.</p>
+                        <div class="scientist-box headings-box">
+                            <h3>List of Headings</h3>
+                            <p><strong>i</strong> Different accounts of the same journey</p>
+                            <p><strong>ii</strong> Bingham gains support</p>
+                            <p><strong>iii</strong> A common belief</p>
+                            <p><strong>iv</strong> The aim of the trip</p>
+                            <p><strong>v</strong> A dramatic description</p>
+                            <p><strong>vi</strong> A new route</p>
+                            <p><strong>vii</strong> Bingham publishes his theory</p>
+                            <p><strong>viii</strong> Bingham's lack of enthusiasm</p>
+                        </div>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">14</span> Paragraph A <span class="ielts-blank short"><input name="answer_14" value="{{ attempt.answers|answer_value:14 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">15</span> Paragraph B <span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">16</span> Paragraph C <span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">17</span> Paragraph D <span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">18</span> Paragraph E <span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">19</span> Paragraph F <span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off"><span>............</span></span></p>
+                            <p><span class="qnum">20</span> Paragraph G <span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off"><span>............</span></span></p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 21-24</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 2?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> Bingham went to South America in search of an Inca city.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> Bingham chose a particular route down the Urubamba valley because it was the most common route used by travellers.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> Bingham understood the significance of Machu Picchu as soon as he saw it.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> Bingham returned to Machu Picchu in order to find evidence to support his theory.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 25-26</p>
+                        <p class="ielts-instr">Complete the sentences below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">25</span> The track that took Bingham down the Urubamba valley had been created for the transportation of <span class="ielts-blank"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off"><span>......................</span></span>.</p>
+                            <p><span class="qnum">26</span> Bingham found out about the ruins of Machu Picchu from a <span class="ielts-blank"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off"><span>......................</span></span> in the Urubamba valley.</p>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 3</h2>
+                        <p class="ielts-instr">Questions 27-31</p>
+                        <p class="ielts-instr">Complete the table below. Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
+                        <table class="ielts-table-box">
+                            <thead>
+                                <tr><th>Test</th><th>Findings</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Observing the <span class="qnum">27</span> <span class="ielts-blank"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off"><span>......................</span></span> of Russian-English bilingual people when asked to select certain objects</td>
+                                    <td>Bilingual people engage both languages simultaneously: a mechanism known as <span class="qnum">28</span> <span class="ielts-blank"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off"><span>......................</span></span></td>
+                                </tr>
+                                <tr>
+                                    <td>A test called the <span class="qnum">29</span> <span class="ielts-blank"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off"><span>......................</span></span>, focusing on naming colours</td>
+                                    <td>Bilingual people are more able to handle tasks involving a skill called <span class="qnum">30</span> <span class="ielts-blank"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off"><span>......................</span></span></td>
+                                </tr>
+                                <tr>
+                                    <td>A test involving switching between tasks</td>
+                                    <td>When changing strategies, bilingual people have superior <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="ielts-instr">Questions 32-36</p>
+                        <p>Do the following statements agree with the claims of the writer in Reading Passage 3?</p>
+                        <p class="tfng-key"><strong>YES</strong> if the statement agrees with the claims of the writer<br><strong>NO</strong> if the statement contradicts the claims of the writer<br><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:32 %}<div class="mc-question"><input type="hidden" name="answer_32" value="{{ selected }}"><p><span class="qnum">32</span> Attitudes towards bilingualism have changed in recent years.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:33 %}<div class="mc-question"><input type="hidden" name="answer_33" value="{{ selected }}"><p><span class="qnum">33</span> Bilingual people are better than monolingual people at guessing correctly what words are before they are finished.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:34 %}<div class="mc-question"><input type="hidden" name="answer_34" value="{{ selected }}"><p><span class="qnum">34</span> Bilingual people consistently name images faster than monolingual people.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:35 %}<div class="mc-question"><input type="hidden" name="answer_35" value="{{ selected }}"><p><span class="qnum">35</span> Bilingual people's brains process single sounds more efficiently than monolingual people in all situations.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:36 %}<div class="mc-question"><input type="hidden" name="answer_36" value="{{ selected }}"><p><span class="qnum">36</span> Fewer bilingual people than monolingual people suffer from brain disease in old age.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 37-40</p>
+                        <p>Reading Passage 3 has seven paragraphs, <strong>A-G</strong>. Which paragraph contains the following information?</p>
+                        <div class="ielts-choice-box">
+                            <p><strong>A</strong></p>
+                            <p><strong>B</strong></p>
+                            <p><strong>C</strong></p>
+                            <p><strong>D</strong></p>
+                            <p><strong>E</strong></p>
+                            <p><strong>F</strong></p>
+                            <p><strong>G</strong></p>
+                        </div>
+                        <div class="sentence-questions">
+                            <p><span class="qnum">37</span> an example of how bilingual and monolingual people's brains respond differently to a certain type of non-verbal auditory input <span class="ielts-blank short"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">38</span> a demonstration of how a bilingual upbringing has benefits even before we learn to speak <span class="ielts-blank short"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">39</span> a description of the process by which people identify words that they hear <span class="ielts-blank short"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                            <p><span class="qnum">40</span> reference to some negative consequences of being bilingual <span class="ielts-blank short"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off" maxlength="1"><span>............</span></span></p>
+                        </div>
+                    </article>
+                </section>
+            </section>
+
+            <div class="practice-actions reading-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

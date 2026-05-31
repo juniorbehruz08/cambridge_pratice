@@ -1,0 +1,287 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 11 Test 3 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 11 - Test 3 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 11 - Test 3</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 3</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Questions 1-6</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Free activities in the Burnham area</h3>
+
+                    <div class="ielts-note-box compact-box">
+                        <p class="ielts-small-title">Example</p>
+                        <p>The caller wants to find out about events on</p>
+                        <div class="mc-options">
+                            <span><strong>A</strong> 27 June.</span>
+                            <span><strong>B</strong> 28 June.</span>
+                            <span><strong>C</strong> <span class="ielts-example">29 June.</span></span>
+                        </div>
+                    </div>
+
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:1 %}<div class="mc-question"><input type="hidden" name="answer_1" value="{{ selected }}"><p><span class="qnum">1</span> The 'Family Welcome' event in the art gallery begins at</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>10 am.</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>10.30 am.</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>2 pm.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:2 %}<div class="mc-question"><input type="hidden" name="answer_2" value="{{ selected }}"><p><span class="qnum">2</span> The film that is now shown in the 'Family Welcome' event is about</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>sculpture.</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>painting.</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>ceramics.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:3 %}<div class="mc-question"><input type="hidden" name="answer_3" value="{{ selected }}"><p><span class="qnum">3</span> When do most of the free concerts take place?</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>in the morning</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>at lunchtime</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>in the evening</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:4 %}<div class="mc-question"><input type="hidden" name="answer_4" value="{{ selected }}"><p><span class="qnum">4</span> Where will the 4 pm concert of Latin American music take place?</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>in a museum</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>in a theatre</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>in a library</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:5 %}<div class="mc-question"><input type="hidden" name="answer_5" value="{{ selected }}"><p><span class="qnum">5</span> The boat race begins at</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>Summer Pool.</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>Charlesworth Bridge.</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>Offord Marina.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:6 %}<div class="mc-question"><input type="hidden" name="answer_6" value="{{ selected }}"><p><span class="qnum">6</span> One of the boat race teams</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>won a regional competition earlier this year.</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>has represented the region in a national competition.</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>has won several regional competitions.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr map-title">Questions 7-10</p>
+                    <p class="ielts-instr">Complete the sentences below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box compact-box">
+                        <h3>Paxton Nature Reserve</h3>
+                        <p><span class="qnum">7</span> Paxton is a good place for seeing rare <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> all year round.</p>
+                        <p><span class="qnum">8</span> This is a particularly good time for seeing certain unusual <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span>.</p>
+                        <p><span class="qnum">9</span> Visitors will be able to learn about <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> and then collect some.</p>
+                        <p><span class="qnum">10</span> Part of the <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> has been made suitable for swimming.</p>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-15</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <p class="ielts-blue-title">Changes in Barford over the last 50 years</p>
+
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> In Shona's opinion, why do fewer people use buses in Barford these days?</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>The buses are old and uncomfortable.</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>Fares have gone up too much.</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>There are not so many bus routes.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> What change in the road network is known to have benefited the town most?</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>the construction of a bypass</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>the development of cycle paths</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>the banning of cars from certain streets</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> What is the problem affecting shopping in the town centre?</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>lack of parking spaces</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>lack of major retailers</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>lack of restaurants and caf&eacute;s</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> What does Shona say about medical facilities in Barford?</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>There is no hospital.</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>New medical practices are planned.</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>The number of dentists is too low.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> The largest number of people are employed in</p><div class="mc-options"><button type="button" class="mc-option {% if selected == 'A' %}is-selected{% endif %}" data-value="A"><strong>A</strong><span>manufacturing.</span></button><button type="button" class="mc-option {% if selected == 'B' %}is-selected{% endif %}" data-value="B"><strong>B</strong><span>services.</span></button><button type="button" class="mc-option {% if selected == 'C' %}is-selected{% endif %}" data-value="C"><strong>C</strong><span>education.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr map-title">Questions 16-20</p>
+                    <p>What is planned for each of the following facilities?</p>
+                    <p class="ielts-instr">Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A-G</strong>, next to Questions 16-20.</p>
+
+                    <div class="ielts-choice-box">
+                        <h3 class="ielts-center-title">Plans</h3>
+                        <p><strong>A</strong><span>It will move to a new location.</span></p>
+                        <p><strong>B</strong><span>It will have its opening hours extended.</span></p>
+                        <p><strong>C</strong><span>It will be refurbished.</span></p>
+                        <p><strong>D</strong><span>It will be used for a different purpose.</span></p>
+                        <p><strong>E</strong><span>It will have its opening hours reduced.</span></p>
+                        <p><strong>F</strong><span>It will have new management.</span></p>
+                        <p><strong>G</strong><span>It will be expanded.</span></p>
+                    </div>
+
+                    <p class="ielts-blue-title">Facilities</p>
+                    <div class="ielts-facility-list ielts-report-list">
+                        <label><strong>16</strong><span>railway station car park</span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>17</strong><span>cinema</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>18</strong><span>indoor market</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>19</strong><span>library</span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>20</strong><span>nature reserve</span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-26</p>
+                    <p class="ielts-instr">Complete the table below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <table class="ielts-table-box">
+                        <thead>
+                            <tr>
+                                <th>Subject of drawing</th>
+                                <th>Change to be made</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A <span class="qnum">21</span> <span class="ielts-blank"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off"><span>......................</span></span> surrounded by trees</td>
+                                <td>Add Malcolm and a <span class="qnum">22</span> <span class="ielts-blank"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off"><span>......................</span></span> noticing him</td>
+                            </tr>
+                            <tr>
+                                <td>People who are <span class="qnum">23</span> <span class="ielts-blank"><input name="answer_23" value="{{ attempt.answers|answer_value:23 }}" autocomplete="off"><span>......................</span></span> outside the forest</td>
+                                <td>Add Malcolm sitting on a tree trunk and <span class="qnum">24</span> <span class="ielts-blank"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off"><span>......................</span></span></td>
+                            </tr>
+                            <tr>
+                                <td>Ice-skaters on <span class="qnum">25</span> <span class="ielts-blank"><input name="answer_25" value="{{ attempt.answers|answer_value:25 }}" autocomplete="off"><span>......................</span></span> covered with ice</td>
+                                <td>Add a <span class="qnum">26</span> <span class="ielts-blank"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off"><span>......................</span></span> for each person</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="ielts-instr map-title">Questions 27-30</p>
+                    <p>Who is going to write each of the following parts of the report?</p>
+                    <p class="ielts-instr">Write the correct letter, <strong>A-D</strong>, next to Questions 27-30.</p>
+
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>Helen only</span></p>
+                        <p><strong>B</strong><span>Jeremy only</span></p>
+                        <p><strong>C</strong><span>both Helen and Jeremy</span></p>
+                        <p><strong>D</strong><span>neither Helen nor Jeremy</span></p>
+                    </div>
+
+                    <p class="ielts-blue-title">Parts of the report</p>
+                    <div class="ielts-report-list">
+                        <label><strong>27</strong><span>how they planned the project</span><span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>28</strong><span>how they had ideas for their stories</span><span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>29</strong><span>an interpretation of their stories</span><span class="ielts-blank short"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>30</strong><span>comments on the illustrations</span><span class="ielts-blank short"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>ETHNOGRAPHY IN BUSINESS</h3>
+
+                        <p><strong>Ethnography:</strong> research which explores human cultures</p>
+                        <p>It can be used in business:</p>
+                        <ul>
+                            <li>to investigate customer needs and <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>to help companies develop new designs</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Examples of ethnographic research in business</p>
+
+                        <p>Kitchen equipment</p>
+                        <ul>
+                            <li>Researchers found that cooks could not easily see the <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> in measuring cups.</li>
+                        </ul>
+
+                        <p>Cell phones</p>
+                        <ul>
+                            <li>In Uganda, customers paid to use the cell phones of entrepreneurs.</li>
+                            <li>These customers wanted to check the <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> used.</li>
+                        </ul>
+
+                        <p>Computer companies</p>
+                        <ul>
+                            <li>There was a need to develop <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> to improve communication between system administrators and colleagues.</li>
+                        </ul>
+
+                        <p>Hospitals</p>
+                        <ul>
+                            <li>Nurses needed to access information about <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> in different parts of the hospital.</li>
+                        </ul>
+
+                        <p>Airlines</p>
+                        <ul>
+                            <li>Respondents recorded information about their <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> while travelling.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title">Principles of ethnographic research in business</p>
+                        <ul>
+                            <li>The researcher does not start off with a hypothesis.</li>
+                            <li>Participants may be selected by criteria such as age, <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> or product used.</li>
+                            <li>The participants must feel <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> about taking part in the research.</li>
+                            <li>There is usually direct <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> of the participants.</li>
+                            <li>The interview is guided by the participant.</li>
+                            <li>A lot of time is needed for the <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> of the data.</li>
+                            <li>Researchers look for a meaningful pattern in the data.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions ielts-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

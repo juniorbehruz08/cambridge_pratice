@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function readDragData(event) {
-        const customData = event.dataTransfer.getData('application/x-cambridge-choice');
+        const customData = event.dataTransfer.getData('application/x-mock-choice');
         if (customData) {
             try {
                 return JSON.parse(customData);
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
             value,
             sourceName: sourceInput ? sourceInput.name : '',
         };
-        event.dataTransfer.setData('application/x-cambridge-choice', JSON.stringify(payload));
+        event.dataTransfer.setData('application/x-mock-choice', JSON.stringify(payload));
         event.dataTransfer.setData('text/plain', value);
         event.dataTransfer.effectAllowed = 'move';
     }

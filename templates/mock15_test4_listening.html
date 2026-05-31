@@ -1,0 +1,375 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 15 Test 4 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        /* Layout-only overrides. Fonts and input styles are inherited from your existing main.css. */
+        .book-form-box {
+            width: min(100%, 640px);
+            margin: 18px auto 0;
+            border: 1.5px solid #555;
+            padding: 0;
+            background: #fff;
+        }
+        .book-form-box,
+        .book-form-box *,
+        .book-map-block,
+        .book-map-block *,
+        .book-notes-box,
+        .book-notes-box * {
+            font-family: inherit;
+        }
+        .book-form-box .book-box-title {
+            text-align: center;
+            font-weight: 700;
+            padding: 10px 12px 8px;
+            border-bottom: 1px solid #777;
+            margin: 0;
+        }
+        .survey-table {
+            width: 100%;
+            border-collapse: collapse;
+            font: inherit;
+        }
+        .survey-table th,
+        .survey-table td {
+            font: inherit;
+            padding: 3px 20px;
+            vertical-align: baseline;
+        }
+        .survey-table th {
+            text-align: left;
+            font-weight: 700;
+            padding-top: 10px;
+            padding-bottom: 4px;
+        }
+        .survey-table .survey-label {
+            width: 48%;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+        .survey-table .survey-value {
+            width: 52%;
+            font-weight: 400;
+        }
+        .book-map-block {
+            width: min(100%, 620px);
+            margin: 18px auto 0;
+        }
+        .book-map-block .farm-map-image {
+            display: block;
+            width: 520px;
+            max-width: 100%;
+            margin: 0 auto 22px;
+        }
+        .book-map-answers {
+            width: 320px;
+            max-width: 100%;
+            margin: 0 0 0 8px;
+        }
+        .book-map-row {
+            display: grid;
+            grid-template-columns: 34px 1fr 128px;
+            align-items: baseline;
+            gap: 8px;
+            margin: 4px 0;
+            font: inherit;
+        }
+        .book-map-row .qnum {
+            font-weight: 400;
+        }
+        .book-notes-box {
+            width: min(100%, 640px);
+            margin: 18px auto 0;
+            border: 1.5px solid #555;
+            padding: 14px 20px 10px;
+            background: #fff;
+        }
+        .book-notes-box h3 {
+            text-align: center;
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+        .book-notes-box .book-note-heading {
+            margin: 8px 0 4px;
+            font-weight: 700;
+        }
+        .book-notes-box .book-note-heading.upper {
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        .book-notes-box ul {
+            margin-top: 3px;
+            margin-bottom: 8px;
+            padding-left: 20px;
+        }
+        .book-notes-box li {
+            margin: 3px 0;
+            font: inherit;
+        }
+        .book-notes-box ul ul {
+            list-style-type: none;
+            padding-left: 24px;
+            margin-top: 4px;
+        }
+        .book-notes-box ul ul li::before {
+            content: "–";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 15 - Test 4 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result %}{{ result.band_score|default_if_none:'' }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 15 - Test 4</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 4</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the form below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                    <div class="ielts-note-box book-form-box">
+                        <h3 class="book-box-title">Customer Satisfaction Survey</h3>
+                        <table class="survey-table" aria-label="Customer Satisfaction Survey">
+                            <tbody>
+                                <tr><th colspan="2">Customer details</th></tr>
+                                <tr><td class="survey-label">Name:</td><td class="survey-value">Sophie Bird</td></tr>
+                                <tr><td class="survey-label">Occupation:</td><td class="survey-value"><span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span></td></tr>
+                                <tr><td class="survey-label">Reason for travel today:</td><td class="survey-value"><span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></td></tr>
+
+                                <tr><th colspan="2">Journey information</th></tr>
+                                <tr><td class="survey-label">Name of station returning to:</td><td class="survey-value"><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span></td></tr>
+                                <tr><td class="survey-label">Type of ticket purchased:</td><td class="survey-value">standard <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> ticket</td></tr>
+                                <tr><td class="survey-label">Cost of ticket:</td><td class="survey-value"><span class="qnum">5</span> &pound;<span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></td></tr>
+                                <tr><td class="survey-label">When ticket was purchased:</td><td class="survey-value">yesterday</td></tr>
+                                <tr><td class="survey-label">Where ticket was bought:</td><td class="survey-value"><span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></td></tr>
+
+                                <tr><th colspan="2">Satisfaction with journey</th></tr>
+                                <tr><td class="survey-label">Most satisfied with:</td><td class="survey-value">the wifi</td></tr>
+                                <tr><td class="survey-label">Least satisfied with:</td><td class="survey-value">the <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> this morning</td></tr>
+
+                                <tr><th colspan="2">Satisfaction with station facilities</th></tr>
+                                <tr><td class="survey-label">Most satisfied with:</td><td class="survey-value">how much <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> was provided</td></tr>
+                                <tr><td class="survey-label">Least satisfied with:</td><td class="survey-value">lack of seats, particularly on the <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span></td></tr>
+                                <tr><td class="survey-label">Neither satisfied nor dissatisfied with:</td><td class="survey-value">the <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> available</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-16</p>
+                    <p class="ielts-instr">Label the map below.</p>
+                    <p class="ielts-instr">Write the correct letter, <strong>A-H</strong>, next to Questions 11-16.</p>
+                    <div class="book-map-block">
+                        <img class="farm-map-image" src="{% static 'img/mock15/test4/listening/croft-valley-park.png' %}" alt="Croft Valley Park map">
+                        <div class="book-map-answers" aria-label="Map label answers">
+                            <div class="book-map-row"><span class="qnum">11</span><span>cafe</span><span class="ielts-blank"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off"><span>......................</span></span></div>
+                            <div class="book-map-row"><span class="qnum">12</span><span>toilets</span><span class="ielts-blank"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off"><span>......................</span></span></div>
+                            <div class="book-map-row"><span class="qnum">13</span><span>formal gardens</span><span class="ielts-blank"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off"><span>......................</span></span></div>
+                            <div class="book-map-row"><span class="qnum">14</span><span>outdoor gym</span><span class="ielts-blank"><input name="answer_14" value="{{ attempt.answers|answer_value:14 }}" autocomplete="off"><span>......................</span></span></div>
+                            <div class="book-map-row"><span class="qnum">15</span><span>skateboard ramp</span><span class="ielts-blank"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off"><span>......................</span></span></div>
+                            <div class="book-map-row"><span class="qnum">16</span><span>wild flowers</span><span class="ielts-blank"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off"><span>......................</span></span></div>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 17 and 18</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. What does the speaker say about the adventure playground?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_17" value="{{ attempt.answers|answer_value:17 }}">
+                        <input type="hidden" name="answer_18" value="{{ attempt.answers|answer_value:18 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>Children must be supervised.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>It costs more in winter.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>Some activities are only for younger children.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>No payment is required.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>It was recently expanded.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 19 and 20</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. What does the speaker say about the glass houses?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_19" value="{{ attempt.answers|answer_value:19 }}">
+                        <input type="hidden" name="answer_20" value="{{ attempt.answers|answer_value:20 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>They are closed at weekends.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>Volunteers are needed to work there.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>They were badly damaged by fire.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>More money is needed to repair some of the glass.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>Visitors can see palm trees from tropical regions.</span></button>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-24</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-centered-title">Presentation about refrigeration</h3>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> What did Annie discover from reading about icehouses?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>why they were first created</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>how the ice was kept frozen</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>where they were located</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> What point does Annie make about refrigeration in ancient Rome?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>It became a commercial business.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>It used snow from nearby.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>It took a long time to become popular.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> In connection with modern refrigerators, both Annie and Jack are worried about</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the complexity of the technology.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the fact that some are disposed of irresponsibly.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the large number that quickly break down.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> What do Jack and Annie agree regarding domestic fridges?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>They are generally good value for money.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>There are plenty of useful variations.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>They are more useful than other domestic appliances.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 25-30</p>
+                    <p>Who is going to do research into each topic?</p>
+                    <p>Write the correct letter, <strong>A, B</strong> or <strong>C</strong>, next to Questions 25-30.</p>
+                    <p class="ielts-instr">You may use any letter more than once.</p>
+                    <div class="ielts-note-box">
+                        <p><strong>A</strong> Annie</p>
+                        <p><strong>B</strong> Jack</p>
+                        <p><strong>C</strong> both Annie and Jack</p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> the goods that are refrigerated</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> the effects on health</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> the impact on food producers</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> the impact on cities</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> refrigerated transport</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> domestic fridges</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box book-notes-box">
+                        <h3>How the Industrial Revolution affected life in Britain</h3>
+                        <p class="book-note-heading">19th century</p>
+                        <ul>
+                            <li>For the first time, people's possessions were used to measure Britain's <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Developments in production of goods and in <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> greatly changed lives.</li>
+                        </ul>
+                        <p class="book-note-heading upper">Main areas of change</p>
+                        <p class="book-note-heading">Manufacturing</p>
+                        <ul>
+                            <li>The Industrial Revolution would not have happened without the new types of <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> that were used then.</li>
+                            <li>The leading industry was <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>. Its products became widely available.</li>
+                            <li>New <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> made factories necessary and so more people moved into towns.</li>
+                        </ul>
+                        <p class="book-note-heading">Transport</p>
+                        <ul>
+                            <li>The railways took the place of canals.</li>
+                            <li>Because of the new transport:
+                                <ul>
+                                    <li>greater access to <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> made people more aware of what they could buy in shops</li>
+                                    <li>when shopping, people were not limited to buying <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> goods.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p class="book-note-heading">Retailing</p>
+                        <ul>
+                            <li>The first department stores were opened.</li>
+                            <li>The displays of goods were more visible:
+                                <ul>
+                                    <li>inside stores because of better <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span></li>
+                                    <li>outside stores, because <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> were bigger</li>
+                                </ul>
+                            </li>
+                            <li><span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> that was persuasive became much more common.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

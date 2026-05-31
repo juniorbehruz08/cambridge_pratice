@@ -1,0 +1,269 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 13 Test 2 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 13 - Test 2 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 13 - Test 2</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 2</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>SECTION 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>South City Cycling Club</h3>
+                        <p class="ielts-blue-title black">Example</p>
+                        <p>Name of club secretary: Jim <span class="ielts-example">Hunter</span></p>
+
+                        <p class="ielts-blue-title black">Membership</p>
+                        <ul>
+                            <li>Full membership costs $260; this covers cycling and <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> all over Australia.</li>
+                            <li>Recreational membership costs $108.</li>
+                            <li>Cost of membership includes the club fee and <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>The club kit is made by a company called <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Training rides</p>
+                        <ul>
+                            <li>Chance to improve cycling skills and fitness.</li>
+                            <li>Level B: speed about <span class="qnum">4</span> <span class="ielts-blank short"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>............</span></span> kph.</li>
+                            <li>Weekly sessions:
+                                <ul>
+                                    <li>Tuesdays at 5.30 am, meet at the <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span>.</li>
+                                    <li>Thursdays at 5.30 am, meet at the entrance to the <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span>.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Further information</p>
+                        <ul>
+                            <li>Rides are about an hour and a half.</li>
+                            <li>Members often have <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> together afterwards.</li>
+                            <li>There is not always a <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> with the group on these rides.</li>
+                            <li>Check and print the <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> on the website beforehand.</li>
+                            <li>Bikes must have <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-16</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Information on company volunteering projects</h3>
+
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> How much time for volunteering does the company allow per employee?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>two hours per week</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>one day per month</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>8 hours per year</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> In feedback almost all employees said that volunteering improved their</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>chances of promotion.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>job satisfaction.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>relationships with colleagues.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> Last year some staff helped unemployed people with their</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>literacy skills.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>job applications.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>communication skills.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> This year the company will start a new volunteering project with a local</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>school.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>park.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>charity.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> Where will the Digital Inclusion Day be held?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>at the company's training facility</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>at a college</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>in a community centre</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> What should staff do if they want to take part in the Digital Inclusion Day?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>fill in a form</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>attend a training workshop</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>get permission from their manager</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 17 and 18</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. What TWO things are mentioned about the participants on the last Digital Inclusion Day?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_17" value="{{ attempt.answers|answer_value:17 }}">
+                        <input type="hidden" name="answer_18" value="{{ attempt.answers|answer_value:18 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>They were all over 70.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>They never used their computer.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>Their phones were mostly old-fashioned.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>They only used their phones for making calls.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>They initially showed little interest.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 19 and 20</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. What TWO activities on the last Digital Inclusion Day did participants describe as useful?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_19" value="{{ attempt.answers|answer_value:19 }}">
+                        <input type="hidden" name="answer_20" value="{{ attempt.answers|answer_value:20 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>learning to use tablets</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>communicating with family</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>shopping online</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>playing online games</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>sending emails</span></button>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-25</p>
+                    <p class="ielts-instr">Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <h3 class="ielts-center-title">Planning a presentation on nanotechnology</h3>
+
+                    <div class="ielts-mc-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> Russ says that his difficulty in planning the presentation is due to</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>his lack of knowledge about the topic.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>his uncertainty about what he should try to achieve.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the short time that he has for preparation.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> Russ and his tutor agree that his approach in the presentation will be</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>to concentrate on how nanotechnology is used in one field.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>to follow the chronological development of nanotechnology.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>to show the range of applications of nanotechnology.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> In connection with slides, the tutor advises Russ to</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>talk about things that he can find slides to illustrate.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>look for slides to illustrate the points he makes.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>consider omitting slides altogether.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> They both agree that the best way for Russ to start his presentation is</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>to encourage the audience to talk.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>to explain what Russ intends to do.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>to provide an example.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> What does the tutor advise Russ to do next while preparing his presentation?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>summarise the main point he wants to make</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>read the notes he has already made</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>list the topics he wants to cover</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 26-30</p>
+                    <p>What comments do the speakers make about each of the following aspects of Russ's previous presentation?</p>
+                    <p class="ielts-instr">Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A-G</strong>, next to Questions 26-30.</p>
+                    <div class="ielts-choice-box">
+                        <h3 class="ielts-center-title">Comments</h3>
+                        <p><strong>A</strong><span>lacked a conclusion</span></p>
+                        <p><strong>B</strong><span>useful in the future</span></p>
+                        <p><strong>C</strong><span>not enough</span></p>
+                        <p><strong>D</strong><span>sometimes distracting</span></p>
+                        <p><strong>E</strong><span>showed originality</span></p>
+                        <p><strong>F</strong><span>covered a wide range</span></p>
+                        <p><strong>G</strong><span>not too technical</span></p>
+                    </div>
+                    <div class="ielts-report-list">
+                        <label><strong>26</strong><span>structure</span><span class="ielts-blank short"><input name="answer_26" value="{{ attempt.answers|answer_value:26 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>27</strong><span>eye contact</span><span class="ielts-blank short"><input name="answer_27" value="{{ attempt.answers|answer_value:27 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>28</strong><span>body language</span><span class="ielts-blank short"><input name="answer_28" value="{{ attempt.answers|answer_value:28 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>29</strong><span>choice of words</span><span class="ielts-blank short"><input name="answer_29" value="{{ attempt.answers|answer_value:29 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label><strong>30</strong><span>handouts</span><span class="ielts-blank short"><input name="answer_30" value="{{ attempt.answers|answer_value:30 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+                <section class="ielts-section">
+                    <h2><span>SECTION 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>Episodic memory</h3>
+                        <ul>
+                            <li>the ability to recall details, e.g. the time and <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> of past events</li>
+                            <li>different to semantic memory – the ability to remember general information about the <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>, which does not involve recalling <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> information</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Forming episodic memories involves three steps:</p>
+
+                        <p class="ielts-blue-title black">Encoding</p>
+                        <ul>
+                            <li>involves receiving and processing information</li>
+                            <li>the more <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> given to an event, the more successfully it can be encoded</li>
+                            <li>to remember a <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>, it is useful to have a strategy for encoding such information</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Consolidation</p>
+                        <ul>
+                            <li>how memories are strengthened and stored</li>
+                            <li>most effective when memories can be added to a <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> of related information</li>
+                            <li>the <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> of retrieval affects the strength of memories</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Retrieval</p>
+                        <ul>
+                            <li>memory retrieval often depends on using a prompt, e.g. the <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> of an object near to the place where you left your car</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Episodic memory impairments</p>
+                        <ul>
+                            <li>these affect people with a wide range of medical conditions</li>
+                            <li>games which stimulate the <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> have been found to help people with schizophrenia</li>
+                            <li>children with autism may have difficulty forming episodic memories – possibly because their concept of the <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> may be absent</li>
+                            <li>memory training may help autistic children develop social skills</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions ielts-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

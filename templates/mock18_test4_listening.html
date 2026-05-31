@@ -1,0 +1,348 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 18 Test 4 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .employment-agency-box {
+            padding: 12px 18px 10px;
+        }
+
+        .employment-agency-box h3 {
+            text-align: center;
+            margin: 0 0 16px;
+            font-size: 20px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #666;
+        }
+
+        .employment-grid {
+            display: grid;
+            grid-template-columns: 92px 1fr;
+            column-gap: 16px;
+            row-gap: 8px;
+            align-items: baseline;
+            font-size: 15px;
+            line-height: 1.25;
+        }
+
+        .employment-label {
+            font-weight: 700;
+            color: #666;
+        }
+
+        .employment-value {
+            min-width: 0;
+        }
+
+        .employment-section-title {
+            grid-column: 1 / -1;
+            font-weight: 700;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .employment-bullets {
+            grid-column: 1 / -1;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .employment-bullets li {
+            margin: 8px 0;
+            line-height: 1.28;
+        }
+
+        .employment-agency-box .ielts-blank {
+            min-width: 145px;
+        }
+
+        .employment-agency-box .ielts-blank.short {
+            min-width: 105px;
+        }
+
+        .employment-agency-box .ielts-blank.medium {
+            min-width: 125px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 18 - Test 4 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 18 - Test 4</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 4</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                    <div class="ielts-note-box employment-agency-box">
+                        <h3>Job details from employment agency</h3>
+
+                        <div class="employment-grid">
+                            <div class="employment-label">Role</div>
+                            <div class="employment-value">
+                                <span class="qnum">1</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </div>
+
+                            <div class="employment-label">Location</div>
+                            <div class="employment-value">
+                                Fordham <span class="qnum">2</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Centre
+                            </div>
+
+                            <div></div>
+                            <div class="employment-value">
+                                <span class="qnum">3</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Road, Fordham
+                            </div>
+
+                            <div class="employment-section-title">Work involves</div>
+                            <ul class="employment-bullets">
+                                <li>dealing with enquiries</li>
+                                <li>making <span class="qnum">4</span> <span class="ielts-blank medium"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> and reorganising them</li>
+                                <li>maintaining the internal <span class="qnum">5</span> <span class="ielts-blank medium"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
+                                <li>general administration</li>
+                            </ul>
+
+                            <div class="employment-section-title">Requirements</div>
+                            <ul class="employment-bullets">
+                                <li><span class="qnum">6</span> <span class="ielts-blank medium"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> (essential)</li>
+                                <li>a calm and <span class="qnum">7</span> <span class="ielts-blank medium"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> manner</li>
+                                <li>good IT skills</li>
+                            </ul>
+
+                            <div class="employment-section-title">Other information</div>
+                            <ul class="employment-bullets">
+                                <li>a <span class="qnum">8</span> <span class="ielts-blank medium"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> job – further opportunities may be available</li>
+                                <li>hours: 7.45 a.m. to <span class="qnum">9</span> <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>............</span></span> p.m. Monday to Friday</li>
+                                <li><span class="qnum">10</span> <span class="ielts-blank medium"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> is available onsite</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-14</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> The museum building was originally</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>a factory.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>a private home.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>a hall of residence.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> The university uses part of the museum building as</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>teaching rooms.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>a research library.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>administration offices.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> What does the guide say about the entrance fee?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Visitors decide whether or not they wish to pay.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Only children and students receive a discount.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>The museum charges extra for special exhibitions.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> What are visitors advised to leave in the cloakroom?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>cameras</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>coats</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>bags</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 15-20</p>
+                    <p>What information does the speaker give about each of the following areas of the museum?</p>
+                    <p class="ielts-instr">Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 15-20.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>Parents must supervise their children.</span></p>
+                        <p><strong>B</strong><span>There are new things to see.</span></p>
+                        <p><strong>C</strong><span>It is closed today.</span></p>
+                        <p><strong>D</strong><span>This is only for school groups.</span></p>
+                        <p><strong>E</strong><span>There is a quiz for visitors.</span></p>
+                        <p><strong>F</strong><span>It features something created by students.</span></p>
+                        <p><strong>G</strong><span>An expert is here today.</span></p>
+                        <p><strong>H</strong><span>There is a one-way system.</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> Four Seasons</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> Farmhouse Kitchen</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> A Year on the Farm</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:18 %}<div class="mc-question"><input type="hidden" name="answer_18" value="{{ selected }}"><p><span class="qnum">18</span> Wagon Walk</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:19 %}<div class="mc-question"><input type="hidden" name="answer_19" value="{{ selected }}"><p><span class="qnum">19</span> Bees are Magic</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:20 %}<div class="mc-question"><input type="hidden" name="answer_20" value="{{ selected }}"><p><span class="qnum">20</span> The Pond</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21 and 22</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> educational skills were shown in the video of children doing origami?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_21" value="{{ attempt.answers|answer_value:21 }}">
+                        <input type="hidden" name="answer_22" value="{{ attempt.answers|answer_value:22 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>solving problems</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>following instructions</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>working cooperatively</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>learning through play</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>developing hand-eye coordination</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 23-27</p>
+                    <p>Which comment do the students make about each of the following children in the video?</p>
+                    <p class="ielts-instr">Choose <strong>FIVE</strong> answers from the box and write the correct letter, <strong>A-G</strong>, next to Questions 23-27.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>demonstrated independence</span></p>
+                        <p><strong>B</strong><span>asked for teacher support</span></p>
+                        <p><strong>C</strong><span>developed a competitive attitude</span></p>
+                        <p><strong>D</strong><span>seemed to find the activity calming</span></p>
+                        <p><strong>E</strong><span>seemed pleased with the results</span></p>
+                        <p><strong>F</strong><span>seemed confused</span></p>
+                        <p><strong>G</strong><span>seemed to find the activity easy</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> Sid</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> Jack</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> Naomi</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> Anya</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Zara</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 28-30</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Before starting an origami activity in class, the students think it is important for the teacher to</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>make models that demonstrate the different stages.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>check children understand the terminology involved.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>tell children not to worry if they find the activity difficult.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> The students agree that some teachers might be unwilling to use origami in class because</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>they may not think that crafts are important.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>they may not have the necessary skills.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>they may worry that it will take up too much time.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> Why do the students decide to use origami in their maths teaching practice?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>to correct a particular misunderstanding</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>to set a challenge</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>to introduce a new concept</span></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 4</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Victor Hugo</h3>
+                        <p class="ielts-blue-title black">His novel, Les Miserables</p>
+                        <ul>
+                            <li>It has been adapted for theatre and cinema.</li>
+                            <li>We know more about its overall <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> than about its author.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">His early career</p>
+                        <ul>
+                            <li>In Paris, his career was successful and he led the Romantic movement.</li>
+                            <li>He spoke publicly about social issues, such as <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> and education.</li>
+                            <li>Napoleon III disliked his views and exiled him.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">His exile from France</p>
+                        <ul>
+                            <li>Victor Hugo had to live elsewhere in <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>He used his income from the sale of some <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> he had written to buy a house on Guernsey.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">His house on Guernsey</p>
+                        <ul>
+                            <li>Victor Hugo lived in this house until the end of the Empire in France.</li>
+                            <li>The ground floor contains portraits, <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> and tapestries that he valued.</li>
+                            <li>He bought cheap <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> made of wood and turned this into beautiful wall carvings.</li>
+                            <li>The first floor consists of furnished areas with wallpaper and <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> that have a Chinese design.</li>
+                            <li>The library still contains many of his favourite books.</li>
+                            <li>He wrote in a room at the top of the house that had a view of the <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>He entertained other writers as well as poor <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> in his house.</li>
+                            <li>Victor Hugo's <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> gave ownership of the house to the city of Paris in 1927.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

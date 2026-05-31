@@ -1,0 +1,441 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 18 Test 2 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .restaurant-jobs-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 20px;
+            font-size: 12.5px;
+            line-height: 1.18;
+            table-layout: fixed;
+        }
+
+        .restaurant-jobs-table th,
+        .restaurant-jobs-table td {
+            border: 1px solid #777;
+            padding: 6px 7px;
+            vertical-align: top;
+        }
+
+        .restaurant-jobs-table thead th {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .restaurant-jobs-table .col-location {
+            width: 15%;
+        }
+
+        .restaurant-jobs-table .col-title {
+            width: 24%;
+        }
+
+        .restaurant-jobs-table .col-duties {
+            width: 31%;
+        }
+
+        .restaurant-jobs-table .col-pay {
+            width: 30%;
+        }
+
+        .restaurant-jobs-table ul {
+            margin: 0;
+            padding-left: 14px;
+        }
+
+        .restaurant-jobs-table li {
+            margin: 0 0 5px;
+        }
+
+        .restaurant-jobs-table .ielts-blank {
+            display: inline-block;
+            min-width: 0 !important;
+            width: 72px !important;
+            max-width: 72px !important;
+            overflow: hidden;
+            white-space: nowrap;
+            vertical-align: baseline;
+        }
+
+        .restaurant-jobs-table .ielts-blank.short {
+            width: 44px !important;
+            max-width: 44px !important;
+        }
+
+        .restaurant-jobs-table .ielts-blank.long {
+            width: 92px !important;
+            max-width: 92px !important;
+        }
+
+        .restaurant-jobs-table .ielts-blank input {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .restaurant-jobs-table .ielts-blank > span {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .restaurant-jobs-table .qnum {
+            font-weight: 700;
+        }
+
+        .restaurant-jobs-table .table-note {
+            display: block;
+            margin-top: 4px;
+        }
+
+        .map-answer-list {
+            max-width: 300px;
+            margin-top: 12px;
+        }
+
+        .map-answer-row {
+            display: grid;
+            grid-template-columns: 28px 1fr 96px;
+            gap: 8px;
+            align-items: baseline;
+            margin-bottom: 7px;
+            white-space: nowrap;
+        }
+
+        .map-answer-row strong {
+            font-weight: 700;
+        }
+
+        .map-answer-row .ielts-blank.short {
+            min-width: 92px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 18 - Test 2 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 18 - Test 2</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 2</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Questions 1-5</p>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Working at Milo's Restaurants</h3>
+                        <p class="ielts-blue-title black">Benefits</p>
+                        <ul>
+                            <li><span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> provided for all staff</li>
+                            <li><span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> during weekdays at all Milo's Restaurants</li>
+                            <li><span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> provided after midnight</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Person specification</p>
+                        <ul>
+                            <li>must be prepared to work well in a team</li>
+                            <li>must care about maintaining a high standard of <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>must have a qualification in <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                    </div>
+
+                    <p class="ielts-instr">Questions 6-10</p>
+                    <p class="ielts-instr">Complete the table below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+                    <table class="restaurant-jobs-table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">Restaurant jobs</th>
+                            </tr>
+                            <tr>
+                                <th class="col-location">Location</th>
+                                <th class="col-title">Job title</th>
+                                <th class="col-duties">Main responsibilities</th>
+                                <th class="col-pay">Pay and conditions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="qnum">6</span>
+                                    <span class="ielts-blank">
+                                        <input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off">
+                                        <span>......................</span>
+                                    </span>
+                                    <span class="table-note">Street</span>
+                                </td>
+                                <td>Breakfast supervisor</td>
+                                <td>
+                                    <ul>
+                                        <li>Checking portions, etc. are correct</li>
+                                        <li>Making sure
+                                            <span class="qnum">7</span>
+                                            <span class="ielts-blank long">
+                                                <input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off">
+                                                <span>......................</span>
+                                            </span>
+                                            is clean
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Starting salary &pound;<span class="qnum">8</span>
+                                    <span class="ielts-blank short">
+                                        <input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off">
+                                        <span>............</span>
+                                    </span> per hour
+                                    <span class="table-note">Start work at 5.30 a.m.</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>City Road</td>
+                                <td>Junior chef</td>
+                                <td>
+                                    <ul>
+                                        <li>Supporting senior chefs</li>
+                                        <li>Maintaining stock and organising
+                                            <span class="qnum">9</span>
+                                            <span class="ielts-blank long">
+                                                <input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off">
+                                                <span>......................</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    Annual salary &pound;23,000
+                                    <span class="table-note">No work on a <span class="qnum">10</span>
+                                        <span class="ielts-blank">
+                                            <input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off">
+                                            <span>......................</span>
+                                        </span>
+                                        once a month
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11 and 12</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>What are the <strong>TWO</strong> main reasons why this site has been chosen for the housing development?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_11" value="{{ attempt.answers|answer_value:11 }}">
+                        <input type="hidden" name="answer_12" value="{{ attempt.answers|answer_value:12 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>It has suitable geographical features.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>There is easy access to local facilities.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>It has good connections with the airport.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>The land is of little agricultural value.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>It will be convenient for workers.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 13 and 14</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> aspects of the planned housing development have people given positive feedback about?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_13" value="{{ attempt.answers|answer_value:13 }}">
+                        <input type="hidden" name="answer_14" value="{{ attempt.answers|answer_value:14 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>the facilities for cyclists</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>the impact on the environment</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>the encouragement of good relations between residents</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the low cost of all the accommodation</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the rural location</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr map-title">Questions 15-20</p>
+                    <p class="ielts-instr">Label the map below.</p>
+                    <p class="ielts-instr">Write the correct letter, <strong>A-I</strong>, next to Questions 15-20.</p>
+                    <img class="farm-map-image" src="{% static '18/images/test2_housing_map.png' %}" alt="Housing development map with labels A to I">
+                    <div class="map-answer-list">
+                        <label class="map-answer-row"><strong>15</strong><span>School</span><span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>16</strong><span>Sports centre</span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>17</strong><span>Clinic</span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>18</strong><span>Community centre</span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>19</strong><span>Supermarket</span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="map-answer-row"><strong>20</strong><span>Playground</span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-24</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> Why do the students think the Laki eruption of 1783 is so important?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>It was the most severe eruption in modern times.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>It led to the formal study of volcanoes.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>It had a profound effect on society.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> What surprised Adam about observations made at the time?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the number of places producing them</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the contradictions in them</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the lack of scientific data to support them</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> According to Michelle, what did the contemporary sources say about the Laki haze?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>People thought it was similar to ordinary fog.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>It was associated with health issues.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>It completely blocked out the sun for weeks.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> Adam corrects Michelle when she claims that Benjamin Franklin</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>came to the wrong conclusion about the cause of the haze.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>was the first to identify the reason for the haze.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>supported the opinions of other observers about the haze.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 25 and 26</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. Which <strong>TWO</strong> issues following the Laki eruption surprised the students?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_25" value="{{ attempt.answers|answer_value:25 }}">
+                        <input type="hidden" name="answer_26" value="{{ attempt.answers|answer_value:26 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>how widespread the effects were</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>how long-lasting the effects were</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>the number of deaths it caused</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the speed at which the volcanic ash cloud spread</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>how people ignored the warning signs</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 27-30</p>
+                    <p>What comment do the students make about the impact of the Laki eruption on the following countries?</p>
+                    <p class="ielts-instr">Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A-F</strong>, next to Questions 27-30.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>This country suffered the most severe loss of life.</span></p>
+                        <p><strong>B</strong><span>The impact on agriculture was predictable.</span></p>
+                        <p><strong>C</strong><span>There was a significant increase in deaths of young people.</span></p>
+                        <p><strong>D</strong><span>Animals suffered from a sickness.</span></p>
+                        <p><strong>E</strong><span>This country saw the highest rise in food prices in the world.</span></p>
+                        <p><strong>F</strong><span>It caused a particularly harsh winter.</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Iceland</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Egypt</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> USA</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> UK</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Pockets</h3>
+                        <p class="ielts-blue-title black">Reason for choice of subject</p>
+                        <ul>
+                            <li>They are <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> but can be overlooked by consumers and designers.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Pockets in men's clothes</p>
+                        <ul>
+                            <li>Men started to wear <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> in the 18th century.</li>
+                            <li>A <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> sewed pockets into the lining of the garments.</li>
+                            <li>The wearer could use the pockets for small items.</li>
+                            <li>Bigger pockets might be made for men who belonged to a certain type of <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Pockets in women's clothes</p>
+                        <ul>
+                            <li>Women's pockets were less <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> than men's.</li>
+                            <li>Women were very concerned about pickpockets.</li>
+                            <li>Pockets were produced in pairs using <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> to link them together.</li>
+                            <li>Pockets hung from the women's <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> under skirts and petticoats.</li>
+                            <li>Items such as <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> could be reached through a gap in the material.</li>
+                            <li>Pockets, of various sizes, stayed inside clothing for many decades.</li>
+                            <li>When dresses changed shape, hidden pockets had a negative effect on the <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> of women.</li>
+                            <li>Bags called "pouches" became popular, before women carried a <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

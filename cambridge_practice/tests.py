@@ -128,7 +128,7 @@ class PracticeContentIntegrityTests(SimpleTestCase):
             template_path = (
                 settings.BASE_DIR
                 / 'templates'
-                / f"cambridge{answer_key['book_number']}_test{answer_key['test_number']}_{answer_key['section']}.html"
+                / f"mock{answer_key['book_number']}_test{answer_key['test_number']}_{answer_key['section']}.html"
             )
             with self.subTest(template=template_path.name):
                 self.assertTrue(template_path.exists())
@@ -138,16 +138,16 @@ class PracticeContentIntegrityTests(SimpleTestCase):
                 self.assertEqual(inputs, expected_questions)
 
     def test_listening_parts_are_separate_papers(self):
-        for template_path in sorted((settings.BASE_DIR / 'templates').glob('cambridge*_test*_listening.html')):
+        for template_path in sorted((settings.BASE_DIR / 'templates').glob('mock*_test*_listening.html')):
             with self.subTest(template=template_path.name):
                 template = template_path.read_text(encoding='utf-8')
-                section_count = template.count('<section class="ielts-section">')
+                section_count = len(re.findall(r'<section class="ielts-section(?:\s[^"]*)?">', template))
                 paper_count = template.count('<article class="ielts-paper">')
                 self.assertGreaterEqual(section_count, 4)
                 self.assertEqual(paper_count, section_count)
 
     def test_reading_passages_and_question_sections_are_separate(self):
-        for template_path in sorted((settings.BASE_DIR / 'templates').glob('cambridge*_test*_reading.html')):
+        for template_path in sorted((settings.BASE_DIR / 'templates').glob('mock*_test*_reading.html')):
             with self.subTest(template=template_path.name):
                 template = template_path.read_text(encoding='utf-8')
                 self.assertEqual(template.count('<article class="reading-passage-block"'), 3)
@@ -185,7 +185,7 @@ class PracticeContentIntegrityTests(SimpleTestCase):
 
         for answer_key in answer_keys:
             template_name = (
-                f"cambridge{answer_key['book_number']}_test"
+                f"mock{answer_key['book_number']}_test"
                 f"{answer_key['test_number']}_{answer_key['section']}.html"
             )
             attempt = SimpleNamespace(
@@ -198,7 +198,7 @@ class PracticeContentIntegrityTests(SimpleTestCase):
                 'attempt': attempt,
                 'book': {
                     'number': answer_key['book_number'],
-                    'title': f"Cambridge IELTS {answer_key['book_number']}",
+                    'title': f"IELTS Mock {answer_key['book_number']}",
                 },
                 'test': {
                     'number': answer_key['test_number'],
@@ -265,7 +265,7 @@ class PastResultsViewTests(TestCase):
         response = self.client.get(reverse('cambridge_practice:past_results'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Cambridge IELTS 11 - Test 2')
+        self.assertContains(response, 'IELTS Mock 11 - Test 2')
         self.assertContains(response, '35/40')
         self.assertContains(response, 'Band 8.0')
         self.assertContains(

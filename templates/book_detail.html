@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ book.title }} | Cambridge Practice</title>
+    <title>{{ book.title }} | Online Free Mock Test</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
     <style>
@@ -940,7 +940,7 @@
     <header class="site-header">
         <a class="brand" href="{% url 'cambridge_practice:home' %}">
             <span class="brand-mark">CP</span>
-            <span>Cambridge Practice</span>
+            <span>Online Free Mock Test</span>
         </a>
 
         <nav class="nav-links" aria-label="Main navigation">
@@ -965,7 +965,7 @@
             <div class="book-container">
                 <div class="hero-layout">
                     <div class="hero-main">
-                        <p class="eyebrow">Cambridge book {{ book.number }}</p>
+                        <p class="eyebrow">Mock book {{ book.number }}</p>
 
                         <h1>{{ book.title }}</h1>
 
@@ -1239,7 +1239,7 @@
                         <div class="step-number">1</div>
                         <h3>Choose a test</h3>
                         <p>
-                            Students select one of the available tests from this Cambridge book.
+                            Students select one of the available tests from this Mock book.
                         </p>
                     </div>
 
@@ -1274,7 +1274,7 @@
                             {% if is_preview %}
                                 Open Test 1 to experience the interface before creating an account or unlocking full access.
                             {% else %}
-                                Open the first test now, or choose any test above to continue your Cambridge IELTS practice.
+                                Open the first test now, or choose any test above to continue your IELTS Mock practice.
                             {% endif %}
                         </p>
                     </div>

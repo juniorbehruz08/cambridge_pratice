@@ -1,0 +1,278 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 16 Test 3 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 16 - Test 3 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 16 - Test 3</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 3</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>JUNIOR CYCLE CAMP</h3>
+                        <p>The course focuses on skills and safety.</p>
+                        <ul>
+                            <li>Charlie would be placed in Level 5.</li>
+                            <li>First of all, children at this level are taken to practise in a <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Instructors</p>
+                        <ul>
+                            <li>Instructors wear <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span> shirts.</li>
+                            <li>A <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> is required and training is given.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Classes</p>
+                        <ul>
+                            <li>The size of the classes is limited.</li>
+                            <li>There are quiet times during the morning for a <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> or a game.</li>
+                            <li>Classes are held even if there is <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">What to bring</p>
+                        <ul>
+                            <li>a <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>a change of clothing</li>
+                            <li>shoes (not sandals)</li>
+                            <li>Charlie's <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                        <p class="ielts-blue-title black">Day 1</p>
+                        <ul>
+                            <li>Charlie should arrive at 9.20 am on the first day.</li>
+                            <li>Before the class, his <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> will be checked.</li>
+                            <li>He should then go to the <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> to meet his class instructor.</li>
+                        </ul>
+                        <p><strong>Cost:</strong> The course costs $<span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> per week.</p>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11 and 12</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>According to Megan, what are the <strong>TWO</strong> main advantages of working in the agriculture and horticulture sectors?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_11" value="{{ attempt.answers|answer_value:11 }}">
+                        <input type="hidden" name="answer_12" value="{{ attempt.answers|answer_value:12 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>the active lifestyle</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>the above-average salaries</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>the flexible working opportunities</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the opportunities for overseas travel</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the chance to be in a natural environment</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 13 and 14</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> of the following are likely to be disadvantages for people working outdoors?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_13" value="{{ attempt.answers|answer_value:13 }}">
+                        <input type="hidden" name="answer_14" value="{{ attempt.answers|answer_value:14 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>the increasing risk of accidents</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>being in a very quiet location</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>difficult weather conditions at times</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the cost of housing</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the level of physical fitness required</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 15-20</p>
+                    <p>What information does Megan give about each of the following job opportunities?</p>
+                    <p>Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 15-20.</p>
+                    <div class="ielts-note-box">
+                        <p><strong>A</strong> not a permanent job</p>
+                        <p><strong>B</strong> involves leading a team</p>
+                        <p><strong>C</strong> experience not essential</p>
+                        <p><strong>D</strong> intensive work but also fun</p>
+                        <p><strong>E</strong> chance to earn more through overtime</p>
+                        <p><strong>F</strong> chance for rapid promotion</p>
+                        <p><strong>G</strong> accommodation available</p>
+                        <p><strong>H</strong> local travel involved</p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> Fresh food commercial manager</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> Agronomist</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:17 %}<div class="mc-question"><input type="hidden" name="answer_17" value="{{ selected }}"><p><span class="qnum">17</span> Fresh produce buyer</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:18 %}<div class="mc-question"><input type="hidden" name="answer_18" value="{{ selected }}"><p><span class="qnum">18</span> Garden centre sales manager</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:19 %}<div class="mc-question"><input type="hidden" name="answer_19" value="{{ selected }}"><p><span class="qnum">19</span> Tree technician</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:20 %}<div class="mc-question"><input type="hidden" name="answer_20" value="{{ selected }}"><p><span class="qnum">20</span> Farm worker</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21 and 22</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> points does Adam make about his experiment on artificial sweeteners?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_21" value="{{ attempt.answers|answer_value:21 }}">
+                        <input type="hidden" name="answer_22" value="{{ attempt.answers|answer_value:22 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>The results were what he had predicted.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>The experiment was simple to set up.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>A large sample of people was tested.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>The subjects were unaware of what they were drinking.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>The test was repeated several times for each person.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 23 and 24</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> problems did Rosie have when measuring the fat content of nuts?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
+                        <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>She used the wrong sort of nuts.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>She used an unsuitable chemical.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>She did not grind the nuts finely enough.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>The information on the nut package was incorrect.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>The weighing scales may have been unsuitable.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 25-30</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> Adam suggests that restaurants could reduce obesity if their menus</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>offered fewer options.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>had more low-calorie foods.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>were organised in a particular way.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> The students agree that food manufacturers deliberately</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>make calorie counts hard to understand.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>fail to provide accurate calorie counts.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>use ineffective methods to reduce calories.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> What does Rosie say about levels of exercise in England?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>The amount recommended is much too low.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Most people overestimate how much they do.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>Women now exercise more than they used to.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Adam refers to the location and width of stairs in a train station to illustrate</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>practical changes that can influence people's behaviour.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>methods of helping people who have mobility problems.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>ways of preventing accidents by controlling crowd movement.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> What do the students agree about including reference to exercise in their presentation?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>They should probably leave it out.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>They need to do more research on it.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>They should discuss this with their tutor.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> What are the students going to do next for their presentation?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>prepare some slides for it</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>find out how long they have for it</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>decide on its content and organisation</span></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 3</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Hand knitting</h3>
+                        <p class="ielts-blue-title black">Interest in knitting</p>
+                        <ul>
+                            <li>Knitting has a long history around the world.</li>
+                            <li>We imagine someone like a <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> knitting.</li>
+                            <li>A <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> ago, knitting was expected to disappear.</li>
+                            <li>The number of knitting classes is now increasing.</li>
+                            <li>People are buying more <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> for knitting nowadays.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Benefits of knitting</p>
+                        <ul>
+                            <li>gives support in times of <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> difficulty</li>
+                            <li>requires only <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> skills and little money to start</li>
+                            <li>reduces stress in a busy life</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Early knitting</p>
+                        <ul>
+                            <li>The origins are not known.</li>
+                            <li>Findings show early knitted items to be <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> in shape.</li>
+                            <li>The first needles were made of natural materials such as wood and <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Early yarns felt <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span> to touch.</li>
+                            <li>Wool became the most popular yarn for spinning.</li>
+                            <li>Geographical areas had their own <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> of knitting.</li>
+                            <li>Everyday tasks like looking after <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> were done while knitting.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

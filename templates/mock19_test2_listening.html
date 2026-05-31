@@ -1,0 +1,400 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 19 Test 2 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .guitar-form-box {
+            padding: 16px 22px;
+        }
+
+        .guitar-form-box h3 {
+            text-align: center;
+            margin: 0 0 12px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .guitar-form-row {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            align-items: baseline;
+            gap: 14px;
+            margin: 8px 0;
+            line-height: 1.35;
+        }
+
+        .guitar-form-row .form-label {
+            font-weight: 600;
+        }
+
+        .guitar-form-row .form-value {
+            display: inline-flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .guitar-form-row.no-label .form-value {
+            grid-column: 2;
+        }
+
+        .guitar-form-box .ielts-blank {
+            min-width: 150px;
+        }
+
+        .guitar-form-box .ielts-blank.short {
+            min-width: 105px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 19 - Test 2 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 19 - Test 2</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 2</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Questions 1-6</p>
+                    <p class="ielts-instr">Complete the form below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+                    <div class="ielts-note-box guitar-form-box">
+                        <h3>Guitar Group</h3>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Coordinator:</span>
+                            <span class="form-value">
+                                Gary <span class="qnum">1</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Level:</span>
+                            <span class="form-value">
+                                <span class="qnum">2</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Place:</span>
+                            <span class="form-value">
+                                the <span class="qnum">3</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row no-label">
+                            <span class="form-value">
+                                <span class="qnum">4</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>
+                                Street
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row no-label">
+                            <span class="form-value">First floor, Room T347</span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Time:</span>
+                            <span class="form-value">
+                                Thursday morning at <span class="qnum">5</span>
+                                <span class="ielts-blank short">
+                                    <input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off">
+                                    <span>............</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="guitar-form-row">
+                            <span class="form-label">Recommended website:</span>
+                            <span class="form-value">
+                                "The perfect <span class="qnum">6</span>
+                                <span class="ielts-blank">
+                                    <input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off">
+                                    <span>......................</span>
+                                </span>"
+                            </span>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 7-10</p>
+                    <p class="ielts-instr">Complete the table below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <table class="ielts-table-box">
+                        <thead>
+                            <tr>
+                                <th colspan="3">A typical 45-minute guitar lesson</th>
+                            </tr>
+                            <tr>
+                                <th>Time</th>
+                                <th>Activity</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5 minutes</td>
+                                <td>tuning guitars</td>
+                                <td>using an app or by <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span></td>
+                            </tr>
+                            <tr>
+                                <td>10 minutes</td>
+                                <td>strumming chords using our thumbs</td>
+                                <td>keeping time while the teacher is <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span></td>
+                            </tr>
+                            <tr>
+                                <td>15 minutes</td>
+                                <td>playing songs</td>
+                                <td>often listening to a <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> of a song</td>
+                            </tr>
+                            <tr>
+                                <td>10 minutes</td>
+                                <td>playing single notes and simple tunes</td>
+                                <td>playing together, then <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span></td>
+                            </tr>
+                            <tr>
+                                <td>5 minutes</td>
+                                <td>noting things to practise at home</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-16</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> What made David leave London and move to Northsea?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>He was eager to develop a hobby.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>He wanted to work shorter hours.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>He found his job in website design unsatisfying.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> The Lifeboat Institution in Northsea was built with money provided by</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>a local organisation.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>a local resident.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the local council.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> In his health assessment, the doctor was concerned about the fact that David</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>might be colour blind.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>was rather short-sighted.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>had undergone eye surgery.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> After arriving at the lifeboat station, they aim to launch the boat within</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>five minutes.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>six to eight minutes.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>eight and a half minutes.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> As a helmsman, David has the responsibility of deciding</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>who will be the members of his crew.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>what equipment it will be necessary to take.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>if the lifeboat should be launched.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:16 %}<div class="mc-question"><input type="hidden" name="answer_16" value="{{ selected }}"><p><span class="qnum">16</span> As well as going out on the lifeboat, David</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>gives talks on safety at sea.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>helps with fundraising.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>recruits new volunteers.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 17 and 18</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> things does David say about the lifeboat volunteer training?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_17" value="{{ attempt.answers|answer_value:17 }}">
+                        <input type="hidden" name="answer_18" value="{{ attempt.answers|answer_value:18 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>The residential course developed his leadership skills.</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>The training in use of ropes and knots was quite brief.</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>The training exercises have built up his mental strength.</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>The casualty care activities were particularly challenging for him.</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>The wave tank activities provided practice in survival techniques.</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 19 and 20</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> things does David find most motivating about the work he does?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_19" value="{{ attempt.answers|answer_value:19 }}">
+                        <input type="hidden" name="answer_20" value="{{ attempt.answers|answer_value:20 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>working as part of a team</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>experiences when working in winter</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>being thanked by those he has helped</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the fact that it keeps him fit</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the chance to develop new equipment</span></button>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21-24</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:21 %}<div class="mc-question"><input type="hidden" name="answer_21" value="{{ selected }}"><p><span class="qnum">21</span> At first, Don thought the topic of recycling footwear might be too</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>limited in scope.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>hard to research.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>boring for listeners.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:22 %}<div class="mc-question"><input type="hidden" name="answer_22" value="{{ selected }}"><p><span class="qnum">22</span> When discussing trainers, Bella and Don disagree about</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>how popular they are among young people.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>how suitable they are for school.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>how quickly they wear out.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:23 %}<div class="mc-question"><input type="hidden" name="answer_23" value="{{ selected }}"><p><span class="qnum">23</span> Bella says that she sometimes recycles shoes because</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>they no longer fit.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>she no longer likes them.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>they are no longer in fashion.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:24 %}<div class="mc-question"><input type="hidden" name="answer_24" value="{{ selected }}"><p><span class="qnum">24</span> What did the article say that confused Don?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Public consumption of footwear has risen.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Less footwear is recycled now than in the past.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>People dispose of more footwear than they used to.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 25-28</p>
+                    <p>What reasons did the recycling manager give for rejecting footwear, according to the students?</p>
+                    <p class="ielts-instr">Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A-F</strong>, next to Questions 25-28.</p>
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>one shoe was missing</span></p>
+                        <p><strong>B</strong><span>the colour of one shoe had faded</span></p>
+                        <p><strong>C</strong><span>one shoe had a hole in it</span></p>
+                        <p><strong>D</strong><span>the shoes were brand new</span></p>
+                        <p><strong>E</strong><span>the shoes were too dirty</span></p>
+                        <p><strong>F</strong><span>the stitching on the shoes was broken</span></p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> the high-heeled shoes</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> the ankle boots</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> the baby shoes</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> the trainers</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 29-30</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> Why did the project to make "new" shoes out of old shoes fail?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>People believed the "new" pairs of shoes were unhygienic.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>There were not enough good parts to use in the old shoes.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>The shoes in the "new" pairs were not completely alike.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> Bella and Don agree that they can present their topic</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>from a new angle.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>with relevant images.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>in a straightforward way.</span></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 2</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Tardigrades</h3>
+                        <ul>
+                            <li>more than 1,000 species, 0.05-1.2 millimetres long</li>
+                            <li>also known as water "bears" due to how they <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> and "moss piglets"</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Physical appearance</p>
+                        <ul>
+                            <li>a <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> round body and four pairs of legs</li>
+                            <li>claws or <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> for gripping</li>
+                            <li>absence of respiratory organs</li>
+                            <li>body filled with a liquid that carries both <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span> and blood</li>
+                            <li>mouth shaped like a <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span>, with teeth called stylets</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Habitat</p>
+                        <ul>
+                            <li>often found at the bottom of a lake or on plants</li>
+                            <li>very resilient and can exist in very low or high <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                        <p class="ielts-blue-title black">Cryptobiosis</p>
+                        <ul>
+                            <li>In dry conditions, they roll into a ball called a "tun".</li>
+                            <li>They stay alive with a much lower metabolism than usual.</li>
+                            <li>A type of <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> ensures their DNA is not damaged.</li>
+                            <li>Research is underway to find out how many days they can stay alive in <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Feeding</p>
+                        <ul>
+                            <li>consume liquids, e.g. those found in moss or <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span></li>
+                            <li>may eat other tardigrades</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Conservation status</p>
+                        <ul>
+                            <li>They are not considered to be <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

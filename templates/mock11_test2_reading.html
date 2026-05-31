@@ -1,0 +1,300 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 11 Test 2 Reading | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=paragraph-heading-drag-20260531">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 11 - Test 2 Reading</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell reading-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <form method="post" class="practice-form reading-practice-form" id="practiceForm">
+            {% csrf_token %}
+            <section class="reading-topbar">
+                <div>
+                    <p class="eyebrow">Reading</p>
+                    <h1>IELTS Mock 11 - Test 2</h1>
+                    <p>Passages are on the left and questions are on the right. Select passage text to highlight it.</p>
+                </div>
+                <span class="completed-pill result-pill" id="resultDisplay" hidden></span>
+            </section>
+
+            <section class="reading-split">
+                <aside class="reading-passages" aria-label="Reading passages">
+                    <article class="reading-passage-block" id="passage-1">
+                        <p class="reading-passage-label">READING PASSAGE 1</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 1-13, which are based on Reading Passage 1 below.</p>
+                        <h2>Raising the Mary Rose</h2>
+                        <h3>How a sixteenth-century warship was recovered from the seabed</h3>
+                        <div class="reading-passage-copy">
+                            <p>On 19 July 1545, English and French fleets were engaged in a sea battle off the coast of southern England in the area of water called the Solent, between Portsmouth and the Isle of Wight. Among the English vessels was a warship by the name of Mary Rose. Built in Portsmouth some 35 years earlier, she had had a long and successful fighting career, and was a favourite of King Henry VIII.</p>
+                            <p>Accounts of what happened to the ship vary: while witnesses agree that she was not hit by the French, some maintain that she was outdated, overladen and sailing too low in the water, others that she was mishandled by undisciplined crew. What is undisputed, however, is that the Mary Rose sank into the Solent that day, taking at least 500 men with her. After the battle, attempts were made to recover the ship, but these failed.</p>
+                            <p>The Mary Rose came to rest on the seabed, lying on her starboard (right) side at an angle of approximately 60 degrees. The hull (the body of the ship) acted as a trap for the sand and mud carried by Solent currents. As a result, the starboard side filled rapidly, leaving the exposed port (left) side to be eroded by marine organisms and mechanical degradation.</p>
+                            <p>Because of the way the ship sank, nearly all of the starboard half survived intact. During the seventeenth and eighteenth centuries, the entire site became covered with a layer of hard grey clay, which minimised further erosion.</p>
+                            <p>Then, on 16 June 1836, some fishermen in the Solent found that their equipment was caught on an underwater obstruction, which turned out to be the Mary Rose. Diver John Deane happened to be exploring another sunken ship nearby, and the fishermen approached him, asking him to free their gear.</p>
+                            <p>Deane dived down, and found the equipment caught on a timber protruding slightly from the seabed. Exploring further, he uncovered several other timbers and a bronze gun. Deane continued diving on the site intermittently until 1840, recovering several more guns, two bows, various timbers, part of a pump and various other small finds.</p>
+                            <p>The Mary Rose then faded into obscurity for another hundred years. But in 1965, military historian and amateur diver Alexander McKee, in conjunction with the British Sub-Aqua Club, initiated a project called "Solent Ships". While on paper this was a plan to examine a number of known wrecks in the Solent, what McKee really hoped for was to find the Mary Rose.</p>
+                            <p>Ordinary search techniques proved unsatisfactory, so McKee entered into collaboration with Harold E. Edgerton, professor of electrical engineering at the Massachusetts Institute of Technology. In 1967, Edgerton's side-scan sonar systems revealed a large, unusually shaped object, which McKee believed was the Mary Rose.</p>
+                            <p>Further excavations revealed stray pieces of timber and an iron gun. But the climax to the operation came when, on 5 May 1971, part of the ship's frame was uncovered. McKee and his team now knew for certain that they had found the wreck, but were as yet unaware that it also housed a treasure trove of beautifully preserved artefacts.</p>
+                            <p>Interest in the project grew, and in 1979, The Mary Rose Trust was formed, with Prince Charles as its President and Dr Margaret Rule its Archaeological Director. The decision whether or not to salvage the wreck was not an easy one, although an excavation in 1978 had shown that it might be possible to raise the hull.</p>
+                            <p>While the original aim was to raise the hull if at all feasible, the operation was not given the go-ahead until January 1982, when all the necessary information was available. An important factor in trying to salvage the Mary Rose was that the remaining hull was an open shell. This led to an important decision being taken: namely to carry out the lifting operation in three very distinct stages.</p>
+                            <p>The hull was attached to a lifting frame via a network of bolts and lifting wires. The problem of the hull being sucked back downwards into the mud was overcome by using 12 hydraulic jacks. These raised it a few centimetres over a period of several days, as the lifting frame rose slowly up its four legs.</p>
+                            <p>It was only when the hull was hanging freely from the lifting frame, clear of the seabed and the suction effect of the surrounding mud, that the salvage operation progressed to the second stage. In this stage, the lifting frame was fixed to a hook attached to a crane, and the hull was lifted completely clear of the seabed and transferred underwater into the lifting cradle.</p>
+                            <p>This required precise positioning to locate the legs into the "stabilising guides" of the lifting cradle. The lifting cradle was designed to fit the hull using archaeological survey drawings, and was fitted with air bags to provide additional cushioning for the hull's delicate timber framework. The third and final stage was to lift the entire structure into the air, by which time the hull was also supported from below.</p>
+                            <p>Finally, on 11 October 1982, millions of people around the world held their breath as the timber skeleton of the Mary Rose was lifted clear of the water, ready to be returned home to Portsmouth.</p>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-2">
+                        <p class="reading-passage-label">READING PASSAGE 2</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 14-26, which are based on Reading Passage 2 below.</p>
+                        <h2>What destroyed the civilisation of Easter Island?</h2>
+                        <div class="reading-passage-copy labelled-copy">
+                            <section class="passage-paragraph"><span>A</span><div><p>Easter Island, or Rapa Nui as it is known locally, is home to several hundred ancient human statues &mdash; the moai. After this remote Pacific island was settled by the Polynesians, it remained isolated for centuries. All the energy and resources that went into the moai &mdash; some of which are ten metres tall and weigh over 7,000 kilos &mdash; came from the island itself.</p><p>Yet when Dutch explorers landed in 1722, they met a Stone Age culture. The moai were carved with stone tools, then transported for many kilometres, without the use of animals or wheels, to massive stone platforms. The identity of the moai builders was in doubt until well into the twentieth century. Thor Heyerdahl, the Norwegian ethnographer and adventurer, thought the statues had been created by pre-Inca peoples from Peru.</p><p>Bestselling Swiss author Erich von D&auml;niken believed they were built by stranded extraterrestrials. Modern science &mdash; linguistic, archaeological and genetic evidence &mdash; has definitively proved the moai builders were Polynesians, but not how they moved their creations. Local folklore maintains that the statues walked, while researchers have tended to assume the ancestors dragged the statues somehow, using ropes and logs.</p></div></section>
+                            <section class="passage-paragraph"><span>B</span><div><p>When the Europeans arrived, Rapa Nui was grassland, with only a few scrawny trees. In the 1970s and 1980s, though, researchers found pollen preserved in lake sediments, which proved the island had been covered in lush palm forests for thousands of years. Only after the Polynesians arrived did those forests disappear.</p><p>US scientist Jared Diamond believes that the Rapanui people &mdash; descendants of Polynesian settlers &mdash; wrecked their own environment. They had unfortunately settled on an extremely fragile island &mdash; dry, cool, and too remote to be properly fertilised by windblown volcanic ash. When the islanders cleared the forests for firewood and farming, the forests did not grow back.</p><p>As trees became scarce and they could no longer construct wooden canoes for fishing, they ate birds. Soil erosion decreased their crop yields. Before Europeans arrived, the Rapanui had descended into civil war and cannibalism, he maintains. The collapse of their isolated civilisation, Diamond writes, is a "worst-case scenario for what may lie ahead of us in our own future".</p></div></section>
+                            <section class="passage-paragraph"><span>C</span><div><p>The moai, he thinks, accelerated the self-destruction. Diamond interprets them as power displays by rival chieftains who, trapped on a remote little island, lacked other ways of asserting their dominance. They competed by building ever bigger figures.</p><p>Diamond thinks they laid the moai on wooden sledges, hauled over log rails, but that required both a lot of wood and a lot of people. To feed the people, even more land had to be cleared. When the wood was gone and civil war began, the islanders began toppling the moai. By the nineteenth century none were standing.</p></div></section>
+                            <section class="passage-paragraph"><span>D</span><div><p>Archaeologists Terry Hunt of the University of Hawaii and Carl Lipo of California State University agree that Easter Island lost its lush forests and that it was an "ecological catastrophe" &mdash; but they believe the islanders themselves were not to blame. And the moai certainly were not.</p><p>Archaeological excavations indicate that the Rapanui went to heroic efforts to protect the resources of their wind-lashed, infertile fields. They built thousands of circular stone windbreaks and gardened inside them, and used broken volcanic rocks to keep the soil moist. In short, Hunt and Lipo argue, the prehistoric Rapanui were pioneers of sustainable farming.</p></div></section>
+                            <section class="passage-paragraph"><span>E</span><div><p>Hunt and Lipo contend that moai-building was an activity that helped keep the peace between islanders. They also believe that moving the moai required few people and no wood, because they were walked upright. On that issue, Hunt and Lipo say, archaeological evidence backs up Rapanui folklore.</p><p>Recent experiments indicate that as few as 18 people could, with three strong ropes and a bit of practice, easily manoeuvre a 1,000 kg moai replica a few hundred metres. The figures' fat bellies tilted them forward, and a D-shaped base allowed handlers to roll and rock them side to side.</p></div></section>
+                            <section class="passage-paragraph"><span>F</span><div><p>Moreover, Hunt and Lipo are convinced that the settlers were not wholly responsible for the loss of the island's trees. Archaeological finds of nuts from the extinct Easter Island palm show tiny grooves, made by the teeth of Polynesian rats. The rats arrived along with the settlers, and in just a few years, Hunt and Lipo calculate, they would have overrun the island.</p><p>They would have prevented the reseeding of the slow-growing palm trees and thereby doomed Rapa Nui's forest, even without the settlers' campaign of deforestation. No doubt the rats ate birds' eggs too. Hunt and Lipo also see no evidence that Rapanui civilisation collapsed when the palm forest did. They think its population grew rapidly and then remained more or less stable until the arrival of the Europeans, who introduced deadly diseases to which islanders had no immunity. Then in the nineteenth century slave traders decimated the population, which shrivelled to 111 people by 1877.</p></div></section>
+                            <section class="passage-paragraph"><span>G</span><div><p>Hunt and Lipo's vision, therefore, is one of an island populated by peaceful and ingenious moai builders and careful stewards of the land, rather than by reckless destroyers ruining their own environment and society. "Rather than a case of abject failure, Rapa Nui is an unlikely story of success", they claim.</p><p>Whichever is the case, there are surely some valuable lessons which the world at large can learn from the story of Rapa Nui.</p></div></section>
+                        </div>
+                    </article>
+
+                    <article class="reading-passage-block" id="passage-3">
+                        <p class="reading-passage-label">READING PASSAGE 3</p>
+                        <p class="ielts-instr">You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3 below.</p>
+                        <h2>Neuroaesthetics</h2>
+                        <div class="reading-passage-copy">
+                            <p>An emerging discipline called neuroaesthetics is seeking to bring scientific objectivity to the study of art, and has already given us a better understanding of many masterpieces. The blurred imagery of Impressionist paintings seems to stimulate the brain's amygdala, for instance. Since the amygdala plays a crucial role in our feelings, that finding might explain why many people find these pieces so moving.</p>
+                            <p>Could the same approach also shed light on abstract twentieth-century pieces, from Mondrian's geometrical blocks of colour, to Pollock's seemingly haphazard arrangements of splashed paint on canvas? Sceptics believe that people claim to like such works simply because they are famous. We certainly do have an inclination to follow the crowd.</p>
+                            <p>When asked to make simple perceptual decisions such as matching a shape to its rotated image, for example, people often choose a definitively wrong answer if they see others doing the same. It is easy to imagine that this mentality would have even more impact on a fuzzy concept like art appreciation, where there is no right or wrong answer.</p>
+                            <p>Angelina Hawley-Dolan, of Boston College, Massachusetts, responded to this debate by asking volunteers to view pairs of paintings &mdash; either the creations of famous abstract artists or the doodles of infants, chimps and elephants. They then had to judge which they preferred. A third of the paintings were given no captions, while many were labelled incorrectly &mdash; volunteers might think they were viewing a chimp's messy brushstrokes when they were actually seeing an acclaimed masterpiece.</p>
+                            <p>In each set of trials, volunteers generally preferred the work of renowned artists, even when they believed it was by an animal or a child. It seems that the viewer can sense the artist's vision in paintings, even if they cannot explain why.</p>
+                            <p>Robert Pepperell, an artist based at Cardiff University, creates ambiguous works that are neither entirely abstract nor clearly representational. In one study, Pepperell and his collaborators asked volunteers to decide how "powerful" they considered an artwork to be, and whether they saw anything familiar in the piece.</p>
+                            <p>The longer they took to answer these questions, the more highly they rated the piece under scrutiny, and the greater their neural activity. It would seem that the brain sees these images as puzzles, and the harder it is to decipher the meaning, the more rewarding is the moment of recognition.</p>
+                            <p>And what about artists such as Mondrian, whose paintings consist exclusively of horizontal and vertical lines encasing blocks of colour? Mondrian's works are deceptively simple, but eye-tracking studies confirm that they are meticulously composed, and that simply rotating a piece radically changes the way we view it. With the originals, volunteers' eyes tended to stay longer on certain places in the image, but with the altered versions they would flit across a piece more rapidly. As a result, the volunteers considered the altered versions less pleasurable when they later rated the work.</p>
+                            <p>In a similar study, Oshin Vartanian of Toronto University asked volunteers to compare original paintings with ones which he had altered by moving objects around within the frame. He found that almost everyone preferred the original, whether it was a Van Gogh still life or an abstract by Mir&oacute;. Vartanian also found that changing the composition of the paintings reduced activation in those brain areas linked with meaning and interpretation.</p>
+                            <p>In another experiment, Alex Forsythe of the University of Liverpool analysed the visual intricacy of different pieces of art, and her results suggest that many artists use a key level of detail to please the brain. Too little and the work is boring, but too much results in a kind of "perceptual overload", according to Forsythe.</p>
+                            <p>What is more, appealing pieces both abstract and representational, show signs of "fractals" &mdash; repeated motifs recurring in different scales. Fractals are common throughout nature, for example in the shapes of mountain peaks or the branches of trees. It is possible that our visual system, which evolved in the great outdoors, finds it easier to process such patterns.</p>
+                            <p>It is also intriguing that the brain appears to process movement when we see a handwritten letter, as if we are replaying the writer's moment of creation. This has led some to wonder whether Pollock's works feel so dynamic because the brain reconstructs the energetic actions the artist used as he painted.</p>
+                            <p>This may be down to our brain's "mirror neurons", which are known to mimic others' actions. The hypothesis will need to be thoroughly tested, however. It might even be the case that we could use neuroaesthetic studies to understand the longevity of some pieces of artwork. While the fashions of the time might shape what is currently popular, works that are best adapted to our visual system may be the most likely to linger once the trends of previous generations have been forgotten.</p>
+                            <p>It is still early days for the field of neuroaesthetics &mdash; and these studies are probably only a taste of what is to come. It would, however, be foolish to reduce art appreciation to a set of scientific laws. We should not underestimate the importance of the style of a particular artist, their place in history and the artistic environment of their time. Abstract art offers both a challenge and the freedom to play with different interpretations.</p>
+                            <p>In some ways, it is not so different to science, where we are constantly looking for systems and decoding meaning so that we can view and appreciate the world in a new way.</p>
+                        </div>
+                    </article>
+                </aside>
+
+                <section class="reading-questions" aria-label="Reading questions">
+                    <nav class="reading-mini-nav" aria-label="Passage navigation">
+                        <a href="#passage-1">Passage 1</a>
+                        <a href="#passage-2">Passage 2</a>
+                        <a href="#passage-3">Passage 3</a>
+                    </nav>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 1</h2>
+                        <p class="ielts-instr">Questions 1-4</p>
+                        <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                        <p class="tfng-key"><strong>TRUE</strong> if the statement agrees with the information<br><strong>FALSE</strong> if the statement contradicts the information<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:1 %}<div class="mc-question"><input type="hidden" name="answer_1" value="{{ selected }}"><p><span class="qnum">1</span> There is some doubt about what caused the Mary Rose to sink.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:2 %}<div class="mc-question"><input type="hidden" name="answer_2" value="{{ selected }}"><p><span class="qnum">2</span> The Mary Rose was the only ship to sink in the battle of 19 July 1545.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:3 %}<div class="mc-question"><input type="hidden" name="answer_3" value="{{ selected }}"><p><span class="qnum">3</span> Most of one side of the Mary Rose lay undamaged under the sea.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:4 %}<div class="mc-question"><input type="hidden" name="answer_4" value="{{ selected }}"><p><span class="qnum">4</span> Alexander McKee knew that the wreck would contain many valuable historical objects.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="TRUE"><strong>TRUE</strong></button><button type="button" class="mc-option" data-value="FALSE"><strong>FALSE</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 5-8</p>
+                        <p>Look at the following statements and the list of dates below. Match each statement with the correct date, <strong>A-G</strong>.</p>
+                        <div class="scientist-box">
+                            <h3>List of Dates</h3>
+                            <p><strong>A</strong> 1836</p><p><strong>B</strong> 1840</p><p><strong>C</strong> 1965</p><p><strong>D</strong> 1967</p><p><strong>E</strong> 1971</p><p><strong>F</strong> 1979</p><p><strong>G</strong> 1982</p>
+                        </div>
+                        <div class="ielts-report-list">
+                            <label><strong>5</strong><span>A search for the Mary Rose was launched.</span><span class="ielts-blank short"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                            <label><strong>6</strong><span>One person's exploration of the Mary Rose site stopped.</span><span class="ielts-blank short"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                            <label><strong>7</strong><span>It was agreed that the hull of the Mary Rose should be raised.</span><span class="ielts-blank short"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                            <label><strong>8</strong><span>The site of the Mary Rose was found by chance.</span><span class="ielts-blank short"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        </div>
+
+                        <p class="ielts-instr">Questions 9-13</p>
+                        <p class="ielts-instr">Label the diagram below.</p>
+                        <p class="ielts-instr">Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.</p>
+                        <p class="ielts-instr">Write your answers in boxes <strong>9-13</strong> on your answer sheet.</p>
+                        <div class="mary-rose-diagram" aria-label="Raising the hull of the Mary Rose diagram">
+                            <h3>Raising the hull of the <em>Mary Rose</em>: Stages one and two</h3>
+                            <div class="mary-rose-stage">
+                                <img src="{% static 'img/mock11/test2/reading/mary-rose-diagram-clean-only.png' %}" alt="Raising the hull of the Mary Rose: Stages one and two">
+                                <label class="mary-rose-answer mary-rose-answer-9 mary-rose-box">
+                                    <span class="sr-only">Question 9</span>
+                                    <span class="mary-rose-line"><strong>9</strong> <span class="mary-rose-input-wrap"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"></span> attached</span>
+                                    <span class="mary-rose-line">to hull by wires</span>
+                                </label>
+                                <label class="mary-rose-answer mary-rose-answer-10 mary-rose-box">
+                                    <span class="sr-only">Question 10</span>
+                                    <span class="mary-rose-line"><strong>10</strong> <span class="mary-rose-input-wrap"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"></span> to</span>
+                                    <span class="mary-rose-line">prevent hull being</span>
+                                    <span class="mary-rose-line">sucked into mud</span>
+                                </label>
+                                <label class="mary-rose-answer mary-rose-answer-11 mary-rose-box">
+                                    <span class="sr-only">Question 11</span>
+                                    <span class="mary-rose-line">legs are placed into</span>
+                                    <span class="mary-rose-line"><strong>11</strong> <span class="mary-rose-input-wrap"><input name="answer_11" value="{{ attempt.answers|answer_value:11 }}" autocomplete="off"></span></span>
+                                </label>
+                                <label class="mary-rose-answer mary-rose-answer-12 mary-rose-box">
+                                    <span class="sr-only">Question 12</span>
+                                    <span class="mary-rose-line">hull is lowered into</span>
+                                    <span class="mary-rose-line"><strong>12</strong> <span class="mary-rose-input-wrap"><input name="answer_12" value="{{ attempt.answers|answer_value:12 }}" autocomplete="off"></span></span>
+                                </label>
+                                <label class="mary-rose-answer mary-rose-answer-13 mary-rose-box">
+                                    <span class="sr-only">Question 13</span>
+                                    <span class="mary-rose-line"><strong>13</strong> <span class="mary-rose-input-wrap"><input name="answer_13" value="{{ attempt.answers|answer_value:13 }}" autocomplete="off"></span> used as extra</span>
+                                    <span class="mary-rose-line">protection for the hull</span>
+                                </label>
+                                <span class="mary-rose-callout mary-rose-callout-9" aria-hidden="true"></span>
+                                <span class="mary-rose-callout mary-rose-callout-10" aria-hidden="true"></span>
+                                <span class="mary-rose-callout mary-rose-callout-11" aria-hidden="true"></span>
+                                <span class="mary-rose-callout mary-rose-callout-12" aria-hidden="true"></span>
+                                <span class="mary-rose-callout mary-rose-callout-13a" aria-hidden="true"></span>
+                                <span class="mary-rose-callout mary-rose-callout-13b" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 2</h2>
+                        <p class="ielts-instr">Questions 14-20</p>
+                        <p>Reading Passage 2 has seven paragraphs, <strong>A-G</strong>. Choose the correct heading for each paragraph from the list of headings below.</p>
+                        <div class="scientist-box headings-box">
+                            <h3>List of Headings</h3>
+                            <p><strong>i</strong> Evidence of innovative environment management practices</p>
+                            <p><strong>ii</strong> An undisputed answer to a question about the moai</p>
+                            <p><strong>iii</strong> The future of the moai statues</p>
+                            <p><strong>iv</strong> A theory which supports a local belief</p>
+                            <p><strong>v</strong> The future of Easter Island</p>
+                            <p><strong>vi</strong> Two opposing views about the Rapanui people</p>
+                            <p><strong>vii</strong> Destruction outside the inhabitants' control</p>
+                            <p><strong>viii</strong> How the statues made a situation worse</p>
+                            <p><strong>ix</strong> Diminishing food resources</p>
+                        </div>
+                        <div class="sentence-questions paragraph-heading-answer-list">
+                            <p><span class="qnum">14</span><span class="paragraph-heading-label">Paragraph <b>A</b></span><span class="ielts-blank short"><input name="answer_14" value="{{ attempt.answers|answer_value:14 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">15</span><span class="paragraph-heading-label">Paragraph <b>B</b></span><span class="ielts-blank short"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">16</span><span class="paragraph-heading-label">Paragraph <b>C</b></span><span class="ielts-blank short"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">17</span><span class="paragraph-heading-label">Paragraph <b>D</b></span><span class="ielts-blank short"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">18</span><span class="paragraph-heading-label">Paragraph <b>E</b></span><span class="ielts-blank short"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">19</span><span class="paragraph-heading-label">Paragraph <b>F</b></span><span class="ielts-blank short"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                            <p><span class="qnum">20</span><span class="paragraph-heading-label">Paragraph <b>G</b></span><span class="ielts-blank short"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="4"><span>............</span></span></p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 21-24</p>
+                        <p class="ielts-instr">Complete the summary below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                        <div class="reading-diagram-card">
+                            <h3>Jared Diamond's View</h3>
+                            <p>Diamond believes that the Polynesian settlers on Rapa Nui destroyed its forests, cutting down its trees for fuel and clearing land for <span class="qnum">21</span> <span class="ielts-blank"><input name="answer_21" value="{{ attempt.answers|answer_value:21 }}" autocomplete="off"><span>......................</span></span>.</p>
+                            <p>Twentieth-century discoveries of pollen prove that Rapa Nui had once been covered in palm forests, which had turned into grassland by the time the Europeans arrived on the island.</p>
+                            <p>When the islanders were no longer able build the <span class="qnum">22</span> <span class="ielts-blank"><input name="answer_22" value="{{ attempt.answers|answer_value:22 }}" autocomplete="off"><span>......................</span></span> they needed to go fishing, they began using the island's <span class="qnum">23</span> <span class="ielts-blank"><input name="answer_23" value="{{ attempt.answers|answer_value:23 }}" autocomplete="off"><span>......................</span></span> as a food source.</p>
+                            <p>Diamond also claims that the moai were built to show the power of the island's chieftains, and that the methods of transporting the statues needed not only a great number of people, but also a great deal of <span class="qnum">24</span> <span class="ielts-blank"><input name="answer_24" value="{{ attempt.answers|answer_value:24 }}" autocomplete="off"><span>......................</span></span>.</p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 25 and 26</p>
+                        <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>. On what points do Hunt and Lipo disagree with Diamond?</p>
+                        <div class="multi-answer-question">
+                            <input type="hidden" name="answer_25" value="{{ attempt.answers|answer_value:25 }}">
+                            <input type="hidden" name="answer_26" value="{{ attempt.answers|answer_value:26 }}">
+                            <div class="mc-options">
+                                <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>the period when the moai were created</span></button>
+                                <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>how the moai were transported</span></button>
+                                <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>the impact of the moai on Rapanui society</span></button>
+                                <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>how the moai were carved</span></button>
+                                <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the origins of the people who made the moai</span></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="reading-question-card">
+                        <h2>Reading Passage 3</h2>
+                        <p class="ielts-instr">Questions 27-30</p>
+                        <p>Choose the correct letter, <strong>A, B, C or D</strong>.</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> In the second paragraph, the writer refers to a shape-matching test in order to illustrate</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the subjective nature of art appreciation.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the reliance of modern art on abstract forms.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>our tendency to be influenced by the opinions of others.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>a common problem encountered when processing visual data.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Angelina Hawley-Dolan's findings indicate that people</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>mostly favour works of art which they know well.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>hold fixed ideas about what makes a good work of art.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>are often misled by their initial expectations of a work of art.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>have the ability to perceive the intention behind works of art.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> Results of studies involving Robert Pepperell's pieces suggest that people</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>can appreciate a painting without fully understanding it.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>find it satisfying to work out what a painting represents.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>vary widely in the time they spend looking at paintings.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>generally prefer representational art to abstract art.</span></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> What do the experiments described in the fifth paragraph suggest about the paintings of Mondrian?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>They are more carefully put together than they appear.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>They can be interpreted in a number of different ways.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>They challenge our assumptions about shape and colour.</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>They are easier to appreciate than many other abstract works.</span></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Questions 31-33</p>
+                        <p class="ielts-instr">Complete the summary using the list of words, <strong>A-H</strong>, below.</p>
+                        <div class="reading-diagram-card">
+                            <h3>Art and the Brain</h3>
+                            <p>The discipline of neuroaesthetics aims to bring scientific objectivity to the study of art. Neurological studies of the brain, for example, demonstrate the impact which Impressionist paintings have on our <span class="qnum">31</span> <span class="ielts-blank short"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off" maxlength="1"><span>............</span></span>.</p>
+                            <p>Alex Forsythe of the University of Liverpool believes many artists give their works the precise degree of <span class="qnum">32</span> <span class="ielts-blank short"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off" maxlength="1"><span>............</span></span> which most appeals to the viewer's brain.</p>
+                            <p>She also observes that pleasing works of art often contain certain repeated <span class="qnum">33</span> <span class="ielts-blank short"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off" maxlength="1"><span>............</span></span> which occur frequently in the natural world.</p>
+                        </div>
+                        <div class="scientist-box">
+                            <p><strong>A</strong> interpretation</p><p><strong>B</strong> complexity</p><p><strong>C</strong> emotions</p><p><strong>D</strong> movements</p><p><strong>E</strong> skill</p><p><strong>F</strong> layout</p><p><strong>G</strong> concern</p><p><strong>H</strong> images</p>
+                        </div>
+
+                        <p class="ielts-instr">Questions 34-39</p>
+                        <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+                        <p class="tfng-key"><strong>YES</strong> if the statement agrees with the views of the writer<br><strong>NO</strong> if the statement contradicts the views of the writer<br><strong>NOT GIVEN</strong> if there is no information on this</p>
+                        <div class="reading-choice-list">
+                            {% with selected=attempt.answers|answer_value:34 %}<div class="mc-question"><input type="hidden" name="answer_34" value="{{ selected }}"><p><span class="qnum">34</span> Forsythe's findings contradicted previous beliefs on the function of "fractals" in art.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:35 %}<div class="mc-question"><input type="hidden" name="answer_35" value="{{ selected }}"><p><span class="qnum">35</span> Certain ideas regarding the link between "mirror neurons" and art appreciation require further verification.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:36 %}<div class="mc-question"><input type="hidden" name="answer_36" value="{{ selected }}"><p><span class="qnum">36</span> People's taste in paintings depends entirely on the current artistic trends of the period.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:37 %}<div class="mc-question"><input type="hidden" name="answer_37" value="{{ selected }}"><p><span class="qnum">37</span> Scientists should seek to define the precise rules which govern people's reactions to works of art.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:38 %}<div class="mc-question"><input type="hidden" name="answer_38" value="{{ selected }}"><p><span class="qnum">38</span> Art appreciation should always involve taking into consideration the cultural context in which an artist worked.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                            {% with selected=attempt.answers|answer_value:39 %}<div class="mc-question"><input type="hidden" name="answer_39" value="{{ selected }}"><p><span class="qnum">39</span> It is easier to find meaning in the field of science than in that of art.</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="YES"><strong>YES</strong></button><button type="button" class="mc-option" data-value="NO"><strong>NO</strong></button><button type="button" class="mc-option" data-value="NOT GIVEN"><strong>NOT GIVEN</strong></button></div></div>{% endwith %}
+                        </div>
+
+                        <p class="ielts-instr">Question 40</p>
+                        <p>Choose the correct letter, <strong>A, B, C or D</strong>. What would be the most appropriate subtitle for the article?</p>
+                        {% with selected=attempt.answers|answer_value:40 %}<div class="mc-question"><input type="hidden" name="answer_40" value="{{ selected }}"><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>Some scientific insights into how the brain responds to abstract art</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>Recent studies focusing on the neural activity of abstract artists</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>A comparison of the neurological bases of abstract and representational art</span></button><button type="button" class="mc-option" data-value="D"><strong>D</strong><span>How brain research has altered public opinion about abstract art</span></button></div></div>{% endwith %}
+                    </article>
+
+                    <div class="practice-actions reading-actions">
+                        <button class="button primary" type="submit">Submit reading</button>
+                        <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+                    </div>
+                </section>
+            </section>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 19 Test 1 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+
+    <style>
+        .listening-note-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 8px;
+        }
+
+        .note-subtitle {
+            margin: 8px 0 4px;
+        }
+
+        .farm-map-image {
+            display: block;
+            width: 100%;
+            max-width: 720px;
+            margin: 18px auto 18px;
+        }
+
+        .map-answers {
+            display: block !important;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            column-count: 1 !important;
+            columns: 1 !important;
+        }
+
+        .map-answers label {
+            display: grid !important;
+            grid-template-columns: 34px 260px 140px !important;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 7px 0;
+            font-size: 15px;
+            line-height: 1.35;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .map-answers label strong {
+            font-weight: 700;
+        }
+
+        .map-answers .ielts-blank {
+            width: 130px;
+        }
+
+        .map-answers .ielts-blank input {
+            text-align: center;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 19 - Test 1 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 19 - Test 1</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <h1 class="ielts-test-title">Test 1</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3 class="listening-note-title">Hinchingbrooke Country Park</h3>
+
+                        <p class="note-subtitle"><strong>The park</strong></p>
+                        <p><strong>Area:</strong> <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> hectares</p>
+                        <p><strong>Habitats:</strong> wetland, grassland and woodland</p>
+                        <p><strong>Wetland:</strong> lake, ponds and a <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span></p>
+                        <p>Wildlife includes birds, insects and animals</p>
+
+                        <p class="ielts-blue-title black">Subjects studied in educational visits include</p>
+                        <p><strong>Science:</strong> Children look at <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> about plants, etc.</p>
+                        <p><strong>Geography:</strong> includes learning to use a <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> and compass</p>
+                        <p><strong>History:</strong> changes in land use</p>
+                        <p><strong>Leisure and tourism:</strong> mostly concentrates on the park's <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span></p>
+                        <p><strong>Music:</strong> Children make <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> with natural materials, and experiment with rhythm and speed.</p>
+
+                        <p class="ielts-blue-title black">Benefits of outdoor educational visits</p>
+                        <p>They give children a feeling of <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> that they may not have elsewhere.</p>
+                        <p>Children learn new <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> and gain self-confidence.</p>
+
+                        <p class="ielts-blue-title black">Practical issues</p>
+                        <p>Cost per child: <span class="qnum">9</span> <span class="ielts-blank short"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>............</span></span></p>
+                        <p>Adults, such as <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span>, free</p>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+
+                    <p class="ielts-instr">Questions 11-15</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> During the visit to Malatte, in France, members especially enjoyed</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>going to a theme park.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>experiencing a river trip.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>visiting a cheese factory.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> What will happen in Stanthorpe to mark the 25th anniversary of the Twinning Association?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>A tree will be planted.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>A garden seat will be bought.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>A footbridge will be built.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> Which event raised most funds this year?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the film show</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the pancake evening</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the cookery demonstration</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> For the first evening with the French visitors, host families are advised to</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>take them for a walk round the town.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>go to a local restaurant.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>have a meal at home.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:15 %}<div class="mc-question"><input type="hidden" name="answer_15" value="{{ selected }}"><p><span class="qnum">15</span> On Saturday evening there will be the chance to</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>listen to a concert.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>watch a match.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>take part in a competition.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr map-title">Questions 16-20</p>
+                    <p class="ielts-instr">Label the map below.</p>
+                    <p class="ielts-instr">Write the correct letter, <strong>A-H</strong>, next to Questions 16-20.</p>
+
+                    <img class="farm-map-image" src="{% static '19/images/test1_farley_house_map.png' %}" alt="Farley House map with labels A to H">
+
+                    <div class="map-answers">
+                        <label>
+                            <strong>16</strong>
+                            <span>Farm shop</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>17</strong>
+                            <span>Disabled entry</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>18</strong>
+                            <span>Adventure playground</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>19</strong>
+                            <span>Kitchen gardens</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <strong>20</strong>
+                            <span>The Temple of the Four Winds</span>
+                            <span class="ielts-blank short">
+                                <input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1">
+                                <span>............</span>
+                            </span>
+                        </label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+
+                    <p class="ielts-instr">Questions 21 and 22</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> things did Colin find most satisfying about his bread reuse project?</p>
+
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_21" value="{{ attempt.answers|answer_value:21 }}">
+                        <input type="hidden" name="answer_22" value="{{ attempt.answers|answer_value:22 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>receiving support from local restaurants</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>finding a good way to prevent waste</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>overcoming problems in a basic process</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>experimenting with designs and colours</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>learning how to apply 3-D printing</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 23 and 24</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> ways do the students agree that touch-sensitive sensors for food labels could be developed in future?</p>
+
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
+                        <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>for use on medical products</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>to show that food is no longer fit to eat</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>for use with drinks as well as foods</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>to provide applications for blind people</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>to indicate the weight of certain foods</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 25-30</p>
+                    <p>What is the students' opinion about each of the following food trends?</p>
+                    <p class="ielts-instr">Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 25-30.</p>
+
+                    <div class="ielts-choice-box">
+                        <p><strong>A</strong><span>This is only relevant to young people.</span></p>
+                        <p><strong>B</strong><span>This may have disappointing results.</span></p>
+                        <p><strong>C</strong><span>This already seems to be widespread.</span></p>
+                        <p><strong>D</strong><span>Retailers should do more to encourage this.</span></p>
+                        <p><strong>E</strong><span>More financial support is needed for this.</span></p>
+                        <p><strong>F</strong><span>Most people know little about this.</span></p>
+                        <p><strong>G</strong><span>There should be stricter regulations about this.</span></p>
+                        <p><strong>H</strong><span>This could be dangerous.</span></p>
+                    </div>
+
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> Use of local products</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> Reduction in unnecessary packaging</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Gluten-free and lactose-free food</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Use of branded products related to celebrity chefs</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> Development of ghost kitchens for takeaway food</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> Use of mushrooms for common health concerns</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+
+                    <div class="ielts-note-box">
+                        <h3>Ceide Fields</h3>
+                        <p class="ielts-blue-title black">An important Neolithic archaeological site in the northwest of Ireland</p>
+
+                        <p class="ielts-blue-title black">Discovery</p>
+                        <ul>
+                            <li>In the 1930s, a local teacher realised that stones beneath the bog surface were once <span class="qnum">31</span> <span class="ielts-blank"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>His <span class="qnum">32</span> <span class="ielts-blank"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span> became an archaeologist and undertook an investigation of the site.</li>
+                            <li>A traditional method used by local people to dig for <span class="qnum">33</span> <span class="ielts-blank"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> was used to identify where stones were located.</li>
+                            <li>Carbon dating later proved the site was Neolithic.</li>
+                            <li>Items are well preserved in the bog because of a lack of <span class="qnum">34</span> <span class="ielts-blank"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Neolithic farmers</p>
+                        <ul>
+                            <li>Houses were <span class="qnum">35</span> <span class="ielts-blank"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> in shape and had a hole in the roof.</li>
+                            <li>Neolithic innovations include cooking indoors, and pots used for storage and to make <span class="qnum">36</span> <span class="ielts-blank"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Each field at Ceide was large enough to support a big <span class="qnum">37</span> <span class="ielts-blank"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>The fields were probably used to restrict the grazing of animals. There is no evidence of structures to house them during <span class="qnum">38</span> <span class="ielts-blank"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span>.</li>
+                        </ul>
+
+                        <p class="ielts-blue-title black">Reasons for the decline in farming</p>
+                        <ul>
+                            <li>a decline in <span class="qnum">39</span> <span class="ielts-blank"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span> quality</li>
+                            <li>an increase in <span class="qnum">40</span> <span class="ielts-blank"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

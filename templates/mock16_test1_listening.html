@@ -1,0 +1,382 @@
+<!doctype html>
+{% load static practice_extras %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IELTS Mock 16 Test 1 Listening | Online Free Mock Test</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/practice.js' %}?v=drag-chip-text-20260529" defer></script>
+    <style>
+        .stevenson-map-answers {
+            width: 300px;
+            margin-top: 10px;
+        }
+
+        .stevenson-map-row {
+            display: grid;
+            grid-template-columns: 28px 1fr 92px;
+            gap: 8px;
+            align-items: baseline;
+            margin: 7px 0;
+            font-size: 14px;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        .stevenson-map-row .qnum {
+            font-weight: 700;
+        }
+
+        .stevenson-map-row .ielts-blank {
+            min-width: 82px;
+        }
+
+        .stoicism-box {
+            padding: 10px 18px 10px;
+            font-size: 14px;
+            line-height: 1.18;
+        }
+
+        .stoicism-box h3 {
+            text-align: center;
+            margin: 0 0 6px;
+            font-size: 20px;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .stoic-section {
+            font-weight: 700;
+            margin: 12px 0 4px;
+        }
+
+        .stoic-row {
+            display: grid;
+            grid-template-columns: 14px 1fr;
+            gap: 8px;
+            align-items: baseline;
+            margin: 4px 0;
+        }
+
+        .stoic-row.sub {
+            margin-left: 28px;
+        }
+
+        .stoic-marker {
+            text-align: center;
+        }
+
+        .stoic-text {
+            min-width: 0;
+        }
+
+        .stoicism-box .ielts-blank {
+            min-width: 120px;
+        }
+
+        .stoicism-box .ielts-blank.short {
+            min-width: 92px;
+        }
+
+        .stoicism-box .ielts-blank.medium {
+            min-width: 108px;
+        }
+
+        .stoicism-box .ielts-blank.long {
+            min-width: 145px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header practice-header">
+        <a class="brand" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">
+            <span class="brand-mark">CP</span>
+            <span>IELTS Mock 16 - Test 1 Listening</span>
+        </a>
+        <nav class="nav-links" aria-label="Practice navigation">
+            <span class="timer-pill" id="timerDisplay">Audio</span>
+            <span class="save-pill" id="saveStatus">{% if is_preview %}Preview{% else %}Not submitted{% endif %}</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'cambridge_practice:past_results' %}">Past results</a>
+                <span class="user-pill">
+                    {{ user.username }}
+                    {% if has_pro_access %}<span>Pro</span>{% endif %}
+                </span>
+            {% else %}
+                <a href="{% url 'cambridge_practice:login' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main
+        class="practice-shell ielts-shell"
+        data-book-number="{{ book.number }}"
+        data-test-number="{{ test.number }}"
+        data-section="{{ section }}"
+        data-save-url="{% url 'cambridge_practice:save_practice_answers' %}"
+        data-duration-seconds="{{ duration_seconds }}"
+        data-time-remaining="{{ attempt.time_remaining_seconds }}"
+        data-review-seconds="{{ review_seconds }}"
+        data-review-remaining="{{ attempt.review_remaining_seconds|default_if_none:'' }}"
+        data-status="{{ attempt.status }}"
+        data-preview="{% if is_preview %}true{% else %}false{% endif %}"
+        data-existing-score="{% if result %}{{ result.score }}{% endif %}"
+        data-existing-band="{% if result and result.band_score is not None %}{{ result.band_score }}{% endif %}"
+    >
+        <section class="audio-panel ielts-audio-panel">
+            <div>
+                <p class="eyebrow">Listening audio</p>
+                <h2>IELTS Mock 16 - Test 1</h2>
+                <p>The audio starts automatically and is locked for the test. When it ends, the two-minute checking timer starts.</p>
+                {% if is_preview %}
+                    <p class="preview-note">Preview mode: answers and result are not saved. Submit to see your score here.</p>
+                {% else %}
+                    <p class="preview-note">Result is saved only after you submit the section.</p>
+                {% endif %}
+            </div>
+            <audio id="practiceAudio" class="locked-audio" preload="auto" autoplay playsinline data-locked-audio="true" aria-hidden="true" tabindex="-1">
+                <source src="{% static audio_path %}" type="audio/mpeg">
+            </audio>
+            <div class="review-banner" id="reviewBanner" hidden>
+                Audio finished. Checking time left: <strong id="reviewTimer">02:00</strong>
+            </div>
+        </section>
+
+        <form method="post" class="practice-form" id="practiceForm">
+            {% csrf_token %}
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+                <h1 class="ielts-test-title">Test 1</h1>
+                <div class="ielts-listening-label">LISTENING</div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 1</span> <em>Questions 1-10</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                    <div class="ielts-note-box">
+                        <h3>Children's Engineering Workshops</h3>
+                        <p class="ielts-blue-title black">Tiny Engineers (ages 4-5)</p>
+                        <p><strong>Activities</strong></p>
+                        <ul>
+                            <li>Create a cover for an <span class="qnum">1</span> <span class="ielts-blank"><input name="answer_1" value="{{ attempt.answers|answer_value:1 }}" autocomplete="off"><span>......................</span></span> so they can drop it from a height without breaking it.</li>
+                            <li>Take part in a competition to build the tallest <span class="qnum">2</span> <span class="ielts-blank"><input name="answer_2" value="{{ attempt.answers|answer_value:2 }}" autocomplete="off"><span>......................</span></span>.</li>
+                            <li>Make a <span class="qnum">3</span> <span class="ielts-blank"><input name="answer_3" value="{{ attempt.answers|answer_value:3 }}" autocomplete="off"><span>......................</span></span> powered by a balloon.</li>
+                        </ul>
+                        <p class="ielts-blue-title black">Junior Engineers (ages 6-8)</p>
+                        <p><strong>Activities</strong></p>
+                        <ul>
+                            <li>Build model cars, trucks and <span class="qnum">4</span> <span class="ielts-blank"><input name="answer_4" value="{{ attempt.answers|answer_value:4 }}" autocomplete="off"><span>......................</span></span> and learn how to program them so they can move.</li>
+                            <li>Take part in a competition to build the longest <span class="qnum">5</span> <span class="ielts-blank"><input name="answer_5" value="{{ attempt.answers|answer_value:5 }}" autocomplete="off"><span>......................</span></span> using card and wood.</li>
+                            <li>Create a short <span class="qnum">6</span> <span class="ielts-blank"><input name="answer_6" value="{{ attempt.answers|answer_value:6 }}" autocomplete="off"><span>......................</span></span> with special software.</li>
+                            <li>Build, <span class="qnum">7</span> <span class="ielts-blank"><input name="answer_7" value="{{ attempt.answers|answer_value:7 }}" autocomplete="off"><span>......................</span></span> and program a humanoid robot.</li>
+                        </ul>
+                        <p><strong>Cost for a five-week block:</strong> &pound;50</p>
+                        <p><strong>Held on:</strong> <span class="qnum">8</span> <span class="ielts-blank"><input name="answer_8" value="{{ attempt.answers|answer_value:8 }}" autocomplete="off"><span>......................</span></span> from 10 am to 11 am</p>
+                        <p><strong>Location:</strong> Building 10A, <span class="qnum">9</span> <span class="ielts-blank"><input name="answer_9" value="{{ attempt.answers|answer_value:9 }}" autocomplete="off"><span>......................</span></span> Industrial Estate, Grasford</p>
+                        <p>Plenty of <span class="qnum">10</span> <span class="ielts-blank"><input name="answer_10" value="{{ attempt.answers|answer_value:10 }}" autocomplete="off"><span>......................</span></span> is available.</p>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 2</span> <em>Questions 11-20</em></h2>
+                    <p class="ielts-instr">Questions 11-14</p>
+                    <p>Choose the correct letter, <strong>A, B</strong> or <strong>C</strong>.</p>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:11 %}<div class="mc-question"><input type="hidden" name="answer_11" value="{{ selected }}"><p><span class="qnum">11</span> Stevenson's was founded in</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>1923.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>1924.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>1926.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:12 %}<div class="mc-question"><input type="hidden" name="answer_12" value="{{ selected }}"><p><span class="qnum">12</span> Originally, Stevenson's manufactured goods for</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>the healthcare industry.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>the automotive industry.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>the machine tools industry.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:13 %}<div class="mc-question"><input type="hidden" name="answer_13" value="{{ selected }}"><p><span class="qnum">13</span> What does the speaker say about the company premises?</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>The company has recently moved.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>The company has no plans to move.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>The company is going to move shortly.</span></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:14 %}<div class="mc-question"><input type="hidden" name="answer_14" value="{{ selected }}"><p><span class="qnum">14</span> The programme for the work experience group includes</p><div class="mc-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong><span>time to do research.</span></button><button type="button" class="mc-option" data-value="B"><strong>B</strong><span>meetings with a teacher.</span></button><button type="button" class="mc-option" data-value="C"><strong>C</strong><span>talks by staff.</span></button></div></div>{% endwith %}
+                    </div>
+
+                    <p class="ielts-instr">Questions 15-20</p>
+                    <p class="ielts-instr">Label the map below.</p>
+                    <p class="ielts-instr">Write the correct letter, <strong>A-J</strong>, next to Questions 15-20.</p>
+                    <img class="farm-map-image" src="{% static 'img/mock16/test1/listening/stevenson-site.png' %}" alt="Plan of Stevenson's site">
+                    <div class="stevenson-map-answers">
+                        <label class="stevenson-map-row"><span class="qnum">15</span><span>coffee room</span><span class="ielts-blank"><input name="answer_15" value="{{ attempt.answers|answer_value:15 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">16</span><span>warehouse</span><span class="ielts-blank"><input name="answer_16" value="{{ attempt.answers|answer_value:16 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">17</span><span>staff canteen</span><span class="ielts-blank"><input name="answer_17" value="{{ attempt.answers|answer_value:17 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">18</span><span>meeting room</span><span class="ielts-blank"><input name="answer_18" value="{{ attempt.answers|answer_value:18 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">19</span><span>human resources</span><span class="ielts-blank"><input name="answer_19" value="{{ attempt.answers|answer_value:19 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                        <label class="stevenson-map-row"><span class="qnum">20</span><span>boardroom</span><span class="ielts-blank"><input name="answer_20" value="{{ attempt.answers|answer_value:20 }}" autocomplete="off" maxlength="1"><span>............</span></span></label>
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 3</span> <em>Questions 21-30</em></h2>
+                    <p class="ielts-instr">Questions 21 and 22</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Which <strong>TWO</strong> parts of the introductory stage to their art projects do Jess and Tom agree were useful?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_21" value="{{ attempt.answers|answer_value:21 }}">
+                        <input type="hidden" name="answer_22" value="{{ attempt.answers|answer_value:22 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>the Bird Park visit</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>the workshop sessions</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>the Natural History Museum visit</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>the projects done in previous years</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>the handouts with research sources</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 23 and 24</p>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>In which <strong>TWO</strong> ways do both Jess and Tom decide to change their proposals?</p>
+                    <div class="multi-answer-question">
+                        <input type="hidden" name="answer_23" value="{{ attempt.answers|answer_value:23 }}">
+                        <input type="hidden" name="answer_24" value="{{ attempt.answers|answer_value:24 }}">
+                        <div class="mc-options">
+                            <button type="button" class="multi-option" data-value="A"><strong>A</strong><span>by giving a rationale for their action plans</span></button>
+                            <button type="button" class="multi-option" data-value="B"><strong>B</strong><span>by being less specific about the outcome</span></button>
+                            <button type="button" class="multi-option" data-value="C"><strong>C</strong><span>by adding a video diary presentation</span></button>
+                            <button type="button" class="multi-option" data-value="D"><strong>D</strong><span>by providing a timeline and a mind map</span></button>
+                            <button type="button" class="multi-option" data-value="E"><strong>E</strong><span>by making their notes more evaluative</span></button>
+                        </div>
+                    </div>
+
+                    <p class="ielts-instr">Questions 25-30</p>
+                    <p>Which personal meaning do the students decide to give to each of the following pictures?</p>
+                    <p>Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A-H</strong>, next to Questions 25-30.</p>
+                    <div class="ielts-note-box">
+                        <p><strong>A</strong> a childhood memory</p>
+                        <p><strong>B</strong> hope for the future</p>
+                        <p><strong>C</strong> fast movement</p>
+                        <p><strong>D</strong> a potential threat</p>
+                        <p><strong>E</strong> the power of colour</p>
+                        <p><strong>F</strong> the continuity of life</p>
+                        <p><strong>G</strong> protection of nature</p>
+                        <p><strong>H</strong> a confused attitude to nature</p>
+                    </div>
+                    <div class="reading-choice-list">
+                        {% with selected=attempt.answers|answer_value:25 %}<div class="mc-question"><input type="hidden" name="answer_25" value="{{ selected }}"><p><span class="qnum">25</span> Falcon (Landseer)</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:26 %}<div class="mc-question"><input type="hidden" name="answer_26" value="{{ selected }}"><p><span class="qnum">26</span> Fish hawk (Audubon)</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:27 %}<div class="mc-question"><input type="hidden" name="answer_27" value="{{ selected }}"><p><span class="qnum">27</span> Kingfisher (van Gogh)</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:28 %}<div class="mc-question"><input type="hidden" name="answer_28" value="{{ selected }}"><p><span class="qnum">28</span> Portrait of William Wells</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:29 %}<div class="mc-question"><input type="hidden" name="answer_29" value="{{ selected }}"><p><span class="qnum">29</span> Vairumati (Gauguin)</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                        {% with selected=attempt.answers|answer_value:30 %}<div class="mc-question"><input type="hidden" name="answer_30" value="{{ selected }}"><p><span class="qnum">30</span> Portrait of Giovanni de Medici</p><div class="mc-options compact-options"><button type="button" class="mc-option" data-value="A"><strong>A</strong></button><button type="button" class="mc-option" data-value="B"><strong>B</strong></button><button type="button" class="mc-option" data-value="C"><strong>C</strong></button><button type="button" class="mc-option" data-value="D"><strong>D</strong></button><button type="button" class="mc-option" data-value="E"><strong>E</strong></button><button type="button" class="mc-option" data-value="F"><strong>F</strong></button><button type="button" class="mc-option" data-value="G"><strong>G</strong></button><button type="button" class="mc-option" data-value="H"><strong>H</strong></button></div></div>{% endwith %}
+                    </div>
+                </section>
+            </article>
+
+            <article class="ielts-paper">
+                <div class="ielts-page-top">
+                    <span>Test 1</span>
+                    <span>Listening</span>
+                </div>
+
+                <section class="ielts-section">
+                    <h2><span>PART 4</span> <em>Questions 31-40</em></h2>
+                    <p class="ielts-instr">Complete the notes below.</p>
+                    <p class="ielts-instr">Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                    <div class="ielts-note-box stoicism-box">
+                        <h3>Stoicism</h3>
+
+                        <div class="stoic-row">
+                            <span class="stoic-marker"></span>
+                            <span class="stoic-text">Stoicism is still relevant today because of its <span class="qnum">31</span> <span class="ielts-blank long"><input name="answer_31" value="{{ attempt.answers|answer_value:31 }}" autocomplete="off"><span>......................</span></span> appeal.</span>
+                        </div>
+
+                        <div class="stoic-section">Ancient Stoics</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Stoicism was founded over 2,000 years ago in Greece.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">The Stoics' ideas are surprisingly well known, despite not being intended<br>for <span class="qnum">32</span> <span class="ielts-blank medium"><input name="answer_32" value="{{ attempt.answers|answer_value:32 }}" autocomplete="off"><span>......................</span></span>.</span>
+                        </div>
+
+                        <div class="stoic-section">Stoic principles</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Happiness could be achieved by leading a virtuous life.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Controlling emotions was essential.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Epictetus said that external events cannot be controlled but the<br><span class="qnum">33</span> <span class="ielts-blank medium"><input name="answer_33" value="{{ attempt.answers|answer_value:33 }}" autocomplete="off"><span>......................</span></span> people make in response can be controlled.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">A Stoic is someone who has a different view on experiences which others would<br>consider as <span class="qnum">34</span> <span class="ielts-blank medium"><input name="answer_34" value="{{ attempt.answers|answer_value:34 }}" autocomplete="off"><span>......................</span></span>.</span>
+                        </div>
+
+                        <div class="stoic-section">The influence of Stoicism</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">George Washington organised a <span class="qnum">35</span> <span class="ielts-blank long"><input name="answer_35" value="{{ attempt.answers|answer_value:35 }}" autocomplete="off"><span>......................</span></span> about Cato to motivate<br>his men.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">The French artist Delacroix was a Stoic.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Adam Smith's ideas on <span class="qnum">36</span> <span class="ielts-blank long"><input name="answer_36" value="{{ attempt.answers|answer_value:36 }}" autocomplete="off"><span>......................</span></span> were influenced by Stoicism.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Some of today's political leaders are inspired by the Stoics.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">Cognitive Behaviour Therapy (CBT)</span>
+                        </div>
+                        <div class="stoic-row sub">
+                            <span class="stoic-marker">–</span>
+                            <span class="stoic-text">the treatment for <span class="qnum">37</span> <span class="ielts-blank medium"><input name="answer_37" value="{{ attempt.answers|answer_value:37 }}" autocomplete="off"><span>......................</span></span> is based on ideas from Stoicism</span>
+                        </div>
+                        <div class="stoic-row sub">
+                            <span class="stoic-marker">–</span>
+                            <span class="stoic-text">people learn to base their thinking on <span class="qnum">38</span> <span class="ielts-blank medium"><input name="answer_38" value="{{ attempt.answers|answer_value:38 }}" autocomplete="off"><span>......................</span></span></span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">In business, people benefit from Stoicism by identifying obstacles as<br><span class="qnum">39</span> <span class="ielts-blank medium"><input name="answer_39" value="{{ attempt.answers|answer_value:39 }}" autocomplete="off"><span>......................</span></span>.</span>
+                        </div>
+
+                        <div class="stoic-section">Relevance of Stoicism</div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">It requires a lot of <span class="qnum">40</span> <span class="ielts-blank medium"><input name="answer_40" value="{{ attempt.answers|answer_value:40 }}" autocomplete="off"><span>......................</span></span> but Stoicism can help people to lead a<br>good life.</span>
+                        </div>
+                        <div class="stoic-row">
+                            <span class="stoic-marker">•</span>
+                            <span class="stoic-text">It teaches people that having a strong character is more important than<br>anything else.</span>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <div class="practice-actions">
+                <button class="button primary" type="submit">Finish practice</button>
+                <a class="button secondary" href="{% url 'cambridge_practice:test_detail' book.number test.number %}">Back to sections</a>
+            </div>
+        </form>
+    </main>
+    {{ result_details|json_script:"resultDetails" }}
+</body>
+</html>

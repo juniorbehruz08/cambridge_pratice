@@ -66,7 +66,7 @@ class PracticeAttempt(models.Model):
 
     def __str__(self):
         owner = self.user.username if self.user else self.session_key
-        return f'{owner} - Cambridge {self.book_number} Test {self.test_number} {self.section}'
+        return f'{owner} - Mock {self.book_number} Test {self.test_number} {self.section}'
 
 
 class AnswerKey(models.Model):
@@ -91,7 +91,7 @@ class AnswerKey(models.Model):
         ordering = ('book_number', 'test_number', 'section')
 
     def __str__(self):
-        return f'Cambridge {self.book_number} Test {self.test_number} {self.get_section_display()}'
+        return f'Mock {self.book_number} Test {self.test_number} {self.get_section_display()}'
 
 
 class PracticeResult(models.Model):
