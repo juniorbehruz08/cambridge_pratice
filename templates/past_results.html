@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Past results | Online Free Mock Test</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=past-results-v3">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
  <header
@@ -88,7 +89,7 @@
             flex-wrap: wrap;
         "
     >
-        
+
 
         {% if user.is_authenticated %}
             <a
@@ -225,38 +226,159 @@
 
     <main>
         <section class="results-hero">
-            <p class="eyebrow">Saved practice</p>
+            <p class="pr-eyebrow">Saved practice</p>
             <h1>Past results</h1>
             <p>Your completed listening and reading sections are saved here with score, band, and answer review.</p>
         </section>
 
         <section class="section results-section">
+            <form class="results-filter-bar" method="get" aria-label="Filter past results">
+                <label>
+                    <span>Section</span>
+                    <select name="section">
+                        {% for option_value, option_label in section_options %}
+                            <option value="{{ option_value }}" {% if selected_section == option_value %}selected{% endif %}>{{ option_label }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <label>
+                    <span>Date range</span>
+                    <select name="range">
+                        {% for option_value, option_label in range_options %}
+                            <option value="{{ option_value }}" {% if selected_range == option_value %}selected{% endif %}>{{ option_label }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <div class="results-filter-actions">
+                    <button class="button primary" type="submit">Apply filter</button>
+                    <a class="button secondary" href="{% url 'cambridge_practice:past_results' %}">Reset</a>
+                </div>
+            </form>
+
             {% if results %}
+                <div class="results-summary-strip" aria-label="Filtered result summary">
+                    <div class="pr-stat-card pr-stat-blue">
+                        <span>{{ result_count }}</span>
+                        <p>completed sections</p>
+                    </div>
+                    <div class="pr-stat-card pr-stat-green">
+                        <span>{{ selected_section|title }}</span>
+                        <p>section filter</p>
+                    </div>
+                    <div class="pr-stat-card pr-stat-amber">
+                        {% for option_value, option_label in range_options %}
+                            {% if selected_range == option_value %}
+                                <span>{{ option_label }}</span>
+                            {% endif %}
+                        {% endfor %}
+                        <p>date range</p>
+                    </div>
+                </div>
+
+                <div class="results-dashboard" aria-label="Past result charts">
+                    {% for panel in chart_panels %}
+                        <article class="results-chart-group">
+                            <div class="results-chart-heading">
+                                <p>{{ panel.section_label }} progress</p>
+                                <span>{{ panel.count }} result{{ panel.count|pluralize }}</span>
+                            </div>
+
+                            <div class="results-chart-grid">
+                                <div class="results-chart-card">
+                                    <div class="chart-title-row">
+                                        <div>
+                                            <h2>{{ panel.band.title }}</h2>
+                                            <p class="chart-subtitle">Scale 0 – {{ panel.band.max_label }}</p>
+                                        </div>
+                                        <div class="chart-stat-pills">
+                                            <span class="chart-pill">Latest <strong>{{ panel.band.series.latest }}</strong></span>
+                                            <span class="chart-pill">Avg <strong>{{ panel.band.series.average }}</strong></span>
+                                        </div>
+                                    </div>
+                                    {% if panel.band.series.points %}
+                                        <div class="chart-canvas-wrap">
+                                            <canvas id="chart-{{ panel.section }}-band" role="img" aria-label="{{ panel.band.title }} trend chart"></canvas>
+                                        </div>
+                                    {% else %}
+                                        <div class="chart-empty">
+                                            <p>No results for this filter.</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="results-chart-card">
+                                    <div class="chart-title-row">
+                                        <div>
+                                            <h2>{{ panel.score.title }}</h2>
+                                            <p class="chart-subtitle">Scale 0 – {{ panel.score.max_label }}</p>
+                                        </div>
+                                        <div class="chart-stat-pills">
+                                            <span class="chart-pill">Latest <strong>{{ panel.score.series.latest }}</strong></span>
+                                            <span class="chart-pill">Avg <strong>{{ panel.score.series.average }}</strong></span>
+                                        </div>
+                                    </div>
+                                    {% if panel.score.series.points %}
+                                        <div class="chart-canvas-wrap">
+                                            <canvas id="chart-{{ panel.section }}-score" role="img" aria-label="{{ panel.score.title }} trend chart"></canvas>
+                                        </div>
+                                    {% else %}
+                                        <div class="chart-empty">
+                                            <p>No results for this filter.</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                <div class="results-list-heading">
+                    <h2>Result history</h2>
+                    <p>Newest completed sections first</p>
+                </div>
+
                 <div class="results-list" aria-label="Past practice results">
                     {% for result in results %}
-                        <a class="result-row" href="{% url 'cambridge_practice:practice_result_detail' result.id %}">
-                            <div>
-                                <p class="result-date">{{ result.attempt.completed_at|default:result.created_at|date:"M j, Y H:i" }}</p>
-                                <h2>IELTS Mock {{ result.attempt.book_number }} - Test {{ result.attempt.test_number }}</h2>
-                                <p>{{ result.attempt.get_section_display }}</p>
+                        <a class="result-row result-{{ result.attempt.section }}" href="{% url 'cambridge_practice:practice_result_detail' result.id %}">
+                            <div class="result-info">
+                                <p class="result-date">{{ result.attempt.completed_at|default:result.created_at|date:"M j, Y · H:i" }}</p>
+                                <h2>IELTS Mock {{ result.attempt.book_number }} – Test {{ result.attempt.test_number }}</h2>
+                                <p class="result-section-label">{{ result.attempt.get_section_display }}</p>
                             </div>
                             <div class="result-score">
-                                <span>{{ result.score }}/{{ result.total_questions }}</span>
+                                <span class="result-score-num">{{ result.score }}<small>/{{ result.total_questions }}</small></span>
                                 {% if result.band_score is not None %}
-                                    <strong>Band {{ result.band_score }}</strong>
+                                    {% if result.band_score >= 7 %}
+                                        <strong class="band-badge band-high">Band {{ result.band_score }}</strong>
+                                    {% elif result.band_score >= 5 %}
+                                        <strong class="band-badge band-mid">Band {{ result.band_score }}</strong>
+                                    {% else %}
+                                        <strong class="band-badge band-low">Band {{ result.band_score }}</strong>
+                                    {% endif %}
                                 {% endif %}
                             </div>
+                            <span class="result-arrow" aria-hidden="true">&#8250;</span>
                         </a>
                     {% endfor %}
                 </div>
             {% else %}
                 <div class="empty-results">
+                    <div class="empty-results-icon" aria-hidden="true">📊</div>
                     <h2>No saved results yet</h2>
-                    <p>Submit a reading or listening section while signed in, then it will appear here.</p>
+                    <p>Submit a reading or listening section while signed in — it will appear here with your score, band, and answer review.</p>
                     <a class="button primary" href="{% url 'cambridge_practice:home' %}#books">Start practice</a>
                 </div>
             {% endif %}
         </section>
     </main>
+
+    {% if results %}
+    <script id="past-results-data" type="application/json">
+    [{% for panel in chart_panels %}{"section":"{{ panel.section }}","sectionLabel":"{{ panel.section_label }}","band":{"labels":[{% for p in panel.band.series.points %}"{{ p.label }}"{% if not forloop.last %},{% endif %}{% endfor %}],"values":[{% for p in panel.band.series.points %}{{ p.value }}{% if not forloop.last %},{% endif %}{% endfor %}],"latest":"{{ panel.band.series.latest }}","average":"{{ panel.band.series.average }}"},"score":{"labels":[{% for p in panel.score.series.points %}"{{ p.label }}"{% if not forloop.last %},{% endif %}{% endfor %}],"values":[{% for p in panel.score.series.points %}{{ p.value }}{% if not forloop.last %},{% endif %}{% endfor %}],"latest":"{{ panel.score.series.latest }}","average":"{{ panel.score.series.average }}"}}{% if not forloop.last %},{% endif %}{% endfor %}]
+    </script>
+    <script src="{% static 'js/past-results.js' %}?v=1"></script>
+    {% endif %}
 </body>
 </html>

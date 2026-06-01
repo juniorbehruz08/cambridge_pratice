@@ -265,8 +265,8 @@ class PastResultsViewTests(TestCase):
         response = self.client.get(reverse('cambridge_practice:past_results'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'IELTS Mock 11 - Test 2')
-        self.assertContains(response, '35/40')
+        self.assertContains(response, 'IELTS Mock 11 – Test 2')
+        self.assertContains(response, '35<small>/40</small>')
         self.assertContains(response, 'Band 8.0')
         self.assertContains(
             response,

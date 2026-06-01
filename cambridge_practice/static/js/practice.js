@@ -1342,6 +1342,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function setupSubmitConfirmation() {
+        const modal = document.createElement('div');
+        modal.className = 'exit-warning-modal';
+        modal.hidden = true;
+        modal.innerHTML = `
+            <div class="exit-warning-dialog" role="dialog" aria-modal="true" aria-labelledby="submitConfirmTitle">
+                <h2 id="submitConfirmTitle">Submit this test?</h2>
+                <p>You will not be able to change your answers after submitting.</p>
+                <div class="exit-warning-actions">
+                    <button type="button" class="button secondary" data-submit-cancel>No, keep working</button>
+                    <button type="button" class="button primary" data-submit-confirm>Yes, submit</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const cancelButton = modal.querySelector('[data-submit-cancel]');
+        const confirmButton = modal.querySelector('[data-submit-confirm]');
+        let resolveConfirmation = null;
+
+        function closeModal(confirmed) {
+            modal.hidden = true;
+            if (resolveConfirmation) {
+                resolveConfirmation(confirmed);
+                resolveConfirmation = null;
+            }
+        }
+
+        cancelButton.addEventListener('click', () => closeModal(false));
+        confirmButton.addEventListener('click', () => closeModal(true));
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal(false);
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (!modal.hidden && event.key === 'Escape') {
+                closeModal(false);
+            }
+        });
+
+        return function confirmSubmit() {
+            if (completed) {
+                return Promise.resolve(false);
+            }
+
+            modal.hidden = false;
+            cancelButton.focus();
+
+            return new Promise((resolve) => {
+                resolveConfirmation = resolve;
+            });
+        };
+    }
+
     async function completePractice() {
         if (completed) {
             return;
@@ -1380,6 +1435,23 @@ document.addEventListener('DOMContentLoaded', () => {
         normalizeAnswerInput(event.target);
         scheduleSave();
     });
+
+    form.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' || event.isComposing) {
+            return;
+        }
+
+        const input = event.target;
+        if (
+            input instanceof HTMLInputElement
+            && /^answer_\d+$/.test(input.name || '')
+            && input.type !== 'hidden'
+        ) {
+            event.preventDefault();
+            input.blur();
+        }
+    });
+
     form.querySelectorAll('.mc-option').forEach((button) => {
         button.addEventListener('click', () => {
             if (completed || button.disabled) {
@@ -1423,6 +1495,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        const shouldSubmit = await confirmSubmit();
+        if (!shouldSubmit) {
+            return;
+        }
         await completePractice();
     });
 
@@ -1444,6 +1520,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimers();
     setupHighlighter();
     setupExitWarning();
+    const confirmSubmit = setupSubmitConfirmation();
 
     if (completed) {
         if (saveStatus) {

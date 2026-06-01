@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template
 from django.utils import timezone
+from datetime import timedelta
 import json
 
 from .forms import RegisterForm
@@ -309,15 +310,156 @@ def test_detail(request, book_number, test_number):
 
 @login_required
 def past_results(request):
-    results = (
+    section_filter = request.GET.get('section', 'all')
+    range_filter = request.GET.get('range', 'all')
+    valid_sections = {PracticeAttempt.SECTION_LISTENING, PracticeAttempt.SECTION_READING}
+    date_ranges = {
+        '7': ('Last week', 7),
+        '15': ('Last 15 days', 15),
+        '30': ('Last month', 30),
+        '90': ('Last 3 months', 90),
+        'all': ('All time', None),
+    }
+
+    if section_filter not in valid_sections and section_filter != 'all':
+        section_filter = 'all'
+    if range_filter not in date_ranges:
+        range_filter = 'all'
+
+    results_query = (
         PracticeResult.objects
         .select_related('attempt', 'answer_key')
         .filter(attempt__user=request.user)
-        .order_by('-attempt__completed_at', '-created_at')[:50]
     )
+
+    if section_filter != 'all':
+        results_query = results_query.filter(attempt__section=section_filter)
+
+    days = date_ranges[range_filter][1]
+    if days is not None:
+        since = timezone.now() - timedelta(days=days)
+        results_query = results_query.filter(attempt__completed_at__gte=since)
+
+    results = list(results_query.order_by('-attempt__completed_at', '-created_at')[:50])
+    chart_results = list(reversed(results))
+    chart_sections = [
+        (PracticeAttempt.SECTION_LISTENING, 'Listening'),
+        (PracticeAttempt.SECTION_READING, 'Reading'),
+    ]
+    if section_filter != 'all':
+        chart_sections = [
+            (slug, label)
+            for slug, label in chart_sections
+            if slug == section_filter
+        ]
+
+    def build_line_series(points, max_value):
+        if not points:
+            return {
+                'points': [],
+                'polyline': '',
+                'area': '',
+                'latest': '-',
+                'average': '-',
+            }
+
+        plot_left = 10
+        plot_right = 94
+        plot_top = 8
+        plot_bottom = 50
+        plot_height = plot_bottom - plot_top
+        step = 0 if len(points) == 1 else (plot_right - plot_left) / (len(points) - 1)
+        plotted_points = []
+
+        for index, point in enumerate(points):
+            ratio = 0 if max_value == 0 else min(max(point['value'] / max_value, 0), 1)
+            x = 50 if len(points) == 1 else plot_left + (step * index)
+            y = plot_bottom - (ratio * plot_height)
+            plotted_points.append({
+                **point,
+                'x': f'{x:.2f}',
+                'y': f'{y:.2f}',
+            })
+
+        polyline = ' '.join(f"{point['x']},{point['y']}" for point in plotted_points)
+        area = (
+            f"{plotted_points[0]['x']},{plot_bottom} "
+            f"{polyline} "
+            f"{plotted_points[-1]['x']},{plot_bottom}"
+        )
+        average_value = sum(point['value'] for point in points) / len(points)
+        return {
+            'points': plotted_points,
+            'polyline': polyline,
+            'area': area,
+            'latest': points[-1]['display'],
+            'average': f'{average_value:g}',
+        }
+
+    chart_panels = []
+    for section_slug, section_label in chart_sections:
+        section_results = [
+            result for result in chart_results
+            if result.attempt.section == section_slug
+        ][-20:]
+
+        band_points = []
+        score_points = []
+        for result in section_results:
+            date = result.attempt.completed_at or result.created_at
+            label = f'T{result.attempt.test_number} - {date.strftime("%b %d")}'
+            band_value = float(result.band_score or 0)
+            score_value = int(result.score or 0)
+            band_points.append({
+                'label': label,
+                'value': band_value,
+                'display': f'{band_value:g}',
+            })
+            score_points.append({
+                'label': label,
+                'value': score_value,
+                'display': str(score_value),
+            })
+
+        band_series = build_line_series(band_points, 9)
+        score_series = build_line_series(score_points, 40)
+        chart_panels.append({
+            'section': section_slug,
+            'section_label': section_label,
+            'band': {
+                'title': f'{section_label} band score',
+                'max_label': '9',
+                'series': band_series,
+            },
+            'score': {
+                'title': f'{section_label} correct answers',
+                'max_label': '40',
+                'series': score_series,
+            },
+            'count': len(section_results),
+        })
+
+    section_options = [
+        ('all', 'All sections'),
+        (PracticeAttempt.SECTION_LISTENING, 'Listening'),
+        (PracticeAttempt.SECTION_READING, 'Reading'),
+    ]
+    range_options = [
+        ('all', 'All time'),
+        ('7', 'Last week'),
+        ('15', 'Last 15 days'),
+        ('30', 'Last month'),
+        ('90', 'Last 3 months'),
+    ]
 
     return render(request, 'past_results.html', {
         'results': results,
+        'chart_panels': chart_panels,
+        'section_options': section_options,
+        'range_options': range_options,
+        'selected_section': section_filter,
+        'selected_range': range_filter,
+        'result_count': len(results),
         'has_pro_access': has_pro_access(request.user),
     })
 
