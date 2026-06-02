@@ -1,16 +1,18 @@
 import json
 import re
+import tempfile
 from types import SimpleNamespace
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.template.loader import render_to_string
 from django.test import RequestFactory, SimpleTestCase, TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import AnswerKey, PracticeAttempt, PracticeResult
+from .models import AnswerKey, Feedback, PracticeAttempt, PracticeResult
 from .services import grade_answers
 from .views import clean_submitted_answers
 
@@ -297,3 +299,48 @@ class PastResultsViewTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 404)
+
+
+class FeedbackViewTests(TestCase):
+    def setUp(self):
+        self.media_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.media_dir.cleanup)
+
+    def test_feedback_page_renders_upload_controls(self):
+        response = self.client.get(reverse('cambridge_practice:feedback'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Drop one image here')
+        self.assertContains(response, 'Choose image')
+        self.assertContains(response, 'Suggestion')
+        self.assertContains(response, 'Problem report')
+
+    def test_feedback_submission_saves_optional_image(self):
+        image = SimpleUploadedFile(
+            'problem.png',
+            (
+                b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR'
+                b'\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02'
+                b'\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDAT'
+                b'\x08\xd7c\xf8\xcf\xc0\x00\x00\x03\x01\x01'
+                b'\x00\x18\xdd\x8d\xb0\x00\x00\x00\x00IEND\xaeB`\x82'
+            ),
+            content_type='image/png',
+        )
+
+        with self.settings(MEDIA_ROOT=self.media_dir.name):
+            response = self.client.post(reverse('cambridge_practice:feedback'), {
+                'feedback_type': Feedback.TYPE_PROBLEM,
+                'name': 'Student',
+                'email': 'student@example.com',
+                'page_url': 'https://onlinefreemocktest.com/books/11/tests/1/listening/',
+                'message': 'The audio did not start.',
+                'image': image,
+            })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'submitted successfully')
+        feedback = Feedback.objects.get()
+        self.assertEqual(feedback.feedback_type, Feedback.TYPE_PROBLEM)
+        self.assertEqual(feedback.message, 'The audio did not start.')
+        self.assertTrue(feedback.image.name.startswith('feedback/'))

@@ -10,7 +10,7 @@ from django.utils import timezone
 from datetime import timedelta
 import json
 
-from .forms import RegisterForm
+from .forms import FeedbackForm, RegisterForm
 from .models import AnswerKey, PracticeAttempt, PracticeResult
 from .services import band_score_for, create_or_update_result, grade_answers
 
@@ -177,6 +177,41 @@ def home(request):
 
 def custom_404(request, exception=None, unmatched_path=''):
     return render(request, '404.html', status=404)
+
+
+def feedback(request):
+    initial = {}
+    next_url = request.GET.get('next', '').strip()
+    if next_url:
+        initial['page_url'] = request.build_absolute_uri(next_url)
+    elif request.META.get('HTTP_REFERER'):
+        initial['page_url'] = request.META['HTTP_REFERER']
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST, request.FILES)
+        if form.is_valid():
+            feedback_item = form.save(commit=False)
+            if request.user.is_authenticated:
+                feedback_item.user = request.user
+                if not feedback_item.name:
+                    feedback_item.name = request.user.get_username()
+                if not feedback_item.email:
+                    feedback_item.email = request.user.email
+            feedback_item.user_agent = request.META.get('HTTP_USER_AGENT', '')
+            feedback_item.save()
+            return render(request, 'feedback.html', {
+                'form': FeedbackForm(),
+                'submitted': True,
+                'has_pro_access': has_pro_access(request.user),
+            })
+    else:
+        form = FeedbackForm(initial=initial)
+
+    return render(request, 'feedback.html', {
+        'form': form,
+        'submitted': False,
+        'has_pro_access': has_pro_access(request.user),
+    })
 
 
 def book_detail(request, number):
@@ -512,6 +547,7 @@ def practice_start(request, book_number, test_number, section):
         'test': test,
         'section': section,
         'section_title': dict(PracticeAttempt.SECTION_CHOICES)[section],
+        'audio_path': f'{book_number}/audio/test{test_number}/merged.mp3',
         'has_pro_access': has_pro_access(request.user),
         'is_preview': not request.user.is_authenticated,
     })

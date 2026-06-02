@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import AnswerKey, PracticeAttempt, PracticeResult, UserProfile
+from .models import AnswerKey, Feedback, PracticeAttempt, PracticeResult, UserProfile
 
 
 @admin.register(UserProfile)
@@ -56,3 +56,11 @@ class PracticeResultAdmin(admin.ModelAdmin):
         'band_score',
     )
     search_fields = ('attempt__user__username', 'attempt__session_key')
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('feedback_type', 'user', 'email', 'page_url', 'created_at')
+    list_filter = ('feedback_type', 'created_at')
+    search_fields = ('message', 'name', 'email', 'page_url', 'user__username')
+    readonly_fields = ('created_at', 'user_agent')

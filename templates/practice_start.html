@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Start {{ section_title }} | Online Free Mock Test</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% if section == 'listening' %}
+        <link rel="preload" href="{% static audio_path %}" as="audio" type="audio/mpeg">
+    {% endif %}
 
     <style>
         :root {
@@ -866,5 +869,21 @@
             </div>
         </div>
     </main>
+    {% if section == 'listening' %}
+        <audio id="startPageAudioPreload" preload="auto" aria-hidden="true" tabindex="-1" style="display: none;">
+            <source src="{% static audio_path %}" type="audio/mpeg">
+        </audio>
+        <script>
+            (function () {
+                const audio = document.querySelector('#startPageAudioPreload');
+                if (!audio) {
+                    return;
+                }
+
+                audio.load();
+                document.addEventListener('pointerdown', () => audio.load(), { once: true });
+            }());
+        </script>
+    {% endif %}
 </body>
 </html>

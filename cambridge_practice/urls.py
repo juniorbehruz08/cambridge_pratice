@@ -30,6 +30,7 @@ urlpatterns = [
         name='practice_section',
     ),
     path('practice/save/', views.save_practice_answers, name='save_practice_answers'),
+    path('feedback/', views.feedback, name='feedback'),
     path(
         'login/',
         auth_views.LoginView.as_view(

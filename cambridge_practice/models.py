@@ -121,3 +121,35 @@ class PracticeResult(models.Model):
 
     def __str__(self):
         return f'{self.attempt} - {self.score}/{self.total_questions}'
+
+
+class Feedback(models.Model):
+    TYPE_SUGGESTION = 'suggestion'
+    TYPE_PROBLEM = 'problem'
+
+    TYPE_CHOICES = [
+        (TYPE_SUGGESTION, 'Suggestion'),
+        (TYPE_PROBLEM, 'Problem report'),
+    ]
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name='feedback_items',
+        null=True,
+        blank=True,
+    )
+    feedback_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    name = models.CharField(max_length=120, blank=True)
+    email = models.EmailField(blank=True)
+    page_url = models.URLField(blank=True)
+    message = models.TextField()
+    image = models.ImageField(upload_to='feedback/%Y/%m/', blank=True)
+    user_agent = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def __str__(self):
+        return f'{self.get_feedback_type_display()} - {self.created_at:%Y-%m-%d %H:%M}'
