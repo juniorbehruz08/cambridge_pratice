@@ -43,6 +43,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const dragChoiceGroups = [];
     const existingScore = shell.dataset.existingScore || '';
     const existingBand = shell.dataset.existingBand || '';
+    const startPageUrl = new URL(
+        `${window.location.pathname.replace(/\/+$/, '')}/start/`,
+        window.location.origin
+    ).href;
+    const browserReloadKey = `practiceReload:${bookNumber}:${testNumber}:${section}`;
+
+    function navigationType() {
+        const entries = typeof performance.getEntriesByType === 'function'
+            ? performance.getEntriesByType('navigation')
+            : [];
+        if (entries && entries.length) {
+            return entries[0].type;
+        }
+
+        if (performance.navigation && performance.navigation.type === 1) {
+            return 'reload';
+        }
+
+        return 'navigate';
+    }
+
+    function markBrowserReloadAttempt() {
+        try {
+            window.sessionStorage.setItem(browserReloadKey, String(Date.now()));
+        } catch (error) {
+            // sessionStorage can be unavailable in restricted browser modes.
+        }
+    }
+
+    function clearBrowserReloadAttempt() {
+        try {
+            window.sessionStorage.removeItem(browserReloadKey);
+        } catch (error) {
+            // sessionStorage can be unavailable in restricted browser modes.
+        }
+    }
+
+    function redirectAfterConfirmedBrowserReload() {
+        let markedAt = 0;
+        try {
+            markedAt = Number(window.sessionStorage.getItem(browserReloadKey) || 0);
+        } catch (error) {
+            markedAt = 0;
+        }
+
+        if (!markedAt) {
+            return false;
+        }
+
+        const age = Date.now() - markedAt;
+        if (age > 120000) {
+            clearBrowserReloadAttempt();
+            return false;
+        }
+
+        if (!completed && navigationType() === 'reload') {
+            clearBrowserReloadAttempt();
+            allowNavigation = true;
+            window.location.replace(startPageUrl);
+            return true;
+        }
+
+        return false;
+    }
+
+    if (redirectAfterConfirmedBrowserReload()) {
+        return;
+    }
 
     if (saveStatus) {
         saveStatus.textContent = isPreview ? 'Preview' : 'Not submitted';
@@ -1428,9 +1496,97 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            markBrowserReloadAttempt();
             event.preventDefault();
             event.returnValue = '';
         });
+    }
+
+    function setupRestartWarning() {
+        const modal = document.createElement('div');
+        modal.className = 'exit-warning-modal';
+        modal.hidden = true;
+        modal.innerHTML = `
+            <div class="exit-warning-dialog" role="dialog" aria-modal="true" aria-labelledby="restartWarningTitle">
+                <h2 id="restartWarningTitle">Restart this section?</h2>
+                <p>Your answers will be lost. Resume keeps this page exactly as it is.</p>
+                <div class="exit-warning-actions">
+                    <button type="button" class="button secondary" data-restart-resume>Resume</button>
+                    <button type="button" class="button primary" data-restart-confirm>Restart</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const resumeButton = modal.querySelector('[data-restart-resume]');
+        const restartButton = modal.querySelector('[data-restart-confirm]');
+
+        function hideModal() {
+            modal.hidden = true;
+        }
+
+        function showModal() {
+            if (completed || allowNavigation) {
+                return;
+            }
+
+            modal.hidden = false;
+            resumeButton.focus();
+        }
+
+        resumeButton.addEventListener('click', hideModal);
+        restartButton.addEventListener('click', () => {
+            clearBrowserReloadAttempt();
+            allowNavigation = true;
+            if (audio) {
+                audio.pause();
+            }
+            window.location.replace(startPageUrl);
+        });
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (!modal.hidden && event.key === 'Escape') {
+                hideModal();
+                return;
+            }
+
+            const isKeyboardReload = event.key === 'F5'
+                || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'r');
+            if (!isKeyboardReload || completed || allowNavigation) {
+                return;
+            }
+
+            event.preventDefault();
+            showModal();
+        });
+    }
+
+    function setupFeedbackLink() {
+        const actions = form.querySelector('.practice-actions');
+        const feedbackUrl = new URL('/feedback/', window.location.origin);
+        feedbackUrl.searchParams.set('next', `${window.location.pathname}${window.location.search}`);
+
+        function createFeedbackLink(className) {
+            const link = document.createElement('a');
+            link.className = className;
+            link.href = feedbackUrl.href;
+            link.dataset.practiceFeedbackLink = 'true';
+            link.textContent = 'Report problem';
+            return link;
+        }
+
+        const headerNav = document.querySelector('.practice-header .nav-links');
+        if (headerNav && !headerNav.querySelector('[data-practice-feedback-link]')) {
+            headerNav.appendChild(createFeedbackLink('practice-feedback-link'));
+        }
+
+        if (actions && !actions.querySelector('[data-practice-feedback-link]')) {
+            actions.appendChild(createFeedbackLink('button secondary'));
+        }
     }
 
     function setupSubmitConfirmation() {
@@ -1610,6 +1766,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateMultiAnswerChoices();
     updateTimers();
     setupHighlighter();
+    setupFeedbackLink();
+    setupRestartWarning();
     setupExitWarning();
     const confirmSubmit = setupSubmitConfirmation();
 
