@@ -1,11 +1,15 @@
+from xml.etree import ElementTree
+
+from django.conf import settings
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template
+from django.urls import reverse
 from django.utils import timezone
 from datetime import timedelta
 import json
@@ -173,6 +177,68 @@ def home(request):
         'has_pro_access': user_is_pro,
         'is_preview': not request.user.is_authenticated,
     })
+
+
+def public_site_url(path):
+    return f"{settings.PUBLIC_SITE_URL}{path}"
+
+
+def sitemap_xml(request):
+    namespace = 'http://www.sitemaps.org/schemas/sitemap/0.9'
+    ElementTree.register_namespace('', namespace)
+    urlset = ElementTree.Element(ElementTree.QName(namespace, 'urlset'))
+    public_urls = [
+        (reverse('cambridge_practice:home'), 'daily', '1.0'),
+        (
+            reverse('cambridge_practice:book_detail', args=[PREVIEW_BOOK_NUMBER]),
+            'weekly',
+            '0.8',
+        ),
+        (
+            reverse(
+                'cambridge_practice:test_detail',
+                args=[PREVIEW_BOOK_NUMBER, PREVIEW_TEST_NUMBER],
+            ),
+            'weekly',
+            '0.7',
+        ),
+    ]
+
+    for path, change_frequency, priority in public_urls:
+        url = ElementTree.SubElement(urlset, ElementTree.QName(namespace, 'url'))
+        ElementTree.SubElement(url, ElementTree.QName(namespace, 'loc')).text = public_site_url(path)
+        ElementTree.SubElement(url, ElementTree.QName(namespace, 'changefreq')).text = change_frequency
+        ElementTree.SubElement(url, ElementTree.QName(namespace, 'priority')).text = priority
+
+    response = HttpResponse(
+        ElementTree.tostring(urlset, encoding='utf-8', xml_declaration=True),
+        content_type='application/xml; charset=utf-8',
+    )
+    response['Cache-Control'] = 'public, max-age=3600'
+    return response
+
+
+def robots_txt(request):
+    rules = [
+        'User-agent: *',
+        'Allow: /',
+        'Disallow: /admin/',
+        'Disallow: /login/',
+        'Disallow: /register/',
+        'Disallow: /logout/',
+        'Disallow: /past-results/',
+        'Disallow: /practice/save/',
+        'Disallow: /feedback/',
+        'Disallow: /media/feedback/',
+        'Disallow: /books/*/tests/*/listening/',
+        'Disallow: /books/*/tests/*/reading/',
+        '',
+        f'Sitemap: {public_site_url(reverse("cambridge_practice:sitemap"))}',
+        '',
+    ]
+    response = HttpResponse('\n'.join(rules), content_type='text/plain; charset=utf-8')
+    response['Cache-Control'] = 'public, max-age=3600'
+    return response
 
 
 def custom_404(request, exception=None, unmatched_path=''):

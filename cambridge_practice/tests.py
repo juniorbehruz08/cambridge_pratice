@@ -2,6 +2,7 @@ import json
 import re
 import tempfile
 from types import SimpleNamespace
+from xml.etree import ElementTree
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -15,6 +16,46 @@ from django.utils import timezone
 from .models import AnswerKey, Feedback, PracticeAttempt, PracticeResult
 from .services import grade_answers
 from .views import clean_submitted_answers
+
+
+class SeoEndpointTests(SimpleTestCase):
+    def test_sitemap_lists_only_public_browse_pages(self):
+        response = self.client.get(reverse('cambridge_practice:sitemap'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response['Content-Type'].startswith('application/xml'))
+        root = ElementTree.fromstring(response.content)
+        namespace = {'sitemap': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+        locations = [
+            element.text
+            for element in root.findall('sitemap:url/sitemap:loc', namespace)
+        ]
+        self.assertEqual(locations, [
+            'https://onlinefreemocktest.com/',
+            'https://onlinefreemocktest.com/books/11/',
+            'https://onlinefreemocktest.com/books/11/tests/1/',
+        ])
+        self.assertNotIn('/login/', response.content.decode())
+        self.assertNotIn('/listening/', response.content.decode())
+        self.assertEqual(response['Cache-Control'], 'public, max-age=3600')
+
+    def test_robots_allows_public_pages_and_blocks_private_flows(self):
+        response = self.client.get(reverse('cambridge_practice:robots'))
+        content = response.content.decode()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response['Content-Type'].startswith('text/plain'))
+        self.assertIn('User-agent: *', content)
+        self.assertIn('Allow: /', content)
+        self.assertIn('Disallow: /admin/', content)
+        self.assertIn('Disallow: /past-results/', content)
+        self.assertIn('Disallow: /books/*/tests/*/listening/', content)
+        self.assertIn('Disallow: /books/*/tests/*/reading/', content)
+        self.assertIn(
+            'Sitemap: https://onlinefreemocktest.com/sitemap.xml',
+            content,
+        )
+        self.assertEqual(response['Cache-Control'], 'public, max-age=3600')
 
 
 class AnswerNormalizationTests(SimpleTestCase):

@@ -39,6 +39,10 @@ if not SECRET_KEY:
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1', '[::1]'])
 CSRF_TRUSTED_ORIGINS = env.list('DJANGO_CSRF_TRUSTED_ORIGINS', default=[])
+PUBLIC_SITE_URL = env(
+    'DJANGO_PUBLIC_SITE_URL',
+    default='https://onlinefreemocktest.com',
+).rstrip('/')
 
 
 # Application definition

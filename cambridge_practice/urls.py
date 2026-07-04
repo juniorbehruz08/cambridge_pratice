@@ -7,6 +7,8 @@ app_name = 'cambridge_practice'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('sitemap.xml', views.sitemap_xml, name='sitemap'),
+    path('robots.txt', views.robots_txt, name='robots'),
     path('books/<int:number>/', views.book_detail, name='book_detail'),
     path(
         'books/<int:book_number>/tests/<int:test_number>/',
