@@ -49,8 +49,8 @@ class SeoEndpointTests(SimpleTestCase):
         self.assertIn('Allow: /', content)
         self.assertIn('Disallow: /admin/', content)
         self.assertIn('Disallow: /past-results/', content)
-        self.assertIn('Disallow: /books/*/tests/*/listening/', content)
-        self.assertIn('Disallow: /books/*/tests/*/reading/', content)
+        self.assertNotIn('Disallow: /books/*/tests/*/listening/', content)
+        self.assertNotIn('Disallow: /books/*/tests/*/reading/', content)
         self.assertIn(
             'Sitemap: https://onlinefreemocktest.com/sitemap.xml',
             content,

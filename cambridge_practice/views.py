@@ -230,8 +230,6 @@ def robots_txt(request):
         'Disallow: /practice/save/',
         'Disallow: /feedback/',
         'Disallow: /media/feedback/',
-        'Disallow: /books/*/tests/*/listening/',
-        'Disallow: /books/*/tests/*/reading/',
         '',
         f'Sitemap: {public_site_url(reverse("cambridge_practice:sitemap"))}',
         '',
